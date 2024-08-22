@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.kh.kh14semi3.dao.MemberDao;
 import com.kh.kh14semi3.dto.MemberDto;
 
+
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -46,8 +47,15 @@ public class MemberController {
 //		System.out.println("isValid : "+isValid);
 		if(isValid == false) return "redirect:/member/login";
 		
-		//3번
+//		//3번 차단
+//		BlockDto blockDto = blockDao.selectLastOne(memberId);
+//		boolean isBlock = blockDto != null && blockDto.getBlockType().equals("차단");
+//		if (isBlock)
+//			return "redirect:/member/block";
+		
+		//4번
 		session.setAttribute("createdUser", memberId);
+		session.setAttribute("createdRank", memberDto.getMemberRank());
 		return "redirect:/home/main"; //성공시 메인으로
 	}
 	
