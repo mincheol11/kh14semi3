@@ -18,4 +18,5 @@ public class MemberDto {
 	private String memberAddress2;//멤버 일반주소
 	private Date memberJoin;
 	private Date memberLogin;
+	
 }
