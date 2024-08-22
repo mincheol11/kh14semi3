@@ -5,9 +5,10 @@ import org.springframework.stereotype.Service;
 
 import lombok.Data;
 
+
 @Data
 @Service
-@ConfigurationProperties(prefix = "custom.cert")
-public class CustomCertProperties {
-private int expire;
+@ConfigurationProperties(prefix = "custom.fileupload")
+public class CustomFileUploadProperties{
+private String path;
 }
