@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class PageVO {
+	
 	private String column;
 	private String keyword;
 	private int page=1;
@@ -12,8 +13,7 @@ public class PageVO {
 	private int blockSize = 10;
 
 
-	public boolean isSearch() {
-		
+	public boolean isSearch() {		
 		return this.column != null && this.keyword != null;
 	}
 
@@ -42,8 +42,8 @@ public class PageVO {
 		return (this.count-1) / this.size+1;
 	}
 	public int getFinishBlock() {
-	int finishBlock = this.getStartBlock() + this.blockSize-1;
-	return Math.min(finishBlock, this.getLastBlock());
+		int finishBlock = this.getStartBlock() + this.blockSize-1;
+		return Math.min(finishBlock, this.getLastBlock());
 	}
 	public boolean isLast() {
 		return this.getFinishBlock() >= this.getLastBlock();
