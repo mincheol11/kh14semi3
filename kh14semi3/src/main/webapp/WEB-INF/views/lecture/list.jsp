@@ -6,7 +6,7 @@
 
 <h1>강의 목록</h1>
 
-<!-- 검색창 -->
+<!-- 검색창 --> 
 <form action="list" method="get">
 	<select name="column">
 		<option value="lecture_department" <c:if test="${param.column == 'lecture_department'}">selected</c:if>>전공(학과)</option>
