@@ -13,15 +13,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.kh.kh14semi3.dao.DepartmentDao;
-import com.kh.kh14semi3.dto.DepartmentDto;
+import com.kh.kh14semi3.dao.AdminDepartmentDao;
+import com.kh.kh14semi3.dto.AdminDepartmentDto;
 
 @Controller
 @RequestMapping("/admin/department")
-public class DepartmentController {
+public class AdminDepartmentController {
 
 	@Autowired
-	private DepartmentDao departmentDao;
+	private AdminDepartmentDao adminDepartmentDao;
 	@Transactional
 
 	//학과 증설
@@ -30,17 +30,18 @@ public class DepartmentController {
 		return "/WEB-INF/views/admin/department/expand.jsp";
 	}
 	@PostMapping("/expand")
-	public String expand(@ModelAttribute DepartmentDto departmentDto) {
-		departmentDao.insert(departmentDto);
+	public String expand(@ModelAttribute AdminDepartmentDto adminDepartmentDto) {
+		adminDepartmentDao.insert(adminDepartmentDto);
 		//학과 상세정보 이동
-		return "redirect:detail?departmentCode="+departmentDto.getDepartmentCode();
+		return "redirect:list";
+//		return "redirect:detail?departmentCode="+adminDepartmentDto.getDepartmentCode();
 	}
-		
+	
 	//학과 상세정보
 	@RequestMapping("detail")
 	public String detail(@RequestParam int departmentCode, Model model) {
-		DepartmentDto departmentDto = departmentDao.selectOne(departmentCode);
-		model.addAttribute("departmentDto", departmentDto);
+		AdminDepartmentDto adminDepartmentDto = adminDepartmentDao.selectOne(departmentCode);
+		model.addAttribute("adminDepartmentDto", adminDepartmentDto);
 		return "/WEB-INF/views/admin/department/detail.jsp";
 	}
 	
@@ -52,11 +53,11 @@ public class DepartmentController {
 		//목록
 		boolean isSearch = column != null && keyword !=null;
 		//검색
-		List<DepartmentDto> list = isSearch?
-				departmentDao. selectList(column, keyword) : departmentDao.selectList();
-		model.addAttribute("column", column);
-		model.addAttribute("keyword", keyword);
-		model.addAttribute("list", list);
+//		List<AdminDepartmentDto> list = isSearch?
+//				adminDepartmentDao. selectList(column, keyword) : adminDepartmentDao.selectList();
+//		model.addAttribute("column", column);
+//		model.addAttribute("keyword", keyword);
+//		model.addAttribute("list", list);
 		return "/WEB-INF/views/admin/department/list.jsp";
 	}
 	
