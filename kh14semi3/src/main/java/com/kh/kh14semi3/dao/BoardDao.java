@@ -183,11 +183,11 @@ public List<BoardDto> selectListByPaging(PageVO pageVO) {
 	}
 	else {
 		
-		String sql = "select * from ("
-				+ "select rownum rn, TMP.* from ("
+		String sql = "select * from ( "
+				+ "select rownum rn, TMP.* from ( "
 				+ "select "
 					+ " BOARD_NO, BOARD_WRITER, BOARD_TYPE, BOARD_TITLE,"
-					+ " BOARD_CONTENT, BOARD_WTIME, BOARD_UTIME, BOARD_VIEWS"
+					+ " BOARD_CONTENT, BOARD_WTIME, BOARD_UTIME, BOARD_VIEWS "
 				+ "from board "
 				+ "order by  board_no asc " 
 			+ ")TMP"
