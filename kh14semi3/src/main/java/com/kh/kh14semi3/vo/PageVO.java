@@ -2,6 +2,7 @@ package com.kh.kh14semi3.vo;
 
 import lombok.Data;
 
+
 //페이징 작업을 모듈화 하기 위한 클래스
 @Data
 public class PageVO {
@@ -31,9 +32,7 @@ public class PageVO {
 	public int getStartBlock() {
 		return (this.page-1) /this.blockSize * this.blockSize +1;
 	}
-	 
-	
-	
+
 	public boolean isFirst() {
 		return this.getStartBlock() <= 1;
 	}
@@ -60,4 +59,5 @@ public class PageVO {
 		return this.getFinishBlock()+1;
 	}
 }
+
 

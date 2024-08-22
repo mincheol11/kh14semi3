@@ -12,7 +12,6 @@ import com.kh.kh14semi3.mapper.MemberTakeOffMapper;
 import com.kh.kh14semi3.vo.MemberTakeOffVO;
 import com.kh.kh14semi3.vo.PageVO;
 
-
 @Service
 public class MemberDao {
 
@@ -21,7 +20,18 @@ public class MemberDao {
 	
 	@Autowired
 	private MemberTakeOffMapper memberTakeOffMapper;
+	
+	@Autowired
+	private MemberMapper memberMapper;
 
+	//회원 상세
+	public MemberDto selectOne(String memberId) {
+		String sql = "select * from member where member_id = ?";
+		Object[] data  = {memberId};
+		List<MemberDto>list = jdbcTemplate.query(sql,memberMapper, data);
+		return list.isEmpty() ? null : list.get(0);
+	}
+	
 	//페이징 관련 메소드
 	public List<MemberTakeOffVO> selectListByPaging(PageVO pageVO) {
         if(pageVO.isSearch()) { // 검색
@@ -69,7 +79,7 @@ public class MemberDao {
 				return jdbcTemplate.queryForObject(sql, int.class);
 			}
 		}
-		
+}		
 		
 
-}
+
