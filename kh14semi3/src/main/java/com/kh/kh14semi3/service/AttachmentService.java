@@ -3,6 +3,7 @@ package com.kh.kh14semi3.service;
 import java.io.File;
 
 
+
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
@@ -37,19 +38,11 @@ public class AttachmentService {
 		dir.mkdirs();
 	}
 	
-	
-	
-	
-	
 	@Autowired
 	private AttachmentDao attachmentDao;
 	
-	
 	public int save(MultipartFile attach) throws IllegalStateException, IOException {
 		int attachmentNo = attachmentDao.sequence();
-		
-		
-		
 		
 		File target = new File(dir,String.valueOf(attachmentNo));
 		attach.transferTo(target);
