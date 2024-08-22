@@ -11,7 +11,6 @@ import com.kh.kh14semi3.mapper.MemberMapper;
 import com.kh.kh14semi3.mapper.MemberTakeOffMapper;
 import com.kh.kh14semi3.vo.MemberTakeOffVO;
 import com.kh.kh14semi3.vo.PageVO;
-import com.kh.spring06.vo.MemberBlockVO;
 
 
 @Service
