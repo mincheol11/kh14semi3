@@ -40,7 +40,10 @@ public class MemberController {
 		if(memberDto == null) return "redirect:/member/login?error"; //redirect는 get으로 감
 		
 		//2번
+//		System.out.println("memberPw : "+memberPw);
+//		System.out.println("memberDto.getMemberPw() : "+memberDto.getMemberPw());
 		boolean isValid = memberPw.equals(memberDto.getMemberPw());
+//		System.out.println("isValid : "+isValid);
 		if(isValid == false) return "redirect:/member/login";
 		
 		//3번
