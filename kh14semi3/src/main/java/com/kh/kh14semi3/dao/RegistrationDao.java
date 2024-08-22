@@ -54,13 +54,13 @@ public class RegistrationDao {
 
 	public int countByPaging(PageVO pageVO) {
 		if(pageVO.isSearch()) { // 검색카운트
-			String sql = "select count(*) from board "
+			String sql = "select count(*) from registration "
 					+ "where instr("+pageVO.getColumn()+", ?) > 0";	
 			Object[] data = {pageVO.getKeyword()};
 			return jdbcTemplate.queryForObject(sql, int.class, data);
 		}
 		else { // 목록카운트
-			String sql = "select count(*) from board";		
+			String sql = "select count(*) from registration";		
 			return jdbcTemplate.queryForObject(sql, int.class);	
 		}
 	}
