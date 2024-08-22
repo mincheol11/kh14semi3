@@ -1,0 +1,53 @@
+package com.kh.kh14semi3.dao;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
+
+import com.kh.kh14semi3.dto.AdminDepartmentDto;
+import com.kh.kh14semi3.mapper.AdminDepartmentMapper;
+
+@Repository
+public class AdminDepartmentDao {
+	@Autowired
+	JdbcTemplate jdbcTemplate;
+	@Autowired
+	private AdminDepartmentMapper adminDepartmentMapper;
+	
+	//학과 증설
+	public void insert(AdminDepartmentDto adminDepartmentDto) {
+		String sql = "insert into department("
+				+ "department_code, department_name"
+				+ ") values(?, ?)";
+		Object[] data = {
+				adminDepartmentDto.getDepartmentCode(),adminDepartmentDto.getDepartmentName()
+				};
+		jdbcTemplate.update(sql,data);
+	}
+	
+	//학과 시스템 관리
+	public List<AdminDepartmentDto>selectList(){
+		String sql = "select * from department order by department_code asc";
+		return jdbcTemplate.query(sql, adminDepartmentMapper);
+	}
+	
+	//학과 상세정보 목록
+	public AdminDepartmentDto selectOne(int departmentCode) {
+		String sql= "select * from department where department_code=?";
+		Object[] data = {departmentCode};
+		List<AdminDepartmentDto> list = jdbcTemplate.query(sql, adminDepartmentMapper, data);
+		return list.isEmpty() ? null : list.get(0);
+	}
+	
+//	//학과 상세정보 검색
+//	public List<AdminDepartmentDto> selectList(String column, String keyword){
+//		String sql = "select * from department "
+//				+ "where instr("+column+", ?)>0 "
+//				+ "order by "+column+" asc ,department_code asc";
+//		Object[] data = {keyword};
+//		return jdbcTemplate.query(sql, adminDepartmentMapper,data);
+//	}
+	
+}
