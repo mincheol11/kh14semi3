@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.kh.kh14semi3.dto.ScheduleDto;
 
 @Service
-public class ScheduleMapper implements RowMapper<ScheduleDto> {
+public class ScheduleDetailMapper implements RowMapper<ScheduleDto> {
 
 	@Override
 	public ScheduleDto mapRow(ResultSet rs, int rowNum) throws SQLException {
