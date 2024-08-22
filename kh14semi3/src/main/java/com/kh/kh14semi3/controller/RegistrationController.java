@@ -15,13 +15,19 @@ public class RegistrationController {
 	
 	@Autowired
 	private RegistrationDao registrationDao;
+//	@Autowired
+//	private LectureDao
 	
-//	@RequestMapping("/list")
-//	public String list(@ModelAttribute("pageVO") PageVO pageVO, Model model) {
-//		model.addAttribute("registrationList", registrationDao.selectListByPaging(pageVO));
-//		int count = registrationDao.countByPaging(pageVO);
-//		pageVO.setCount(count);
-//	}
+	@RequestMapping("/list")
+	public String list(@ModelAttribute("pageVO") PageVO pageVO, Model model) {
+		model.addAttribute("registrationList", registrationDao.selectListByPaging(pageVO));
+		int count = registrationDao.countByPaging(pageVO);
+		pageVO.setCount(count);
+		return "/WEB-INF/views/registration/list.jsp";
+	}
+	
+//	@RequestMapping("/regist")
+//	public
 	
 	
 }
