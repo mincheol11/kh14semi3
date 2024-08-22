@@ -13,5 +13,6 @@ public class AdminLectureDto {
 	private String lectureRoom;
 	private int lectureCount;
 	
+	
 	private int lectureDepartmentCode;
 }
