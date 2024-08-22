@@ -8,7 +8,7 @@
     
     <form action="login" method="post">
     	아이디<input type="text" name="memberId" required><br>
-    	비밀번호<input type="password" name="memberPw" required><br>
+    	비밀번호<input type="text" name="memberPw" required><br>
     	<button>로그인</button>
     </form>
     
