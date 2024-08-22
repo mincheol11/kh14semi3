@@ -62,7 +62,7 @@
 				</c:when>
 				<%-- 결과가 있을 때 --%>
 				<c:otherwise>
-					<c:forEach var="dto" items="${lectureList}">
+					<c:forEach var="lectureDto" items="${lectureList}">
 					<tr>
 						<td>${lectureDto.lectureDepartment}</td>
 						<td>${lectureDto.lectureProfessor}</td>
