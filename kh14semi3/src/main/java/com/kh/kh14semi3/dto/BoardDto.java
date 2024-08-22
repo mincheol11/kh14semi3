@@ -2,6 +2,7 @@ package com.kh.kh14semi3.dto;
 
 import java.sql.Date;
 
+
 import lombok.Data;
 
 @Data
@@ -15,4 +16,9 @@ public class BoardDto {
 	private  Date boardUtime;
 	private int boardViews;
 	
-}
+	
+	}
+
+
+
+
