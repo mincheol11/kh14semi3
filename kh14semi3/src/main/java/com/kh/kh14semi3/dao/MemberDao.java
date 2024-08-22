@@ -70,6 +70,7 @@ public class MemberDao {
 				return jdbcTemplate.queryForObject(sql, int.class);
 			}
 		}
-
+		
+		
 
 }

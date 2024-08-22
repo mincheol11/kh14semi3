@@ -31,6 +31,7 @@ public class PageVO {
 	public int getStartBlock() {
 		return (this.page-1) /this.blockSize * this.blockSize +1;
 	}
+	 
 	
 	
 	public boolean isFirst() {
