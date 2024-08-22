@@ -384,7 +384,7 @@ textarea.field{
     transition: transform 0.1s ease-out;
 }
 .link.link-animation:hover {
-    transform: scale(1.02);
+    transform: scale(1.1);
     /* transform: rotate(90deg); */
 }
 
