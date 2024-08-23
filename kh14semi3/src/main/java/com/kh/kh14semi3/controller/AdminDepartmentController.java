@@ -1,8 +1,6 @@
 package com.kh.kh14semi3.controller;
 
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.kh14semi3.dao.AdminDepartmentDao;
 import com.kh.kh14semi3.dto.AdminDepartmentDto;
+import com.kh.kh14semi3.error.TargetNotFoundException;
 import com.kh.kh14semi3.vo.PageVO;
 
 
@@ -33,35 +32,19 @@ public class AdminDepartmentController {
 	public String expand(@ModelAttribute AdminDepartmentDto adminDepartmentDto) {
 		adminDepartmentDao.insert(adminDepartmentDto);
 		//학과 상세정보 이동
-		return "redirect:list";
-//		return "redirect:detail?departmentCode="+adminDepartmentDto.getDepartmentCode();
+		return "redirect:detail?departmentCode="+adminDepartmentDto.getDepartmentCode();
 	}
 	
 	//학과 상세정보
 	@RequestMapping("detail")
-	public String detail(@RequestParam int departmentCode, Model model) {
+	public String detail(@RequestParam String departmentCode, Model model) {
 		AdminDepartmentDto adminDepartmentDto = adminDepartmentDao.selectOne(departmentCode);
 		model.addAttribute("adminDepartmentDto", adminDepartmentDto);
 		return "/WEB-INF/views/admin/department/detail.jsp";
 	}
 	
 	//학과 시스템 관리
-//	@RequestMapping("list")
-//	public String list(Model model,
-//			@RequestParam(required = false) String column,
-//			@RequestParam(required = false) String keyword) {
-//		//목록
-//		boolean isSearch = column != null && keyword !=null;
-//		//검색
-//		List<AdminDepartmentDto> list = isSearch?
-//				adminDepartmentDao. selectList(column, keyword) : adminDepartmentDao.selectList();
-//		model.addAttribute("column", column);
-//		model.addAttribute("keyword", keyword);
-//		model.addAttribute("list", list);
-//		return "/WEB-INF/views/admin/department/list.jsp";
-//	}
-	
-	@RequestMapping("/list")
+	@RequestMapping("list")
 	public String list(@ModelAttribute("pageVO") PageVO pageVO, Model model) {
 		model.addAttribute("adminDepartmentList", adminDepartmentDao.selectListByPaging(pageVO));
 		int count = adminDepartmentDao.countByPaging(pageVO);
@@ -69,4 +52,27 @@ public class AdminDepartmentController {
 		return "/WEB-INF/views/admin/department/list.jsp";
 	}
 	
+	//학과 통폐합
+	@RequestMapping("/reduce")
+	public String reduce(@RequestParam String departmentCode) {
+		boolean result = adminDepartmentDao.reduce(departmentCode);
+		if(result == false)
+			throw new TargetNotFoundException("존재하지 않는 학과입니다.");
+		return "redirect:list";//시스템관리로 이동
+	}
+	
+	//학과 상세정보 수정
+		@GetMapping("/edit")
+		public String edit(Model model, @RequestParam String departmentCode) {
+			AdminDepartmentDto adminDepartmentDto = adminDepartmentDao.selectOne(departmentCode);
+			if(adminDepartmentDto == null) throw new TargetNotFoundException();
+			model.addAttribute("adminDepartmentDto", adminDepartmentDto);
+			return "/WEB-INF/views/admin/department/edit.jsp";
+		}
+		@PostMapping("/edit")
+		public String edit(@ModelAttribute AdminDepartmentDto adminDepartmentDto) {
+			boolean result = adminDepartmentDao.edit(adminDepartmentDto);
+			if(result == false) throw new TargetNotFoundException("수정할 학과가 없습니다.");
+			return "redirect:detail?departmentCode="+adminDepartmentDto.getDepartmentCode();
+		}
 }
