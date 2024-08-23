@@ -18,50 +18,36 @@ public class RegistrationDao {
 	@Autowired
 	private RegistrationMapper registrationMapper;
 	
-	// 페이징 객체를 이용한 목록 및 검색 메소드
-	public List<RegistrationDto> selectListByPaging(PageVO pageVO){
-		if(pageVO.isSearch()) { // 검색이라면 
-			String sql = "select * from ("
-					+ "select rownum rn, TMP.* from ("
-					+ "select "
-					+ "registration_code, registration_student, "
-					+ "registration_lecture, registration_date "
-					+ "from registration "
-					+ "where instr("+pageVO.getColumn()+",?)>0 "
-					// 트리정렬				
-					+ "order by registration_code asc"
-					+ ") TMP"
-					+ ") where rn between ? and ?";		
-			Object[] data = {pageVO.getKeyword(), 
-						pageVO.getBeginRow(), pageVO.getEndRow()};
-			return jdbcTemplate.query(sql, registrationMapper, data);
-		}
-		else { // 목록이라면
-			String sql = "select * from ("
-					+ "select rownum rn, TMP.* from ("
-					+ "select "
-					+ "registration_code, registration_student, "
-					+ "registration_lecture, registration_date "
-					+ "from registration "
-					// 트리정렬					
-					+ "order by registration_code asc"
-					+ ") TMP"
-					+ ") where rn between ? and ?";
-			Object[] data = {pageVO.getBeginRow(), pageVO.getEndRow()};
-			return jdbcTemplate.query(sql, registrationMapper, data);
-		}	
+	// [1] 학번과 강의코드를 가지고 기록 유무를 조회하는 기능
+	public boolean check(String studentId, String lectureCode) {
+		if(studentId == null) return false; // 학번 없으면 나가
+		String sql = "select count(*) from registration "
+				+ "where registration_student = ? and registration_lecture = ?";
+		Object[] data = {studentId, lectureCode};
+		return jdbcTemplate.queryForObject(sql, int.class, data) > 0; 
 	}
-
-	public int countByPaging(PageVO pageVO) {
-		if(pageVO.isSearch()) { // 검색카운트
-			String sql = "select count(*) from registration "
-					+ "where instr("+pageVO.getColumn()+", ?) > 0";	
-			Object[] data = {pageVO.getKeyword()};
-			return jdbcTemplate.queryForObject(sql, int.class, data);
-		}
-		else { // 목록카운트
-			String sql = "select count(*) from registration";		
-			return jdbcTemplate.queryForObject(sql, int.class);	
-		}
+	
+	// [2] 수강인원 카운트 기능
+	public int count(String lectureCode) {
+		String sql = "select count(*) from registration where registration_lecture = ?";
+		Object[] data = {lectureCode};
+		return jdbcTemplate.queryForObject(sql, int.class, data);
 	}
+	
+	// [3] 강의 수강신청 기능
+	public void insert(String studentId, String lecturCode) {
+		String sql = "insert into registration "
+				+ "values(registration_seq.nextval, ?, ?, sysdate)";
+		Object[] data = {studentId, lecturCode};
+		jdbcTemplate.update(sql, data);
+	}
+	
+	// [4] 강의 수강취소 기능
+	public boolean delete(String studentId, String lectureCode) {
+		String sql = "delete registration "
+				+ "where registration_student = ? and registration_lecture = ?";
+		Object[] data = {studentId, lectureCode};
+		return jdbcTemplate.update(sql, data) > 0 ;		
+	}	
+	
 }

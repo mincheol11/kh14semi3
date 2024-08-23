@@ -54,6 +54,7 @@
 				<div class="right">
 					<i class="fa-brands fa-slack red"></i> 강의명 클릭시 수강신청 담기 가능
 				</div>
+				<%-- 
 				<div class="flex-box">
 				<table class="table table-horizontal w-20" style="border-right:none;">
 					<thead>
@@ -69,11 +70,11 @@
 						</c:forEach>
 					</tbody>										
 				</table>
-				
-				<table class="table table-horizontal w-80" style="border-left:none;">
+				 --%>
+				<table class="table table-horizontal table-hover" style="border-left:none;">
 					<thead>
 						<tr>
-							<!-- <th>전공(학과)</th> -->
+							<th>전공(학과)</th>
 							<th>교수명</th>
 							<th>분류</th>
 							<th width="30%">강의명</th>
@@ -86,7 +87,7 @@
 					<tbody class="center">					
 						<c:forEach var="lectureDto" items="${lectureList}">
 						<tr>
-							<%-- <td>${lectureDto.lectureDepartment}</td> --%>
+							<td>${lectureDto.lectureDepartment}</td>
 							<td>${lectureDto.lectureProfessor}</td>
 							<td>${lectureDto.lectureType}</td>
 							<td>
@@ -102,9 +103,9 @@
 						</c:forEach>
 					</tbody>
 				</table>
-			</div>
-				</c:otherwise>
-			</c:choose>
+			<%-- </div> --%>
+			</c:otherwise>
+		</c:choose>
 	</div>
 
 </div>
