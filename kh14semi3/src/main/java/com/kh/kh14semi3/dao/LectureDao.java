@@ -86,6 +86,24 @@ public class LectureDao {
 			return jdbcTemplate.queryForObject(sql, int.class);	
 		}
 	}
+
+	// 수강신청 갱신(최신화) 기능
+	public boolean updateRegistration(String lectureCode) {
+		String sql = "update lecture set lecture_regist = ( " // 반정규화
+				+ "select count(*) from registration where lecture_code = ? "
+				+ ") where lecture_code = ?";
+		Object[] data = {lectureCode, lectureCode};
+		return jdbcTemplate.update(sql, data) > 0 ;		
+	}
 	
+	// 수강신청한 강의 목록을 조회
+	public List<LectureDto> selectListByRegistration(String studentId) {
+		String sql = "select * from lecture where lecture_code in (" 
+					+ "select registration_lecture from registration "
+					+ "where registration_student = ? "
+					+ ") order by lecture_code desc";
+		Object[] data = {studentId};
+		return jdbcTemplate.query(sql, lectureMapper, data);
+	}
 	
 }

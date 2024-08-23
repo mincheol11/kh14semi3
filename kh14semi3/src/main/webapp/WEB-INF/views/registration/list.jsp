@@ -10,17 +10,43 @@
 	.table {
 		border: 1px solid #2d3436;
 		width: 100%;
-		font-size: 16px;
-		
+		font-size: 16px;		
+	}	
+	.class-regist{
+		cursor: pointer;
 	}
 </style>
 
+<%-- <c:if test="${sessionScope.createdRank == '학생'}"> --%>
 <script type="text/javascript">
+	// (회원전용) 하트를 누르면 좋아요 처리를 수행
+	var params = new URLSearchParams(location.search);
+	var lectureCode = $(".lecture-code").attr("data-code");
+	
 	$(function(){
-	
-	
+		$(".class-regist").on("click",function(){
+			$.ajax({
+				url: "/rest/registration/regist",
+				method: "post",
+				data: {lectureCode : lectureCode},
+				success: function(response){
+					if(response.checked){						
+						console.log(lectureCode);
+						// 너 이미 이거 수강신청 했어 라는 문구 출력 alert-link.js 만들어서 추가
+						window.alert("너 이거 담음");
+					}
+					else{
+						// 너의 수강신청목록에 이거 넣었어 라는 문구 출력
+						window.alert("이거 담을게");
+					}					
+					/* $(".class-regist").next("span").text(response.count); */
+				}
+			});
+		});
 	});
 </script>
+<%-- </c:if> --%>
+
 
 <div class="container w-700 my-50">
 	<div class="row center">
@@ -78,6 +104,7 @@
 							<th>교수명</th>
 							<th>분류</th>
 							<th width="30%">강의명</th>
+							<th>강의코드</th>
 							<th>강의시간</th>
 							<th>강의실</th>
 							<th>수강인원</th>
@@ -90,11 +117,10 @@
 							<td>${lectureDto.lectureDepartment}</td>
 							<td>${lectureDto.lectureProfessor}</td>
 							<td>${lectureDto.lectureType}</td>
-							<td>
-								<a href="/lecture/detail?lectureCode=${lectureDto.lectureCode}" class="link link-animation">
-									${lectureDto.lectureName}
-								</a>
+							<td class="link link-animation class-regist">
+								${lectureDto.lectureName}
 							</td>
+							<td class="lecture-code" data-code="${lectureDto.lectureCode}">${lectureDto.lectureCode}</td>
 							<td>${lectureDto.lectureTime} ${lectureDto.lectureDuration} ${lectureDto.lectureDay}</td>
 							<td>${lectureDto.lectureRoom}</td>
 							<td>${lectureDto.lectureCount}</td>		
