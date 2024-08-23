@@ -16,5 +16,6 @@ public class LectureDto {
 	private Date lectureDay;
 	private String lectureRoom;
 	private int lectureCount;
+	private int lectureRegist;
 	
 }
