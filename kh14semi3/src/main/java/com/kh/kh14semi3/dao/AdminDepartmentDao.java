@@ -8,6 +8,9 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.kh14semi3.dto.AdminDepartmentDto;
 import com.kh.kh14semi3.mapper.AdminDepartmentMapper;
+import com.kh.spring06.dto.PoketmonDto;
+import com.kh.spring06.vo.PageVO;
+import com.kh.spring06.vo.StatusVO;
 
 @Repository
 public class AdminDepartmentDao {
@@ -41,13 +44,53 @@ public class AdminDepartmentDao {
 		return list.isEmpty() ? null : list.get(0);
 	}
 	
-//	//학과 상세정보 검색
-//	public List<AdminDepartmentDto> selectList(String column, String keyword){
-//		String sql = "select * from department "
-//				+ "where instr("+column+", ?)>0 "
-//				+ "order by "+column+" asc ,department_code asc";
-//		Object[] data = {keyword};
-//		return jdbcTemplate.query(sql, adminDepartmentMapper,data);
-//	}
+	//학과 상세정보 검색
+	public List<AdminDepartmentDto> selectList(String column, String keyword){
+		String sql = "select * from department "
+				+ "where instr("+column+", ?)>0 "
+				+ "order by "+column+" asc ,department_code asc";
+		Object[] data = {keyword};
+		return jdbcTemplate.query(sql, adminDepartmentMapper,data);
+	}
+
+	//목록 페이지
+	public Object selectListByPaging(PageVO pageVO) {
+		if(pageVO.isSearch()) {//검색
+			String sql = "select * from ("
+								+ "select rownum rn, TMP.* from ("
+									+ "select * from department where instr(#1, ?) > 0 "
+									+ "order by #1 asc, department_code asc"
+								+ ")TMP"
+							+ ") where rn between ? and ?";
+			sql = sql.replace("#1", pageVO.getColumn());
+			Object[] data = {
+				pageVO.getKeyword(), 
+				pageVO.getBeginRow(), pageVO.getEndRow()
+			};
+			return jdbcTemplate.query(sql, adminDepartmentMapper, data);
+	}
+		else {//목록
+			String sql = "select * from ("
+								+ "select rownum rn, TMP.* from ("
+									+ "select * from department order by department_code asc"
+								+ ")TMP"
+							+ ") where rn between ? and ?";
+			Object[] data = {pageVO.getBeginRow(), pageVO.getEndRow()};
+			return jdbcTemplate.query(sql, adminDepartmentMapper, data);
+
+				}
+			}
+			public int countByPaging(PageVO pageVO) {
+				if(pageVO.isSearch()) {//검색
+					String sql = "select count(*) from department where instr(#1, ?) > 0";
+					sql = sql.replace("#1", pageVO.getColumn());
+					Object[] data = {pageVO.getKeyword()};
+					return jdbcTemplate.queryForObject(sql, int.class, data);
+				}
+				else {//목록
+					String sql = "select count(*) from department";
+					return jdbcTemplate.queryForObject(sql, int.class);
+				}
+			}
 	
 }
