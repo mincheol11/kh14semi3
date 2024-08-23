@@ -16,8 +16,6 @@ public class AttachmentDao {
 	@Autowired
 	private AttachmentMapper attachmentMapper;
 	
-
-	
 	
 	public int sequence() {
 		

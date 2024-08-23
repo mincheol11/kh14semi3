@@ -10,7 +10,6 @@ import com.kh.kh14semi3.dto.AdminDepartmentDto;
 import com.kh.kh14semi3.mapper.AdminDepartmentMapper;
 import com.kh.kh14semi3.vo.PageVO;
 
-
 @Repository
 public class AdminDepartmentDao {
 	@Autowired
@@ -36,7 +35,7 @@ public class AdminDepartmentDao {
 	}
 	
 	//학과 상세정보 목록
-	public AdminDepartmentDto selectOne(int departmentCode) {
+	public AdminDepartmentDto selectOne(String departmentCode) {
 		String sql= "select * from department where department_code=?";
 		Object[] data = {departmentCode};
 		List<AdminDepartmentDto> list = jdbcTemplate.query(sql, adminDepartmentMapper, data);
@@ -52,15 +51,15 @@ public class AdminDepartmentDao {
 		return jdbcTemplate.query(sql, adminDepartmentMapper,data);
 	}
 	
-	
-	
-	
-	
-	
-	
+	//학과 통폐합
+	public boolean reduce(String departmentCode) {
+		String sql = "delete department where department_code=?";
+		Object[] data = {departmentCode};
+		return jdbcTemplate.update(sql, data) > 0;
+		}
 
 	//목록 페이지
-	public Object selectListByPaging(PageVO pageVO) {
+	public List<AdminDepartmentDto> selectListByPaging(PageVO pageVO) { 
 		if(pageVO.isSearch()) {//검색
 			String sql = "select * from ("
 								+ "select rownum rn, TMP.* from ("
@@ -74,7 +73,7 @@ public class AdminDepartmentDao {
 				pageVO.getBeginRow(), pageVO.getEndRow()
 			};
 			return jdbcTemplate.query(sql, adminDepartmentMapper, data);
-	}
+		}
 		else {//목록
 			String sql = "select * from ("
 								+ "select rownum rn, TMP.* from ("
@@ -83,20 +82,32 @@ public class AdminDepartmentDao {
 							+ ") where rn between ? and ?";
 			Object[] data = {pageVO.getBeginRow(), pageVO.getEndRow()};
 			return jdbcTemplate.query(sql, adminDepartmentMapper, data);
+		}
+	}
+	public int countByPaging(PageVO pageVO) {
+		if(pageVO.isSearch()) {//검색
+			String sql = "select count(*) from department where instr(#1, ?) > 0";
+			sql = sql.replace("#1", pageVO.getColumn());
+			Object[] data = {pageVO.getKeyword()};
+			return jdbcTemplate.queryForObject(sql, int.class, data);
+		}
+		else {//목록
+			String sql = "select count(*) from department";
+			return jdbcTemplate.queryForObject(sql, int.class);
+		}
+	}
 
-				}
-			}
-			public int countByPaging(PageVO pageVO) {
-				if(pageVO.isSearch()) {//검색
-					String sql = "select count(*) from department where instr(#1, ?) > 0";
-					sql = sql.replace("#1", pageVO.getColumn());
-					Object[] data = {pageVO.getKeyword()};
-					return jdbcTemplate.queryForObject(sql, int.class, data);
-				}
-				else {//목록
-					String sql = "select count(*) from department";
-					return jdbcTemplate.queryForObject(sql, int.class);
-				}
-			}
-	
+	public boolean edit(AdminDepartmentDto adminDepartmentDto) {
+		String sql = "update department set "
+				+ "department_name=? "
+				+ "where department_code = ?";
+		Object[] data = {
+				adminDepartmentDto.getDepartmentName(),
+				adminDepartmentDto.getDepartmentCode()
+		};
+		return jdbcTemplate.update(sql, data) > 0;
+}	
+
+
+
 }
