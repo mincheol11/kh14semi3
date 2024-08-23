@@ -13,7 +13,7 @@
 <script src="/editor/editor.js"></script>
 
 
-<form action="write" method="post" autocomplete="off">
+<form action="add" method="post" autocomplete="off">
 
 	<div class="container w-800 my-50">
 		<div class="row center">
