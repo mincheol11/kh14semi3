@@ -8,9 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.kh14semi3.dto.AdminDepartmentDto;
 import com.kh.kh14semi3.mapper.AdminDepartmentMapper;
-import com.kh.spring06.dto.PoketmonDto;
 import com.kh.spring06.vo.PageVO;
-import com.kh.spring06.vo.StatusVO;
 
 @Repository
 public class AdminDepartmentDao {
@@ -52,6 +50,13 @@ public class AdminDepartmentDao {
 		Object[] data = {keyword};
 		return jdbcTemplate.query(sql, adminDepartmentMapper,data);
 	}
+	
+	
+	
+	
+	
+	
+	
 
 	//목록 페이지
 	public Object selectListByPaging(PageVO pageVO) {
