@@ -76,17 +76,23 @@ public class MemberDao {
         }
     }
 
-		public int countWithPaging(PageVO pageVO) {
-			if(pageVO.isSearch()) {
-				String sql = "select count(*) from member where instr("+pageVO.getColumn()+", ?) > 0";
-				Object[] data = {pageVO.getKeyword()}; 
-				return jdbcTemplate.queryForObject(sql, int.class, data);
-			}
-			else {
-				String sql = "select count(*) from registration";
-				return jdbcTemplate.queryForObject(sql, int.class);
-			}
+	public int countWithPaging(PageVO pageVO) {
+		if(pageVO.isSearch()) {
+			String sql = "select count(*) from member where instr("+pageVO.getColumn()+", ?) > 0";
+			Object[] data = {pageVO.getKeyword()}; 
+			return jdbcTemplate.queryForObject(sql, int.class, data);
 		}
+		else {
+			String sql = "select count(*) from registration";
+			return jdbcTemplate.queryForObject(sql, int.class);
+		}
+	}
+
+	public boolean delete(String memberId) {
+		String sql = "delete from member where member_id=?";
+		Object[] data = {memberId};
+		return jdbcTemplate.update(sql, data) >0;
+	}
 }		
 		
 

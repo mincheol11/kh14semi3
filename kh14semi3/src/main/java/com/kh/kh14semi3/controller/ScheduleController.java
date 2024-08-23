@@ -31,7 +31,7 @@ public class ScheduleController {
 private ScheduleDao scheduleDao;
 
 @RequestMapping("/list")
-public String list(@ModelAttribute ("PageVO")PageVO pageVO,Model model) {
+public String list(@ModelAttribute ("pageVO")PageVO pageVO,Model model) {
 	model.addAttribute("scheduleList",scheduleDao.selectListByPaging(pageVO));
 	int count = scheduleDao.countByPaging(pageVO);
 	pageVO.setCount(count);
@@ -55,7 +55,7 @@ public String detail(@RequestParam int scheduleNo,Model model) {
 	ScheduleDto scheduleDto = scheduleDao.selectOne(scheduleNo);
 	
 	if(scheduleDto == null)
-		throw new TargetNotFoundException("올바르지 않는 접근 번호");
+		throw new TargetNotFoundException("올바르지 않는 글 번호");
 	model.addAttribute("scheduleDto",scheduleDto);
 	return "/WEB-INF/views/schedule/detail.jsp";
 	

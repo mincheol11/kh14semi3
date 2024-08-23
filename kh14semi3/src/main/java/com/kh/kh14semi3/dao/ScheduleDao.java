@@ -51,7 +51,7 @@ public class ScheduleDao {
 
 	public List<ScheduleDto> selectList() {
 		String sql = "select  "
-				+ "schedule_no, SCHEDULE_WRITER, SCHEDULE_TYPE, SCHEDULE_TITLE, SCHEDULE_CONTENT, SCHEDULE_WTIME"
+				+ "schedule_no, SCHEDULE_WRITER, SCHEDULE_TYPE, SCHEDULE_TITLE, SCHEDULE_CONTENT, SCHEDULE_WTIME "
 				+ "from schedule order by schedule_no desc";
 		return jdbcTemplate.query(sql,scheduleListMapper );
 	}
@@ -59,7 +59,7 @@ public class ScheduleDao {
 
 	public List<ScheduleDto> selectList(String column, String keyword) {
 		String sql = "select "
-				+ "schedule_no, SCHEDULE_WRITER, SCHEDULE_TYPE, SCHEDULE_TITLE, SCHEDULE_CONTENT, SCHEDULE_WTIME"
+				+ "schedule_no, SCHEDULE_WRITER, SCHEDULE_TYPE, SCHEDULE_TITLE, SCHEDULE_CONTENT, SCHEDULE_WTIME "
 				+ " from schedule "
 				+ "where instr(#1, ?) > 0 "
 				+ "order by schedule_no desc";
@@ -101,11 +101,11 @@ public class ScheduleDao {
 		      int beginRow = endRow - (size-1);
 				
 	String sql = "select * from ("
-				+ "select rownum rn, TMP.* from ("
+				+ "select rownum rn, TMP.* from ( "
 				+ "select "
 					+ "schedule_no, SCHEDULE_WRITER, SCHEDULE_TYPE, SCHEDULE_TITLE, SCHEDULE_CONTENT, SCHEDULE_WTIME "
-				+ "from schedule order by schedule_no desc"
-			+ ")TMP"
+				+ "from schedule order by schedule_no desc "
+			+ ")TMP "
 	+ ") where rn between ? and ?";
 				
 		
@@ -121,14 +121,14 @@ public class ScheduleDao {
 		int endRow= page * size;
 	    int beginRow = endRow - (size-1);
 			
-	String sql = "select * from ("
-			+ "select rownum rn, TMP.* from ("
+	String sql = "select * from ( "
+			+ "select rownum rn, TMP.* from ( "
 			+ "select "
-			+ " schedule_no, SCHEDULE_WRITER, SCHEDULE_TYPE, SCHEDULE_TITLE, SCHEDULE_CONTENT, SCHEDULE_WTIME"
+			+ " schedule_no, SCHEDULE_WRITER, SCHEDULE_TYPE, SCHEDULE_TITLE, SCHEDULE_CONTENT, SCHEDULE_WTIME "
 			+ " from schedule "
-			+ "where instr(#1, ?) > 0 "
-			+ "order by schedule_no desc"
-		+ ")TMP"
+			+ "where instr(#1, ?) >  0  "
+			+ "order by schedule_no desc "
+		+ ")TMP "
 	+ ") where rn between ? and ?";
 			sql = sql.replace("#1", column);
 
@@ -160,11 +160,11 @@ public class ScheduleDao {
 			String sql = "select * from ("
 					+ "select rownum rn, TMP.* from ("
 					+ "select "
-					+ "schedule_no, SCHEDULE_WRITER, SCHEDULE_TYPE, SCHEDULE_TITLE, SCHEDULE_CONTENT, SCHEDULE_WTIME"
+					+ "schedule_no, SCHEDULE_WRITER, SCHEDULE_TYPE, SCHEDULE_TITLE, SCHEDULE_CONTENT, SCHEDULE_WTIME "
 					+ " from schedule "
 					+ "where instr(#1, ?) > 0 "
 					+ "order by schedule_no asc "
-				+ ")TMP"
+				+ ")TMP "
 			+ ") where rn between ? and ?";
 					sql = sql.replace("#1", pageVO.getColumn());
 
@@ -176,7 +176,7 @@ public class ScheduleDao {
 			String sql = "select * from ("
 					+ "select rownum rn, TMP.* from ("
 					+ "select "
-					+ " schedule_no, SCHEDULE_WRITER, SCHEDULE_TYPE, SCHEDULE_TITLE, SCHEDULE_CONTENT, SCHEDULE_WTIME"
+					+ " schedule_no, SCHEDULE_WRITER, SCHEDULE_TYPE, SCHEDULE_TITLE, SCHEDULE_CONTENT, SCHEDULE_WTIME "
 					+ "from schedule "
 					+ "order by schedule_no asc " 
 				+ ")TMP"
@@ -188,11 +188,11 @@ public class ScheduleDao {
 		}
 
 
-	public int countByPaging(PageVO pageVo) {
-		if(pageVo.isSearch()) {
+	public int countByPaging(PageVO pageVO) {
+		if(pageVO.isSearch()) {
 			String sql="select count(*) from schedule where instr(#1,?) > 0";
-			sql= sql.replace("#1",pageVo.getColumn() );
-			Object[]data= {pageVo.getKeyword()};
+			sql= sql.replace("#1",pageVO.getColumn() );
+			Object[]data= {pageVO.getKeyword()};
 			return jdbcTemplate.queryForObject(sql, int.class,data);
 		}
 		else {
@@ -206,9 +206,5 @@ public class ScheduleDao {
 			Object[] data = {scheduleNo};
 			return jdbcTemplate.queryForObject(sql ,int.class,data);
 
+}
 	}
-
-
-	}
-
-

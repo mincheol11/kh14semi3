@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include> <!-- hearder 추가 -->
+
  <script type="text/javascript">
     
 
@@ -16,18 +18,18 @@
             <h2>존재하지 않는 학과 정보 입니다.</h2>
         </c:when>
     <c:otherwise>
-        <table class="table table-horizontal table-hover">
+        <table class="table table-border table-hover">
                 <tr>
                     <th width="30%">학과 코드</th>
-                    <td>${departmentDto.departmendCode}</td>
+                    <td>${AdminDepartmentDto.departmendCode}</td>
                 </tr>
                 <tr>
                     <th>학과명</th>
-                    <td>${departmentDto.departmendName}</td>
+                    <td>${AdminDepartmentDto.departmendName}</td>
                 </tr>
                 <tr>
                     <th>담당교수</th>
-                    <td>박철수(가제)</td>
+                    <td>박철수(코드추가))</td>
                 </tr>
             </table>
         </c:otherwise>

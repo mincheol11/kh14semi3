@@ -32,7 +32,7 @@ public class BoardController {
 	private BoardDao boardDao;
 	
 	@RequestMapping("/list")
-	public  String list(@ModelAttribute("PageVO")PageVO pageVO,Model model) {
+	public  String list(@ModelAttribute("pageVO")PageVO pageVO,Model model) {
 		model.addAttribute("boardList",boardDao.selectListByPaging(pageVO));
 		int count = boardDao.countByPaging(pageVO);
 		pageVO.setCount(count);

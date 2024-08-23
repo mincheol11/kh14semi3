@@ -18,10 +18,7 @@ public class LectureDao {
 	private JdbcTemplate jdbcTemplate;
 	
 	@Autowired
-	private LectureMapper lectureMapper;
-	
-//	@Autowired
-//	private LectureDepartmentMapper lectureDepartmentMapper;
+	private LectureMapper lectureMapper;	
 	
 	
 	public void insert(LectureDto lectureDto) {
