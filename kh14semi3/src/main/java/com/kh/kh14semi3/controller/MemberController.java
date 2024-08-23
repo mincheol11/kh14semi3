@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.kh.kh14semi3.dao.MemberDao;
 import com.kh.kh14semi3.dto.MemberDto;
 
-
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -28,23 +28,21 @@ public class MemberController {
 	@PostMapping("/login")
 	public String login(@RequestParam String memberId,
 								@RequestParam String memberPw,
-								HttpSession session) {
-//		public String login(@ModelAttribute MemberDto memberDto) {
+//								@RequestParam(required = false) String remember,//아이디 저장하기 기능넣을시 활용용
+								HttpSession session, HttpServletResponse response) {
 		//1. 아이디에 해당하는 정보(MemberDto)를 불러옴
 		//->없으면 실패
 		//2. MemberDto와 비밀번호를 비교
 		//->안맞으면 실패
-		//3. 1,2 다 성공시 성공
+		//3.차단회원 차단 되게 
+		//4. 1,2,3 다 성공시 로그인 성공
 		
 		//1번
 		MemberDto memberDto = memberDao.selectOne(memberId);
 		if(memberDto == null) return "redirect:/member/login?error"; //redirect는 get으로 감
 		
 		//2번
-//		System.out.println("memberPw : "+memberPw);
-//		System.out.println("memberDto.getMemberPw() : "+memberDto.getMemberPw());
 		boolean isValid = memberPw.equals(memberDto.getMemberPw());
-//		System.out.println("isValid : "+isValid);
 		if(isValid == false) return "redirect:/member/login";
 		
 //		//3번 차단
@@ -55,8 +53,19 @@ public class MemberController {
 		
 		//4번
 		session.setAttribute("createdUser", memberId);
-		session.setAttribute("createdRank", memberDto.getMemberRank());
+		session.setAttribute("createdRank", memberDto.getMemberRank()); //? 관리자 메뉴추가할때 썼던 코드
+//		memberDao.updateMemberLogin(memberId); 최종 로그인 시각이 반영되도록 할때 필요한 코드
+		
+		
 		return "redirect:/home/main"; //성공시 메인으로
+	}
+	
+	//로그아웃
+	@RequestMapping("/logout")
+	public String logout(HttpSession session) {
+		session.removeAttribute("createdUser");
+		session.removeAttribute("createdRank"); // ? 관리자 메뉴추가 할때 썻던 코드
+		return "redirect:/";
 	}
 	
 }

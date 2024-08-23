@@ -32,6 +32,14 @@ public class MemberDao {
 		return list.isEmpty() ? null : list.get(0);
 	}
 	
+//	회원 최종 로그인 시각 갱신 필요시 주석 해제
+//	public boolean updateMemberLogin(String memberId) {
+//		String sql = "update member set member_login=sysdate "
+//						+ "where member_id = ?";
+//		Object[] data = {memberId};
+//		return jdbcTemplate.update(sql, data) > 0;
+//	}
+	
 	//페이징 관련 메소드
 	public List<MemberTakeOffVO> selectListByPaging(PageVO pageVO) {
         if(pageVO.isSearch()) { // 검색
