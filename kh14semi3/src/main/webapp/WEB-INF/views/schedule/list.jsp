@@ -52,7 +52,7 @@
 			
 			<td >${scheduleDto.scheduleWriter}</td>
 			<td >${scheduleDto.scheduleWtime }</td>
-			
+				<td >${scheduleDto.scheduleType}</td>
 			<td >${scheduleDto.scheduleNo}</td>
 			</tr>
 		</c:forEach>
