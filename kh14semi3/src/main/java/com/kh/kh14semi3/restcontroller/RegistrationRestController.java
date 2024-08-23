@@ -26,7 +26,7 @@ public class RegistrationRestController {
 //	@RequestMapping("/check")
 //	public RegistrationVO check(HttpSession session, @RequestParam String lectureCode) {
 //		// 학번 추출
-//		String studentId = (String) session.getAttribute("")
+//		String studentId = (String) session.getAttribute("createdUser");
 //	}
 	
 	
