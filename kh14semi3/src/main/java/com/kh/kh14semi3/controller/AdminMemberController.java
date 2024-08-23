@@ -3,14 +3,14 @@ package com.kh.kh14semi3.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.kh14semi3.dao.MemberDao;
-import com.kh.kh14semi3.vo.PageVO;
-import com.kh.kh14semi3.error.TargetNotFoundException;
 import com.kh.kh14semi3.dto.MemberDto;
+import com.kh.kh14semi3.error.TargetNotFoundException;
+import com.kh.kh14semi3.vo.PageVO;
 
 @Controller
 @RequestMapping("/admin/member")
@@ -30,15 +30,9 @@ public class AdminMemberController {
 		
 		return "/WEB-INF/views/admin/member/list.jsp";
 	}
-<<<<<<< HEAD
-	//재적 기능(미완성)
-	@GetMapping("/block")
-	public String takeOff(@RequestParam String takeOffTarget, Model model) {
-		return "/WEB-INF/views/member/block.jsp";
-	}
 
-=======
-	
+
+
 	//회원 상세
 	@RequestMapping("/detail")
 	public String detail(Model model, @RequestParam String memberId) {
@@ -56,5 +50,5 @@ public class AdminMemberController {
 		return "redirect:list";
 	}
 	
->>>>>>> branch 'main' of https://github.com/mincheol11/kh14semi3.git
+
 }
