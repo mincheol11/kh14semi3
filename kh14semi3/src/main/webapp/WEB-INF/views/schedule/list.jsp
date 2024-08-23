@@ -22,10 +22,10 @@
 </form>
     </div>
     <div class="row">
-    ${pageVo.page}/${pageVo.lastBlock}페이지
+    ${pageVO.page}/${pageVO.lastBlock}페이지
     </div>
     <div class="row">
-    ${pageVo.beginRow}-${pageVo.endRow}/${pageVo.count}개
+    ${pageVO.beginRow}-${pageVO.endRow}/${pageVO.count}개
     </div>
     
     <div class="row">
@@ -61,4 +61,4 @@
 </table>
     </div>
     </div>
-     
+     <jsp:include page="/WEB-INF/views/template/navigator.jsp"></jsp:include>

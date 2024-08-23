@@ -167,10 +167,10 @@ public List<BoardDto> selectListByPaging(PageVO pageVO) {
 	
 	if(pageVO.isSearch()) {
 		String sql = "select * from ("
-				+ "select rownum rn, TMP.* from ("
+				+ "select rownum rn, TMP.* from  ("
 				+ "select "
-				+ " BOARD_NO, BOARD_WRITER, BOARD_TYPE, BOARD_TITLE,"
-				+ "	BOARD_CONTENT, BOARD_WTIME, BOARD_UTIME, BOARD_VIEWS "
+				+ " BOARD_NO, BOARD_WRITER, BOARD_TYPE, BOARD_TITLE, "
+				+ "BOARD_CONTENT, BOARD_WTIME, BOARD_UTIME, BOARD_VIEWS "
 				+ " from board "
 				+ "where instr(#1, ?) > 0 "
 			   + "order by board_no asc "
@@ -200,11 +200,11 @@ public List<BoardDto> selectListByPaging(PageVO pageVO) {
 	}
 
 
-public int countByPaging(PageVO pageVo) {
-	if(pageVo.isSearch()) {
+public int countByPaging(PageVO pageVO) {
+	if(pageVO.isSearch()) {
 		String sql="select count(*) from board where instr(#1,?) > 0";
-		sql= sql.replace("#1",pageVo.getColumn() );
-		Object[]data= {pageVo.getKeyword()};
+		sql= sql.replace("#1",pageVO.getColumn() );
+		Object[]data= {pageVO.getKeyword()};
 		return jdbcTemplate.queryForObject(sql, int.class,data);
 	}
 	else {

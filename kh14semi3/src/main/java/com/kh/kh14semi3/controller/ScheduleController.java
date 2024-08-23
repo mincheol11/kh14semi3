@@ -31,7 +31,7 @@ public class ScheduleController {
 private ScheduleDao scheduleDao;
 
 @RequestMapping("/list")
-public String list(@ModelAttribute ("PageVO")PageVO pageVO,Model model) {
+public String list(@ModelAttribute ("pageVO")PageVO pageVO,Model model) {
 	model.addAttribute("scheduleList",scheduleDao.selectListByPaging(pageVO));
 	int count = scheduleDao.countByPaging(pageVO);
 	pageVO.setCount(count);
