@@ -1,6 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+   
  <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ </script>
+ 
  
  <link
 	href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css"

@@ -3,11 +3,47 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
+ <script type="text/javascript">
+ $(function(){
+	    $("#move_month > i").click(function(){
+	        let url = $(this).parent().attr("data-url");
+	        let action = $(this).parent().attr("data-action");
+
+	        let date = $(this).siblings("h2").html();
+	        let year = parseInt(date.split(".")[0]);
+	        let month = parseInt(date.split(".")[1]) - 1;
+
+	        date = ($(this).attr("id") == "before_month") ? new Date(year, month - 1) : new Date(year, month + 1);
+	        year = date.getFullYear();
+	        month = date.getMonth() + 1;
+
+	        let form = $("<form></form>");
+	        form.attr("method", action);
+	        form.attr("action", url);
+	        form.append($("<input/>", {type:"hidden", name:"year", value:year}));
+	        form.append($("<input/>", {type:"hidden", name:"month", value:month}));
+	        form.appendTo("body");
+	        form.submit();
+	    });
+	});
+ 
+ 
+ </script>
+
+
 <div class="container w-800 my-50">
     
     <div class="row left">
     <h1>학사 일정</h1>
     </div>
+    
+    <div class="row center">
+    <h2>2024</h2>
+    </div>
+    
+    
+    
+    
     <c:set var="isAdmin" value="${sessionScope.createdRank == '관리자'}" />
      <c:set var="isLogin" value="${sessionScope.createdUser != null}" />
       
@@ -49,7 +85,7 @@
 			<td>${scheduleDto.scheduleWriter}</td>
 			<td>${scheduleDto.scheduleWtime }</td>
 			<td>${scheduleDto.scheduleType}</td>
-			<td>${scheduleDto.scheduleNo}</td>
+			
 			</tr>
 		</c:forEach>
 		
