@@ -93,6 +93,22 @@ public class MemberDao {
 		Object[] data = {memberId};
 		return jdbcTemplate.update(sql, data) >0;
 	}
+
+	public void insert(MemberDto memberDto) {
+		String sql = "insert into member("
+				+ "member_id, member_pw, member_name, member_rank, "
+				+ "member_email, member_cell, member_birth, member_post, "
+				+ "member_address1, member_address2 "
+				+ ") "
+				+ "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		Object[] data = {
+			memberDto.getMemberId(), memberDto.getMemberPw(), memberDto.getMemberName(),
+			memberDto.getMemberRank(), memberDto.getMemberEmail(), memberDto.getMemberCell(),
+			memberDto.getMemberBirth(), memberDto.getMemberPost(), memberDto.getMemberAddress1(),
+			memberDto.getMemberAddress2()
+		};
+		jdbcTemplate.update(sql, data);
+	}
 }		
 		
 
