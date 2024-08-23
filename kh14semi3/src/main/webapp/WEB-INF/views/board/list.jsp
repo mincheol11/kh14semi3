@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
     <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+    
+
 
 <div class="container w-800 my-50">
     
@@ -23,10 +25,10 @@
 </form>
     </div>
     <div class="row">
-    ${pageVo.page}/${pageVo.lastBlock}페이지
+    ${pageVO.page}/${pageVO.lastBlock}페이지
     </div>
     <div class="row">
-    ${pageVo.beginRow}-${pageVo.endRow}/${pageVo.count}개
+    ${pageVO.beginRow}-${pageVO.endRow}/${pageVO.count}개
     </div>
     
     <div class="row">
@@ -64,4 +66,6 @@
 </table>
     </div>
     </div>
+    
+    <jsp:include page="/WEB-INF/views/template/navigator.jsp"></jsp:include>
      

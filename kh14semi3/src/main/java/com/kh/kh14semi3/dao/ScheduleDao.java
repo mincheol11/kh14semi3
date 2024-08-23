@@ -126,7 +126,7 @@ public class ScheduleDao {
 			+ "select "
 			+ " schedule_no, SCHEDULE_WRITER, SCHEDULE_TYPE, SCHEDULE_TITLE, SCHEDULE_CONTENT, SCHEDULE_WTIME "
 			+ " from schedule "
-			+ "where instr(#1, ?) > 0  "
+			+ "where instr(#1, ?) >  0  "
 			+ "order by schedule_no desc "
 		+ ")TMP "
 	+ ") where rn between ? and ?";
