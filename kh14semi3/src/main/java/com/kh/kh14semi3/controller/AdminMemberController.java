@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kh.kh14semi3.dao.MemberDao;
 import com.kh.kh14semi3.vo.PageVO;
+import com.kh.kh14semi3.error.TargetNotFoundException;
+import com.kh.kh14semi3.dto.MemberDto;
 
 @Controller
 @RequestMapping("/admin/member")
@@ -27,5 +29,22 @@ public class AdminMemberController {
 		
 		return "/WEB-INF/views/admin/member/list.jsp";
 	}
-
+	
+	//회원 상세
+	@RequestMapping("/detail")
+	public String detail(Model model, @RequestParam String memberId) {
+		MemberDto memberDto = memberDao.selectOne(memberId);
+		model.addAttribute("memberDto", memberDto);
+		return "/WEB-INF/views/admin/member/detail.jsp";
+	}
+	
+	//회원 삭제
+	@RequestMapping("/delete")
+	public String delete(@RequestParam String memberId) {
+		boolean result = memberDao.delete(memberId);
+		if(result == false)
+			throw new TargetNotFoundException("존재하지 않는 회원ID");
+		return "redirect:list";
+	}
+	
 }
