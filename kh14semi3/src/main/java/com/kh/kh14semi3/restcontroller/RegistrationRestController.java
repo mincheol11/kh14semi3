@@ -44,10 +44,10 @@ public class RegistrationRestController {
 		String studentId = (String) session.getAttribute("createdUser");
 		
 		boolean isChecked = registrationDao.check(studentId, lectureCode);
-		if(isChecked) { // 삭제
+		if(isChecked) { // 삭제(등록 이력 있음)
 			registrationDao.delete(studentId, lectureCode);
 		}
-		else { // 등록
+		else { // 등록(등록 이력 없음)
 			registrationDao.insert(studentId, lectureCode);
 		}
 		

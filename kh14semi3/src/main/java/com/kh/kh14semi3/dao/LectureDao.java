@@ -7,7 +7,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.kh14semi3.dto.LectureDto;
-import com.kh.kh14semi3.dto.RegistrationDto;
 import com.kh.kh14semi3.mapper.LectureMapper;
 import com.kh.kh14semi3.vo.PageVO;
 
@@ -45,7 +44,7 @@ public class LectureDao {
 					+ "lecture_code, lecture_department, lecture_professor, "
 					+ "lecture_type, lecture_name, "
 					+ "lecture_time, lecture_day, lecture_duration, "
-					+ "lecture_room, lecture_count "
+					+ "lecture_room, lecture_count, lecture_regist "
 					+ "from lecture "
 					+ "where instr("+pageVO.getColumn()+",?)>0 "
 					// 트리정렬				
@@ -63,7 +62,7 @@ public class LectureDao {
 					+ "lecture_code, lecture_department, lecture_professor, "
 					+ "lecture_type, lecture_name, "
 					+ "lecture_time, lecture_day, lecture_duration, "
-					+ "lecture_room, lecture_count "
+					+ "lecture_room, lecture_count, lecture_regist "
 					+ "from lecture "
 					// 트리정렬					
 					+ "order by lecture_code asc"
@@ -90,7 +89,7 @@ public class LectureDao {
 	// 수강신청 갱신(최신화) 기능
 	public boolean updateRegistration(String lectureCode) {
 		String sql = "update lecture set lecture_regist = ( " // 반정규화
-				+ "select count(*) from registration where lecture_code = ? "
+				+ "select count(*) from registration where registration_lecture = ? "
 				+ ") where lecture_code = ?";
 		Object[] data = {lectureCode, lectureCode};
 		return jdbcTemplate.update(sql, data) > 0 ;		

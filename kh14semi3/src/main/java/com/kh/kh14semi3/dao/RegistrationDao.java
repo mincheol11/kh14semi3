@@ -6,9 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.kh.kh14semi3.dto.RegistrationDto;
 import com.kh.kh14semi3.mapper.RegistrationMapper;
-import com.kh.kh14semi3.vo.PageVO;
 
 @Repository
 public class RegistrationDao {
@@ -36,7 +34,7 @@ public class RegistrationDao {
 	
 	// [3] 강의 수강신청 기능
 	public void insert(String studentId, String lecturCode) {
-		String sql = "insert into registration "
+		String sql = "insert into registration "				
 				+ "values(registration_seq.nextval, ?, ?, sysdate)";
 		Object[] data = {studentId, lecturCode};
 		jdbcTemplate.update(sql, data);

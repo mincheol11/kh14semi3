@@ -25,6 +25,7 @@ public class LectureMapper implements RowMapper<LectureDto>{
 		lectureDto.setLectureDay(rs.getDate("lecture_day"));
 		lectureDto.setLectureRoom(rs.getString("lecture_room"));
 		lectureDto.setLectureCount(rs.getInt("lecture_count"));
+		lectureDto.setLectureRegist(rs.getInt("lecture_regist"));
 		
 		return lectureDto;
 	}
