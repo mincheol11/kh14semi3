@@ -8,6 +8,10 @@
     <div class="row left">
     <h1>학사 일정</h1>
     </div>
+    <c:set var="isAdmin" value="${sessionScope.createdRank == '관리자'}" />
+     <c:set var="isLogin" value="${sessionScope.createdUser != null}" />
+      
+      
     <c:if test="${isLogin && isAdmin}">
     <div class="row right">
     <a href="add" class="btn btn-neutral">신규등록</a>
@@ -35,7 +39,7 @@
 	<tbody align="center">
 		<c:forEach var="scheduleDto" items="${scheduleList}">
 		<tr>
-			<td >${scheduleDto.scheduleNo}</td>
+			<td>${scheduleDto.scheduleNo}</td>
 			
 			<td  align="right">
 			<!-- 제목에 링크를 부여해서 상세 페이지로 이동하도록 구현 -->
