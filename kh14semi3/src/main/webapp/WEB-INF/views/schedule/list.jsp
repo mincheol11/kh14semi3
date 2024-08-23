@@ -5,22 +5,15 @@
 
 <div class="container w-800 my-50">
     
-    <div class="row center">
-    <h1>게시글 목록</h1>
+    <div class="row left">
+    <h1>학사 일정</h1>
     </div>
+    <c:if test="${isLogin && isAdmin}">
     <div class="row right">
     <a href="add" class="btn btn-neutral">신규등록</a>
     </div>
-    <div class="row center">
-    <form action="list" method="get">
-	<select name="column" class="field">
-    <option value="schedule_title" <c:if test="${param.column == 'schedule_title'}">selected</c:if>>제목</option>
-    <option value="schedule_writer" <c:if test="${param.column == 'schedule_writer'}">selected</c:if>>작성자</option>
-	</select>
-	<input type="text" name="keyword" placeholder="검색어" value="${param.keyword}" class="field">
-	<button type="submit" class="btn btn-positive">검색</button>
-</form>
-    </div>
+    </c:if>
+    
     <div class="row">
     ${pageVO.page}/${pageVO.lastBlock}페이지
     </div>
@@ -36,7 +29,7 @@
 			<th>제목</th>
 			<th>작성자</th>
 			<th>작성일</th>
-			<th >글 분류</th>
+			<th>글 분류</th>
 		</tr>
 	</thead>
 	<tbody align="center">
@@ -49,11 +42,10 @@
 				<a href="detail?scheduleNo=${scheduleDto.scheduleNo}">${scheduleDto.scheduleTitle} </a>
 				
 			</td>
-			
-			<td >${scheduleDto.scheduleWriter}</td>
-			<td >${scheduleDto.scheduleWtime }</td>
-				<td >${scheduleDto.scheduleType}</td>
-			<td >${scheduleDto.scheduleNo}</td>
+			<td>${scheduleDto.scheduleWriter}</td>
+			<td>${scheduleDto.scheduleWtime }</td>
+			<td>${scheduleDto.scheduleType}</td>
+			<td>${scheduleDto.scheduleNo}</td>
 			</tr>
 		</c:forEach>
 		
