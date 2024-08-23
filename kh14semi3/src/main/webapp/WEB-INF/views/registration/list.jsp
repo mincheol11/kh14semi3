@@ -70,8 +70,11 @@
 	});
 </script>
 <%-- </c:if> --%>
+
 createdUser = ${sessionScope.createdUser} , 
-	createdLevel = ${sessionScope.createdRank}
+createdLevel = ${sessionScope.createdRank}
+	
+<a href="regist" class="btn btn-neutral">이동</a>
 
 <div class="container w-700 my-50">
 	<div class="row center">
@@ -104,24 +107,7 @@ createdUser = ${sessionScope.createdUser} ,
 				<!-- 결과 화면 -->
 				<div class="right">
 					<i class="fa-brands fa-slack red"></i> 강의명 클릭시 수강신청 담기 가능
-				</div>
-				<%-- 
-				<div class="flex-box">
-				<table class="table table-horizontal w-20" style="border-right:none;">
-					<thead>
-						<tr>
-							<th>전공(학과)</th>
-						</tr>
-					</thead>
-					<tbody class="center">
-						<c:forEach var="departmentDto" items="${departmentList}">
-						<tr class="w-20">
-							<td>${departmentDto.departmentName}</td>
-						</tr>
-						</c:forEach>
-					</tbody>										
-				</table>
-				 --%>
+				</div>				
 				<table class="table table-horizontal table-hover" style="border-left:none;">
 					<thead>
 						<tr>
