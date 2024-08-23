@@ -21,7 +21,7 @@ public class RegistrationRestController {
 	private RegistrationDao registrationDao;
 	@Autowired
 	private LectureDao lectureDao;
-
+ 
 //	// 수강신청 확인 매핑
 //	@RequestMapping("/check")
 //	public RegistrationVO check(HttpSession session, @RequestParam String lectureCode) {
