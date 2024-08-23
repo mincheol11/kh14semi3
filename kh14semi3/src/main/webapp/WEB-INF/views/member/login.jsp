@@ -8,16 +8,21 @@
     <form action="login" method="post" autocomplete="off">
     <div class="container w-400 my-50">
     	<div class="row center">
-    		<h1>로그인</h1>
+    		<h1>Kh 대학교 로그인</h1>
     	</div>
-    
-    
-    </div>
-    	아이디<input type="text" name="memberId" required><br>
-    	비밀번호<input type="text" name="memberPw" required><br>
-    	<button>로그인</button>
-    </form>
-    
-    <c:if test="${parm.error != null }">
-    	<h3 style="color:red">아이디 또는 비밀번호가 잘못 되었습니다.</h3>
-    </c:if>
+    <label>아이디</label> <input type="text" name="memberId" class="field w-100">
+		<div class="row">
+			<label>비밀번호</label> <input type="password" name="memberPw" class="field w-100">
+		</div>
+		<div>
+			<button class="btn btn-positive w-100" >로그인</button>	
+		</div>
+		
+		<c:if test="${param.error != null}">
+			<div class="row center">
+				<h3 style="color: red">아이디 또는 비밀번호가 잘못되었습니다</h3>
+			</div>
+		</c:if>
+		
+	</div>
+</form>
