@@ -3,7 +3,9 @@ package com.kh.kh14semi3.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -50,5 +52,20 @@ public class AdminMemberController {
 		return "redirect:list";
 	}
 	
-
+	//관리자 - 회원가입
+	@GetMapping("join")
+	public String join() {
+		return "/WEB-INF/views/admin/member/join.jsp";
+	}
+	
+	@PostMapping("/join")
+	public String join(@ModelAttribute MemberDto memberDto) {
+		memberDao.insert(memberDto);
+		return "redirect:list";
+	}
+	
+	
+	
+	
+	
 }
