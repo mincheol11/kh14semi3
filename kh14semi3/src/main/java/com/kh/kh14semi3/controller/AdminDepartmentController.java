@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.kh14semi3.dao.AdminDepartmentDao;
 import com.kh.kh14semi3.dto.AdminDepartmentDto;
-import com.kh.spring06.vo.PageVO;
+import com.kh.kh14semi3.vo.PageVO;
+
 
 @Controller
 @RequestMapping("/admin/department")

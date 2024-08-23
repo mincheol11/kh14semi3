@@ -8,7 +8,8 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.kh14semi3.dto.AdminDepartmentDto;
 import com.kh.kh14semi3.mapper.AdminDepartmentMapper;
-import com.kh.spring06.vo.PageVO;
+import com.kh.kh14semi3.vo.PageVO;
+
 
 @Repository
 public class AdminDepartmentDao {
