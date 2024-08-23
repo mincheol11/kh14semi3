@@ -17,21 +17,21 @@
 			<h1>게시글 수정</h1>
 		</div>
 		<div class="row">
-			<input type="hidden" name="boardNo" class="field w-100"
-				value="${boardDto.boardNo}">
+			<input type="hidden" name="scheduleNo" class="field w-100"
+				value="${scheduleDto.scheduleNo}">
 		</div>
 		<div class="row">
 			<label>제목 <i class="fa-solid fa-asterisk fa-fade"></i></label> <input
-				type="text" name="boardTitle" class="field w-100"
-				value="${boardDto.boardTitle}" required> <br>
+				type="text" name="scheduleTitle" class="field w-100"
+				value="${scheduleDto.scheduleTitle}" required> <br>
 			<br>
 		</div>
 		<div class="row">
 
 			<label>내용 <i class="fa-solid fa-asterisk fa-fade"></i></label>
 			<%--textarea는 value 속성이 없고 시작과 종료태그 사이에 작성 --%>
-			<textarea name="boardContent" class="field w-100"
-				value="${boardDto.boardContent}" rows="10" cols="80" required>${boardDto.boardContent}</textarea>
+			<textarea name="scheduleContent" class="field w-100"
+				value="${scheduleDto.scheduleContent}" rows="10" cols="80" required>${scheduleDto.scheduleContent}</textarea>
 			<br>
 			<br>
 		</div>
