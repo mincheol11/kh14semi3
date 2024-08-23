@@ -22,7 +22,7 @@
 	    <!-- my css (절대주소 필수) -->
 	    <link rel="stylesheet" type="text/css" href="/css/commons.css">
 	    <link rel="stylesheet" type="text/css" href="/css/commons.css">
-		<!-- <link rel="stylesheet" type="text/css" href="/css/test.css"> --> 
+	<link rel="stylesheet" type="text/css" href="/css/test.css"> 
 	
 	    <!-- font awesome icon cdn-->
 	    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
