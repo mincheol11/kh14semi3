@@ -17,36 +17,61 @@
 	}
 </style>
 
+<script type="text/javascript">
+	$(function(){
+		$(".class-regist").each(function() {
+	        var lectureCode = $(this).parent().find(".lecture-code").text();
+	        var btn = $(this);
+
+	        $.ajax({
+	            url: "/rest/registration/check",
+	            method: "post",
+	            data: {lectureCode: lectureCode},
+	            success: function(response) {
+	                if (response.checked) {
+	                    // 이미 수강신청이 완료된 경우
+	                    $(btn).removeClass("class-regist link link-animation");
+	                    $(btn).off("click");
+	                    $(btn).css("cursor", "not-allowed"); // 클릭할 수 없도록 커서 스타일 변경
+	                    $(btn).attr("title", "이미 수강신청 완료"); // 마우스 오버 시 메시지 표시
+	                }
+	                // 수강신청 상태가 아닐 경우에는 기본 상태를 유지
+	            }
+	        });
+	    });
+	});
+</script>
+
 <%-- <c:if test="${sessionScope.createdRank == '학생'}"> --%>
 <script type="text/javascript">
-	// (회원전용) 하트를 누르면 좋아요 처리를 수행
-	var params = new URLSearchParams(location.search);
-	var lectureCode = $(".lecture-code").attr("data-code");
-	
+	// (회원전용) 강의명을 누르면 수강 신청 처리를 수행	
 	$(function(){
 		$(".class-regist").on("click",function(){
+			var lectureCode = $(this).parent().find(".lecture-code").text();
+			var btn = this;
+			
 			$.ajax({
 				url: "/rest/registration/regist",
 				method: "post",
 				data: {lectureCode : lectureCode},
 				success: function(response){
 					if(response.checked){						
-						console.log(lectureCode);
-						// 너 이미 이거 수강신청 했어 라는 문구 출력 alert-link.js 만들어서 추가
-						window.alert("너 이거 담음");
-					}
-					else{
 						// 너의 수강신청목록에 이거 넣었어 라는 문구 출력
-						window.alert("이거 담을게");
+						window.alert("수강 신청 완료!");
+						$(btn).removeClass("class-regist link link-animation");
+						$(btn).off("click");
+	                    $(btn).css("cursor", "not-allowed"); // 클릭할 수 없도록 커서 스타일 변경
+	                    $(btn).attr("title", "이미 수강신청 완료"); // 마우스 오버 시 메시지 표시
 					}					
-					/* $(".class-regist").next("span").text(response.count); */
+					$(btn).parent().find(".lecture-count").text(response.count);
 				}
 			});
 		});
 	});
 </script>
 <%-- </c:if> --%>
-
+createdUser = ${sessionScope.createdUser} , 
+	createdLevel = ${sessionScope.createdRank}
 
 <div class="container w-700 my-50">
 	<div class="row center">
@@ -120,10 +145,13 @@
 							<td class="link link-animation class-regist">
 								${lectureDto.lectureName}
 							</td>
-							<td class="lecture-code" data-code="${lectureDto.lectureCode}">${lectureDto.lectureCode}</td>
+							<td class="lecture-code">${lectureDto.lectureCode}</td>
 							<td>${lectureDto.lectureTime} ${lectureDto.lectureDuration} ${lectureDto.lectureDay}</td>
 							<td>${lectureDto.lectureRoom}</td>
-							<td>${lectureDto.lectureCount}</td>		
+							<td>
+								<span class="lecture-count">${lectureDto.lectureRegist}</span>
+								/${lectureDto.lectureCount}
+							</td>		
 							<td></td>					
 						</tr>					
 						</c:forEach>
