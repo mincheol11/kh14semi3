@@ -43,7 +43,7 @@
 	});
 </script>
 
-<%-- <c:if test="${sessionScope.createdRank == '학생'}"> --%>
+<c:if test="${sessionScope.createdRank == '학생'}">
 <script type="text/javascript">
 	// (회원전용) 강의명을 누르면 수강 신청 취소 처리를 수행	
 	$(function(){
@@ -70,14 +70,14 @@
 		});
 	});
 </script>
-<%-- </c:if> --%>
+</c:if>
 
 createdUser = ${sessionScope.createdUser} , 
 createdLevel = ${sessionScope.createdRank}
 	
 <a href="list" class="btn btn-neutral">이동</a>
 
-<div class="contatiner w-700 my-50">
+<div class="contatiner w-900 my-50">
 	<div class="row center">
         <h2>${sessionScope.createdUser}님의 수강 신청 목록</h2>        
     </div>
@@ -111,8 +111,10 @@ createdLevel = ${sessionScope.createdRank}
 						<td>${lectureDto.lectureCode}</td>	                        
                         <td>${lectureDto.lectureProfessor}</td>
 						<td>${lectureDto.lectureType}</td>
-						<td class="link link-animation class-regist">
-							${lectureDto.lectureName}
+						<td>
+							<a href="/lecture/detail?lectureCode=${lectureDto.lectureCode}&&goWhere=regist2" class="link link-animation black">
+								${lectureDto.lectureName}
+							</a>
 						</td>
 						<td class="lecture-code">${lectureDto.lectureCode}</td>
 						<td>${lectureDto.lectureTime} ${lectureDto.lectureDuration} ${lectureDto.lectureDay}</td>
@@ -121,7 +123,9 @@ createdLevel = ${sessionScope.createdRank}
 							<span class="lecture-count">${lectureDto.lectureRegist}</span>
 							/${lectureDto.lectureCount}
 						</td>		
-						<td></td>
+						<td class="link link-animation class-regist">
+							수강취소
+						</td>
                     </tr>
                     </c:forEach>
                 </tbody>

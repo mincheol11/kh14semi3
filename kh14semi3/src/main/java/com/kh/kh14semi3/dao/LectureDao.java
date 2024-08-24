@@ -19,7 +19,7 @@ public class LectureDao {
 	@Autowired
 	private LectureMapper lectureMapper;	
 	
-	
+	// 강의 등록
 	public void insert(LectureDto lectureDto) {
 		String sql = "insert into lecture("
 							+ "lecture_code, lecture_department, lecture_professor, "
@@ -30,6 +30,14 @@ public class LectureDao {
 				lectureDto.getLectureType(), lectureDto.getLectureName()
 		};
 		jdbcTemplate.update(sql, data);
+	}
+	
+	// 강의 상세
+	public LectureDto selectOne(String lectureCode) {
+		String sql = "select * from lecture where lecture_code = ?";
+		Object[] data = {lectureCode};
+		List<LectureDto> list = jdbcTemplate.query(sql, lectureMapper, data);
+		return list.isEmpty() ? null : list.get(0);
 	}
 	
 	
@@ -95,7 +103,7 @@ public class LectureDao {
 		return jdbcTemplate.update(sql, data) > 0 ;		
 	}
 	
-	// 수강신청한 강의 목록을 조회
+	// 학생이 수강신청한 강의 목록을 조회
 	public List<LectureDto> selectListByRegistration(String studentId) {
 		String sql = "select * from lecture where lecture_code in (" 
 					+ "select registration_lecture from registration "
@@ -104,5 +112,15 @@ public class LectureDao {
 		Object[] data = {studentId};
 		return jdbcTemplate.query(sql, lectureMapper, data);
 	}
+	
+	// 교수가 가르치고 있는 강의 목록을 조회
+	public List<LectureDto> selectListByTeaching(String professorId){
+		String sql = "select * from lecture where lecture_professor = ? "
+				+ "order by lecture_code desc";
+		Object[] data = {professorId};
+		return jdbcTemplate.query(sql, lectureMapper, data);
+	}
+
+
 	
 }

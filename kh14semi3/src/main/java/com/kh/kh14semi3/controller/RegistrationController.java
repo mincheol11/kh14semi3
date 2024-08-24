@@ -17,19 +17,14 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 @RequestMapping("/registration")
 public class RegistrationController {
-	
+
 	@Autowired
-	private RegistrationDao registrationDao;
-	@Autowired
-	private LectureDao lectureDao; 
-	@Autowired
-	private DepartmentDao departmentDao;
+	private LectureDao lectureDao;
 	
 	// 강의 전체 목록 + 검색 기능
 	@RequestMapping("/list")
 	public String list(@ModelAttribute("pageVO") PageVO pageVO, Model model) {
-		model.addAttribute("lectureList", lectureDao.selectListByPaging(pageVO));
-		model.addAttribute("departmentList", departmentDao.selectListByPaging(pageVO));
+		model.addAttribute("lectureList", lectureDao.selectListByPaging(pageVO));		
 		int count = lectureDao.countByPaging(pageVO);
 		pageVO.setCount(count);
 		return "/WEB-INF/views/registration/list.jsp";

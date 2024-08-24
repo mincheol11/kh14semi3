@@ -7,11 +7,7 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <style>
-	.table {
-		border: 1px solid #2d3436;
-		width: 100%;
-		font-size: 16px;		
-	}	
+		
 	.class-regist{
 		cursor: pointer;
 	}
@@ -42,7 +38,7 @@
 	});
 </script>
 
-<%-- <c:if test="${sessionScope.createdRank == '학생'}"> --%>
+<<c:if test="${sessionScope.createdRank == '학생'}">
 <script type="text/javascript">
 	// (회원전용) 강의명을 누르면 수강 신청 처리를 수행	
 	$(function(){
@@ -69,19 +65,19 @@
 		});
 	});
 </script>
-<%-- </c:if> --%>
+</c:if>
 
 createdUser = ${sessionScope.createdUser} , 
-createdLevel = ${sessionScope.createdRank}
+createdRank = ${sessionScope.createdRank}
 	
 <a href="regist" class="btn btn-neutral">이동</a>
 
-<div class="container w-700 my-50">
+<div class="container w-900 my-50">
 	<div class="row center">
 		<h1>강의 목록</h1>
 	</div>
 
-	<div class="row">
+	<div class="row cneter">
 		<form action="list" method="get" autocomplete="off">
 			<!-- 검색창 --> 
 			<select class="field" name="column">
@@ -96,7 +92,7 @@ createdLevel = ${sessionScope.createdRank}
 	</div>
 	
 
-	<div class="row">
+	<div class="row center">
 		<c:choose>
 			<%-- 결과가 없을 때 --%>
 			<c:when test="${lectureList.isEmpty()}">
@@ -106,9 +102,9 @@ createdLevel = ${sessionScope.createdRank}
 			<c:otherwise>
 				<!-- 결과 화면 -->
 				<div class="right">
-					<i class="fa-brands fa-slack red"></i> 강의명 클릭시 수강신청 담기 가능
+					<i class="fa-brands fa-slack red"></i> 강의명 클릭시 상세 정보 페이지로 이동
 				</div>				
-				<table class="table table-horizontal table-hover" style="border-left:none;">
+				<table class="table table-horizontal table-hover">
 					<thead>
 						<tr>
 							<th>전공(학과)</th>
@@ -128,8 +124,10 @@ createdLevel = ${sessionScope.createdRank}
 							<td>${lectureDto.lectureDepartment}</td>
 							<td>${lectureDto.lectureProfessor}</td>
 							<td>${lectureDto.lectureType}</td>
-							<td class="link link-animation class-regist">
-								${lectureDto.lectureName}
+							<td>
+								<a href="/lecture/detail?lectureCode=${lectureDto.lectureCode}&&goWhere=regist1" class="link link-animation black">
+									${lectureDto.lectureName}
+								</a>
 							</td>
 							<td class="lecture-code">${lectureDto.lectureCode}</td>
 							<td>${lectureDto.lectureTime} ${lectureDto.lectureDuration} ${lectureDto.lectureDay}</td>
@@ -138,16 +136,16 @@ createdLevel = ${sessionScope.createdRank}
 								<span class="lecture-count">${lectureDto.lectureRegist}</span>
 								/${lectureDto.lectureCount}
 							</td>		
-							<td></td>					
+							<td class="link link-animation class-regist">
+								수강신청
+							</td>					
 						</tr>					
 						</c:forEach>
 					</tbody>
 				</table>
-			<%-- </div> --%>
 			</c:otherwise>
 		</c:choose>
 	</div>
-
 </div>
 
 
