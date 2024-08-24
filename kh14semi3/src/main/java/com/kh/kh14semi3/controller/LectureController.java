@@ -48,5 +48,9 @@ public class LectureController {
 		return "/WEB-INF/views/lecture/detail.jsp";
 	}
 	
+	@RequestMapping("/grade/insert")
+	public String gradeInsert() {
+		return "/WEB-INF/views/lecture/gradeInsert.jsp";
+	}
 	
 }
