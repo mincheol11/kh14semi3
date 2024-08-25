@@ -119,3 +119,7 @@ createdRank = ${sessionScope.createdRank}
 	</div>
 </div>
 
+
+<%-- navigator.jsp에 존재하는 내용을 불러오도록 설정 --%>
+<jsp:include page="/WEB-INF/views/template/navigator.jsp"></jsp:include>
+
