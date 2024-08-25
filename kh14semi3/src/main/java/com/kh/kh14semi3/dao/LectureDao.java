@@ -104,20 +104,28 @@ public class LectureDao {
 	}
 	
 	// 학생이 수강신청한 강의 목록을 조회
-	public List<LectureDto> selectListByRegistration(String studentId) {
-		String sql = "select * from lecture where lecture_code in (" 
+	public List<LectureDto> selectListByRegistration(PageVO pageVO, String studentId) {
+		String sql = "select * from ("
+					+ "select rownum rn, TMP.* from ("
+					+ "select * from lecture where lecture_code in (" 
 					+ "select registration_lecture from registration "
 					+ "where registration_student = ? "
-					+ ") order by lecture_code desc";
-		Object[] data = {studentId};
+					+ ") order by lecture_code asc"
+					+ ") TMP"
+					+ ") where rn between ? and ?";	
+		Object[] data = {studentId, pageVO.getBeginRow(), pageVO.getEndRow()};
 		return jdbcTemplate.query(sql, lectureMapper, data);
 	}
 	
 	// 교수가 가르치고 있는 강의 목록을 조회
-	public List<LectureDto> selectListByTeaching(String professorId){
-		String sql = "select * from lecture where lecture_professor = ? "
-				+ "order by lecture_code desc";
-		Object[] data = {professorId};
+	public List<LectureDto> selectListByTeaching(PageVO pageVO, String professorId){
+		String sql = "select * from ("
+				+ "select rownum rn, TMP.* from ("
+				+ "select * from lecture where lecture_professor = ? "
+				+ "order by lecture_code asc"
+				+ ") TMP"
+				+ ") where rn between ? and ?";	
+		Object[] data = {professorId, pageVO.getBeginRow(), pageVO.getEndRow()};
 		return jdbcTemplate.query(sql, lectureMapper, data);
 	}
 

@@ -11,7 +11,7 @@
         <div class="pagination">
             <c:choose>
                 <c:when test="${pageVO.hasPrev()}">
-                    <a href="list?page=${pageVO.getPrevBlock()}&column=${param.column}&keyword=${param.keyword}"><i class="fa-solid fa-chevron-left"></i></a>
+                    <a href="?page=${pageVO.getPrevBlock()}&column=${param.column}&keyword=${param.keyword}"><i class="fa-solid fa-chevron-left"></i></a>
                 </c:when>
                 <c:otherwise>
                     <i class="fa-solid fa-chevron-left"></i>
@@ -23,13 +23,13 @@
                         <a class="on">${n}</a>
                     </c:when>
                     <c:otherwise>
-                        <a href="list?page=${n}&column=${param.column}&keyword=${param.keyword}">${n}</a>
+                        <a href="?page=${n}&column=${param.column}&keyword=${param.keyword}">${n}</a>
                     </c:otherwise>
                 </c:choose>		
             </c:forEach>
             <c:choose> <%-- 다음 버튼은 마지막 구간이 아닐 때(finishBlock < lastBlock) 나온다 --%>
                 <c:when test="${pageVO.hasNext()}">		
-                    <a href="list?page=${pageVO.getNextBlock()}&column=${param.column}&keyword=${param.keyword}"><i class="fa-solid fa-chevron-right"></i></a>
+                    <a href="?page=${pageVO.getNextBlock()}&column=${param.column}&keyword=${param.keyword}"><i class="fa-solid fa-chevron-right"></i></a>
                 </c:when>
                 <c:otherwise>
                     <i class="fa-solid fa-chevron-right"></i>
