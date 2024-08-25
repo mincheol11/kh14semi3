@@ -7,12 +7,7 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 
-<style>
-	.table {
-		border: 1px solid #2d3436;
-		width: 100%;
-		font-size: 16px;		
-	}	
+<style>	
 	.class-regist{
 		cursor: pointer;
 	}
