@@ -77,7 +77,7 @@ createdLevel = ${sessionScope.createdRank}
 	
 <a href="list" class="btn btn-neutral">이동</a>
 
-<div class="contatiner w-900 my-50">
+<div class="container w-900 my-50">
 	<div class="row center">
         <h2>${sessionScope.createdUser}님의 수강 신청 목록</h2>        
     </div>
