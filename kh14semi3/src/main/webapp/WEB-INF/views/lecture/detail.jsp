@@ -33,12 +33,6 @@
 	<div class="row">
         <table class="table table-hover table-horizontal">
             <tr>
-                <th>강의계획서</th>
-                <td class="flex-core">	                
-	                <img src="https://placehold.co/200x200">
-                </td>
-            </tr>
-            <tr>
                 <th>강의코드</th>
                 <td>${lectureDto.lectureCode}</td>
             </tr>
@@ -70,6 +64,12 @@
                 <th>수강인원</th>
                 <td>${lectureDto.lectureRegist}/${lectureDto.lectureCount}</td>
             </tr>                     
+            <tr>
+                <th>강의계획서</th>
+                <td class="flex-core">	                
+	                <img src="https://placehold.co/200x200">
+                </td>
+            </tr>
         </table>
     </div>
 
