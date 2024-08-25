@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.kh.kh14semi3.dao.MemberDao;
 import com.kh.kh14semi3.dto.MemberDto;
 
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
@@ -28,7 +29,7 @@ public class MemberController {
 	@PostMapping("/login")
 	public String login(@RequestParam String memberId,
 								@RequestParam String memberPw,
-//								@RequestParam(required = false) String remember,//아이디 저장하기 기능넣을시 활용용
+								@RequestParam(required = false) String remember,//아이디 저장하기 기능넣을시 활용용
 								HttpSession session, HttpServletResponse response) {
 		//1. 아이디에 해당하는 정보(MemberDto)를 불러옴
 		//->없으면 실패
@@ -43,7 +44,7 @@ public class MemberController {
 		
 		//2번
 		boolean isValid = memberPw.equals(memberDto.getMemberPw());
-		if(isValid == false) return "redirect:/member/login";
+		if(isValid == false) return "redirect:/member/login?error"; //
 		
 //		//3번 차단
 //		BlockDto blockDto = blockDao.selectLastOne(memberId);
@@ -56,9 +57,21 @@ public class MemberController {
 		session.setAttribute("createdRank", memberDto.getMemberRank()); //? 관리자 메뉴추가할때 썼던 코드
 //		memberDao.updateMemberLogin(memberId); 최종 로그인 시각이 반영되도록 할때 필요한 코드
 		
+		//쿠키를 사용한 아이디저장 기능 코드
+		if(remember != null) {//아이디저장체크o
+			Cookie ck = new Cookie("saveId", memberId);//쿠키생성
+			ck.setMaxAge(4 * 7 * 24 * 60 * 60); //기간4주
+			response.addCookie(ck);
+		}
+		else {//아이디저장체크x
+			Cookie ck = new Cookie("saveId", memberId);//쿠키생성
+			ck.setMaxAge(0); //0초=삭제
+			response.addCookie(ck);
+		}
+
 		
 		return "redirect:/home/main"; //성공시 메인으로
-	}
+}
 	
 	//로그아웃
 	@RequestMapping("/logout")

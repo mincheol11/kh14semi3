@@ -10,10 +10,24 @@
     	<div class="row center">
     		<h1>Kh 대학교 로그인</h1>
     	</div>
-    <label>아이디</label> <input type="text" name="memberId" class="field w-100">
+    	<div class="row">
+    		<label>아이디</label> 
+    		<input type="text" name="memberId" class="field w-100"
+    																			value="${cookie.saveId.value}">
+    	</div>
 		<div class="row">
 			<label>비밀번호</label> <input type="password" name="memberPw" class="field w-100">
 		</div>
+		
+		<%--쿠키를 이용한 아이디저장 체크박스 --%>
+		<div class="row">
+		<label>
+			<input type="checkbox" name="remember" 
+			<c:if test="${cookie.saveId != null}">checked</c:if>>
+			<span>아이디 저장</span>
+		</label>
+		</div>
+
 		<div>
 			<button class="btn btn-positive w-100" >로그인</button>	
 		</div>
