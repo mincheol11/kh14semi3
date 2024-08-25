@@ -32,9 +32,9 @@ public class RegistrationController {
 	
 	// 로그인 중인 유저가 수강 신청한 강의 목록을 조회
 	@RequestMapping("/regist")
-	public String regist(HttpSession session, Model model) {
+	public String regist(HttpSession session,@ModelAttribute("pageVO") PageVO pageVO, Model model) {
 		String studentId = (String) session.getAttribute("createdUser");
-		model.addAttribute("RegistrationList", lectureDao.selectListByRegistration(studentId));
+		model.addAttribute("RegistrationList", lectureDao.selectListByRegistration(pageVO, studentId));
 		return "/WEB-INF/views/registration/regist.jsp";
 	}
 	
