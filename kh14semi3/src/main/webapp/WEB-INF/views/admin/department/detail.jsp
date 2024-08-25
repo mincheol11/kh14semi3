@@ -4,7 +4,9 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include> <!-- hearder 추가 -->
 
  <script type="text/javascript">
-    
+    function checkDelete(){
+        return confirm("정말 삭제하시겠습니까?");
+    }
 
     </script>
     <body>
@@ -44,7 +46,7 @@
     <a href="list" class="btn btn-netraul">목록</a>
     <c:if test="${adminDepartmentDto != null}">
     <a href="edit?departmentCode=${adminDepartmentDto.departmentCode}" class="btn btn-netraul">학과 정보 수정</a>
-    <a href="reduce?departmentCode=${adminDepartmentDto.departmentCode}" class="btn btn-netraul">학과 삭제</a>
+    <a href="reduce?departmentCode=${adminDepartmentDto.departmentCode}" class="btn btn-netraul" onclick="return checkDelete()">학과 삭제</a>
     </c:if>
 </div>
 </div>    
