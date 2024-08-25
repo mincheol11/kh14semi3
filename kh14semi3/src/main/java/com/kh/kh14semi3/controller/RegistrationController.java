@@ -6,10 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.kh.kh14semi3.dao.DepartmentDao;
 import com.kh.kh14semi3.dao.LectureDao;
-import com.kh.kh14semi3.dao.RegistrationDao;
-import com.kh.kh14semi3.dto.StudentDto;
 import com.kh.kh14semi3.vo.PageVO;
 
 import jakarta.servlet.http.HttpSession;
@@ -35,6 +32,8 @@ public class RegistrationController {
 	public String regist(HttpSession session,@ModelAttribute("pageVO") PageVO pageVO, Model model) {
 		String studentId = (String) session.getAttribute("createdUser");
 		model.addAttribute("RegistrationList", lectureDao.selectListByRegistration(pageVO, studentId));
+		int count = lectureDao.countByPaging(pageVO);
+		pageVO.setCount(count);
 		return "/WEB-INF/views/registration/regist.jsp";
 	}
 	

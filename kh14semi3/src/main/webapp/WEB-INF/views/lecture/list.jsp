@@ -70,7 +70,7 @@ createdRank = ${sessionScope.createdRank}
 				
 					<%-- 학생인 경우 --%>
 					<c:if test="${sessionScope.createdRank == '학생'}">
-					<c:forEach var="lectureDto" items="${RegistrationList}">
+					<c:forEach var="lectureDto" items="${registrationList}">
 					<tr>
 						<td>${lectureDto.lectureDepartment}</td>
 						<td>${lectureDto.lectureProfessor}</td>
@@ -92,7 +92,7 @@ createdRank = ${sessionScope.createdRank}
 					
 					<%-- 교수인 경우 --%>
 					<c:if test="${sessionScope.createdRank == '교수'}">
-					<c:forEach var="lectureDto" items="${ProfessorList}">
+					<c:forEach var="lectureDto" items="${professorList}">
 					<tr>
 						<td>${lectureDto.lectureDepartment}</td>
 						<td>${lectureDto.lectureProfessor}</td>
