@@ -31,9 +31,9 @@ public class LectureController {
 		// 학생인지 교수인지 알 수 없으므로 memberId로 표현
 		String memberId = (String) session.getAttribute("createdUser");
 		// 학생이 수강중인 강의 목록을 전송
-		model.addAttribute("RegistrationList", lectureDao.selectListByRegistration(pageVO, memberId));
+		model.addAttribute("registrationList", lectureDao.selectListByRegistration(pageVO, memberId));
 		// 교수가 가르치는 강의 목록을 전송
-		model.addAttribute("ProfessorList", lectureDao.selectListByTeaching(pageVO, memberId));
+		model.addAttribute("professorList", lectureDao.selectListByTeaching(pageVO, memberId));
 		int count = lectureDao.countByPaging(pageVO);
 		pageVO.setCount(count);
 		return "/WEB-INF/views/lecture/list.jsp";

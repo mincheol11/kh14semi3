@@ -4,7 +4,7 @@
 
 <div class="container w-600 my-10">
     <div class="row mb-0 center">
-        <!-- <h2>페이지 네비게이터</h2> -->
+        <%-- <h2>페이지 네비게이터</h2> --%>
         <span>${pageVO.page} / ${pageVO.lastBlock} 페이지</span>
     </div>
     <div class="row mt-0">
