@@ -194,5 +194,5 @@ public class GradeDao {
 		return jdbcTemplate.queryForObject(sql, int.class, data);
 	}
 	
-	
+
 }
