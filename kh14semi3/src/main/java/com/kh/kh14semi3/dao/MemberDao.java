@@ -133,11 +133,28 @@ public class MemberDao {
 	}
 
 	// 비밀번호 변경
-		public boolean updateMemberPw(String memberId, String memberPw) {
-			String sql = "update member set member_pw=? where member_id=?";
-			Object[] data = { memberPw, memberId };
-			return jdbcTemplate.update(sql, data) > 0;
-		}
+	public boolean updateMemberPw(String memberId, String memberPw) {
+		String sql = "update member set member_pw=? where member_id=?";
+		Object[] data = { memberPw, memberId };
+		return jdbcTemplate.update(sql, data) > 0;
+	}
+	
+	public boolean updateMemberByAdmin(MemberDto memberDto) {
+		String sql = "update member set "
+					+ "member_name=?, member_rank=?, "
+					+ "member_email=?, member_cell=?, "
+					+ "member_birth=?, member_post=?, "
+					+ "member_address1=?, member_address2=? "
+					+ "where member_id=? ";
+		Object[] data = {
+				memberDto.getMemberName(), memberDto.getMemberRank(),
+				memberDto.getMemberEmail(), memberDto.getMemberCell(),
+				memberDto.getMemberBirth(), memberDto.getMemberPost(),
+				memberDto.getMemberAddress1(), memberDto.getMemberAddress2(),
+				memberDto.getMemberId()
+		};
+		return jdbcTemplate.update(sql, data)>0;
+	}
 
 }		
 		
