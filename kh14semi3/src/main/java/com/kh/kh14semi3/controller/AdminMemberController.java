@@ -53,7 +53,7 @@ public class AdminMemberController {
 	}
 	
 	//관리자 - 회원가입
-	@GetMapping("join")
+	@GetMapping("/join")
 	public String join() {
 		return "/WEB-INF/views/admin/member/join.jsp";
 	}

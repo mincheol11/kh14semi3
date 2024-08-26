@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.kh.kh14semi3.dao.MemberDao;
 import com.kh.kh14semi3.dto.MemberDto;
-
+ 
 @CrossOrigin(origins = {"http://127.0.0.1:5500"})
 @RestController
 @RequestMapping("/rest/member")
