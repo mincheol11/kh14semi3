@@ -73,15 +73,15 @@ public class LectureController {
 	}
 	
 	// 성적 입력 
-	@RequestMapping("/grade/insert")
-	public String gradeInsert(
-			@ModelAttribute("lectureStudentVO") LectureStudentVO lectureStudentVO, 
-			Model model) {
-		String lectureCode;
-		model.addAttribute("studentList", lectureDao.studentList(lectureStudentVO, ?));
-		
-		
-		return "/WEB-INF/views/lecture/gradeInsert.jsp";
-	}
+//	@RequestMapping("/grade/insert")
+//	public String gradeInsert(
+//			@ModelAttribute("lectureStudentVO") LectureStudentVO lectureStudentVO, 
+//			Model model) {
+//		String lectureCode;
+//		model.addAttribute("studentList", lectureDao.studentList(lectureStudentVO, ?));
+//		
+//		
+//		return "/WEB-INF/views/lecture/gradeInsert.jsp";
+//	}
 	
 }
