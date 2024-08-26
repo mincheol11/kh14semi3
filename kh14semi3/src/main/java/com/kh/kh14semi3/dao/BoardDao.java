@@ -31,13 +31,13 @@ public int sequence() {
 
 public void insert(BoardDto boardDto) {
 	String sql = "insert into board(BOARD_NO, BOARD_WRITER, "
-			+ "BOARD_TYPE, BOARD_TITLE, BOARD_CONTENT, "
-			+ "BOARD_WTIME, BOARD_UTIME, BOARD_VIEWS)"
-			+ "values(?, ?, ?, ?,?,?,?,?)";
+			+ " BOARD_TITLE, BOARD_CONTENT, "
+			+ " BOARD_VIEWS)"
+			+ "values(?, ?, ?, ?,?)";
 	Object[] data = {
-		boardDto.getBoardNo(),boardDto.getBoardWriter(),boardDto.getBoardType(),
+		boardDto.getBoardNo(),boardDto.getBoardWriter(),
 		boardDto.getBoardTitle(),boardDto.getBoardContent(),
-		boardDto.getBoardWtime(),boardDto.getBoardUtime(),boardDto.getBoardViews()
+		boardDto.getBoardViews()
 		
 	};
 	jdbcTemplate.update(sql, data);

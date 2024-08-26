@@ -31,18 +31,18 @@ public class ScheduleDao {
 
 
 	public void insert(ScheduleDto scheduleDto) {
-		String sql = "insert into board"
+		String sql = "insert into schedule"
 				+ "("
-				+ " schedule_no, SCHEDULE_WRITER, SCHEDULE_TYPE, SCHEDULE_TITLE, SCHEDULE_CONTENT, SCHEDULE_WTIME "
+				+ " schedule_no, SCHEDULE_WRITER, SCHEDULE_TYPE, SCHEDULE_TITLE, SCHEDULE_CONTENT"
 				+ ")"
-				+ "values(?, ?, ?, ?,?,?,)";
+				+ "values(?, ?, ?, ?,?)";
 		Object[] data = {
 			scheduleDto.getScheduleNo(),
 			scheduleDto.getScheduleWriter(),
 			scheduleDto.getScheduleType(),
 			scheduleDto.getScheduleTitle(),
-			scheduleDto.getScheduleContent(),
-			scheduleDto.getScheduleWtime()
+			scheduleDto.getScheduleContent()
+		
 		};
 		jdbcTemplate.update(sql, data);
 	}
@@ -78,7 +78,7 @@ public class ScheduleDao {
 
 	public boolean update(ScheduleDto scheduleDto) {
 		String sql = "update schedule set "
-						+ "schedule_title=?, schedule_content=?, schedule_utime=sysdate "
+						+ "schedule_title=?, schedule_content=? "
 						+ "where schedule_no=?";
 		Object[] data = {
 		scheduleDto.getScheduleTitle(),
@@ -89,7 +89,7 @@ public class ScheduleDao {
 	}
 
 	public boolean delete(int scheduleNo) {
-		String sql ="delete from schedule"
+		String sql ="delete from schedule "
 				+ "where schedule_no=? ";
 		 Object[] data = {scheduleNo};
 		 return jdbcTemplate.update(sql,data) > 0;
