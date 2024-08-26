@@ -32,6 +32,7 @@
 }
 
 .submenu {
+	padding-left: 30px !important;
     display: none; /* 기본적으로 숨김 처리 */
     list-style-type: none;
     padding: 0;
@@ -92,7 +93,7 @@
 	            <ul class="menu">
 	                <li>
 	                    <a href="#">학생 메뉴1</a>
-	                    <ul class="submenu ps-30">
+	                    <ul class="submenu">
 	                        <li><a href="#">학생 하위1</a></li>
 	                        <li><a href="#">학생 하위2</a></li>
 	                    </ul>
@@ -119,7 +120,7 @@
 	            <ul class="menu">
 	                <li>
 	                    <a href="#">교수 메뉴1</a>
-	                    <ul class="submenu ps-30">
+	                    <ul class="submenu">
 	                        <li><a href="#">교수 하위1</a></li>
 	                        <li><a href="#">교수 하위2</a></li>
 	                    </ul>
@@ -146,7 +147,7 @@
 	            <ul class="menu">
 	                <li>
 	                    <a href="#">관리자 메뉴1</a>
-	                    <ul class="submenu ps-30">
+	                    <ul class="submenu">
 	                        <li><a href="#">관리자 하위1</a></li>
 	                        <li><a href="#">관리자 하위2</a></li>
 	                    </ul>
