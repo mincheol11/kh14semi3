@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.kh14semi3.dto.GradeDto;
+import com.kh.kh14semi3.dto.LectureDto;
 import com.kh.kh14semi3.mapper.GradeMapper;
 import com.kh.kh14semi3.vo.PageVO;
 
@@ -75,7 +76,7 @@ public class GradeDao {
 			return jdbcTemplate.query(sql, gradeMapper, data);
 		}	
 	}
-	
+
 	public int countByPaging(PageVO pageVO) {
 		if(pageVO.isSearch()) { // 검색카운트
 			String sql = "select count(*) from grade "
@@ -86,6 +87,72 @@ public class GradeDao {
 		else { // 목록카운트
 			String sql = "select count(*) from grade";		
 			return jdbcTemplate.queryForObject(sql, int.class);	
+		}
+	}
+	
+	// 학생이 수강신청한 강의 목록을 조회
+	public List<GradeDto> selectListByRegistration(PageVO pageVO, String studentId) {
+		String sql = "select * from ("
+					+ "select rownum rn, TMP.* from ("
+					+ "select "
+					+ "grade_code, grade_student, grade_lecture, "
+					+ "grade_attendance, grade_score1, "
+					+ "grade_score2, grade_homework "
+					+ "from grade "
+					+ "where grade_student = ? "
+					+ ") TMP"
+					+ ") where rn between ? and ?";	
+		Object[] data = {studentId, pageVO.getBeginRow(), pageVO.getEndRow()};
+		return jdbcTemplate.query(sql, gradeMapper, data);
+	}
+	
+	// 교수가 가르치고 있는 강의 목록을 조회
+	public List<GradeDto> selectListByTeaching(PageVO pageVO, String professorId){
+		String sql = "select * from ("
+					+ "select "
+					+ "grade_code, grade_student, grade_lecture, "
+					+ "grade_attendance, grade_score1, "
+					+ "grade_score2, grade_homework "
+					+ "from grade "
+					+ "where grade_student = ? "
+					+ ") TMP"
+					+ ") where rn between ? and ?";	
+		Object[] data = {professorId, pageVO.getBeginRow(), pageVO.getEndRow()};
+		return jdbcTemplate.query(sql, gradeMapper, data);
+	}
+		
+	// 학생이 수강신청한 강의 목록 카운트
+	public int countByPagingWithStudent(PageVO pageVO, String studentId) {
+		if(pageVO.isSearch()) { // 검색카운트
+			String sql = "select count(*) from lecture "
+					+ "where instr("+pageVO.getColumn()+", ?) > 0 and "
+					+ "lecture_code in ( "
+					+ "select registration_lecture from registration where registration_student = ? )";	
+			Object[] data = {pageVO.getKeyword(), studentId};
+			return jdbcTemplate.queryForObject(sql, int.class, data);
+		}
+		else { // 목록카운트
+			String sql = "select count(*) from lecture "
+					+ "where lecture_code in ( "
+					+ "select registration_lecture from registration where registration_student = ? )";	
+			Object[] data = {studentId};
+			return jdbcTemplate.queryForObject(sql, int.class, data);	
+		}
+	}
+	
+	// 교수가 가르치고 있는 강의 목록 카운트
+	public int countByPagingWithProfessor(PageVO pageVO, String professorId) {
+		if(pageVO.isSearch()) { // 검색카운트
+			String sql = "select count(*) from lecture "
+					+ "where instr("+pageVO.getColumn()+", ?) > 0 and "
+					+ "lecture_professor = ? ";	
+			Object[] data = {pageVO.getKeyword(), professorId};
+			return jdbcTemplate.queryForObject(sql, int.class, data);
+		}
+		else { // 목록카운트
+			String sql = "select count(*) from lecture where lecture_professor = ? ";	
+			Object[] data = {professorId};
+			return jdbcTemplate.queryForObject(sql, int.class, data);	
 		}
 	}
 	
