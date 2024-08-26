@@ -37,11 +37,6 @@
     <h1>학사 일정</h1>
     </div>
     
-    
-    
-    
-    
-    
     <c:set var="isAdmin" value="${sessionScope.createdRank == '관리자'}" />
      <c:set var="isLogin" value="${sessionScope.createdUser != null}" />
       
@@ -51,32 +46,23 @@
     <a href="add" class="btn btn-neutral">신규등록</a>
     </div>
     </c:if>
-    
-    
     <div class="row">
     <table class="table table-border table-hover w-800">
 	<thead>
 		<tr>
-			<th>번호</th>
-			<th>제목</th>
-			<th>작성자</th>
-			<th>작성일</th>
-			<th>글 분류</th>
+		<th>작성일</th>
+		<th>제목</th>
 		</tr>
 	</thead>
 	<tbody align="center">
 		<c:forEach var="scheduleDto" items="${scheduleList}">
 		<tr>
-			<td>${scheduleDto.scheduleNo}</td>
-			
-			<td  align="right">
+		<td>${scheduleDto.scheduleWtime }</td>
+		<td  align="right">
 			<!-- 제목에 링크를 부여해서 상세 페이지로 이동하도록 구현 -->
 				<a href="detail?scheduleNo=${scheduleDto.scheduleNo}">${scheduleDto.scheduleTitle} </a>
 				
 			</td>
-			<td>${scheduleDto.scheduleWriter}</td>
-			<td>${scheduleDto.scheduleWtime }</td>
-			<td>${scheduleDto.scheduleType}</td>
 			
 			</tr>
 		</c:forEach>
