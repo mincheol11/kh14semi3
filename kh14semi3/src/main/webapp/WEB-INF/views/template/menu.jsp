@@ -92,24 +92,31 @@
 	 		<div class="sidebar">
 	            <ul class="menu">
 	                <li>
-	                    <a href="#">학생 메뉴1</a>
+	                    <a href="#">공지사항</a>
 	                    <ul class="submenu">
-	                        <li><a href="#">학생 하위1</a></li>
-	                        <li><a href="#">학생 하위2</a></li>
+	                        <li><a href="/board/list">공지사항</a></li>
+	                        <li><a href="/schedule/list">학사일정</a></li>
 	                    </ul>
 	                </li>
 	                <li>
-	                    <a href="#">학생 메뉴2</a>
+	                    <a href="#">수강신청</a>
 	                    <ul class="submenu">
-	                        <li><a href="#">학생 하위1</a></li>
-	                        <li><a href="#">학생 하위2</a></li>
+	                        <li><a href="/registration/list">수강 신청</a></li>
+	                        <li><a href="/registration/regist">수강 목록</a></li>
 	                    </ul>
 	                </li>
 	                <li>
-	                    <a href="#">학생 메뉴3</a>
+	                    <a href="#">강의 관리</a>
 	                    <ul class="submenu">
-	                        <li><a href="#">학생 하위1</a></li>
-	                        <li><a href="#">학생 하위2</a></li>
+	                        <li><a href="/lecture/list">강의 목록</a></li>
+	                        <li><a href="/lecture/grade">성적 조회</a></li>
+	                    </ul>
+	                </li>
+	                <li>
+	                    <a href="#">마이페이지</a>
+	                    <ul class="submenu">
+	                        <li><a href="/member/mypage">내 정보</a></li>
+	                        <li><a href="/member/findPw">비밀번호 변경</a></li>
 	                    </ul>
 	                </li>
 	            </ul>
@@ -119,24 +126,24 @@
 	 		<div class="sidebar">
 	            <ul class="menu">
 	                <li>
-	                    <a href="#">교수 메뉴1</a>
+	                    <a href="#">공지사항</a>
 	                    <ul class="submenu">
-	                        <li><a href="#">교수 하위1</a></li>
-	                        <li><a href="#">교수 하위2</a></li>
+	                        <li><a href="/board/list">공지사항</a></li>
+	                        <li><a href="/schedule/list">학사일정</a></li>
+	                    </ul>
+	                </li>	                
+	                <li>
+	                    <a href="#">강의 관리</a>
+	                    <ul class="submenu">
+	                        <li><a href="/lecture/list">강의 목록</a></li>
+	                        <li><a href="/lecture/grade">성적 입력</a></li>
 	                    </ul>
 	                </li>
 	                <li>
-	                    <a href="#">교수 메뉴2</a>
+	                    <a href="#">마이페이지</a>
 	                    <ul class="submenu">
-	                        <li><a href="#">교수 하위1</a></li>
-	                        <li><a href="#">교수 하위2</a></li>
-	                    </ul>
-	                </li>
-	                <li>
-	                    <a href="#">교수 메뉴3</a>
-	                    <ul class="submenu">
-	                        <li><a href="#">교수 하위1</a></li>
-	                        <li><a href="#">교수 하위2</a></li>
+	                        <li><a href="/member/mypage">내 정보</a></li>
+	                        <li><a href="/member/findPw">비밀번호 변경</a></li>
 	                    </ul>
 	                </li>
 	            </ul>
@@ -146,24 +153,24 @@
 	 		<div class="sidebar">
 	            <ul class="menu">
 	                <li>
-	                    <a href="#">관리자 메뉴1</a>
+	                    <a href="#">회원 관리</a>
 	                    <ul class="submenu">
-	                        <li><a href="#">관리자 하위1</a></li>
-	                        <li><a href="#">관리자 하위2</a></li>
+	                        <li><a href="/admin/member/list">회원 목록</a></li>
+	                        <li><a href="/admin/member/join">회원 등록</a></li>
 	                    </ul>
 	                </li>
 	                <li>
-	                    <a href="#">관리자 메뉴2</a>
+	                    <a href="#">강의 시스템 관리</a>
 	                    <ul class="submenu">
-	                        <li><a href="#">관리자 하위1</a></li>
-	                        <li><a href="#">관리자 하위2</a></li>
+	                        <li><a href="/admin/lecture/list">강의 목록</a></li>
+	                        <li><a href="/admin/lecture/add">강의 개설</a></li>
 	                    </ul>
 	                </li>
 	                <li>
-	                    <a href="#">관리자 메뉴3</a>
+	                    <a href="#">학과 시스템 관리</a>
 	                    <ul class="submenu">
-	                        <li><a href="#">관리자 하위1</a></li>
-	                        <li><a href="#">관리자 하위2</a></li>
+	                        <li><a href="/admin/department/list">학과 목록</a></li>
+	                        <li><a href="/admin/department/expand">관리자 하위2</a></li>
 	                    </ul>
 	                </li>
 	            </ul>
