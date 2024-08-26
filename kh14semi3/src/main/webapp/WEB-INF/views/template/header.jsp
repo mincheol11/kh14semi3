@@ -52,3 +52,27 @@
         
 	    </style>
 	</head>
+	<body>
+	
+	<div class="container w-1400">
+		
+	        <div class="row my-0 flex-box">
+	            <div class="w-25 flex-core">
+	                <img src="https://placehold.co/295x70">
+	            </div>
+	            <div class="w-50">
+	                <h2 class="center">KH 대학교 학사정보사이트</h2>
+	            </div>
+	            <div class="w-25 flex-core">
+	                <img src="https://placehold.co/295x70">
+	            </div>
+	        </div>	      
+	          
+	        <hr>
+	        
+	        <div class="row my-0 flex-box" style="min-height: 400px;">
+	        
+	        <%-- menu.jsp에 존재하는 내용을 불러오도록 설정 --%>
+			<jsp:include page="/WEB-INF/views/template/menu.jsp"></jsp:include>
+			
+			<div style="flex-grow: 1;">
