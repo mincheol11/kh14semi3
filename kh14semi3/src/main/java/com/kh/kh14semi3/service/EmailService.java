@@ -56,7 +56,7 @@ public class EmailService {
 	}
 	
 	//비밀번호 재설정 메일 발송 기능
-	public void sendRestPw(String memberId, String memberEmail) throws IOException, MessagingException {
+	public void sendResetPw(String memberId, String memberEmail) throws IOException, MessagingException {
 	ClassPathResource resource = new ClassPathResource("templates/reset-pw.html");
 	File target = resource.getFile();
 	Document document = Jsoup.parse(target);
