@@ -37,9 +37,7 @@
     <h1>학사 일정</h1>
     </div>
     
-    <div class="row center">
-    <h2>2024</h2>
-    </div>
+    
     
     
     
