@@ -54,12 +54,6 @@
     </div>
     </c:if>
     
-    <div class="row">
-    ${pageVO.page}/${pageVO.lastBlock}페이지
-    </div>
-    <div class="row">
-    ${pageVO.beginRow}-${pageVO.endRow}/${pageVO.count}개
-    </div>
     
     <div class="row">
     <table class="table table-border table-hover w-800">
@@ -93,4 +87,3 @@
 </table>
     </div>
     </div>
-     <jsp:include page="/WEB-INF/views/template/navigator.jsp"></jsp:include>
