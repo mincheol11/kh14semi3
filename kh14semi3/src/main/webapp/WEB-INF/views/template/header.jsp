@@ -49,7 +49,15 @@
 	    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 		    
 	    <style>	    
-        
+        .profile{
+        	border: 1px solid black;
+        	border-top: none;
+            border-left: none;
+            border-bottom: none;
+            padding-left: 0;
+            padding-right: 0;
+            border-radius: 0;
+        }
 	    </style>
 	</head>
 	<body>

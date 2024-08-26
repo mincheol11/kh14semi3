@@ -3,6 +3,13 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
+<!-- lightpick cdn -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/css/lightpick.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.30.1/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/lightpick.min.js"></script>
+
+
+
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <style>
@@ -20,7 +27,6 @@ $(function(){
         memberPwValid : false,
         memberPwCheckValid : false,
         memberNameValid : false, //형식검사
-        memberNameCheckValid : false, //중복검사
         memberRankValid: false,
         memberEmailValid : false,
         memberCellValid : true , //선택항목
@@ -29,7 +35,7 @@ $(function(){
         ok : function(){
             return this.memberIdValid && this.memberIdCheckValid
                 && this.memberPwValid && this.memberPwCheckValid 
-                && this.memberNameValid && this.memberNameCheckValid && this.memberRankValid
+                && this.memberNameValid && this.memberRankValid
                 && this.memberEmailValid && this.memberCellValid
                 && this.memberBirthValid && this.memberAddressValid;
         },
@@ -49,7 +55,6 @@ $(function(){
                 method:"post",
                 data:{memberId : memberId},
                 success: function(response) {
-                    //console.log("중복 확인 결과", response);
                     if(response) {//.success - 아이디가 사용가능한 경우
                         status.memberIdCheckValid = true;
                         $("[name=memberId]").removeClass("success fail fail2")
@@ -87,10 +92,11 @@ $(function(){
     });
     
     $("[name=memberName]").blur(function(){
-        var regex = /^[가-힣]{2,7}$/;
+        var regexStr = /^[가-힣]{2,7}$/;
+        var regex = new RegExp(regexStr);
         var isValid = regex.test($(this).val());
         $(this).removeClass("success fail").addClass(isValid ? "success" : "fail");
-        status.memberNameCheckValid = isValid;
+        status.memberNameValid = isValid;
     });
 
     $("[name=memberRank]").on("input", function(){
@@ -144,11 +150,7 @@ $(function(){
 
     //폼 검사
     $(".check-form").submit(function(){
-        $("[name], #password-check").trigger("input").trigger("blur");
-        if(status.ok()){
-        	this.submit();
-        }
-        
+        $("[name], #password-check").trigger("input").trigger("blur");    
         return status.ok();
     });
     
@@ -255,19 +257,6 @@ $(function(){
                         <div class="fail-feedback">올바른 형식으로 작성해주세요</div>
                         <div class="fail2-feedback">아이디가 이미 사용중입니다</div>
                     </div>
-
-                    <div class="row mt-50">
-                        <div class="flex-box">
-                            <div class="w-50 left">
-                                
-                            </div>
-                            <div class="w-50 right">
-                                <button type="button" class="btn btn-neutral btn-next">
-                                    다음<i class="fa-solid fa-chevron-right"></i>
-                                </button>
-                            </div>
-                        </div>	
-                    </div>
                 </div>
                 <div class="page">
                     <div class="row">
@@ -298,21 +287,6 @@ $(function(){
                         <div class="success-feedback">비밀번호가 일치합니다</div>
                         <div class="fail-feedback">비밀번호가 일치하지 않습니다</div>
                     </div>
-
-                    <div class="row mt-50">
-                        <div class="flex-box">
-                            <div class="w-50 left">
-                                <button type="button" class="btn btn-neutral btn-prev">
-                                    <i class="fa-solid fa-chevron-left"></i>이전
-                                </button>
-                            </div>
-                            <div class="w-50 right">
-                                <button type="button" class="btn btn-neutral btn-next">
-                                    다음<i class="fa-solid fa-chevron-right"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <div class="page">
                     <div class="row">
@@ -324,21 +298,6 @@ $(function(){
                                 class="field w-100" placeholder="이름">
                         <div class="success-feedback">완료</div>
                         <div class="fail-feedback">이름이 형식에 맞지 않습니다</div>
-                    </div>
-
-                    <div class="row mt-50">
-                        <div class="flex-box">
-                            <div class="w-50 left">
-                                <button type="button" class="btn btn-neutral btn-prev">
-                                    <i class="fa-solid fa-chevron-left"></i>이전
-                                </button>
-                            </div>
-                            <div class="w-50 right">
-                                <button type="button" class="btn btn-neutral btn-next">
-                                    다음<i class="fa-solid fa-chevron-right"></i>
-                                </button>
-                            </div>
-                        </div>
                     </div>
                 </div>
 <!------------- 교수 관리자 학생-------------->
@@ -357,21 +316,6 @@ $(function(){
                         <div class="success-feedback">완료</div>
                         <div class="fail-feedback">필수 선택사항 입니다.</div>
                     </div>
-
-                    <div class="row mt-50">
-                        <div class="flex-box">
-                            <div class="w-50 left">
-                                <button type="button" class="btn btn-neutral btn-prev">
-                                    <i class="fa-solid fa-chevron-left"></i>이전
-                                </button>
-                            </div>
-                            <div class="w-50 right">
-                                <button type="button" class="btn btn-neutral btn-next">
-                                    다음<i class="fa-solid fa-chevron-right"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
                 <div class="page">
@@ -383,21 +327,6 @@ $(function(){
                         <input type="email" name="memberEmail"
                             class="field w-100" placeholder="test@kh.com">
                         <div class="fail-feedback">이메일은 반드시 입력해야 합니다</div>
-                    </div>
-
-                    <div class="row mt-50">
-                        <div class="flex-box">
-                            <div class="w-50 left">
-                                <button type="button" class="btn btn-neutral btn-prev">
-                                    <i class="fa-solid fa-chevron-left"></i>이전
-                                </button>
-                            </div>
-                            <div class="w-50 right">
-                                <button type="button" class="btn btn-neutral btn-next">
-                                    다음<i class="fa-solid fa-chevron-right"></i>
-                                </button>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <div class="page">
@@ -415,21 +344,6 @@ $(function(){
                     <div class="row">
                         <label>생년월일</label>
                         <input type="text" name="memberBirth" class="field w-100">
-                    </div>
-
-                    <div class="row mt-50">
-                        <div class="flex-box">
-                            <div class="w-50 left">
-                                <button type="button" class="btn btn-neutral btn-prev">
-                                    <i class="fa-solid fa-chevron-left"></i>이전
-                                </button>
-                            </div>
-                            <div class="w-50 right">
-                                <button type="button" class="btn btn-neutral btn-next">
-                                    다음<i class="fa-solid fa-chevron-right"></i>
-                                </button>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <div class="page">
@@ -457,12 +371,7 @@ $(function(){
                     </div>
                     <div class="row mt-50">
                         <div class="flex-box">
-                            <div class="w-50 left">
-                                <button type="button" class="btn btn-neutral btn-prev">
-                                    <i class="fa-solid fa-chevron-left"></i>이전
-                                </button>
-                            </div>
-                            <div class="w-50 right">
+                            <div class="w-100 right">
                                 <button type="submit" class="btn btn-positive">
                                     <i class="fa-solid fa-right-to-bracket"></i>
                                     회원가입
