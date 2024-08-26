@@ -20,14 +20,14 @@
 
 <div class="container w-800">
     <!-- 작성자 -->
-    <div class="row">${scheduleDto.scheduleWriter}</div>
+    <div class="row center">${scheduleDto.scheduleWriter}</div>
     <!-- 작성일 -->
-    <div class="row right">
+    <div class="row center">
         <fmt:formatDate value="${scheduleDto.scheduleWtime}"
            pattern="y년 M월 d일 E a h시 m분 s초" />
     </div>
     <!-- 내용 -->
-    <div class="row" style="min-height: 200px">
+    <div class="row center" style="min-height: 200px">
         <!-- pre 태그는 내용을 작성된 형태 그대로 출력한다
                 Rich Text Editor를 쓸 경우는 할 필요가 없다 -->
         ${scheduleDto.scheduleContent}

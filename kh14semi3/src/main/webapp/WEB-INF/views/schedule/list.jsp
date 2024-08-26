@@ -83,17 +83,19 @@ function changeMonth(direction) {
 /* 모달 콘텐츠 스타일 */
 .modal-content {
   background-color: #fefefe;
-  margin: 15% auto;
+  margin: 10% auto; /* 상단 여백을 줄여서 중앙에 더 가까이 위치 */
   padding: 20px;
   border: 1px solid #888;
-  width: 80%;
+  width: 50%; /* 모달 너비를 줄이기 */
+  max-width: 900px; /* 최대 너비를 설정 */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* 그림자 추가 */
 }
 
 /* 닫기 버튼 스타일 */
 .close {
   color: #aaa;
   float: right;
-  font-size: 28px;
+  font-size: 24px; /* 폰트 크기 줄이기 */
   font-weight: bold;
 }
 
@@ -105,24 +107,20 @@ function changeMonth(direction) {
 }
 
 /* 탐색 버튼 스타일 */
-.nav-buttons {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
 .nav-buttons button {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  font-size: 16px;
+  background-color: transparent; /* 배경색을 투명으로 설정 */
+  color: skyblue; /* 텍스트 색상을 하늘색으로 설정 */
+  border: 2px solid skyblue; /* 버튼 테두리 색상 설정 */
+  padding: 15px 15px; /* 버튼의 패딩을 늘려서 크기를 키움 */
+  font-size: 36px; /* 폰트 크기를 증가시켜 버튼을 더 크게 보이게 함 */
   cursor: pointer;
+  border-radius: 5px; /* 버튼의 모서리를 둥글게 함 */
+  transition: background-color 0.3s, color 0.3s; /* 색상 변화에 부드러운 전환 효과 추가 */
 }
 
 .nav-buttons button:hover {
-  background-color: #0056b3;
+  background-color: skyblue; /* 호버 시 배경색을 하늘색으로 변경 */
+  color: white; /* 호버 시 텍스트 색상을 흰색으로 변경 */
 }
 </style>
 
@@ -132,7 +130,7 @@ function changeMonth(direction) {
   </div>
 
   <!-- 탐색 버튼 추가 -->
-  <div class="row left nav-buttons">
+  <div class="row center nav-buttons">
     <button onclick="changeMonth(-1)">‹</button>
     <span>${currentYear}년 ${currentMonth}월</span>
     <button onclick="changeMonth(1)">›</button>
