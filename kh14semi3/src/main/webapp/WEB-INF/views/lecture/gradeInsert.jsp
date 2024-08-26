@@ -57,16 +57,6 @@
 	</div>
 </script>
 
-<td><input class="field grade-input-attendance" ></td>
-						<td><input class="field grade-input-score1" ></td>
-						<td><input class="field grade-input-score2" ></td>
-						<td><input class="field grade-input-homework" ></td>
-						<td>총점</td>
-						<td><button type="button" class="btn btn-grade-input">입력/수정</td>	
-
-							
-							
-							
 <script type="text/template" id="reply-edit-template">
 	<!-- 댓글 수정 영역 -->
 	<div class="reply-wrapper reply-edit-wrapper">
@@ -93,6 +83,66 @@
 	<div class="row center">
 		<h1>성적입력</h1>
 	</div>
+	<table class="table table-horizontal table-hover">
+					<thead>
+						<tr>
+							<th>전공(학과)</th>
+							<th>교수명</th>
+							<th>분류</th>
+							<th width="30%">강의명</th>
+							<th>강의코드</th>
+							<th>비고</th>
+						</tr>
+					</thead>
+					<tbody class="center">					
+						<tr>
+							<td>${lectureDto.lectureDepartment}</td>
+							<td>${lectureDto.lectureProfessor}</td>
+							<td>${lectureDto.lectureType}</td>
+							<td>
+								<a href="/lecture/detail?lectureCode=${lectureDto.lectureCode}&&goWhere=regist1" class="link link-animation black">
+									${lectureDto.lectureName}
+								</a>
+							</td>
+							<td class="lecture-code">${lectureDto.lectureCode}</td>
+							<td>${lectureDto.lectureTime} ${lectureDto.lectureDuration} ${lectureDto.lectureDay}</td>
+							<td>${lectureDto.lectureRoom}</td>
+							<td>
+								<span class="lecture-count">${lectureDto.lectureRegist}</span>
+								/${lectureDto.lectureCount}
+							</td>		
+							<td class="link link-animation class-regist">
+								수강신청
+							</td>					
+						</tr>					
+					</tbody>
+				</table>
+				
+				
+	<table class="table table-horizontal table-hover">
+					<thead>
+						<tr>
+							<th>평가배점</th>
+							<th>출석</th>
+							<th>중간평가</th>
+							<th>기말평가</th>
+							<th>과제(태도)</th>
+							<th>합계</th>
+						</tr>
+					</thead>
+					<tbody class="center">					
+						<tr>
+							<td>기준</td>
+							<td>20</td>
+							<td>35</td>
+							<td>35</td>
+							<td>10</td>
+						</tr>					
+					</tbody>
+				</table>
+	
+	
+	
 	
 	<form action="gradeInsert" method="post" autocomplete="off">
 		<div class="row">
@@ -100,8 +150,6 @@
 			<table class="table w-100">
 			<thead>
 				<tr>
-					<th>학과/전공</th>
-					<th>학년</th>
 					<th>학번</th>
 					<th>성명</th>
 					<th>출석</th>
@@ -117,9 +165,7 @@
 			<div class="row student-list">
 				<tbody align="center">
 					<tr>
-						<td>${departmentDto.departmentName}</td>
-						<td>${studentDto.studentLevel}</td>
-						<td>${studentDto.studentId}</td>
+						<td>${memberDto.membetId}</td>
 						<td>${memberDto.memberName}</td>
 						<td><input class="field grade-input-attendance" ></td>
 						<td><input class="field grade-input-score1" ></td>
