@@ -9,7 +9,7 @@ $(document).ready(function() {
     $('tr').on('click', function() {
         var departmentCode = $(this).data('departmentCode');
         if (departmentCode) {
-            window.location.href = 'detail?departmentCode=' + departmentCode;
+            location.href = 'detail?departmentCode=' + departmentCode;
         }
     });
 });
@@ -25,13 +25,18 @@ $(document).ready(function() {
 		<a href="expand" class="btn btn-neutral w-20">학과개설</a>
 		</div>
             <select name="column" class="field">
-               <option value="department_name" ${param.column == 'department_name' ? 'selected' : ''}>학과명</option>
-                <option value="major_courses" ${param.column == 'major_courses' ? 'selected' : ''}>전공수업</option>
-                <option value="professor" ${param.column == 'professor' ? 'selected' : ''}>담당교수</option>
+            <option value="department_code">코드명</option>
+		<c:choose>
+			<c:when test="${column == 'department_name'}">
+				<option value="department_name" selected>학과명</option>
+			</c:when>
+			<c:otherwise>
+				<option value="department_name">학과명</option>
+			</c:otherwise>
+		</c:choose>
             </select>
         <input type="text" name="keyword" value="${param.keyword}" class="field w-60">
         <button type="submit" class="btn btn-positive w-20"><i class="fa-solid fa-magnifying-glass">검색</i></button>
-          
         </form>
     </div>
                 
@@ -39,21 +44,16 @@ $(document).ready(function() {
         <table class="table table-horizontal table-hover">
             <thead>
               <tr>
-                    <th hidden>학과코드</th>
+                    <th>학과코드</th>
                     <th>학과명</th>
-                    <th>전공수업</th>
-                    <th>담당교수</th>
-                    <th>모집인원</th>
+                    
              </tr>
     </thead>
 	<tbody>
 			<c:forEach var="adminDepartmentDto" items="${adminDepartmentList}">
     			<tr onclick="location.href='detail?departmentCode=${adminDepartmentDto.departmentCode}'" style="cursor: pointer;">
-				        <td hidden>${adminDepartmentDto.departmentCode}</td>
+				        <td>${adminDepartmentDto.departmentCode}</td>
 				        <td>${adminDepartmentDto.departmentName}</td>
-				        <td></td>
-				        <td></td>
-				        <td></td>
     				</tr>
 				</c:forEach>
 			</tbody>

@@ -1,18 +1,20 @@
 package com.kh.kh14semi3.dto;
 
+import java.sql.Date;
+
 import lombok.Data;
 
 @Data
 public class AdminLectureDto {
-	private int lectureCode;
+	private String lectureCode;
+	private String lectureDepartment;
+	private String lectureProfessor;
 	private String lectureType;
 	private String lectureName;
-	private String lectureTime;
+	private Date lectureTime;
 	private int lectureDuration;
-	private String lectureDay;
+	private Date lectureDay;
 	private String lectureRoom;
 	private int lectureCount;
 	
-	
-	private int lectureDepartmentCode;
 }
