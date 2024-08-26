@@ -13,6 +13,8 @@ public class PageVO {
 	private int size=10;//1페이지의 크기
 	private int count;//총 데이터 개수
 	private int blockSize = 10; //한 블럭구역의 크기
+	 private int year;
+	    private int month;
 	
 	//계산 메소드 (가상의 Getter 메소드) 추가
 	public boolean isSearch() {
@@ -58,6 +60,24 @@ public class PageVO {
 	public int getNextBlock() {//다음 구역 이동시 나올 번호
 		return this.getFinishBlock()+1;
 	}
-}
+
+
+	 public int getYear() {
+	        return year;
+	    }
+
+	    public void setYear(int year) {
+	        this.year = year;
+	    }
+
+	    public int getMonth() {
+	        return month;
+	    }
+
+	    public void setMonth(int month) {
+	        this.month = month;
+	    }
+		
+	}
 
 

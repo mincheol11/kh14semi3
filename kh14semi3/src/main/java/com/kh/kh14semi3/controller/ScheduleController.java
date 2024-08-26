@@ -1,6 +1,10 @@
 package com.kh.kh14semi3.controller;
 
+
+
+import java.util.Calendar;
 import java.util.HashSet;
+
 import java.util.Set;
 
 import org.jsoup.Jsoup;
@@ -30,25 +34,34 @@ public class ScheduleController {
 @Autowired
 private ScheduleDao scheduleDao;
 
+
 @RequestMapping("/list")
-public String list(@ModelAttribute ("pageVO")PageVO pageVO,Model model) {
-	model.addAttribute("scheduleList",scheduleDao.selectListByPaging(pageVO));
-	int count = scheduleDao.countByPaging(pageVO);
-	pageVO.setCount(count);
-	return "/WEB-INF/views/schedule/list.jsp";
-}
-private boolean checkSearch(String column,String keyword) {
-	if(column == null)
-		return false;
-	if(keyword == null)
-		return false;
-	
-	switch(column) {
-	case "schedule_title":
-	case "schedule_writer":
-		return true;
-	}
-	return false;
+public String list(
+        @RequestParam(value = "pageYear", required = false) Integer year,
+        @RequestParam(value = "pageMonth", required = false) Integer month,
+        @ModelAttribute("pageVO") PageVO pageVO,
+        Model model) {
+
+    // 현재 연도와 월을 기본값으로 설정
+    if (year == null) {
+        year = Calendar.getInstance().get(Calendar.YEAR);
+    }
+    if (month == null) {
+        month = Calendar.getInstance().get(Calendar.MONTH) + 1; // 1월은 0이므로 +1
+    }
+
+    // 데이터베이스에서 해당 연도와 월의 데이터를 가져옵니다
+    pageVO.setYear(year);
+    pageVO.setMonth(month);
+    model.addAttribute("scheduleList", scheduleDao.selectListByPaging(pageVO));
+    int count = scheduleDao.countByPaging(pageVO);
+    pageVO.setCount(count);
+
+    // 연도와 월을 모델에 추가
+    model.addAttribute("currentYear", year);
+    model.addAttribute("currentMonth", month);
+
+    return "/WEB-INF/views/schedule/list.jsp";
 }
 @RequestMapping("/detail")
 public String detail(@RequestParam int scheduleNo,Model model) {
@@ -146,3 +159,5 @@ public String image(@RequestParam int scheduleNo) {
 	}
 }
 }
+
+
