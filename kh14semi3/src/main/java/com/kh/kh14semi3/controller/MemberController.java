@@ -1,15 +1,27 @@
 package com.kh.kh14semi3.controller;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.kh14semi3.configuration.CustomCertProperties;
+import com.kh.kh14semi3.dao.CertDao;
 import com.kh.kh14semi3.dao.MemberDao;
+import com.kh.kh14semi3.dto.CertDto;
 import com.kh.kh14semi3.dto.MemberDto;
+import com.kh.kh14semi3.error.TargetNotFoundException;
+import com.kh.kh14semi3.service.EmailService;
 
+import jakarta.mail.MessagingException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -19,6 +31,12 @@ import jakarta.servlet.http.HttpSession;
 @RequestMapping("/member")
 
 public class MemberController {
+	@Autowired
+	private PasswordEncoder encoder; 
+	
+	@Autowired
+	private EmailService emailService;
+	
 	@Autowired
 	private MemberDao memberDao;
 	//로그인
@@ -43,8 +61,18 @@ public class MemberController {
 		if(memberDto == null) return "redirect:/member/login?error"; //redirect는 get으로 감
 		
 		//2번
-		boolean isValid = memberPw.equals(memberDto.getMemberPw());
-		if(isValid == false) return "redirect:/member/login?error"; //
+//		boolean isValid = memberPw.equals(memberDto.getMemberPw()); //암호화변되면 equals 못씀 쓰면 false
+//		boolean isValid = encoder.matches(memberDto.getMemberPw(), encrypt);
+//		if(isValid == false) return "redirect:/member/login?error"; //
+		
+		
+		String rawPw = memberDto.getMemberPw(); // 비밀번호 암호화안된것
+		String encPw = encoder.encode(rawPw); // 암호화된 비밀번호
+
+		boolean isValid = encoder.matches(memberPw,encPw);
+		if (!isValid) {
+		    return "redirect:/member/login?error";
+		}
 		
 //		//3번 차단
 //		BlockDto blockDto = blockDao.selectLastOne(memberId);
@@ -81,4 +109,73 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
+	//비밀번호 찾기(재설정 링크 방식)
+	@GetMapping("/findPw")
+	public String findPw() {
+		return "/WEB-INF/views/member/findPw.jsp";
+	}
+	@PostMapping("/findPw")
+	public String findPw(@RequestParam String memberId,
+									@RequestParam String memberEmail) throws IOException, MessagingException {
+		
+		//회원 정보를 조회
+		MemberDto memberDto = memberDao.selectOne(memberId);
+		if(memberDto == null) {
+			return"redirect:findPw?error";
+		}
+		//이메일비교
+		if(!memberEmail.equals(memberDto.getMemberEmail())) {
+			return "redirect:findPw?error";
+		}
+		//템플릿을 불러와 재설정메일발송
+		emailService.sendRestPw(memberId,memberEmail);
+		
+		return "redirect:findPwFinish";
+	}
+	@RequestMapping("/findPwFinish")
+	public String findPwFinish() {
+		return "/WEB-INF/views/member/findPwFinish.jsp";
+	}
+	
+	@Autowired
+	private CertDao certDao;
+	
+	@Autowired
+	private CustomCertProperties customCertProperties;
+	
+	//비밀번호 재설정 페이지
+	@GetMapping("/resetPw")
+	public String resetPw(@ModelAttribute CertDto certDto,
+									@RequestParam String memberId,
+									Model model) {
+		boolean isValid = certDao.check(certDto, customCertProperties.getExpire());
+		if(isValid) {			
+			model.addAttribute("certDto", certDto);
+			model.addAttribute("memberId", memberId);
+			return "/WEB-INF/views/member/resetPw.jsp";
+		}
+		else {
+			throw new TargetNotFoundException("올바르지 않은 접근");
+		}
+	}
+	@PostMapping("/resetPw")
+	public String resetPw(@ModelAttribute CertDto certDto,
+									@ModelAttribute MemberDto memberDto) {
+		//인증정보확인
+		boolean isValid = certDao.check(certDto, customCertProperties.getExpire());
+		if(!isValid) {
+			throw new TargetNotFoundException("올바르지 않은 접근");
+		}
+		//인증성공시 인증번호 삭제(1회접근페이지)
+		certDao.delete(certDto.getCertEmail());
+		
+		//비밀번호변경
+		memberDao.updateMemberPw(
+				memberDto.getMemberId(), memberDto.getMemberPw());
+		return "redirect:resetPwFinish";
+	}
+	@RequestMapping("/resetPwFinish")
+	public String resetPwFinish() {
+		return "/WEB-INF/views/member/resetPwFinish.jsp";
+	}
 }
