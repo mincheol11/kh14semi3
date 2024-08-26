@@ -1,6 +1,7 @@
-package com.kh.kh14semi3.dao;
+	package com.kh.kh14semi3.dao;
 
 import java.util.List;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -207,4 +208,4 @@ public class ScheduleDao {
 			return jdbcTemplate.queryForObject(sql ,int.class,data);
 
 }
-	}
+}

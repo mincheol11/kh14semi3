@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.kh.kh14semi3.dto.MemberDto;
@@ -23,6 +24,9 @@ public class MemberDao {
 	
 	@Autowired
 	private MemberMapper memberMapper;
+	
+	@Autowired
+	private PasswordEncoder encoder;
 
 	//회원 상세
 	public MemberDto selectOne(String memberId) {
@@ -30,6 +34,19 @@ public class MemberDao {
 		Object[] data  = {memberId};
 		List<MemberDto>list = jdbcTemplate.query(sql,memberMapper, data);
 		return list.isEmpty() ? null : list.get(0);
+	}
+	//로그인전용 상세조회(암호화비번때문에)
+	public MemberDto selectOneWithPassword(String memberId, String memberPw) {
+		String sql = "select * from member where member_id = ?";
+		Object[] data  = {memberId};
+		List<MemberDto>list = jdbcTemplate.query(sql,memberMapper, data);
+		if(list.isEmpty()) return null;
+		
+		MemberDto memberDto = list.get(0); //비밀번호 비교
+		boolean isValid = encoder.matches(memberPw, memberDto.getMemberPw());
+		//ture, false가 나온다
+		return isValid ? memberDto : null;
+		
 	}
 	
 //	회원 최종 로그인 시각 갱신 필요시 주석 해제
@@ -95,6 +112,11 @@ public class MemberDao {
 	}
 
 	public void insert(MemberDto memberDto) {
+		//비밀번호 암호화
+		String rawPw = memberDto.getMemberPw(); // 비밀번호 암호화안된것
+		String encPw = encoder.encode(rawPw); // 암호화된 비밀번호
+		memberDto.setMemberPw(encPw);
+		
 		String sql = "insert into member("
 				+ "member_id, member_pw, member_name, member_rank, "
 				+ "member_email, member_cell, member_birth, member_post, "
@@ -109,6 +131,14 @@ public class MemberDao {
 		};
 		jdbcTemplate.update(sql, data);
 	}
+
+	// 비밀번호 변경
+		public boolean updateMemberPw(String memberId, String memberPw) {
+			String sql = "update member set member_pw=? where member_id=?";
+			Object[] data = { memberPw, memberId };
+			return jdbcTemplate.update(sql, data) > 0;
+		}
+
 }		
 		
 

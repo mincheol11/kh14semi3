@@ -32,7 +32,7 @@ public class RegistrationController {
 	public String regist(HttpSession session,@ModelAttribute("pageVO") PageVO pageVO, Model model) {
 		String studentId = (String) session.getAttribute("createdUser");
 		model.addAttribute("RegistrationList", lectureDao.selectListByRegistration(pageVO, studentId));
-		int count = lectureDao.countByPaging(pageVO);
+		int count = lectureDao.countByPagingWithStudent(pageVO, studentId);
 		pageVO.setCount(count);
 		return "/WEB-INF/views/registration/regist.jsp";
 	}

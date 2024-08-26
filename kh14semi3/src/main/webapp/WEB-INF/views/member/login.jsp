@@ -32,6 +32,11 @@
 			<button class="btn btn-positive w-100" >로그인</button>	
 		</div>
 		
+		<!-- 비밀번호 찾기링크 -->
+		<div class="row center">
+			<a href="findPw">비밀번호가 기억나지 않습니다(재설정 링크)</a>
+		</div>
+		
 		<c:if test="${param.error != null}">
 			<div class="row center">
 				<h3 style="color: red">아이디 또는 비밀번호가 잘못되었습니다</h3>
