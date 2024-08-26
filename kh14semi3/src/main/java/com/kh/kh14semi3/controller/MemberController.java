@@ -129,7 +129,7 @@ public class MemberController {
 			return "redirect:findPw?error";
 		}
 		//템플릿을 불러와 재설정메일발송
-		emailService.sendRestPw(memberId,memberEmail);
+		emailService.sendResetPw(memberId,memberEmail);
 		
 		return "redirect:findPwFinish";
 	}
