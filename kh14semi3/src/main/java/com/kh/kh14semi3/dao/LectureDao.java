@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.kh14semi3.dto.LectureDto;
 import com.kh.kh14semi3.mapper.LectureMapper;
+import com.kh.kh14semi3.mapper.LectureStudentMapper;
+import com.kh.kh14semi3.vo.LectureStudentVO;
 import com.kh.kh14semi3.vo.PageVO;
 
 @Repository
@@ -17,7 +19,10 @@ public class LectureDao {
 	private JdbcTemplate jdbcTemplate;
 	
 	@Autowired
-	private LectureMapper lectureMapper;	
+	private LectureMapper lectureMapper;
+	
+	@Autowired
+	private LectureStudentMapper lectureStudentMapper;
 	
 	// 강의 등록
 	public void insert(LectureDto lectureDto) {
@@ -163,7 +168,20 @@ public class LectureDao {
 			return jdbcTemplate.queryForObject(sql, int.class, data);	
 		}
 	}
-
-
 	
+	public List<LectureStudentVO> studentList(LectureStudentVO lectureStudentVO, String lectureCde) {
+		String sql = "select distinct m.member_name "
+				+ "from lecture l "
+					+ "join regstration r on l.lecture_code = r.registration_lecture "
+						+ "join student s on r.registration_student = s.student_id "
+							+ "join member m on s.student_id = m.member_id "
+								+ "where l.lecture_code = ?";  
+		Object[] data = {
+				lectureStudentVO.getLectureCode()
+		};
+		
+		return jdbcTemplate.query(sql, lectureStudentMapper, data);
+	}
+	
+
 }
