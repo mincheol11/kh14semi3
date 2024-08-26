@@ -13,8 +13,9 @@
     	<div class="row">
     		<label>아이디</label> 
     		<input type="text" name="memberId" class="field w-100"
-    																			value="${cookie.saveId.value}">
+    																		  value="${cookie.saveId.value}">
     	</div>
+    	
 		<div class="row">
 			<label>비밀번호</label> <input type="password" name="memberPw" class="field w-100">
 		</div>
@@ -23,8 +24,8 @@
 		<div class="row">
 		<label>
 			<input type="checkbox" name="remember" 
-			<c:if test="${cookie.saveId != null}">checked</c:if>>
-			<span>아이디 저장</span>
+					<c:if test="${cookie.saveId != null}">checked</c:if>>
+				<span>아이디 저장하기</span>
 		</label>
 		</div>
 

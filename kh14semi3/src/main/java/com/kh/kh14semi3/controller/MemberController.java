@@ -88,6 +88,7 @@ public class MemberController {
 		//쿠키를 사용한 아이디저장 기능 코드
 		if(remember != null) {//아이디저장체크o
 			Cookie ck = new Cookie("saveId", memberId);//쿠키생성
+			ck.setPath("/");
 			ck.setMaxAge(4 * 7 * 24 * 60 * 60); //기간4주
 			response.addCookie(ck);
 		}
