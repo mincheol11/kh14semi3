@@ -64,9 +64,9 @@
 						<td>총점</td>
 						<td><button type="button" class="btn btn-grade-input">입력/수정</td>	
 
-
-
-
+							
+							
+							
 <script type="text/template" id="reply-edit-template">
 	<!-- 댓글 수정 영역 -->
 	<div class="reply-wrapper reply-edit-wrapper">
