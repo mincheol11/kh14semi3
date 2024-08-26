@@ -146,14 +146,14 @@ public class MemberDao {
 				+ "member_birth=?, member_post=?, "
 				+ "member_address1=?, member_address2=? "
 				+ "where member_id=? ";
-	Object[] data = {
+		Object[] data = {
 			memberDto.getMemberName(), memberDto.getMemberRank(),
 			memberDto.getMemberEmail(), memberDto.getMemberCell(),
 			memberDto.getMemberBirth(), memberDto.getMemberPost(),
 			memberDto.getMemberAddress1(), memberDto.getMemberAddress2(),
 			memberDto.getMemberId()
-	};
-	return jdbcTemplate.update(sql, data)>0;
+		};
+		return jdbcTemplate.update(sql, data)>0;
 	}
 
 }		

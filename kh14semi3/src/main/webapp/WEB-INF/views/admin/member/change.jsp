@@ -11,6 +11,9 @@
 			<h1>회원정보수정</h1>
 		</div>
 		<div class="row">
+			<input name="memberId" type="hidden" value="${memberDto.memberId}">		
+		</div>
+		<div class="row">
 			<label>이름</label> <input type="text" name="memberName"
 				value="${memberDto.memberName}" class="field w-100">
 		</div>
