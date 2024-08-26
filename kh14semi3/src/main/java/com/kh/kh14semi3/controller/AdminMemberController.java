@@ -72,10 +72,11 @@ public class AdminMemberController {
 			throw new TargetNotFoundException("존재하지 않는 회원입니다.");
 		model.addAttribute("memberDto", memberDto);
 		return "/WEB-INF/views/admin/member/change.jsp";
-	}
+	} 
 	@PostMapping("/change")
 	public String change(@ModelAttribute MemberDto memberDto) {
 		boolean result = memberDao.updateMemberByAdmin(memberDto);
+		System.out.println(memberDto.getMemberId());
 		if(result == false)
 			throw new TargetNotFoundException("존재하지 않는 회원ID입니다.");
 		return "redirect:detail?memberId="+memberDto.getMemberId();
