@@ -39,6 +39,7 @@ private ScheduleDao scheduleDao;
 public String list(
         @RequestParam(value = "pageYear", required = false) Integer year,
         @RequestParam(value = "pageMonth", required = false) Integer month,
+        @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
         @ModelAttribute("pageVO") PageVO pageVO,
         Model model) {
 
@@ -50,19 +51,30 @@ public String list(
         month = Calendar.getInstance().get(Calendar.MONTH) + 1; // 1월은 0이므로 +1
     }
 
-    // 데이터베이스에서 해당 연도와 월의 데이터를 가져옵니다
+    // 페이지 번호가 1보다 작지 않도록 보장
+    if (page < 1) {
+        page = 1;
+    }
+
+    // pageVO에 연도, 월, 페이지 번호 설정
     pageVO.setYear(year);
     pageVO.setMonth(month);
-    model.addAttribute("scheduleList", scheduleDao.selectListByPaging(pageVO));
-    int count = scheduleDao.countByPaging(pageVO);
+    pageVO.setPage(page); // 페이지 번호를 추가합니다
+
+    // 데이터베이스에서 해당 연도와 월의 데이터를 가져옵니다
+    int pageSize = 10; // 예: 페이지당 10개 항목
+    model.addAttribute("scheduleList", scheduleDao.selectListByMonth(year, month, page, pageSize));
+    int count = scheduleDao.countByMonth(year, month);
     pageVO.setCount(count);
 
     // 연도와 월을 모델에 추가
     model.addAttribute("currentYear", year);
     model.addAttribute("currentMonth", month);
+    model.addAttribute("currentPage", page); // 현재 페이지 번호를 모델에 추가합니다
 
     return "/WEB-INF/views/schedule/list.jsp";
 }
+
 @RequestMapping("/detail")
 public String detail(@RequestParam int scheduleNo,Model model) {
 	ScheduleDto scheduleDto = scheduleDao.selectOne(scheduleNo);
