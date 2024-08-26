@@ -446,24 +446,19 @@ var editorOptions = {
 
 	<!-- 각종 이동버튼들 -->
 	<div class="row right">
-		<a class="btn btn-positive" href="write">글쓰기</a> 
 		
-
-		<%-- 본인 글만 표시되도록 조건 설정 --%>
-		<c:set var="isAdmin" value="${sessionScope.createdLevel == '관리자'}" />
-		<c:set var="isLogin" value="${sessionScope.createdUser != null}" />
-		<c:set var="isOwner"
-			value="${sessionScope.createdUser == boardDto.boardWriter}" />
-
-		<c:if test="${isLogin}">
-			<c:if test="${isOwner}">
-				<a class="btn btn-negative" href="edit?boardNo=${boardDto.boardNo}">수정</a>
-			</c:if>
-			<c:if test="${isOwner || isAdmin}">
-				<a class="btn btn-negative"
-					href="delete?boardNo=${boardDto.boardNo}">삭제</a>
-			</c:if>
-		</c:if>
+	<%-- 본인 글만 표시되도록 조건 설정 --%>
+		  <c:set var="isAdmin" value="${sessionScope.createdRank == '관리자'}" />
+        <c:set var="isLogin" value="${sessionScope.createdUser != null}" />
+		
+		  <c:if test="${isLogin && isAdmin}">
+            <!-- 관리자만 수정 버튼을 볼 수 있음 -->
+            <a class="btn btn-negative" href="edit?boardNo=${boardDto.boardNo}">수정</a>
+            <!-- 관리자만 삭제 버튼을 볼 수 있음 -->
+            <a class="btn btn-negative" href="delete?boardNo=${boardDto.boardNo}">삭제</a>
+            <!-- 관리자만 등록 버튼을 볼 수 있음 -->
+            <a class="btn btn-positive" href="write">등록</a>
+        </c:if>
 
 		<a class="btn btn-neutral" href="list">목록</a>
 	</div>
