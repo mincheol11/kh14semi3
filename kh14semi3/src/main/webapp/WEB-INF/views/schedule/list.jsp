@@ -1,47 +1,72 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
- <script type="text/javascript">
- document.addEventListener('DOMContentLoaded', function() {
-	  var modal = document.getElementById("scheduleModal");
-	  var span = document.getElementsByClassName("close")[0];
-	  
-	  // 모달 열기
-	  function openModal(url) {
-	    fetch(url)
-	      .then(response => response.text())
-	      .then(data => {
-	        document.getElementById("modalBody").innerHTML = data;
-	        modal.style.display = "block";
-	      });
-	  }
 
-	  // 모달 닫기
-	  span.onclick = function() {
-	    modal.style.display = "none";
-	  }
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+  var modal = document.getElementById("scheduleModal");
+  var span = document.getElementsByClassName("close")[0];
 
-	  window.onclick = function(event) {
-	    if (event.target == modal) {
-	      modal.style.display = "none";
-	    }
-	  }
+  // 모달 열기
+  function openModal(url) {
+    var modalBody = document.getElementById("modalBody");
+    modalBody.innerHTML = '<p>Loading...</p>'; // 로딩 메시지
 
-	  // 링크 클릭 시 모달 열기
-	  document.querySelectorAll('.modal-trigger').forEach(function(element) {
-	    element.addEventListener('click', function(event) {
-	      event.preventDefault();
-	      var url = this.getAttribute('href');
-	      openModal(url);
-	    });
-	  });
-	});
-	 
- </script>
- 
- 
- <style>
+    fetch(url)
+      .then(response => response.text())
+      .then(data => {
+        modalBody.innerHTML = data;
+        modal.style.display = "block";
+      })
+      .catch(error => {
+        modalBody.innerHTML = '<p>Failed to load content.</p>'; // 오류 메시지
+        console.error('Error:', error);
+      });
+  }
+
+  // 모달 닫기
+  span.onclick = function() {
+    modal.style.display = "none";
+  }
+
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+
+  // 링크 클릭 시 모달 열기
+  document.querySelectorAll('.modal-trigger').forEach(function(element) {
+    element.addEventListener('click', function(event) {
+      event.preventDefault();
+      var url = this.getAttribute('href');
+      openModal(url);
+    });
+  });
+});
+
+function changeMonth(direction) {
+    var currentYear = parseInt('${currentYear}');
+    var currentMonth = parseInt('${currentMonth}');
+    currentMonth += direction;
+
+    if (currentMonth > 12) {
+        currentMonth = 1;
+        currentYear++;
+    } else if (currentMonth < 1) {
+        currentMonth = 12;
+        currentYear--;
+    }
+
+    // URL 파라미터를 관리하는 더 나은 방법
+    var url = new URL(window.location.href);
+    url.searchParams.set('pageYear', currentYear);
+    url.searchParams.set('pageMonth', currentMonth);
+    window.location.href = url.toString();
+}
+</script>
+
+<style>
 /* 모달의 기본 스타일링 */
 .modal {
   display: none; /* 모달은 기본적으로 보이지 않도록 설정 */
@@ -52,7 +77,6 @@
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgb(0,0,0);
   background-color: rgba(0,0,0,0.4);
 }
 
@@ -79,56 +103,84 @@
   text-decoration: none;
   cursor: pointer;
 }
+
+/* 탐색 버튼 스타일 */
+.nav-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.nav-buttons button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.nav-buttons button:hover {
+  background-color: #0056b3;
+}
 </style>
- 
+
 <div class="container w-800 my-50">
-    
-    <div class="row left">
+  <div class="row left">
     <h1>학사 일정</h1>
-    </div>
+  </div>
 
- <jsp:include page="/WEB-INF/views/template/navigator.jsp"></jsp:include>
+  <!-- 탐색 버튼 추가 -->
+  <div class="row left nav-buttons">
+    <button onclick="changeMonth(-1)">‹</button>
+    <span>${currentYear}년 ${currentMonth}월</span>
+    <button onclick="changeMonth(1)">›</button>
+  </div>
 
+  <jsp:include page="/WEB-INF/views/template/navigator.jsp"></jsp:include>
 
-<c:set var="isAdmin" value="${sessionScope.createdRank == '관리자'}" />
-     <c:set var="isLogin" value="${sessionScope.createdUser != null}" />
+  <c:set var="isAdmin" value="${sessionScope.createdRank == '관리자'}" />
+  <c:set var="isLogin" value="${sessionScope.createdUser != null}" />
 
-      
-    <c:if test="${isLogin && isAdmin}">
-    <div class="row right">
+  <c:if test="${isLogin && isAdmin}">
+  <div class="row right">
     <a href="add" class="btn btn-neutral">신규등록</a>
-    </div>
-    </c:if>
+  </div>
+  </c:if>
 
-<div class="row">
+  <div class="row">
     <table class="table table-border table-hover w-800">
-	<thead>
-		<tr>
-		<th>작성일</th>
-		<th>제목</th>
-		</tr>
-	</thead>
-	<tbody align="center">
-		<c:forEach var="scheduleDto" items="${scheduleList}">
-		<tr>
-			
-		<td>${scheduleDto.scheduleWtime }</td>
-		<td  align="right">
-			<!-- 제목에 링크를 부여해서 상세 페이지로 이동하도록 구현 -->
-				<a href="detail?scheduleNo=${scheduleDto.scheduleNo}" class="modal-trigger">${scheduleDto.scheduleTitle} </a>
+      <thead>
+        <tr>
+          <th>작성일</th>
+          <th>제목</th>
+        </tr>
+      </thead>
+      <tbody align="center">
+        <c:choose>
+          <c:when test="${not empty scheduleList}">
+            <c:forEach var="scheduleDto" items="${scheduleList}">
+            <tr>
+              <td>${scheduleDto.scheduleWtime}</td>
+              <td align="right">
+                <a href="detail?scheduleNo=${scheduleDto.scheduleNo}" class="modal-trigger">${scheduleDto.scheduleTitle}</a>
+              </td>
+            </tr>
+            </c:forEach>
+          </c:when>
+          <c:otherwise>
+            <tr>
+              <td colspan="2">일정이 없습니다.</td>
+            </tr>
+          </c:otherwise>
+        </c:choose>
+      </tbody>
+    </table>
+  </div>
+</div>
 
-			</td>
-			
-
-			</tr>
-		</c:forEach>
-
-	</tbody>
-</table>
-    </div>
-    </div>
-    
-    <!-- 모달 구조 추가 -->
+<!-- 모달 구조 추가 -->
 <div id="scheduleModal" class="modal">
   <div class="modal-content">
     <span class="close">&times;</span>
@@ -136,5 +188,4 @@
       <!-- 상세 페이지 내용이 여기에 로드됩니다 -->
     </div>
   </div>
-  </div>
- 
+</div>
