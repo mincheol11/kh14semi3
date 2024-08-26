@@ -97,6 +97,7 @@ public class AdminDepartmentDao {
 		}
 	}
 
+	//수정 페이지
 	public boolean edit(AdminDepartmentDto adminDepartmentDto) {
 		String sql = "update department set "
 				+ "department_name=? "
@@ -106,7 +107,24 @@ public class AdminDepartmentDao {
 				adminDepartmentDto.getDepartmentCode()
 		};
 		return jdbcTemplate.update(sql, data) > 0;
-}	
+}
+
+	//코드 중복검사
+	public AdminDepartmentDto selectOneByDepartmentCode(String departmentCode) {
+		String sql="select * from department where department_code=?";
+		Object[] data= {departmentCode};
+		List<AdminDepartmentDto>list = jdbcTemplate.query(sql, adminDepartmentMapper, data);
+		return list.isEmpty()? null:list.get(0);
+	}
+
+	//학과명 중복검사
+	public AdminDepartmentDto selectOneByDepartmentName(String departmentName) {
+		String sql="select * from department where department_name=?";
+		Object[] data= {departmentName};
+		List<AdminDepartmentDto>list = jdbcTemplate.query(sql, adminDepartmentMapper, data);
+		return list.isEmpty()? null:list.get(0);
+	}	
+	
 
 
 
