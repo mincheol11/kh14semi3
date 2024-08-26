@@ -49,6 +49,81 @@
 	    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 		    
 	    <style>	    
-        
+        .profile{
+        	border: 1px solid black;
+        	border-top: none;
+            border-left: none;
+            border-bottom: none;
+            padding-left: 0;
+            padding-right: 0;
+            border-radius: 0;
+        }
 	    </style>
 	</head>
+	<body> <!-- 문서의 화면 출력 내용을 담는 태그 -->
+		<!-- 상단(Header) -->
+		<!-- <div>
+			<h1>내가 만든 홈페이지</h1>
+		</div> -->
+		
+		<!-- 정보 확인용 공간 -->
+		<div class="right">
+		<c:if test="${sessionScope.createdLevel=='관리자'}">
+			createdUser = ${sessionScope.createdUser} , 
+			createdLevel = ${sessionScope.createdLevel} ,
+			session id =${pageContext.session.id}  
+		</c:if>
+		</div>
+		
+		<div class="container w-1400">
+		
+	        <div class="row my-0 flex-box">
+	            <div class="w-25 flex-core">
+	                <img src="https://placehold.co/295x70">
+	            </div>
+	            <div class="w-50">
+	                <h2 class="center">KH 정보교육원 수업자료</h2>
+	            </div>
+	            <div class="w-25 flex-core">
+	                <img src="https://placehold.co/295x70">
+	            </div>
+	        </div>
+	        
+			<%-- menu.jsp에 존재하는 내용을 불러오도록 설정 --%>
+			<%-- <jsp:include page="/WEB-INF/views/template/menu.jsp"></jsp:include> --%>
+
+			<div class="row my-0 flex-box" style="min-height: 400px;">
+			
+	       		<div class="w-200 me-30 profile rightline">
+		       	
+					<c:choose>
+						<c:when test="${createdUser!=null}">			
+						
+							<div class="row center">
+								<img src="/member/myImage" width="50%" class="image image-circle image-lift">
+	                    		<!-- <img src="/images/user.jpg" width="50%" class="image image-circle image-lift"> -->
+							</div>
+							<div class="row center">
+								${sessionScope.createdUser} (등급: ${sessionScope.createdLevel})
+							</div>
+							<div class="row center">
+								<a href="/member/mypage" class="link link-animation">
+								내정보<i class="fa-solid fa-square-arrow-up-right"></i>
+								</a>
+							</div>
+					                        
+						</c:when>
+						<c:otherwise>
+									
+							<div class="row center">
+								<a href="/member/login" class="link link-animation">
+									로그인<i class="fa-solid fa-square-arrow-up-right"></i>
+								</a> 하세요
+							</div>
+				            
+						</c:otherwise>
+					</c:choose>
+			         	
+				</div>
+	
+				<div style="flex-grow: 1;">
