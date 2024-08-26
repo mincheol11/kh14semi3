@@ -566,78 +566,78 @@ float: right;
 */
 
 /* 1 */
-.menu, /* 1차 메뉴 */
-.menu ul /* 2차 메뉴 이상 */
+/* .menu, 1차 메뉴
+.menu ul 2차 메뉴 이상
 {
     list-style: none;
     margin: 0;
     padding: 0;
     background-color: #80808020;
 }
-.menu a /* 메뉴 안의 모든 a태그 */
+.menu a 메뉴 안의 모든 a태그
 {
     color: inherit;
     text-decoration: none;
 }
 
-/* 2 */
+2
 .menu{
     display: flex;
 }
 
-/* 3 */
-.menu li{ /* 메뉴 안의 모든 항목 */
+3
+.menu li{ 메뉴 안의 모든 항목
     width: 120px;
 }
-.menu a{ /* 메뉴 안의 모든 a태그 */
+.menu a{ 메뉴 안의 모든 a태그
     display: block;
     width: 100%;
     padding: 0.5em;
     text-align: center;
 }
 
-/* 4 */
-.menu li { /* 모든 메뉴의 항목 */
-    position: relative; /* 기준점 만들기 */
+4
+.menu li { 모든 메뉴의 항목
+    position: relative; 기준점 만들기
 }
-.menu ul { /* 2차 이상 메뉴 */
+.menu ul { 2차 이상 메뉴
     position: absolute;
     top: 100%;
     left: 0;
 
 }
 
-/* 5 */
+5
 .menu ul{
     display: none;
 }
-.menu li:hover > ul{ /* 모든 항목에 마우스가 올라가면 바로 아래 메뉴 */
+.menu li:hover > ul{ 모든 항목에 마우스가 올라가면 바로 아래 메뉴
     display: block;
 }
 
-/* 6 */
+6
 .right-menu{
     margin-left: auto;
 }
 
-/* 7 */
-.menu > li > ul ul{ /* 3차 이상의 모든 메뉴 */
+7
+.menu > li > ul ul{ 3차 이상의 모든 메뉴
     top: 0;
     left: 100%;
 }
 .menu > li.right-menu > ul ul,
-.menu > li.right-menu ~li > ul ul{ /* 오른쪽에 배치되는 1차 메뉴들에게서 열리는 3차 메뉴들 */
+.menu > li.right-menu ~li > ul ul{ 오른쪽에 배치되는 1차 메뉴들에게서 열리는 3차 메뉴들
     top: 0;
     left: -100%;
 }
 
-/* 8 */
+8
 .menu a:hover{
     color: red;
 }
 .menu ul{
     background-color: #87cfeb20;
-}
+} */
 
 /*
     입력창 피드백 디자인
