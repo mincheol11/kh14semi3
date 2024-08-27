@@ -70,12 +70,11 @@
                 	<input type="hidden" name="departmentCode" value="${adminDepartmentDto.departmentCode}">
                 	<div class="field w-100">${adminDepartmentDto.departmentCode}</div>
                 	
-                	
-                	<!-- 학과명 입력 -->
+<!-- 학과명 입력 -->
 			<div class="row">
                 <label>학과명 <i class="fa-solid fa-asterisk"></i></label>
                       <input type="text" name="departmentName" 
-                        class="field w-100" placeholder="ex)세무회계과">
+                        class="field w-100" placeholder="ex)기계공학과">
  				<div class="success-feedback 00b894">올바른 학과명입니다.</div>
                 <div class="fail-feedback d63031">학과명은 한글로만 입력해주세요.</div>
                 <div class="fail2-feedback d63031">이미 사용중인 학과명입니다</div>
@@ -87,3 +86,4 @@
 	</div>
 </form>
 
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include> <!-- footer 추가 -->

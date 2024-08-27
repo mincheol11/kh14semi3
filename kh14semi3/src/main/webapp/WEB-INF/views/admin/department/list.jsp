@@ -25,9 +25,9 @@ $(document).ready(function() {
 		<a href="expand" class="btn btn-neutral w-20">학과개설</a>
 		</div>
             <select name="column" class="field">
-            <option value="department_code">코드명</option>
+            <option value="department_code">학과코드</option>
 		<c:choose>
-			<c:when test="${column == 'department_name'}">
+			<c:when test="${param.column == 'department_name'}">
 				<option value="department_name" selected>학과명</option>
 			</c:when>
 			<c:otherwise>
@@ -46,7 +46,6 @@ $(document).ready(function() {
               <tr>
                     <th>학과코드</th>
                     <th>학과명</th>
-                    
              </tr>
     </thead>
 	<tbody>
@@ -61,3 +60,5 @@ $(document).ready(function() {
 		<jsp:include page="/WEB-INF/views/template/navigator.jsp"></jsp:include> <!-- navigator 추가 -->
 	</div>
 </div>
+
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include> <!-- footer 추가 -->
