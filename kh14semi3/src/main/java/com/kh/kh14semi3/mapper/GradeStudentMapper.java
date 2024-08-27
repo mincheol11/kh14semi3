@@ -18,8 +18,8 @@ public class GradeStudentMapper implements RowMapper<GradeStudentVO>{
 		gradeStudentVO.setGradeStudent(rs.getString("grade_student"));
 		gradeStudentVO.setGradeLecture(rs.getString("grade_lecture"));
 		gradeStudentVO.setGradeAttendance(rs.getInt("grade_attendance"));
-		gradeStudentVO.setGradeAttendance(rs.getInt("grade_attendance"));
 		gradeStudentVO.setGradeScore1(rs.getInt("grade_score1"));
+		gradeStudentVO.setGradeScore2(rs.getInt("grade_score2"));
 		gradeStudentVO.setGradeHomework(rs.getInt("grade_homework"));
 		gradeStudentVO.setGradeRank(rs.getInt("grade_rank"));
 		
