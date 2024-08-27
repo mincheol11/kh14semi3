@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.kh14semi3.dao.BoardDao;
 import com.kh.kh14semi3.dto.BoardDto;
+import com.kh.kh14semi3.dto.ScheduleDto;
 import com.kh.kh14semi3.error.TargetNotFoundException;
 import com.kh.kh14semi3.service.AttachmentService;
 import com.kh.kh14semi3.vo.PageVO;
@@ -67,7 +68,7 @@ public class BoardController {
 		return "/WEB-INF/views/board/write.jsp";
 	}
 	@PostMapping("/write")
-	public String write(@ModelAttribute BoardDto boardDto, HttpSession session) {
+	public String write(@ModelAttribute BoardDto boardDto, HttpSession session,@ModelAttribute PageVO pageVO) {
 		//세션에서 아이디 추출 후 boardDto에 첨부
 		String createdUser = (String)session.getAttribute("createdUser");
 		boardDto.setBoardWriter(createdUser);
@@ -76,13 +77,11 @@ public class BoardController {
 		
 		//등록할 정보에 번호를 첨부한다
 		boardDto.setBoardNo(seq);
+		  boardDto.setBoardNo(seq);
+		  return "redirect:/board/list?page=" + pageVO.getPage() + "&message=writeSuccess";
+    }
 		
-		//등록을 지시한다
-		boardDao.insert(boardDto);
 		
-		//생성한 번호에 맞는 상세페이지로 리다이렉트(추방)
-		return "redirect:detail?boardNo="+seq;
-	}
 	@GetMapping("/edit")
 	public String edit(@RequestParam int boardNo,Model model) {
 		BoardDto  boardDto = boardDao.selectOne(boardNo);
@@ -92,7 +91,7 @@ public class BoardController {
 		return "/WEB-INF/views/board/edit.jsp";
 	}
 	@PostMapping("/edit")
-	public String edit(@ModelAttribute BoardDto boardDto) {
+	public String edit(@ModelAttribute BoardDto boardDto,@ModelAttribute PageVO pageVO) {
 		BoardDto originDto = boardDao.selectOne(boardDto.getBoardNo());
 		if(originDto == null)
 			throw new TargetNotFoundException("존재하지 않는 글번호");
@@ -118,19 +117,20 @@ public class BoardController {
 			attachmentService.delete(attachmentNo);
 		}
 		boardDao.update(boardDto);
-		return"redirect:detail?boardNo="+boardDto.getBoardNo();
+		   return "redirect:/board/list?page=" +pageVO.getPage() + "&message=updateSuccess";
 	}
 	@Autowired
 	private AttachmentService attachmentService;
 	
 	@RequestMapping("/delete")
-	public String delete(@RequestParam int boardNo) {
-		BoardDto boardDto = boardDao.selectOne(boardNo);
-		if(boardDto == null)
-			throw new TargetNotFoundException("존재 하지 않는 게시글 번호");
-		String boardContent = boardDto.getBoardContent();
+	public String delete(@RequestParam int boardNo, @RequestParam(defaultValue = "1") int page, @RequestParam(value = "confirm", required = false) String confirm) {
 		
-		
+		 if ("true".equals(confirm)) {
+			 BoardDto boardDto = boardDao.selectOne(boardNo);
+	            if (boardDto == null) {
+	                throw new TargetNotFoundException("존재하지 않는 게시글 번호");
+	            }
+	       String boardContent = boardDto.getBoardContent();
 		Document document = Jsoup.parse(boardContent);
 		Elements elements = document.select(".board-attach");
 		for(Element element : elements) {
@@ -139,8 +139,16 @@ public class BoardController {
 			attachmentService.delete(attachmentNo);
 		}
 		boolean result = boardDao.delete(boardNo);
-		return "redirect:list";
-	}
+		if (result) {
+            return "redirect:/board/list?page=" + page + "&message=deleteSuccess";
+        } else {
+            return "redirect:/board/list?page=" + page + "&message=deleteFail";
+        }
+    } else {
+        return "redirect:/board/detail?boardNo=" + boardNo + "&confirm=show";
+    }
+}
+	
 	@RequestMapping("/image")
 	public String image(@RequestParam int boardNo) {
 		try {

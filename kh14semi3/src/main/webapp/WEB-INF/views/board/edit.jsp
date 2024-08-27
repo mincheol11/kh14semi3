@@ -11,6 +11,31 @@
 <link rel="stylesheet" type="text/css" href="/editor/editor.css">
 <script src="/editor/editor.js"></script>
 
+
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+    function showMessage(message) {
+        if (message === 'updateSuccess') {
+            alert('수정이 완료되었습니다.');
+        } else if (message === 'deleteSuccess') {
+            alert('삭제가 완료되었습니다.');
+        } else if (message === 'deleteFail') {
+            alert('삭제에 실패하였습니다.');
+        }
+        else if (message === 'writeSuccess') {
+            alert('등록되었습니다.');
+        }
+    }
+
+    var urlParams = new URLSearchParams(window.location.search);
+    var message = urlParams.get('message');
+
+    if (message) {
+        showMessage(message);
+    }
+});
+</script>
+
 <form action="edit" method="post" autocomplete="off">
 	<div class="container w-800 my-50">
 		<div class="row center">
