@@ -37,7 +37,7 @@
 	});
 </script>
 
-<<c:if test="${sessionScope.createdRank == '학생'}">
+<c:if test="${sessionScope.createdRank == '학생'}">
 <script type="text/javascript">
 	// (회원전용) 강의명을 누르면 수강 신청 처리를 수행	
 	$(function(){
