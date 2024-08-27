@@ -152,8 +152,8 @@ public class AdminMemberController {
 			public String blockGo(@ModelAttribute TakeOffDto takeOffDto) {
 				//마지막 이력 조회
 				TakeOffDto lastDto = takeOffDao.selectLastOne(takeOffDto.getTakeOffTarget());
-				if(lastDto == null || lastDto.getTakeOffType().equals("제적취소")) {
-					takeOffDao.insertTakeOff(takeOffDto);
+				if(lastDto == null || !lastDto.getTakeOffType().equals("제적")) {
+					takeOffDao.blockGo(takeOffDto);
 				}
 				return "redirect:detail?memberId="+takeOffDto.getTakeOffTarget();
 			}
@@ -171,7 +171,7 @@ public class AdminMemberController {
 			public String blockNo(@ModelAttribute TakeOffDto takeOffDto) {
 				TakeOffDto lastDto = takeOffDao.selectLastOne(takeOffDto.getTakeOffTarget());
 				if(lastDto != null && lastDto.getTakeOffType().equals("제적")) {
-					takeOffDao.insertTakeOn(takeOffDto);
+					takeOffDao.blockNo(takeOffDto);
 				}
 				return "redirect:detail?memberId="+takeOffDto.getTakeOffTarget();
 			}

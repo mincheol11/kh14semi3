@@ -61,7 +61,7 @@
 	<!-- 메뉴 배치 -->
 	<div class="row float-box">
 		<div class="float-right">
-			<a href="list" class="btn btn-neutral">회원 정보 검색</a> <a
+			<a href="list" class="btn btn-neutral">회원 정보 목록</a> <a
 				href="change?memberId=${memberDto.memberId}"
 				class="btn btn-neutral ms-10">회원 정보 수정</a> <a
 				href="delete?memberId=${memberDto.memberId}"
