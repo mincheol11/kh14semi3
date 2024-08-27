@@ -43,6 +43,7 @@
 				<h3 style="color: red">아이디 또는 비밀번호가 잘못되었습니다</h3>
 			</div>
 		</c:if>
-		
 	</div>
 </form>
+
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
