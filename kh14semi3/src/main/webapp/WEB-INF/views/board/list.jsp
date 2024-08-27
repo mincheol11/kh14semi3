@@ -2,11 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-    <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
-    
-<script type="text/javascript">
+<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-// 메시지 표시 함수
+<script type="text/javascript">
+    // 메시지 표시 함수
     function showMessage(message) {
         if (message === 'updateSuccess') {
             alert('수정이 완료되었습니다.');
@@ -30,76 +29,112 @@
         urlParams.delete('message');
         window.history.replaceState(null, '', `${window.location.pathname}?${urlParams}`);
     }
-
-   
-
- 
 </script>
 
+<style>
+   .header-ellipse {
+    display: inline-block;
+    background-color: transparent; /* 투명한 배경 */
+    color: black; /* 글씨 색상 */
+    border: 3px solid #87CEFA; /* 하늘색 테두리 */
+    border-radius: 20px; /* 모서리 둥글게 하기 */
+    padding: 5px 5px; /* 상하좌우 여백 조절 */
+    font-size: 16px; /* 글씨 크기 조절 */
+    font-weight: bold;
+    text-align: center;
+    line-height: 1.5; /* 텍스트 높이 조절 */
+    position: relative; /* 후에 추가할 요소에 상대적 위치 지정 */
+}
+
+.header-ellipse::before, .header-ellipse::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 15px; /* 상단과 하단의 둥글게 처리할 높이 */
+    border-radius: 50%; /* 완전한 둥글기 */
+}
+
+.header-ellipse::before {
+    top: -15px; /* 상단 부분 위치 조정 */
+}
+
+.header-ellipse::after {
+    bottom: -15px; /* 하단 부분 위치 조정 */
+}
+/* 링크에 마우스를 올렸을 때 스타일 변경 */
+.board-title {
+  color: black;  /* 기본 텍스트 색상을 검은색으로 설정 */
+  text-decoration: none; /* 기본 상태에서 밑줄 제거 */
+  transition: transform 0.3s; /* 확대 효과에 부드러운 전환 추가 */
+}
+
+.table.table-hover > tbody > tr:hover {
+    background-color: rgb(255, 255, 255)!important;
+}
+</style>
+   
+</style>
 
 <div class="container w-800 my-50">
     
-    <div class="row center">
-    <h1>게시글 목록</h1>
+    <div class="header-container">
+        <div class="header-ellipse">
+            학생 공지 사항
+        </div>
     </div>
     
     <c:set var="isAdmin" value="${sessionScope.createdRank == '관리자'}" />
-  <c:set var="isLogin" value="${sessionScope.createdUser != null}" />
+    <c:set var="isLogin" value="${sessionScope.createdUser != null}" />
     
     <c:if test="${isLogin && isAdmin}">
     <div class="row right">
-    <a href="write" class="btn btn-neutral">신규등록</a>
+        <a href="write" class="btn btn-neutral">신규등록</a>
     </div>
     </c:if>
     
     <div class="row center">
-    <form action="list" method="get">
-	<select name="column" class="field">
-    <option value="board_title" <c:if test="${param.column == 'board_title'}">selected</c:if>>제목</option>
-    <option value="board_writer" <c:if test="${param.column == 'board_writer'}">selected</c:if>>작성자</option>
-	</select>
-	<input type="text" name="keyword" placeholder="검색어" value="${param.keyword}" class="field">
-	<button type="submit" class="btn btn-positive">검색</button>
-</form>
+        <form action="list" method="get">
+            <select name="column" class="field">
+                <option value="board_title" <c:if test="${param.column == 'board_title'}">selected</c:if>>제목</option>
+                <option value="board_writer" <c:if test="${param.column == 'board_writer'}">selected</c:if>>작성자</option>
+            </select>
+            <input type="text" name="keyword" placeholder="검색어" value="${param.keyword}" class="field">
+            <button type="submit" class="btn btn-positive">검색</button>
+        </form>
     </div>
-    
     
     <div class="row">
-    <table class="table table-border table-hover w-800">
-	<thead>
-		<tr>
-			<th >번호</th>
-			<th  >제목</th>
-			<th >작성자</th>
-			<th >작성일</th>
-			<th  >조회수</th>
-		</tr>
-	</thead>
-	<tbody align="center">
-		<c:forEach var="boardDto" items="${boardList}">
-		<tr>
-			<td >${boardDto.boardNo}</td>
-			
-			<td align="right">
-			<!-- 제목에 링크를 부여해서 상세 페이지로 이동하도록 구현 -->
-				<a href="detail?boardNo=${boardDto.boardNo}">${boardDto.boardTitle} </a>
-				
-			</td>
-			
-			<td >${boardDto.boardWriter}</td>
-			<td >${boardDto.boardWtime }</td>
-			<td  align="right">
-				<fmt:formatNumber value="${boardDto.boardViews}" pattern="#,##0"/>
-			</td>
-			<td >${boardDto.boardNo }</td>
-			</tr>
-		</c:forEach>
-		
-	</tbody>
-</table>
+        <table class="table table-border table-hover w-800">
+            <thead>
+                <tr>
+                    <th>번호</th>
+                    <th>제목</th>
+                    <th>작성자</th>
+                    <th>작성일</th>
+                    <th>조회수</th>
+                </tr>
+            </thead>
+            <tbody align="center">
+                <c:forEach var="boardDto" items="${boardList}">
+                    <tr>
+                        <td>${boardDto.boardNo}</td>
+                        <td align="right">
+                            <!-- 제목에 링크를 부여해서 상세 페이지로 이동하도록 구현 -->
+                            <a href="detail?boardNo=${boardDto.boardNo}" class="board-title">${boardDto.boardTitle}</a>
+                        </td>
+                        <td>${boardDto.boardWriter}</td>
+                        <td>${boardDto.boardWtime}</td>
+                        <td align="right">
+                            <fmt:formatNumber value="${boardDto.boardViews}" pattern="#,##0"/>
+                        </td>
+                        <td>${boardDto.boardNo}</td>
+                    </tr>
+                </c:forEach>
+            </tbody>
+        </table>
     </div>
-    </div>
-    
-    <jsp:include page="/WEB-INF/views/template/navigator.jsp"></jsp:include>
-    <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
-     
+</div>
+
+<jsp:include page="/WEB-INF/views/template/navigator.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
