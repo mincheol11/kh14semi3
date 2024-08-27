@@ -15,7 +15,7 @@
 		},
 	};
 		
-	// 코드 입력창 검사
+	// 학과 코드 입력창 검사
 	  $("[name=departmentCode]").blur(function(){
 		var regex= /^[d][0-9]{2,3}$/;//형식검사
 		var departmentCode = $(this).val();

@@ -21,15 +21,12 @@ public class AdminLectureDao {
 	public void add(LectureDto lectureDto) {
 		String sql = "insert into lecture("
 				+ "lecture_code, lecture_department, lecture_professor, "
-				+ "lecture_type, lecture_name, lecture_time, "
-				+ "lecture_duration, lecture_day, lecture_room, lecture_count"
-				+ ") values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				+ "lecture_type, lecture_name"
+				+ ") values(?, ?, ?, ?, ?)";
 		Object[] data = {
 				lectureDto.getLectureCode(), lectureDto.getLectureDepartment(),
 				lectureDto.getLectureProfessor(), lectureDto.getLectureType(), 
-				lectureDto.getLectureName(), lectureDto.getLectureTime(), 
-				lectureDto.getLectureDuration(), lectureDto.getLectureDay(), 
-				lectureDto.getLectureRoom(), lectureDto.getLectureCount()
+				lectureDto.getLectureName()
 				};
 		jdbcTemplate.update(sql,data);		
 	}
@@ -95,24 +92,29 @@ public class AdminLectureDao {
 			return jdbcTemplate.queryForObject(sql, int.class);
 		}
 	}
-		
 		//수정 페이지
 		public boolean edit(LectureDto lectureDto) {
 			String sql = "update lecture set "
 					+ "lecture_department=?, lecture_professor=?, "
-					+ "lecture_type=?, lecture_time=?, "
-					+ "lecture_duration=?, lecture_day=?, "
-					+ "lectrure_room=?, lecture_count=? "
-					+ "where lecture_code = ?";
+					+ "lecture_type=?, lecture_name=?, "
+					+ "lecture_time=?, lecture_duration=?, "
+					+ "lecture_day=?, lecture_room=?, "
+					+ "lecture_count=? where lecture_code = ?";
 			Object[] data = {
 					lectureDto.getLectureDepartment(),lectureDto.getLectureProfessor(),
-					lectureDto.getLectureType(),lectureDto.getLectureTime(),
-					lectureDto.getLectureDuration(),lectureDto.getLectureDay(),
-					lectureDto.getLectureRoom(),lectureDto.getLectureCount(),
-					lectureDto.getLectureCode()
+					lectureDto.getLectureType(),lectureDto.getLectureName(),
+					lectureDto.getLectureTime(),lectureDto.getLectureDuration(),
+					lectureDto.getLectureDay(),lectureDto.getLectureRoom(),
+					lectureDto.getLectureCount(),lectureDto.getLectureCode()
 			};
 			return jdbcTemplate.update(sql, data) > 0;
 	}
+		//학과 통폐합
+		public boolean remove(String lectureCode) {
+			String sql = "delete lecture where lecture_code=?";
+			Object[] data = {lectureCode};
+			return jdbcTemplate.update(sql, data) > 0;
+			}
 
 		//코드 중복검사
 		public LectureDto selectOneByLectureCode(String lectureCode) {
@@ -122,18 +124,6 @@ public class AdminLectureDao {
 			return list.isEmpty()? null:list.get(0);
 		}
 
-		//강의명 중복검사
-		public LectureDto selectOneByLectureName(String lectureName) {
-			String sql="select * from lecture where lecture_name=?";
-			Object[] data= {lectureName};
-			List<LectureDto>list = jdbcTemplate.query(sql, lectureMapper, data);
-			return list.isEmpty()? null:list.get(0);
-		}		
-		//학과 통폐합
-		public boolean remove(String lectureCode) {
-			String sql = "delete lecture where lecture_code=?";
-			Object[] data = {lectureCode};
-			return jdbcTemplate.update(sql, data) > 0;
-			}
-
+	
+		
 }

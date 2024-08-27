@@ -13,11 +13,11 @@
     <body>
     <div class="container w-600 my-50">
     <div class="row center">
-    <h1>학과 상세정보</h1>
+    <h1>강의 상세정보</h1>
     </div>
     <c:choose>
         <c:when test="${lectureDto == null}">
-            <h2>존재하지 않는 학과 정보 입니다.</h2>
+            <h2>존재하지 않는 강의 정보 입니다.</h2>
         </c:when>
     <c:otherwise>
         <table class="table table-border table-hover">
@@ -43,11 +43,11 @@
                 </tr>
                  <tr>
                     <th>강의시작 시간</th>
-                    <td>${lectureDto.lectureTime}</td>
+                    <td>${lectureDto.lectureTime}부터</td>
                 </tr>
                  <tr>
                     <th>강의수업 시간</th>
-                    <td>${lectureDto.lectureDuration}</td>
+                    <td>${lectureDto.lectureDuration}시간</td>
                 </tr>
                  <tr>
                     <th>강의요일</th>
@@ -59,14 +59,14 @@
                 </tr>
                  <tr>
                     <th>정원</th>
-                    <td>${lectureDto.lectureCount}</td>
+                    <td>${lectureDto.lectureCount}명</td>
                 </tr>
             </table>
         </c:otherwise>
     </c:choose>
     
      <div class="row center">
-     <a href="add" class="btn btn-neutral w-20">강의개설</a>
+     <a href="add" class="btn btn-neutral w-20">추가 강의개설</a>
     <a href="list" class="btn btn-neutral w-20">목록이동</a>
     <c:if test="${lectureDto != null}">
     <a href="edit?lectureCode=${lectureDto.lectureCode}" class="btn btn-neutral w-20">강의 정보 수정</a>
