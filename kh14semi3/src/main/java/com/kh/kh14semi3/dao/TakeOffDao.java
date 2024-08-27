@@ -22,7 +22,7 @@ public class TakeOffDao {
 	public void insertTakeOff(TakeOffDto takeOffDto) {
 		String sql = "insert into takeOff("
 						+ "takeOff_no, takeOff_type, "
-						+ "takeOff_memo, takeOff_time, takeOff_target" 
+						+ "takeOff_memo, takeOff_time, takeOff_target " 
 						+ ") "
 						+ "values(takeOff_seq.nextval, '휴학', ?, sysdate, ?)";
 		Object[] data = {takeOffDto.getTakeOffMemo(), takeOffDto.getTakeOffTarget()};
@@ -40,7 +40,27 @@ public class TakeOffDao {
 		jdbcTemplate.update(sql, data);
 	}
 	
+	//제적 등록
+	public void blockGo(TakeOffDto takeOffDto) {
+		String sql = "insert into takeOff("
+						+ "takeOff_no, takeOff_type, "
+						+ "takeOff_memo, takeOff_time, takeOff_target " 
+						+ ") "
+						+ "values(takeOff_seq.nextval, '제적', ?, sysdate, ?)";
+		Object[] data = {takeOffDto.getTakeOffMemo(), takeOffDto.getTakeOffTarget()};
+		jdbcTemplate.update(sql, data);
+	}
 	
+	//제적 해제
+	public void blockNo(TakeOffDto takeOffDto) {
+		String sql = "insert into takeOff("
+				+ "takeOff_no, takeOff_type, "
+				+ "takeOff_memo, takeOff_time, takeOff_target "
+				+ ") "
+				+ "values(takeOff_seq.nextval, '제적취소', ?, sysdate, ?)";
+		Object[] data = {takeOffDto.getTakeOffMemo(), takeOffDto.getTakeOffTarget()};
+		jdbcTemplate.update(sql, data);
+	}
 	
 	// 주어진 아이디의 마지막 takeOff 정보를 상세조회하는 기능
 	public TakeOffDto selectLastOne(String takeOffTarget) {

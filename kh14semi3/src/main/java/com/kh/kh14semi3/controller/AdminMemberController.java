@@ -113,7 +113,7 @@ public class AdminMemberController {
 	public String takeOff(@ModelAttribute TakeOffDto takeOffDto) {
 		//마지막 이력 조회
 		TakeOffDto lastDto = takeOffDao.selectLastOne(takeOffDto.getTakeOffTarget());
-		if(lastDto == null || lastDto.getTakeOffType().equals("복학")) {
+		if(lastDto == null || lastDto.getTakeOffType().equals("재학")) {
 			takeOffDao.insertTakeOff(takeOffDto);
 		}
 		return "redirect:detail?memberId="+takeOffDto.getTakeOffTarget();
@@ -136,6 +136,52 @@ public class AdminMemberController {
 		}
 		return "redirect:detail?memberId="+takeOffDto.getTakeOffTarget();
 	}
+	
+	
+	
+	//제적기능
+			@GetMapping("/blockGo")
+			public String blockGo(@RequestParam String takeOffTarget) {
+				MemberDto memberDto = memberDao.selectOne(takeOffTarget);
+				if(memberDto == null)
+					throw new TargetNotFoundException("존재하지 않는 학생입니다.");
+				return "/WEB-INF/views/admin/member/blockGo.jsp";
+			}
+			
+			@PostMapping("/blockGo")
+			public String blockGo(@ModelAttribute TakeOffDto takeOffDto) {
+				//마지막 이력 조회
+				TakeOffDto lastDto = takeOffDao.selectLastOne(takeOffDto.getTakeOffTarget());
+				if(lastDto == null || lastDto.getTakeOffType().equals("제적취소")) {
+					takeOffDao.insertTakeOff(takeOffDto);
+				}
+				return "redirect:detail?memberId="+takeOffDto.getTakeOffTarget();
+			}
+			
+			//제적 해제기능
+			@GetMapping("/blockNo")
+			public String blockNo(@RequestParam String takeOffTarget) {
+				MemberDto memberDto = memberDao.selectOne(takeOffTarget);
+				if(memberDto == null)
+					throw new TargetNotFoundException("존재하지 않는 학생입니다.");
+				return "/WEB-INF/views/admin/member/blockNo.jsp";
+			}
+			
+			@PostMapping("/blockNo")
+			public String blockNo(@ModelAttribute TakeOffDto takeOffDto) {
+				TakeOffDto lastDto = takeOffDao.selectLastOne(takeOffDto.getTakeOffTarget());
+				if(lastDto != null && lastDto.getTakeOffType().equals("제적")) {
+					takeOffDao.insertTakeOn(takeOffDto);
+				}
+				return "redirect:detail?memberId="+takeOffDto.getTakeOffTarget();
+			}
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
