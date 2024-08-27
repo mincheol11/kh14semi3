@@ -1,6 +1,5 @@
 package com.kh.kh14semi3.mapper;
 
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -20,9 +19,9 @@ public class LectureMapper implements RowMapper<LectureDto>{
 		lectureDto.setLectureProfessor(rs.getString("lecture_professor"));
 		lectureDto.setLectureType(rs.getString("lecture_type"));
 		lectureDto.setLectureName(rs.getString("lecture_name"));
-		lectureDto.setLectureTime(rs.getDate("lecture_time"));
+		lectureDto.setLectureTime(rs.getString("lecture_time"));
 		lectureDto.setLectureDuration(rs.getInt("lecture_duration"));
-		lectureDto.setLectureDay(rs.getDate("lecture_day"));
+		lectureDto.setLectureDay(rs.getString("lecture_day"));
 		lectureDto.setLectureRoom(rs.getString("lecture_room"));
 		lectureDto.setLectureCount(rs.getInt("lecture_count"));
 		lectureDto.setLectureRegist(rs.getInt("lecture_regist"));
