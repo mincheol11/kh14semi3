@@ -22,7 +22,7 @@ $(lecture).ready(function() {
     <div class="row center">
         <form action="list" method="get" autocomplete="off">
         <div class="row right">
-		<a href="lecture" class="btn btn-neutral w-20">학과개설</a>
+		<a href="add" class="btn btn-neutral w-20">학과개설</a>
 		</div>
             <select name="column" class="field">
             <option value="lecture_code">강의코드</option>

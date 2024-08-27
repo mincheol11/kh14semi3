@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.kh.kh14semi3.dto.AdminDepartmentDto;
 import com.kh.kh14semi3.dto.LectureDto;
 import com.kh.kh14semi3.mapper.LectureMapper;
 import com.kh.kh14semi3.vo.PageVO;

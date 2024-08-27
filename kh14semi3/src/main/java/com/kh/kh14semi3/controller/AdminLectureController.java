@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.kh14semi3.dao.AdminLectureDao;
-import com.kh.kh14semi3.dto.AdminDepartmentDto;
 import com.kh.kh14semi3.dto.LectureDto;
 import com.kh.kh14semi3.error.TargetNotFoundException;
 import com.kh.kh14semi3.vo.PageVO;
