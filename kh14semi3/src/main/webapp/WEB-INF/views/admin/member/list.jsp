@@ -5,8 +5,8 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 
-<div class="container w-1400 my-50">
-	<div class="row">
+<div class="container w-900 my-50">
+	<div class="row center">
 		<h1>회원 관리</h1>
 	</div>
 
@@ -25,7 +25,6 @@
 	</div>
 
 	<!-- 결과화면 -->
-	<hr>
 
 	<c:if test="${memberList.isEmpty()}">
 		<h3>검색 결과가 존재하지 않습니다</h3>
