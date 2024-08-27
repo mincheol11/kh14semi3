@@ -21,6 +21,7 @@
 			</select>
 			<input class="field" type="text" name="keyword" value="${param.keyword}" placeholder="검색어">
 			<button class="btn btn-positive" type="submit">검색</button>
+			<a class="btn btn-netural" type="button" href="join">등록</a>
 		</form>
 	</div>
 
