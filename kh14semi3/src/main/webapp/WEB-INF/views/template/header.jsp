@@ -11,7 +11,7 @@
 <!Doctype HTML>
 <html> <!-- HTML 문서의 범위를 나타내는 태그 -->
 	<head> <!-- 문서의 정보를 표시하는 태그 (각 탭에 적히는 내용)-->
-		<title>나의 홈페이지</title>
+		<title>KH 대학교 학사정보 사이트</title>
 		<meta charset="UTF-8"> <!-- jsp에 정의해서 중복되지만 HTML만 사용할 때는 써야함 -->
 		
 		<!-- google font cdn -->
@@ -66,13 +66,17 @@
 		
 	        <div class="row my-0 flex-box">
 	            <div class="w-25 flex-core">
-	                <img src="https://placehold.co/295x70">
+	                <img src="https://placehold.co/295x95">
 	            </div>
 	            <div class="w-50">
-	                <h2 class="center">KH 대학교 학사정보사이트</h2>
+	                <h2 class="center">
+	                	<a href="/home/main" class="link">
+		                	KH 대학교 학사정보 사이트
+	                	</a>
+	                </h2>
 	            </div>
 	            <div class="w-25 flex-core">
-	                <img src="https://placehold.co/295x70">
+	                <img src="https://placehold.co/295x95">
 	            </div>
 	        </div>	      
 	          
