@@ -62,6 +62,12 @@
 		</table>
 	</div>
 	
+	<div class="row float-box">
+		<div class="float-right">
+		<a href="edit?memberId=${memberDto.memberId}" class="btn btn-neutral ms-10">내 정보 수정</a> 
+		</div>
+	</div>
+	
 </div>
 
 
