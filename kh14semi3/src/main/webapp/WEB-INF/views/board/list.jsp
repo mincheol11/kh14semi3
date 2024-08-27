@@ -4,6 +4,37 @@
 
     <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
     
+<script type="text/javascript">
+
+// 메시지 표시 함수
+    function showMessage(message) {
+        if (message === 'updateSuccess') {
+            alert('수정이 완료되었습니다.');
+        } else if (message === 'deleteSuccess') {
+            alert('삭제가 완료되었습니다.');
+        } else if (message === 'deleteFail') {
+            alert('삭제에 실패하였습니다.');
+        }
+        else if (message === 'writeSuccess') {
+            alert('등록되었습니다.');
+        }
+    }
+
+    // URL의 message 파라미터를 사용하여 메시지를 표시하고, 한 번만 표시되도록 관리
+    var urlParams = new URLSearchParams(window.location.search);
+    var message = urlParams.get('message');
+    if (message) {
+        showMessage(message);
+
+        // 메시지 파라미터 제거 후 페이지 이동
+        urlParams.delete('message');
+        window.history.replaceState(null, '', `${window.location.pathname}?${urlParams}`);
+    }
+
+   
+
+ 
+</script>
 
 
 <div class="container w-800 my-50">
@@ -11,9 +42,16 @@
     <div class="row center">
     <h1>게시글 목록</h1>
     </div>
+    
+    <c:set var="isAdmin" value="${sessionScope.createdRank == '관리자'}" />
+  <c:set var="isLogin" value="${sessionScope.createdUser != null}" />
+    
+    <c:if test="${isLogin && isAdmin}">
     <div class="row right">
     <a href="write" class="btn btn-neutral">신규등록</a>
     </div>
+    </c:if>
+    
     <div class="row center">
     <form action="list" method="get">
 	<select name="column" class="field">
@@ -24,12 +62,7 @@
 	<button type="submit" class="btn btn-positive">검색</button>
 </form>
     </div>
-    <div class="row">
-    ${pageVO.page}/${pageVO.lastBlock}페이지
-    </div>
-    <div class="row">
-    ${pageVO.beginRow}-${pageVO.endRow}/${pageVO.count}개
-    </div>
+    
     
     <div class="row">
     <table class="table table-border table-hover w-800">
@@ -47,7 +80,7 @@
 		<tr>
 			<td >${boardDto.boardNo}</td>
 			
-			<td  align="right">
+			<td align="right">
 			<!-- 제목에 링크를 부여해서 상세 페이지로 이동하도록 구현 -->
 				<a href="detail?boardNo=${boardDto.boardNo}">${boardDto.boardTitle} </a>
 				
