@@ -22,7 +22,7 @@
     <c:otherwise>
         <table class="table table-border table-hover">
                 <tr>
-                    <th width="30%">학과 코드</th>
+                    <th width="30%">학과코드</th>
                     <td>${adminDepartmentDto.departmentCode}</td>
                 </tr>
                 <tr>
@@ -44,4 +44,4 @@
 </div>    
 </body>
 
-
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include> <!-- footer 추가 -->

@@ -2,55 +2,51 @@
     pageEncoding="UTF-8"%>
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include> <!-- hearder 추가 -->
-    
-    
- 
+
   <script type="text/javascript">
+  function checkEdit(){
+		return confirm("정말 수정하시겠습니까?");
+  	}
   
+  $(function(){
+	
+});		
   </script>
 
- <form action="add" method="post" autocomplete="off" class="check-form">
-        <div class="container w-400 my-50">
+ <form action="edit" method="post" autocomplete="off" class="check-form">
+	<div class="container w-400 my-50">
             <div class="row center">
-                <h1>강의 추가</h1>
+                <h2>강의 상세정보 수정</h2>
             </div>
- <!-- 강의 코드 입력 -->               
+            	<div class="row">
+            		<label>강의코드</label>
+                	<input type="hidden" name="lectureCode" value="${lectureDto.lectureCode}">
+                	<div class="field w-100">${lectureDto.lectureCode}</div>
+<!-- 학과코드 입력 -->
 			<div class="row">
-                <label>강의 코드<i class="fa-solid fa-asterisk red"></i></label>
-                    <input type="text" name="lectureCode" 
-                        class="field w-100" placeholder="ex)l01">
-                <div class="success-feedback 00b894">올바른 강의 코드입니다.</div>
-                <div class="fail-feedback d63031">코드는 앞 영문 소문자 'l'로 시작하며,다음 숫자를 2~3자로 작성해주세요.</div>
-                <div class="fail2-feedback d63031">이미 사용중인 코드입니다.</div>
-			</div>
-<!-- 학과 코드 입력 중복가능-->
-			<div class="row">
-                <label>학과 코드<i class="fa-solid fa-asterisk red"></i></label>
-                      <input type="text" name="lectureDepartment" 
+                <label>학과코드 <i class="fa-solid fa-asterisk red"></i></label>
+                      <input type="text" name="lecture_department" 
                         class="field w-100" placeholder="ex)d01">
- 				<div class="success-feedback 00b894">올바른 학과 코드입니다.</div>
+ 				<div class="success-feedback 00b894">올바른 학과코드입니다.</div>
                 <div class="fail-feedback d63031">코드는 앞 영문 소문자 'd'로 시작하며,다음 숫자를 2~3자로 작성해주세요.</div>
-                </div>
-<!-- 교수 코드 입력 중복가능-->
+                	</div>
+<!-- 강사코드 입력 -->
 			<div class="row">
-                <label>교수 코드<i class="fa-solid fa-asterisk red"></i></label>
-                      <input type="text" name="lectureProfessor" 
+                <label>강사코드 <i class="fa-solid fa-asterisk red"></i></label>
+                      <input type="text" name="lecture_professor" 
                         class="field w-100" placeholder="ex)prof001">
- 				<div class="success-feedback 00b894">올바른 교수 코드입니다.</div>
+ 				<div class="success-feedback 00b894">올바른 학과코드입니다.</div>
                 <div class="fail-feedback d63031">코드는 앞 영문 소문자 'prof'로 시작하며,다음 숫자를 3자로 작성해주세요.</div>
-                </div>
-<!-- 분류 선택-->
+                	</div>
+<!-- 분류 선택 -->
 			<div class="row">
-                <label>분류<i class="fa-solid fa-asterisk red"></i></label>
-                <select name="lectureType" class="field w-100">
-                    <option value="">선택하세요</option>
-                    <option value="전공">전공</option>
-                    <option value="교양">교양</option>
-                    <option value="채플">채플</option>
-                </select>
-                <div class="fail-feedback d63031">반드시 선택해야 합니다</div>
-            </div>
-<!-- 강의명 입력-->
+                <label>강사코드 <i class="fa-solid fa-asterisk red"></i></label>
+                      <input type="text" name="lecture_professor" 
+                        class="field w-100" placeholder="ex)prof001">
+ 				<div class="success-feedback 00b894">올바른 학과코드입니다.</div>
+                <div class="fail-feedback d63031">코드는 앞 영문 소문자 'prof'로 시작하며,다음 숫자를 3자로 작성해주세요.</div>
+                	</div>
+ <!-- 강의명 입력-->
 			<div class="row">
                 <label>강의 명<i class="fa-solid fa-asterisk red"></i></label>
                       <input type="text" name="lectureName" 
@@ -72,7 +68,7 @@
 				</div> 
 <!-- 강의 수업요일 입력-->
 			<div class="row">
-                <label>강의요일<i class="fa-solid fa-asterisk red"></i></label>
+                <label>강의요일<i class="fa-solid fa-asterisk"></i></label>
                 <select name="lectureDay" class="field w-100">
                     <option value="">선택하세요</option>
                     <option value="월요일">월요일</option>
@@ -100,15 +96,12 @@
                         class="field w-100" placeholder="인원">
  				<div class="success-feedback 00b894">올바른 입력입니다.</div>
                 <div class="fail-feedback d63031">숫자만을 입력하세요.</div>
-                </div>
-<!-- 전송버튼 -->
-            <div class="row">
-                <button type="submit" class="btn btn-positive w-100" >
-                   <i class="fa-solid fa-landmark"></i>
-                   학과개설
-                </button>
+                </div>               	
+				 <div class="row mt-40">
+                	<button class="btn btn-positive w-100" onclick="return checkEdit()" >수정하기</button>
+            	</div>
             </div>
-        </div>
-    </form>
+	</div>
+</form>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include> <!-- footer 추가 -->
