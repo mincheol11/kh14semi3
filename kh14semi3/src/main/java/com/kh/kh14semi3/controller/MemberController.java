@@ -3,7 +3,6 @@ package com.kh.kh14semi3.controller;
 import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.kh.kh14semi3.configuration.CustomCertProperties;
 import com.kh.kh14semi3.dao.CertDao;
 import com.kh.kh14semi3.dao.MemberDao;
+import com.kh.kh14semi3.dao.TakeOffDao;
 import com.kh.kh14semi3.dto.CertDto;
 import com.kh.kh14semi3.dto.MemberDto;
+import com.kh.kh14semi3.dto.TakeOffDto;
 import com.kh.kh14semi3.error.TargetNotFoundException;
 import com.kh.kh14semi3.service.EmailService;
 
@@ -31,6 +32,7 @@ import jakarta.servlet.http.HttpSession;
 @RequestMapping("/member")
 
 public class MemberController {
+	
 	@Autowired
 	private PasswordEncoder encoder; 
 	
@@ -179,4 +181,8 @@ public class MemberController {
 	public String resetPwFinish() {
 		return "/WEB-INF/views/member/resetPwFinish.jsp";
 	}
+	
+	
+	
+	
 }
