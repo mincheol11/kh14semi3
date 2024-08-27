@@ -58,6 +58,9 @@
 		<div class="row mt-30">
 			<button class="btn btn-positive w-100">수정하기</button>
 		</div>
+		<div class="row">
+			<a class="btn btn-neutral w-100" type="button" href="detail?memberId=${memberDto.memberId}">뒤로가기</a>
+		</div>
 	</div>
 </form>
 

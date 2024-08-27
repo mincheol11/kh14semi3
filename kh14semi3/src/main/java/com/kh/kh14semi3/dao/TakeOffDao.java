@@ -57,7 +57,7 @@ public class TakeOffDao {
 				+ "takeOff_no, takeOff_type, "
 				+ "takeOff_memo, takeOff_time, takeOff_target "
 				+ ") "
-				+ "values(takeOff_seq.nextval, '제적취소', ?, sysdate, ?)";
+				+ "values(takeOff_seq.nextval, '재학', ?, sysdate, ?)";
 		Object[] data = {takeOffDto.getTakeOffMemo(), takeOffDto.getTakeOffTarget()};
 		jdbcTemplate.update(sql, data);
 	}

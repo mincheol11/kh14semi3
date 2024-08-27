@@ -56,22 +56,26 @@
 						<td>
 							<a class="link link-animation" href="detail?memberId=${memberTakeOffVO.memberId}">상세</a>
 							<a class="link link-animation" href="change?memberId=${memberTakeOffVO.memberId}">수정</a>
+							
 							<c:choose>
 								<c:when test="${memberTakeOffVO.takeOffType == '재학'}">
 									<a class="link link-animation" href="takeOff?takeOffTarget=${memberTakeOffVO.memberId}">휴학</a>
 								</c:when>
-								<c:otherwise>
-									<a class="link link-animation" href="takeOn?takeOffTarget=${memberTakeOffVO.memberId}">재학</a>
-								</c:otherwise>
-							</c:choose>
-							<c:choose>
-								<c:when test="${memberTakeOffVO.takeOffType == '제적'}">
-									<a class="link link-animation" href="blockNo?takeOffTarget=${memberTakeOffVO.memberId}">제적취소</a>
+								<c:when test="${memberTakeOffVO.takeOffType == '휴학'}">
+									<a class="link link-animation" href="takeOn?takeOffTarget=${memberTakeOffVO.memberId}">복학</a>
 								</c:when>
-								<c:otherwise>
-									<a class="link link-animation" href="blockGo?takeOffTarget=${memberTakeOffVO.memberId}">제적</a>
+								<c:when test="${memberTakeOffVO.takeOffType == '제적'}">
+									<a class="link link-animation" href="blockNo?takeOffTarget=${memberTakeOffVO.memberId}">제적해제</a>
+								</c:when>
+								<c:otherwise>									
 								</c:otherwise>
 							</c:choose>
+							
+							
+							<c:if test="${memberTakeOffVO.takeOffType != '제적'}">
+								<a class="link link-animation" href="blockGo?takeOffTarget=${memberTakeOffVO.memberId}">제적</a>
+							</c:if>
+								
 							<a class="link link-animation" href="delete?memberId=${memberTakeOffVO.memberId}">삭제</a>
 						</td>
 					</tr>
