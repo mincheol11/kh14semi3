@@ -21,6 +21,7 @@ import com.kh.kh14semi3.dto.MemberDto;
 import com.kh.kh14semi3.dto.TakeOffDto;
 import com.kh.kh14semi3.error.TargetNotFoundException;
 import com.kh.kh14semi3.service.EmailService;
+import com.kh.kh14semi3.vo.PageVO;
 
 import jakarta.mail.MessagingException;
 import jakarta.servlet.http.Cookie;
@@ -41,16 +42,26 @@ public class MemberController {
 	
 	@Autowired
 	private MemberDao memberDao;
+	
+	@Autowired
+	private CertDao certDao;
+	
+	@Autowired
+	private CustomCertProperties customCertProperties;
+	
+	@Autowired
+	private TakeOffDao takeOffDao;	
 	//로그인
 	@GetMapping("/login")
 	public String login() {
 		return "/WEB-INF/views/member/login.jsp";
 	}
+	
 	@PostMapping("/login")
 	public String login(@RequestParam String memberId,
-								@RequestParam String memberPw,
-								@RequestParam(required = false) String remember,//아이디 저장하기 기능넣을시 활용용
-								HttpSession session, HttpServletResponse response) {
+						@RequestParam String memberPw,
+						@RequestParam(required = false) String remember,//아이디 저장하기 기능넣을시 활용용
+						HttpSession session, HttpServletResponse response) {
 		//1. 아이디에 해당하는 정보(MemberDto)를 불러옴
 		//->없으면 실패
 		//2. MemberDto와 비밀번호를 비교
@@ -70,7 +81,7 @@ public class MemberController {
 		
 		String rawPw = memberDto.getMemberPw(); // 비밀번호 암호화안된것
 		String encPw = encoder.encode(rawPw); // 암호화된 비밀번호
-
+	
 		boolean isValid = encoder.matches(memberPw,encPw);
 		if (!isValid) {
 		    return "redirect:/member/login?error";
@@ -98,11 +109,9 @@ public class MemberController {
 			Cookie ck = new Cookie("saveId", memberId);//쿠키생성
 			ck.setMaxAge(0); //0초=삭제
 			response.addCookie(ck);
-		}
-
-		
+		}		
 		return "redirect:/home/main"; //성공시 메인으로
-}
+	}
 	
 	//로그아웃 필요없으면 주석 처리하세용
 	@RequestMapping("/logout")
@@ -117,9 +126,10 @@ public class MemberController {
 	public String findPw() {
 		return "/WEB-INF/views/member/findPw.jsp";
 	}
+	
 	@PostMapping("/findPw")
 	public String findPw(@RequestParam String memberId,
-									@RequestParam String memberEmail) throws IOException, MessagingException {
+						@RequestParam String memberEmail) throws IOException, MessagingException {
 		
 		//아이디로 회원 정보 조회
 		MemberDto memberDto = memberDao.selectOne(memberId);
@@ -135,22 +145,17 @@ public class MemberController {
 		
 		return "redirect:findPwFinish";
 	}
+	
 	@RequestMapping("/findPwFinish")
 	public String findPwFinish() {
 		return "/WEB-INF/views/member/findPwFinish.jsp";
-	}
-	
-	@Autowired
-	private CertDao certDao;
-	
-	@Autowired
-	private CustomCertProperties customCertProperties;
+	}	
 	
 	//비밀번호 재설정 페이지
 	@GetMapping("/resetPw") 
 	public String resetPw(@ModelAttribute CertDto certDto,
-									@RequestParam String memberId,
-									Model model) {
+						@RequestParam String memberId,
+							Model model) {
 		boolean isValid = certDao.check(certDto, customCertProperties.getExpire());
 		if(isValid) {			
 			model.addAttribute("certDto", certDto);
@@ -161,6 +166,7 @@ public class MemberController {
 			throw new TargetNotFoundException("올바르지 않은 접근");
 		}
 	}
+	
 	@PostMapping("/resetPw")
 	public String resetPw(@ModelAttribute CertDto certDto,
 									@ModelAttribute MemberDto memberDto) {
@@ -177,11 +183,22 @@ public class MemberController {
 				memberDto.getMemberId(), memberDto.getMemberPw());
 		return "redirect:resetPwFinish";
 	}
+	
 	@RequestMapping("/resetPwFinish")
 	public String resetPwFinish() {
 		return "/WEB-INF/views/member/resetPwFinish.jsp";
 	}
 	
+	@RequestMapping("/mypage")
+	public String mypage(HttpSession session, Model model) {
+		String memberId = (String) session.getAttribute("createdUser");
+		MemberDto memberDto = memberDao.selectOne(memberId);
+		model.addAttribute("memberDto", memberDto); // 멤버정보 jsp로 전송
+		TakeOffDto lastDto = takeOffDao.selectLastOne(memberId);
+		model.addAttribute("lastDto", lastDto); // 멤버의 휴복학정보 jsp로 전송
+		System.out.println("memberDto : "+memberDto);
+		return "/WEB-INF/views/member/mypage.jsp";
+	}
 	
 	
 	
