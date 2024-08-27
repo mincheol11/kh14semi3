@@ -106,7 +106,7 @@ createdRank = ${sessionScope.createdRank}
 						<td>${lectureDto.lectureRoom}</td>
 						<td>${lectureDto.lectureRegist}/${lectureDto.lectureCount}</td>						
 						<td>
-							<a href="#" class="link link-animation">성적입력</a>
+							<a href="/lecture/grade/insert?gradeLecture=${lectureDto.lectureCode};" class="link link-animation">성적입력</a>
 						</td>
 					</tr>					
 					</c:forEach>
@@ -122,4 +122,7 @@ createdRank = ${sessionScope.createdRank}
 
 <%-- navigator.jsp에 존재하는 내용을 불러오도록 설정 --%>
 <jsp:include page="/WEB-INF/views/template/navigator.jsp"></jsp:include>
+
+<%-- footer.jsp에 존재하는 내용을 불러오도록 설정 --%>
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
 

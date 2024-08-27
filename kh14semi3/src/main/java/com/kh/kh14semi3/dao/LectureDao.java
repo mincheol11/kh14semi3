@@ -8,8 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.kh14semi3.dto.LectureDto;
 import com.kh.kh14semi3.mapper.LectureMapper;
-import com.kh.kh14semi3.mapper.LectureStudentMapper;
-import com.kh.kh14semi3.vo.LectureStudentVO;
 import com.kh.kh14semi3.vo.PageVO;
 
 @Repository
@@ -20,9 +18,6 @@ public class LectureDao {
 	
 	@Autowired
 	private LectureMapper lectureMapper;
-	
-	@Autowired
-	private LectureStudentMapper lectureStudentMapper;
 	
 	// 강의 등록
 	public void insert(LectureDto lectureDto) {
@@ -44,9 +39,6 @@ public class LectureDao {
 		List<LectureDto> list = jdbcTemplate.query(sql, lectureMapper, data);
 		return list.isEmpty() ? null : list.get(0);
 	}
-	
-	
-	
 	
 	// 페이징 객체를 이용한 목록 및 검색 메소드
 	public List<LectureDto> selectListByPaging(PageVO pageVO){
@@ -169,19 +161,6 @@ public class LectureDao {
 		}
 	}
 	
-	public List<LectureStudentVO> studentList(LectureStudentVO lectureStudentVO, String lectureCde) {
-		String sql = "select distinct m.member_name "
-				+ "from lecture l "
-					+ "join regstration r on l.lecture_code = r.registration_lecture "
-						+ "join student s on r.registration_student = s.student_id "
-							+ "join member m on s.student_id = m.member_id "
-								+ "where l.lecture_code = ?";  
-		Object[] data = {
-				lectureStudentVO.getLectureCode()
-		};
-		
-		return jdbcTemplate.query(sql, lectureStudentMapper, data);
-	}
 	
 
 }

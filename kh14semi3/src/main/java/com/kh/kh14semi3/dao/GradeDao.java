@@ -7,8 +7,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.kh14semi3.dto.GradeDto;
-import com.kh.kh14semi3.dto.LectureDto;
 import com.kh.kh14semi3.mapper.GradeMapper;
+import com.kh.kh14semi3.mapper.GradeStudentMapper;
+import com.kh.kh14semi3.vo.GradeStudentVO;
 import com.kh.kh14semi3.vo.PageVO;
 
 @Repository
@@ -18,6 +19,8 @@ public class GradeDao {
 	private JdbcTemplate jdbcTemplate;
 	@Autowired
 	private GradeMapper gradeMapper;
+	@Autowired
+	private GradeStudentMapper gradeStudentMapper;
 	
 	// 시퀀스 생성 구문
 	public int sequence() {
@@ -194,5 +197,15 @@ public class GradeDao {
 		return jdbcTemplate.queryForObject(sql, int.class, data);
 	}
 	
+	// 특정 강의를 듣는 학생 목록
+		public List<GradeStudentVO> studentList(GradeStudentVO gradeStudentVO, String gradeLecture) {
+			String sql = "select member_name, grade_student "
+								+ "from member join grade "
+									+ "on member_id=grade_student "
+										+ "where grade_lecture=?";
+			Object[] data = {gradeLecture};
+			return jdbcTemplate.query(sql, gradeStudentMapper, data);
+		}
+		
 
 }
