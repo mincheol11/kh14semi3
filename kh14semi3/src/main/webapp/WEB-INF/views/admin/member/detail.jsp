@@ -53,7 +53,7 @@
 				<c:if test="${memberDto.memberRank=='관리자'}">
 				<th>입사일</th>
 				</c:if>				
-				<td><fmt:formatDate value="${memberDto.memberJoin}"pattern="yyyy-MM-dd E HH:mm:ss" /></td>
+				<td><fmt:formatDate value="${memberDto.memberJoin}" pattern="yyyy-MM-dd E" /></td>
 			</tr>
 		</table>
 	</div>
