@@ -106,7 +106,7 @@ createdRank = ${sessionScope.createdRank}
 						<td>${lectureDto.lectureRoom}</td>
 						<td>${lectureDto.lectureRegist}/${lectureDto.lectureCount}</td>						
 						<td>
-							<a href="/lecture/grade/insert?gradeLecture=${lectureDto.lectureCode};" class="link link-animation">성적입력</a>
+							<a href="/lecture/grade/insert?lectureCode=${lectureDto.lectureCode}&gradeLecture=${lectureDto.lectureCode}" class="link link-animation">성적입력</a>
 						</td>
 					</tr>					
 					</c:forEach>

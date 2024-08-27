@@ -1,9 +1,12 @@
 package com.kh.kh14semi3.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -69,17 +72,28 @@ public class LectureController {
 		return "/WEB-INF/views/lecture/grade.jsp";
 	}
 	
+	// 학생 목록
+	@PostMapping("/student/list")
+	public List<GradeStudentVO> list(@RequestParam String gradeLecture) {
+	    return gradeDao.studentList(gradeLecture);
+	}
+			
 	// 성적 입력 
 	@RequestMapping("/grade/insert")
 	public String gradeInsert(
-			@ModelAttribute("gradeStudentVO") GradeStudentVO gradeStudentVO,
-			@RequestParam String gradeLecture,
-			Model model) {
+					@ModelAttribute("gradeStudentVO") GradeStudentVO gradeStudentVO,
+					@RequestParam String lectureCode,
+					@RequestParam String gradeLecture,
+					Model model) {
+		LectureDto lectureDto = lectureDao.selectOne(lectureCode);
+		model.addAttribute("lectureDto", lectureDto);
+			
 		GradeDto gradeDto = gradeDao.selectOne(gradeLecture);
 		model.addAttribute("gradeDto", gradeDto);
-		model.addAttribute("studentList", gradeDao.studentList(gradeStudentVO, gradeLecture));
+		model.addAttribute("studentList", gradeDao.studentList(gradeLecture));
 		
 		return "/WEB-INF/views/lecture/gradeInsert.jsp";
 	}
+	
 	
 }
