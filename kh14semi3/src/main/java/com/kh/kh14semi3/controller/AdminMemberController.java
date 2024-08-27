@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.kh14semi3.dao.MemberDao;
+import com.kh.kh14semi3.dao.TakeOffDao;
 import com.kh.kh14semi3.dto.MemberDto;
+import com.kh.kh14semi3.dto.TakeOffDto;
 import com.kh.kh14semi3.error.TargetNotFoundException;
 import com.kh.kh14semi3.vo.PageVO;
 
@@ -20,6 +22,9 @@ public class AdminMemberController {
 		
 	@Autowired
 	private MemberDao memberDao;
+	
+	@Autowired
+	private TakeOffDao takeOffDao;
 	
 	
 	//회원 관리 목록
@@ -52,7 +57,7 @@ public class AdminMemberController {
 		return "redirect:list";
 	}
 	
-	//관리자 - 회원가입
+	//관리자 - 회원가입(멤버테이블)
 	@GetMapping("/join")
 	public String join() {
 		return "/WEB-INF/views/admin/member/join.jsp";
@@ -61,8 +66,21 @@ public class AdminMemberController {
 	@PostMapping("/join")
 	public String join(@ModelAttribute MemberDto memberDto) {
 		memberDao.insert(memberDto);
-		return "redirect:list";
+		return "redirect:joinR?memberId="+memberDto.getMemberId()+"&memberRank="+memberDto.getMemberRank();
 	}
+	
+	//관리자 - 회원가입(하위테이블)
+	@GetMapping("/joinR")
+	public String joinR() {
+		return "/WEB-INF/views/admin/member/joinR.jsp";
+	}
+	
+//	@PostMapping("/joinR")
+//	public String joinR(@RequestParam String memberId,
+//							@RequestParam String memberRank) {
+//		
+//	}
+	
 	
 	//관리자 - 회원 정보 수정
 	@GetMapping("/change")
@@ -81,5 +99,46 @@ public class AdminMemberController {
 			throw new TargetNotFoundException("존재하지 않는 회원ID입니다.");
 		return "redirect:detail?memberId="+memberDto.getMemberId();
 	}
+	
+	//휴학기능
+	@GetMapping("/takeOff")
+	public String takeOff(@RequestParam String takeOffTarget) {
+		MemberDto memberDto = memberDao.selectOne(takeOffTarget);
+		if(memberDto == null)
+			throw new TargetNotFoundException("존재하지 않는 학생입니다.");
+		return "/WEB-INF/views/admin/member/takeOff.jsp";
+	}
+	
+	@PostMapping("/takeOff")
+	public String takeOff(@ModelAttribute TakeOffDto takeOffDto) {
+		//마지막 이력 조회
+		TakeOffDto lastDto = takeOffDao.selectLastOne(takeOffDto.getTakeOffTarget());
+		if(lastDto == null || lastDto.getTakeOffType().equals("복학")) {
+			takeOffDao.insertTakeOff(takeOffDto);
+		}
+		return "redirect:detail?memberId="+takeOffDto.getTakeOffTarget();
+	}
+	
+	//복학 기능
+	@GetMapping("/takeOn")
+	public String takeOn(@RequestParam String takeOffTarget) {
+		MemberDto memberDto = memberDao.selectOne(takeOffTarget);
+		if(memberDto == null)
+			throw new TargetNotFoundException("존재하지 않는 학생입니다.");
+		return "/WEB-INF/views/admin/member/takeOn.jsp";
+	}
+	
+	@PostMapping("/takeOn")
+	public String takeOn(@ModelAttribute TakeOffDto takeOffDto) {
+		TakeOffDto lastDto = takeOffDao.selectLastOne(takeOffDto.getTakeOffTarget());
+		if(lastDto != null && lastDto.getTakeOffType().equals("휴학")) {
+			takeOffDao.insertTakeOn(takeOffDto);
+		}
+		return "redirect:detail?memberId="+takeOffDto.getTakeOffTarget();
+	}
+	
+	
+	
+	
 	
 }
