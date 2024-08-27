@@ -56,11 +56,11 @@
 							<a class="link link-animation" href="detail?memberId=${memberTakeOffVO.memberId}">상세</a>
 							<a class="link link-animation" href="change?memberId=${memberTakeOffVO.memberId}">수정</a>
 							<c:choose>
-								<c:when test="${memberTakeOffVO.takeOffType == '복학'}">
+								<c:when test="${memberTakeOffVO.takeOffType == '재학'}">
 									<a class="link link-animation" href="takeOff?takeOffTarget=${memberTakeOffVO.memberId}">휴학</a>
 								</c:when>
 								<c:otherwise>
-									<a class="link link-animation" href="takeOn?takeOffTarget=${memberTakeOffVO.memberId}">복학</a>
+									<a class="link link-animation" href="takeOn?takeOffTarget=${memberTakeOffVO.memberId}">재학</a>
 								</c:otherwise>
 							</c:choose>
 							<a class="link link-animation" href="delete?memberId=${memberTakeOffVO.memberId}">삭제</a>
@@ -75,3 +75,5 @@
 		<jsp:include page="/WEB-INF/views/template/navigator.jsp"/>
 	</div>
 </div>
+
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

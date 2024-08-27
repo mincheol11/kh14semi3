@@ -29,13 +29,13 @@ public class TakeOffDao {
 		jdbcTemplate.update(sql, data);
 	}
 
-	//복학 등록
+	//재학 등록
 	public void insertTakeOn(TakeOffDto takeOffDto) {
 		String sql = "insert into takeOff("
 				+ "takeOff_no, takeOff_type, "
 				+ "takeOff_memo, takeOff_time, takeOff_target "
 				+ ") "
-				+ "values(takeOff_seq.nextval, '복학', ?, sysdate, ?)";
+				+ "values(takeOff_seq.nextval, '재학', ?, sysdate, ?)";
 		Object[] data = {takeOffDto.getTakeOffMemo(), takeOffDto.getTakeOffTarget()};
 		jdbcTemplate.update(sql, data);
 	}
