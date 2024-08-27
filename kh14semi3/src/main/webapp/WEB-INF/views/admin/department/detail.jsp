@@ -34,7 +34,7 @@
     </c:choose>
     
      <div class="row center">
-     <a href="expand" class="btn btn-neutral w-20">학과개설</a>
+     <a href="expand" class="btn btn-neutral w-20">추가 학과개설</a>
     <a href="list" class="btn btn-neutral w-20">목록이동</a>
     <c:if test="${adminDepartmentDto != null}">
     <a href="edit?departmentCode=${adminDepartmentDto.departmentCode}" class="btn btn-neutral w-20">학과 정보 수정</a>

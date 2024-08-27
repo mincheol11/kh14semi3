@@ -15,7 +15,7 @@ $(document).ready(function() {
 });
 </script>
 
-    <div class="container w-600 my-50">
+    <div class="container w-700 my-50">
         <div class="row center">
             <h1>학과 시스템 관리</h1>
         </div>
@@ -24,6 +24,7 @@ $(document).ready(function() {
         <div class="row right">
 		<a href="expand" class="btn btn-neutral w-20">학과개설</a>
 		</div>
+		<div class="row right">
             <select name="column" class="field">
             <option value="department_code">학과코드</option>
 		<c:choose>
@@ -37,6 +38,7 @@ $(document).ready(function() {
             </select>
         <input type="text" name="keyword" value="${param.keyword}" class="field w-60">
         <button type="submit" class="btn btn-positive w-20"><i class="fa-solid fa-magnifying-glass">검색</i></button>
+            </div>
         </form>
     </div>
                 

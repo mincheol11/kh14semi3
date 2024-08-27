@@ -19,12 +19,12 @@ $(lecture).ready(function() {
         <div class="row center">
             <h1>강의 시스템 관리</h1>
         </div>
-    <div class="row center">
+    <div class="row right">
         <form action="list" method="get" autocomplete="off">
         <div class="row right">
-		<a href="add" class="btn btn-neutral w-20">학과개설</a>
+		<a href="add" class="btn btn-neutral w-25">학과개설</a>
 		</div>
-            <select name="column" class="field">
+            <select name="column" class="field w-10">
             <option value="lecture_code">강의코드</option>
             
 		<c:choose>
@@ -65,7 +65,7 @@ $(lecture).ready(function() {
 		
             </select>
         <input type="text" name="keyword" value="${param.keyword}" class="field w-60">
-        <button type="submit" class="btn btn-positive w-20"><i class="fa-solid fa-magnifying-glass">검색</i></button>
+        <button type="submit" class="btn btn-positive w-25"><i class="fa-solid fa-magnifying-glass">검색</i></button>
         </form>
     </div>
                 

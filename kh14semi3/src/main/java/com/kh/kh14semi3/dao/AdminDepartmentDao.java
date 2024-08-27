@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.kh14semi3.dto.AdminDepartmentDto;
+import com.kh.kh14semi3.dto.LectureDto;
 import com.kh.kh14semi3.mapper.AdminDepartmentMapper;
 import com.kh.kh14semi3.vo.PageVO;
 
@@ -123,7 +124,8 @@ public class AdminDepartmentDao {
 		Object[] data= {departmentName};
 		List<AdminDepartmentDto>list = jdbcTemplate.query(sql, adminDepartmentMapper, data);
 		return list.isEmpty()? null:list.get(0);
-	}	
+	}
+
 	
 
 
