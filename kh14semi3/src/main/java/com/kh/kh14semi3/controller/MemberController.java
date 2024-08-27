@@ -102,7 +102,7 @@ public class MemberController {
 		return "redirect:/home/main"; //성공시 메인으로
 }
 	
-	//로그아웃
+	//로그아웃 필요없으면 주석 처리하세용
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
 		session.removeAttribute("createdUser");
@@ -119,7 +119,7 @@ public class MemberController {
 	public String findPw(@RequestParam String memberId,
 									@RequestParam String memberEmail) throws IOException, MessagingException {
 		
-		//회원 정보를 조회
+		//아이디로 회원 정보 조회
 		MemberDto memberDto = memberDao.selectOne(memberId);
 		if(memberDto == null) {
 			return"redirect:findPw?error";
@@ -145,7 +145,7 @@ public class MemberController {
 	private CustomCertProperties customCertProperties;
 	
 	//비밀번호 재설정 페이지
-	@GetMapping("/resetPw")
+	@GetMapping("/resetPw") 
 	public String resetPw(@ModelAttribute CertDto certDto,
 									@RequestParam String memberId,
 									Model model) {

@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
     <script type="text/javascript">
-	//class="check-form" 이 전송될 때 이메일 때문에 시간이 오래 걸리므로
+	
 	//전송 시작을 누르면 무언가 진행되고 있는 것처럼 표시
 	$(function(){
 		$(".check-form").submit(function(){
@@ -31,13 +31,13 @@
 			<i class="fa-regular fa-envelope"></i>
 			<span>비밀번호 재설정 메일 발송</span>
 		</button>
-	</div>
-	</form>
-	
 	<c:if test="${param.error != null}">
 	<div class="row center">
 		<b class="red">아이디 또는 이메일이 일치하지 않습니다</b>
 	</div>
 	</c:if>
+	</div>
+	</form>
+	
 </div>
 		
