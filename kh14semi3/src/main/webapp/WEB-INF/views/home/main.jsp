@@ -1,17 +1,63 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<html>
-<head>
+<%-- header.jsp에 존재하는 내용을 불러오도록 설정 --%>
+<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-<title>학사정보메인페이지</title>
-</head>
-<body>
-	<h1>확인용 메인페이지</h1>
+<div class="right">
 	createdUser = ${sessionScope.createdUser},
 	createdRank = ${sessionScope.createdRank}
-	<a href="/registration/list">수강신청이동</a>
-	<a href="/lecture/list">강의목록이동</a>
-</body>
-</html>
+</div>
+
+<div class="container w-1000 mb-30">
+	<div class="row flex-box">
+		<div class="w-50 mx-10 profile">
+			<div class="row center">
+				<h2>확인용</h2>
+			</div>
+			<div class="row center">
+				<h2>확인용</h2>
+			</div>
+		</div>
+		<div class="w-50 mx-10">
+			<div class="row center">
+				<h2>확인용</h2>
+			</div>
+			<div class="row center">
+				<h2>확인용</h2>
+			</div>
+		</div>
+	</div>
+	
+	<hr>
+	
+	<div class="row flex-box">
+		<div class="w-50 mx-10 profile">
+			<div class="row center">
+				<h2>확인용</h2>
+			</div>
+			<div class="row center">
+				<h2>확인용</h2>
+			</div>
+		</div>
+		<div class="w-50 mx-10" >
+			<div class="row center">
+				<h2>확인용</h2>
+			</div>
+			<div class="row center">
+				<h2>확인용</h2>
+			</div>
+			<%-- <div class="row center" style="max-width:300px !important;">
+				schedule.jsp에 존재하는 내용을 불러오도록 설정
+				<jsp:include page="/WEB-INF/views/schedule/list.jsp"></jsp:include>
+			</div> --%>
+		</div>
+	</div>
+	
+</div>
+
+<%-- footer.jsp에 존재하는 내용을 불러오도록 설정 --%>
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>	
+	

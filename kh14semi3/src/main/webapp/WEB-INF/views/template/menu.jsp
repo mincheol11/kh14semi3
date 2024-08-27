@@ -71,7 +71,7 @@
 </script>
 
 
-<div class="w-200 me-30 profile rightline" style="background-color:80808020;">
+<div class="w-200 me-30 profile" style="background-color:80808020;">
 	<!-- 	
 		메뉴(Navbar)
 		- (중요) 템플릿 페이지의 모든 경로는 전부 다 절대경로를 써야한다
@@ -170,7 +170,7 @@
 	                    <a href="#">학과 시스템 관리</a>
 	                    <ul class="submenu">
 	                        <li><a href="/admin/department/list">학과 목록</a></li>
-	                        <li><a href="/admin/department/expand">관리자 하위2</a></li>
+	                        <li><a href="/admin/department/expand">학과 개설</a></li>
 	                    </ul>
 	                </li>
 	            </ul>

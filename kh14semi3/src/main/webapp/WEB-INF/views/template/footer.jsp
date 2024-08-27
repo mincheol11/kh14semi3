@@ -18,6 +18,8 @@
 			        </div>
 			        <div class="row">
 			            이사장 : 박이사장
+		            </div>
+		            <div class="row">
 			            총장 : 김총장
 			        </div>
 			        <div class="row">
