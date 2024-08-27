@@ -100,7 +100,7 @@ public class MemberDao {
 			return jdbcTemplate.queryForObject(sql, int.class, data);
 		}
 		else {
-			String sql = "select count(*) from registration";
+			String sql = "select count(*) from member";
 			return jdbcTemplate.queryForObject(sql, int.class);
 		}
 	}
