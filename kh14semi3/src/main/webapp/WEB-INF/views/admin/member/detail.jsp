@@ -23,7 +23,7 @@
 				<td>${memberDto.memberName}</td>
 			</tr>
 			<tr>
-				<th>직급</th>
+				<th>구분</th>
 				<td>${memberDto.memberRank}</td>
 			</tr>
 			<tr>
@@ -44,14 +44,16 @@
 					${memberDto.memberAddress2}</td>
 			</tr>
 			<tr>
-				<th>가입일</th>
-				<td><fmt:formatDate value="${memberDto.memberJoin}"
-						pattern="yyyy-MM-dd E HH:mm:ss" /></td>
-			</tr>
-			<tr>
-				<th>최근접속일</th>
-				<td><fmt:formatDate value="${memberDto.memberLogin}"
-						pattern="yyyy-MM-dd E HH:mm:ss" /></td>
+				<c:if test="${memberDto.memberRank=='학생'}">
+				<th>입학일</th>
+				</c:if>
+				<c:if test="${memberDto.memberRank=='교수'}">
+				<th>등록일</th>
+				</c:if>
+				<c:if test="${memberDto.memberRank=='관리자'}">
+				<th>입사일</th>
+				</c:if>				
+				<td><fmt:formatDate value="${memberDto.memberJoin}"pattern="yyyy-MM-dd E HH:mm:ss" /></td>
 			</tr>
 		</table>
 	</div>
