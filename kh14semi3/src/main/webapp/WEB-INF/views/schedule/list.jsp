@@ -5,7 +5,7 @@
 <script type="text/javascript">
 document.addEventListener('DOMContentLoaded', function() {
     var modal = document.getElementById("scheduleModal");
-    var span = document.getElementsByClassName("close")[0];
+    var span = document.getElementsByClassName("scheduleModalClose")[0];
 
     // 모달 열기
     function openModal(url) {
@@ -43,46 +43,81 @@ document.addEventListener('DOMContentLoaded', function() {
             openModal(url);
         });
     });
-});
 
-function changeMonth(direction) {
-    var currentYear = parseInt('${currentYear}');
-    var currentMonth = parseInt('${currentMonth}');
-    var currentPage = parseInt('${currentPage}') || 1; // 기본값을 1로 설정
-
-    // 월을 이동
-    currentMonth += direction;
-
-    // 월과 연도 조정
-    if (currentMonth > 12) {
-        currentMonth = 1;
-        currentYear++;
-    } else if (currentMonth < 1) {
-        currentMonth = 12;
-        currentYear--;
+    // 메시지 표시 함수
+    function showMessage(message) {
+        if (message === 'updateSuccess') {
+            alert('수정이 완료되었습니다.');
+        } else if (message === 'deleteSuccess') {
+            alert('삭제가 완료되었습니다.');
+        } else if (message === 'deleteFail') {
+            alert('삭제에 실패하였습니다.');
+        }
+        else if (message === 'addSuccess') {
+            alert('등록되었습니다.');
+        }
     }
 
-    // URL 파라미터 업데이트
-    var url = new URL(window.location.href);
-    url.searchParams.set('pageYear', currentYear);
-    url.searchParams.set('pageMonth', currentMonth);
+    // URL의 message 파라미터를 사용하여 메시지를 표시하고, 한 번만 표시되도록 관리
+    var urlParams = new URLSearchParams(window.location.search);
+    var message = urlParams.get('message');
+    if (message) {
+        showMessage(message);
 
-    // 페이지 번호 조정
-    var totalPages = parseInt('${totalPages}') || 1; // 페이지 수를 모델에서 가져와야 함
-    if (currentPage > totalPages) currentPage = totalPages; // 유효한 페이지로 설정
-    url.searchParams.set('page', currentPage);
+        // 메시지 파라미터 제거 후 페이지 이동
+        urlParams.delete('message');
+        window.history.replaceState(null, '', `${window.location.pathname}?${urlParams}`);
+    }
 
-    // 페이지 새로 고침
-    window.location.href = url.toString();
-}
+    // 페이지 이동 함수
+    function changeMonth(direction) {
+        var currentYear = parseInt('${currentYear}');
+        var currentMonth = parseInt('${currentMonth}');
+        var currentPage = parseInt('${currentPage}') || 1; // 기본값을 1로 설정
+
+        // 월을 이동
+        currentMonth += direction;
+
+        // 월과 연도 조정
+        if (currentMonth > 12) {
+            currentMonth = 1;
+            currentYear++;
+        } else if (currentMonth < 1) {
+            currentMonth = 12;
+            currentYear--;
+        }
+
+        // URL 파라미터 업데이트
+        var url = new URL(window.location.href);
+        url.searchParams.set('pageYear', currentYear);
+        url.searchParams.set('pageMonth', currentMonth);
+
+        // 페이지 번호 조정
+        var totalPages = parseInt('${totalPages}') || 1; // 페이지 수를 모델에서 가져와야 함
+        if (currentPage > totalPages) currentPage = totalPages; // 유효한 페이지로 설정
+        url.searchParams.set('page', currentPage);
+
+        // 페이지 새로 고침
+        window.location.href = url.toString();
+    }
+
+    // 월 이동 버튼 클릭 시 페이지 이동
+    document.querySelectorAll('.nav-buttons button').forEach(function(button) {
+        button.addEventListener('click', function(event) {
+            var direction = this.getAttribute('data-icon') === '‹' ? -1 : 1;
+            changeMonth(direction);
+        });
+    });
+});
 </script>
+
 
 <style>
 /* 모달의 기본 스타일링 */
 .modal {
-  display: none; /* 모달은 기본적으로 보이지 않도록 설정 */
+  display: none;  /* 모달은 기본적으로 보이지 않도록 설정 */
   position: fixed;
-  z-index: 1;
+  z-index: 1000; /* 모달의 z-index 값을 높여서 목록 위에 표시되도록 설정 */
   left: 0;
   top: 0;
   width: 100%;
@@ -96,23 +131,23 @@ function changeMonth(direction) {
   background-color: #fefefe;
   margin: 10% auto; /* 상단 여백을 줄여서 중앙에 더 가까이 위치 */
   padding: 20px;
-  border: 1px solid #888;
-  width: 50%; /* 모달 너비를 줄이기 */
-  max-width: 900px; /* 최대 너비를 설정 */
+  border: 1px solid rgb(0, 168, 255); /* 두꺼운 하늘색 테두리 추가 */
+  width: 53.5%; /* 모달 너비를 증가시킴 */
+  max-width: 1200px; /* 최대 너비를 1200px로 증가시킴 */
   box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* 그림자 추가 */
+  z-index: 1001; /* 모달 콘텐츠의 z-index 값을 모달보다 더 높게 설정 */
 }
 
 /* 닫기 버튼 스타일 */
-.close {
+.scheduleModalClose {
   color: #aaa;
   float: right;
   font-size: 24px; /* 폰트 크기 줄이기 */
   font-weight: bold;
 }
 
-.close:hover,
-.close:focus {
-
+.scheduleModalClose:hover,
+.scheduleModalClose:focus {
   color: black;
   text-decoration: none;
   cursor: pointer;
@@ -153,20 +188,18 @@ function changeMonth(direction) {
 }
 
 /* 링크에 마우스를 올렸을 때 스타일 변경 */
-.schedule-title:hover {
-  color: red; /* 빨간색으로 변경 */
-  text-decoration: underline; /* 선택 사항: 밑줄 추가 */
+.schedule-title {
+  color: black;  /* 기본 텍스트 색상을 검은색으로 설정 */
+  text-decoration: none; /* 기본 상태에서 밑줄 제거 */
+  transition: transform 0.3s; /* 확대 효과에 부드러운 전환 추가 */
 }
-.table.table-hover > tbody > tr:hover
-{
+
+.table.table-hover > tbody > tr:hover {
     background-color: rgb(255, 255, 255)!important;
-    
 }
-
-
 </style>
 
-<div class="container w-800 my-50">
+<div class="container w-800">
   <div class="row left">
     <h1>학사 일정</h1>
   </div>
@@ -200,7 +233,7 @@ function changeMonth(direction) {
           <c:when test="${not empty scheduleList}">
             <c:forEach var="scheduleDto" items="${scheduleList}">
             <tr>
-              <td class="schedule-wtime" >${scheduleDto.scheduleWtime}</td> <!-- schedule-wtime 클래스 추가 -->
+              <td class="schedule-wtime">${scheduleDto.scheduleWtime}</td> <!-- schedule-wtime 클래스 추가 -->
               <td align="right">
                 <a href="detail?scheduleNo=${scheduleDto.scheduleNo}" class="schedule-title modal-trigger">${scheduleDto.scheduleTitle}</a> <!-- schedule-title 클래스 추가 -->
               </td>
@@ -221,7 +254,7 @@ function changeMonth(direction) {
 <!-- 모달 구조 추가 -->
 <div id="scheduleModal" class="modal">
   <div class="modal-content">
-    <span class="close">&times;</span>
+    <span class="scheduleModalClose">&times;</span>
     <div id="modalBody">
       <!-- 상세 페이지 내용이 여기에 로드됩니다 -->
     </div>
