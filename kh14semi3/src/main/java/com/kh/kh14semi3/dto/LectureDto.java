@@ -11,10 +11,10 @@ public class LectureDto {
 	private String lectureType;
 	private String lectureName;
 	private String lectureTime;
-	private int lectureDuration;
+	private Integer lectureDuration;
 	private String lectureDay;
 	private String lectureRoom;
-	private int lectureCount;
-	private int lectureRegist;
+	private Integer lectureCount;
+	private Integer lectureRegist;
 	
 }
