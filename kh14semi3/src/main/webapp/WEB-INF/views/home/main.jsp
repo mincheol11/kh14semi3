@@ -10,7 +10,167 @@
 .profile{
 	min-height:150px;
 }
+#mypage-preview{
+	display: flex;
+	margin-top: 20px;	
+	min-width: 300px;
+}
+#mypage-preview img{
+	border-radius: 25%;
+}
+.preview{
+	background-color : white;
+	border-radius: 30px;
+}
+#boardTable td{
+	padding-left:30px;
+	padding-right:30px;
+}
+#lectureTable td{
+	padding-left:10px;
+	padding-right:10px;
+}
+#scheduleTable td{
+	padding-left:30px;
+	padding-right:30px;
+}
 </style>
+
+<script type="text/javascript">
+	$(function(){
+		
+		// mypage
+		$(document).ready(function() {
+			$.ajax({
+				url: '/rest/home/main/mypage-preview',
+				method: 'GET',
+				success: function(data) {					
+					$('#memberId').text("학번 : "+data.memberId);
+					$('#memberName').text(data.memberName);
+					$('#memberRank').text("구분 : "+data.memberRank);
+					/* $('#takeOffType').text(data.takeOffType); */
+					$('#memberJoin').text("최근접속일 : "+data.memberJoin);
+				},
+				error: function() {
+				    $('#mypage-preview').html('<p>Error loading preview</p>');
+				}
+			});
+		});
+		
+		// board
+		function loadBoardList() {
+            $.ajax({
+                url: '/rest/home/main/board-preview',
+                method: 'GET',
+                dataType: 'json',
+                success: function(response) {
+                    var boardList = response.boardList;
+                    
+                    // Clear the existing content
+                    $('#boardTable tbody').empty();
+
+                    // Populate the table with new data
+                    $.each(boardList, function(index, board) {
+						if(index<3){
+	                        $('#boardTable tbody').append(
+	                            '<tr>' +
+	                            '<td>' + ' [' + board.boardType + '] ' + board.boardTitle + '</td>' +
+	                            '<td>' + board.boardWtime + '</td>' +
+	                            '</tr>'
+	                        );							
+						}
+                    });
+
+                    // Update pagination controls if needed
+                    // $('#pagination').html('...'); // Update pagination HTML
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error fetching data:', status, error);
+                }
+            });
+        }
+
+        // Load board list when the page loads
+        loadBoardList();
+		
+		// lecture
+		function loadLectureList() {
+     		$.ajax({
+          		url: '/rest/home/main/lecture-preview',
+          		method: 'GET',
+          		dataType: 'json',
+          		success: function(response) {
+           			var LectureList = response.lectureList;
+	              	// Clear the existing content
+	              	$('#lectureTable tbody').empty();
+	
+	              	// Populate the table with new data
+	              	$.each(LectureList, function(index, lecture) {
+						if(index<3){
+							$('#lectureTable tbody').append(
+								'<tr>' +
+	                            '<td>' + lecture.lectureDepartment + '</td>' +
+	                            '<td>' + lecture.lectureProfessor + '</td>' +
+	                            '<td>' + lecture.lectureType + '</td>' +
+	                            '<td>' + lecture.lectureName + '[' + lecture.lectureCode + ']' + '</td>' +
+	                            '<td>' + lecture.lectureTime + '</td>' +
+	                            '<td>' + lecture.lectureRoom + '</td>' +
+                            	'</tr>'
+							);							
+						}
+					});
+
+					// Update pagination controls if needed
+					// $('#pagination').html('...'); // Update pagination HTML
+				},
+				error: function(xhr, status, error) {
+					console.error('Error fetching data:', status, error);
+				}
+			});
+		}
+	
+      	// Load lecture list when the page loads
+      	loadLectureList();
+      	
+		// schedule
+		function loadScheduleList() {
+     		$.ajax({
+          		url: '/rest/home/main/schedule-preview',
+          		method: 'GET',
+          		dataType: 'json',
+          		success: function(response) {
+           			var ScheduleList = response.scheduleList;
+           			console.log(response);
+	              	// Clear the existing content
+	              	$('#scheduleTable tbody').empty();
+	
+	              	// Populate the table with new data
+	              	$.each(ScheduleList, function(index, schedule) {
+						if(index<3){
+							$('#scheduleTable tbody').append(
+								'<tr>' +
+								'<td>' + ' [' + schedule.scheduleType + '] ' + schedule.scheduleTitle + '</td>' +
+	                            '<td>' + schedule.scheduleWtime + '</td>' +
+                            	'</tr>'
+							);							
+						}
+					});
+
+					// Update pagination controls if needed
+					// $('#pagination').html('...'); // Update pagination HTML
+				},
+				error: function(xhr, status, error) {
+					console.error('Error fetching data:', status, error);
+				}
+			});
+		}
+      	
+		// Load schedule list when the page loads
+      	loadScheduleList();
+      	
+        
+	});
+</script>
 
 <div class="right">
 	createdUser = ${sessionScope.createdUser},
@@ -18,32 +178,79 @@
 </div>
 
 <div class="container w-1000 mb-30">
+
 	<div class="row flex-box">
-		<div class="w-50 mx-10 profile flex-core">
-			<div class="row center">
-				<h2>마이페이지</h2>
+		
+		<div class="w-50 mx-10 flex-core preview">
+			<div class="row">			
+				<h2 class="left ps-50 my-0">개인정보</h2>
+				<div id="mypage-preview" class="flex-box mt-10">
+					<div id="preview-text" class="w-40 center">
+						<img src="https://placehold.co/100x100">
+						<p id="memberName" class="my-0"></p>					
+					</div>
+					<div id="preview-text" class="w-60 ms-10">
+						<p id="memberId"></p>
+						<p id="memberRank"></p>
+						<%-- <p id="takeOffType"></p> --%>
+						<p id="memberJoin"></p>
+					</div>
+				</div>				
 			</div>
 		</div>
-		<div class="w-50 mx-10 flex-core">
-			<div class="row center">
-				<h2>공지사항</h2>
+		
+		<div class="w-50 mx-10 flex-core preview">
+			<div class="row center">			
+				<h2 class=" mt-0 mb-10">공지사항</h2>
+				 <table id="boardTable" class="left">					 
+			        <tbody>
+			            <!-- AJAX로 채워질 내용 -->
+			        </tbody>
+			    </table>				
 			</div>
 		</div>
+		
 	</div>
-	
-	<hr>
-	
+			
 	<div class="row flex-box">
-		<div class="w-50 mx-10 profile flex-core">
-			<div class="row center">
-				<h2>강의 목록</h2>
+	
+		<div class="w-50 mx-10 flex-core preview">
+			<div class="row center">			
+				<h2 class=" mt-0 mb-10">강의목록</h2>
+				 <table id="lectureTable">
+				 	 <thead>
+			            <tr>
+			                <th>학과</th>
+			                <th>교수</th>
+			                <th>분류</th>
+			                <th>강의명</th>
+			                <th>시간</th>
+			                <th>교실</th>
+			            </tr>
+			        </thead>			 
+			        <tbody>
+			            <!-- AJAX로 채워질 내용 -->
+			        </tbody>
+			    </table>				
 			</div>
 		</div>
-		<div class="w-50 mx-10 flex-core" >
-			<div class="row center">
-				<h2>학사 일정</h2>
+		
+		<div class="w-50 mx-10 flex-core preview">
+			<div class="row center">			
+				<h2 class=" mt-0 mb-10">학사일정</h2>
+				 <table id="scheduleTable" class="left">
+				 	 <thead>
+			            <tr>
+			                
+			            </tr>
+			        </thead>			 
+			        <tbody>
+			            <!-- AJAX로 채워질 내용 -->
+			        </tbody>
+			    </table>				
 			</div>
 		</div>
+		
 	</div>
 	
 </div>
