@@ -12,35 +12,35 @@
 			<h1>내 정보 수정</h1>
 		</div>
 		<div class="row">
-			<input name="memberId" type="text" value="${memberDto.memberId}" readonly>		
+			<label>학번[수정불가]</label> 
+			<input name="memberId" type="text" value="${memberDto.memberId}" class="field w-100" readonly>		
 		</div>
 		<div class="row">
-			<label>이름</label> <input type="text" name="memberName"
-				value="${memberDto.memberName}" class="field w-100">
+			<label>이름</label> 
+			<input type="text" name="memberName" value="${memberDto.memberName}" class="field w-100">
 		</div>
 		<div class="row">
-			<label>직급</label> <select name="memberRank" class="field w-100">
-				<option value="">분류</option>
-				<option value="관리자">관리자</option>
-				<option value="교수">교수</option>
-				<option value="학생">학생</option>
-			</select>
+			<label>구분[수정불가]</label> 
+			<input type="text" name="memberRank" value="${memberDto.memberRank}" class="field w-100" readonly>
 		</div>
 		<div class="row">
-			<label>생년월일</label> <input type="date" name="memberBirth"
-				value="${memberDto.memberBirth}" class="field w-100">
+			<label>학적상태[수정불가]</label> 
+			<input type="text" value="${lastDto.takeOffType}" class="field w-100" readonly>
+		</div>		
+		<div class="row">
+			<label>생년월일</label>
+			<input type="date" name="memberBirth" value="${memberDto.memberBirth}" class="field w-100">
 		</div>
 		<div class="row">
-			<label>연락처</label> <input type="tel" name="memberCell"
-				value="${memberDto.memberCell}" class="field w-100">
+			<label>연락처</label> 
+			<input type="tel" name="memberCell" value="${memberDto.memberCell}" class="field w-100">
 		</div>
 		<div class="row">
-			<label>이메일</label> <input type="email" name="memberEmail"
-				value="${memberDto.memberEmail}" class="field w-100">
+			<label>이메일</label>
+			<input type="email" name="memberEmail" value="${memberDto.memberEmail}" class="field w-100">
 		</div>
 		<div class="row">
-			<input type="text" name="memberPost" class="field" placeholder="우편번호"
-				readonly>
+			<input type="text" name="memberPost" class="field" placeholder="우편번호" readonly>
 			<button class="btn btn-neutral btn-find-address">
 				<i class="fa-solid fa-magnifying-glass"></i>
 			</button>
@@ -49,15 +49,16 @@
 			</button>
 		</div>
 		<div class="row">
-			<input type="text" name="memberAddress1" class="field w-100"
-				placeholder="기본주소" readonly>
+			<input type="text" name="memberAddress1" class="field w-100" placeholder="기본주소" readonly>
 		</div>
 		<div class="row">
-			<input type="text" name="memberAddress2" class="field w-100"
-				placeholder="상세주소">
+			<input type="text" name="memberAddress2" class="field w-100" placeholder="상세주소">
 		</div>
 		<div class="row mt-30">
 			<button class="btn btn-positive w-100">수정하기</button>
+		</div>
+		<div class="row mt-30">
+			<a href="mypage" class="btn btn-neutral w-100">수정취소</a>
 		</div>
 	</div>
 </form>

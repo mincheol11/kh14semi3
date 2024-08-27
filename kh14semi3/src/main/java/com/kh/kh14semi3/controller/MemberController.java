@@ -196,10 +196,28 @@ public class MemberController {
 		model.addAttribute("memberDto", memberDto); // 멤버정보 jsp로 전송
 		TakeOffDto lastDto = takeOffDao.selectLastOne(memberId);
 		model.addAttribute("lastDto", lastDto); // 멤버의 휴복학정보 jsp로 전송
-		System.out.println("memberDto : "+memberDto);
 		return "/WEB-INF/views/member/mypage.jsp";
 	}
 	
+	@GetMapping("/edit")
+	public String change(Model model, HttpSession session) {
+		String memberId = (String) session.getAttribute("createdUser");
+		MemberDto memberDto = memberDao.selectOne(memberId);
+		model.addAttribute("memberDto", memberDto); // 멤버정보 jsp로 전송
+		TakeOffDto lastDto = takeOffDao.selectLastOne(memberId);
+		model.addAttribute("lastDto", lastDto); // 멤버의 휴복학정보 jsp로 전송
+		return "/WEB-INF/views/member/edit.jsp";
+	}
 	
+	@PostMapping("/edit")
+	public String edit(@ModelAttribute MemberDto memberDto) {
+		boolean result = memberDao.updateMemberByAdmin(memberDto); 
+		// 메서드가 관리자전용이지만 memberId와 memberRank를 readonly로 수정불가하게 하여 전달함으로 
+		// 사용 가능하게 됨 그래서 씀
+		if(result == false)
+			throw new TargetNotFoundException("존재하지 않는 회원ID입니다.");
+		return "redirect:mypage";
+		
+	}
 	
 }
