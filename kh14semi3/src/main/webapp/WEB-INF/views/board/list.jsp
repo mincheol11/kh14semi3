@@ -32,36 +32,7 @@
 </script>
 
 <style>
-   .header-ellipse {
-    display: inline-block;
-    background-color: transparent; /* 투명한 배경 */
-    color: black; /* 글씨 색상 */
-    border: 3px solid #87CEFA; /* 하늘색 테두리 */
-    border-radius: 20px; /* 모서리 둥글게 하기 */
-    padding: 5px 5px; /* 상하좌우 여백 조절 */
-    font-size: 16px; /* 글씨 크기 조절 */
-    font-weight: bold;
-    text-align: center;
-    line-height: 1.5; /* 텍스트 높이 조절 */
-    position: relative; /* 후에 추가할 요소에 상대적 위치 지정 */
-}
 
-.header-ellipse::before, .header-ellipse::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    height: 15px; /* 상단과 하단의 둥글게 처리할 높이 */
-    border-radius: 50%; /* 완전한 둥글기 */
-}
-
-.header-ellipse::before {
-    top: -15px; /* 상단 부분 위치 조정 */
-}
-
-.header-ellipse::after {
-    bottom: -15px; /* 하단 부분 위치 조정 */
-}
 /* 링크에 마우스를 올렸을 때 스타일 변경 */
 .board-title {
   color: black;  /* 기본 텍스트 색상을 검은색으로 설정 */
@@ -78,10 +49,8 @@
 
 <div class="container w-800 my-50">
     
-    <div class="header-container">
-        <div class="header-ellipse">
-            학생 공지 사항
-        </div>
+  <div class="row center">
+    <h1>학생 공지 사항</h1>
     </div>
     
     <c:set var="isAdmin" value="${sessionScope.createdRank == '관리자'}" />
@@ -128,7 +97,7 @@
                         <td align="right">
                             <fmt:formatNumber value="${boardDto.boardViews}" pattern="#,##0"/>
                         </td>
-                        <td>${boardDto.boardNo}</td>
+                       
                     </tr>
                 </c:forEach>
             </tbody>
