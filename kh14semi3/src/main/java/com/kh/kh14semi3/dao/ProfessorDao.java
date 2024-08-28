@@ -24,5 +24,5 @@ public class ProfessorDao {
 		jdbcTemplate.update(sql, data);
 	}
 	
-	
+
 }
