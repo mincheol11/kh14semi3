@@ -119,7 +119,7 @@ public class AdminLectureDao {
 			return jdbcTemplate.update(sql, data) > 0;
 			}
 
-		//코드 중복검사
+		//강의 코드 중복검사
 		public LectureDto selectOneByLectureCode(String lectureCode) {
 			String sql="select * from lecture where lecture_code=?";
 			Object[] data= {lectureCode};
@@ -127,6 +127,21 @@ public class AdminLectureDao {
 			return list.isEmpty()? null:list.get(0);
 		}
 
+		//학과 코드 중복검사
+				public LectureDto selectOneByLectureDepartment(String lectureDepartment) {
+					String sql="select * from lecture where lecture_department=?";
+					Object[] data= {lectureDepartment};
+					List<LectureDto>list = jdbcTemplate.query(sql,  lectureMapper, data);
+					return list.isEmpty()? null:list.get(0);
+				}
+				
+		//교수 코드 중복검사
+				public LectureDto selectOneByLectureProfessor(String lectureProfessor) {
+					String sql="select * from lecture where lecture_professor=?";
+					Object[] data= {lectureProfessor};
+					List<LectureDto>list = jdbcTemplate.query(sql,  lectureMapper, data);
+					return list.isEmpty()? null:list.get(0);
+				}				
 	
 		
 }

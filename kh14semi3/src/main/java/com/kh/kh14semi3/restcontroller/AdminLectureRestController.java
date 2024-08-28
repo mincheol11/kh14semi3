@@ -24,4 +24,18 @@ public class AdminLectureRestController {
 				return lectureDto==null;
 			}
 			
+			@PostMapping("/checkLectureDepartment")
+			public boolean checkLectureDepartment(@RequestParam String lectureDepartment) {
+				LectureDto lectureDto =
+						adminLectureDao.selectOneByLectureDepartment(lectureDepartment);
+				return lectureDto!=null; 
+			}
+			
+			@PostMapping("/checkLectureProfessor")
+			public boolean checkLectureProfessor(@RequestParam String lectureProfessor) {
+				LectureDto lectureDto =
+						adminLectureDao.selectOneByLectureProfessor(lectureProfessor);
+				return lectureDto!=null; 
+			}
+			
 }

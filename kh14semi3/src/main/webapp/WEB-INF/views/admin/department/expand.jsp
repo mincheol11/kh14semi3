@@ -17,7 +17,7 @@
 		
 	// 학과 코드 입력창 검사
 	  $("[name=departmentCode]").blur(function(){
-		var regex= /^[d][0-9]{2,3}$/;//형식검사
+		var regex= /^.+$/;//형식검사
 		var departmentCode = $(this).val();
 		var isValid= regex.test(departmentCode);
 		if(isValid){//중복검사
@@ -48,7 +48,7 @@
 		
 	  //학과명 입력창 검사
 				$("[name=departmentName]").blur(function(){
-					var regex= /^[가-힣]{2,20}$/;//형식검사
+					var regex= /^.+$/;//형식검사
 					var departmentName = $(this).val();
 					var isValid= regex.test(departmentName);
 					if(isValid){//중복검사
@@ -97,7 +97,7 @@
             </div>
  <!-- 학과 코드 입력 -->               
 			<div class="row">
-                <label>학과 코드<i class="fa-solid fa-asterisk"></i></label>
+                <label>학과 코드 <i class="fa-solid fa-asterisk red"></i></label>
                     <input type="text" name="departmentCode" 
                         class="field w-100" placeholder="ex)d01">
                 <div class="success-feedback 00b894">올바른 코드입니다.</div>
@@ -106,7 +106,7 @@
 			</div>
 <!-- 학과명 입력 -->
 			<div class="row">
-                <label>학과명 <i class="fa-solid fa-asterisk"></i></label>
+                <label>학과명 <i class="fa-solid fa-asterisk red"></i></label>
                       <input type="text" name="departmentName" 
                         class="field w-100" placeholder="ex)기계공학과">
  				<div class="success-feedback 00b894">올바른 학과명입니다.</div>

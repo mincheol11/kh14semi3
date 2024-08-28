@@ -5,13 +5,16 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include> <!-- hearder 추가 -->
 
 <script type="text/javascript">
-$(lecture).ready(function() {
-    $('tr').on('click', function() {
-        var lectureCode = $(this).data('lectureCode');
-        if (lectureCode) {
-            location.href = 'detail?lectureCode=' + lectureCode;
-        }
-    });
+function showMessage(message) {
+	if (message === 'remove') 
+        alert('삭제가 완료되었습니다.');
+	}
+$(document).ready(function() {
+    var urlParams = new URLSearchParams(window.location.search);
+    var message = urlParams.get('message');
+    if (message) {
+        showMessage(message); 
+    }
 });
 </script>
 

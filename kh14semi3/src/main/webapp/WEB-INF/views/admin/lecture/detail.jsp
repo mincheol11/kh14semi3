@@ -4,10 +4,22 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include> <!-- hearder 추가 -->
 
  <script type="text/javascript">
-    function checkDelete(){
+    function checkRemove(){
         return confirm("정말 삭제하시겠습니까?");
     }
-
+    
+    function showMessage(message) {
+        if (message === 'edit') {
+            alert('수정이 완료되었습니다.');
+        } 
+    }
+    $(document).ready(function() {
+        var urlParams = new URLSearchParams(window.location.search);
+        var message = urlParams.get('message');
+        if (message) {
+            showMessage(message); 
+        }
+    });
     </script>
     
     <body>
@@ -66,11 +78,11 @@
     </c:choose>
     
      <div class="row center">
-     <a href="add" class="btn btn-neutral w-20">추가 강의개설</a>
+     <a href="add" class="btn btn-positive w-20">추가 강의개설</a>
     <a href="list" class="btn btn-neutral w-20">목록이동</a>
     <c:if test="${lectureDto != null}">
     <a href="edit?lectureCode=${lectureDto.lectureCode}" class="btn btn-neutral w-20">강의 정보 수정</a>
-    <a href="remove?lectureCode=${lectureDto.lectureCode}"class="btn btn-neutral w-20" 	onclick="return checkDelete()">강의 삭제</a>
+    <a href="remove?lectureCode=${lectureDto.lectureCode}"class="btn btn-negative w-20" 	onclick="return checkRemove()">강의 삭제</a>
     </c:if>
 </div>
 </div>    

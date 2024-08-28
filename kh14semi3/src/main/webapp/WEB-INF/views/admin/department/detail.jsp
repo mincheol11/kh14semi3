@@ -9,11 +9,9 @@
  }
 
  function showMessage(message) {
-     if (message === 'edit') {
+     if (message === 'edit') 
          alert('수정이 완료되었습니다.');
-     } else if (message === 'reduce') {
-         alert('삭제가 완료되었습니다.');
-     }
+     
  }
 
  $(document).ready(function() {
