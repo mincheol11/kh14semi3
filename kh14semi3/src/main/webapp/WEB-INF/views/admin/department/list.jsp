@@ -5,13 +5,17 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include> <!-- hearder 추가 -->
 
 <script type="text/javascript">
+
+function showMessage(message) {
+if (message === 'reduce') 
+        alert('삭제가 완료되었습니다.');
+}
 $(document).ready(function() {
-    $('tr').on('click', function() {
-        var departmentCode = $(this).data('departmentCode');
-        if (departmentCode) {
-            location.href = 'detail?departmentCode=' + departmentCode;
-        }
-    });
+    var urlParams = new URLSearchParams(window.location.search);
+    var message = urlParams.get('message');
+    if (message) {
+        showMessage(message); 
+    }
 });
 </script>
 
@@ -59,6 +63,7 @@ $(document).ready(function() {
 				</c:forEach>
 			</tbody>
 		</table>
+
 		<jsp:include page="/WEB-INF/views/template/navigator.jsp"></jsp:include> <!-- navigator 추가 -->
 	</div>
 </div>

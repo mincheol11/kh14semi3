@@ -53,11 +53,11 @@ public class AdminLectureController {
 		
 		//학과 통폐합
 		@RequestMapping("/remove")
-		public String remove(@RequestParam String lectureCode) {
+		public String remove(@RequestParam String lectureCode, @ModelAttribute PageVO pageVO) {
 			boolean result = adminLectureDao.remove(lectureCode);
 			if(result == false)
 				throw new TargetNotFoundException("존재하지 않는 학과입니다.");
-			return "redirect:list";//시스템관리로 이동
+			return "redirect:list?page=" + pageVO.getPage() + "&message=remove"; 
 		}
 		
 		//학과 상세정보 수정
@@ -72,6 +72,6 @@ public class AdminLectureController {
 			public String edit(@ModelAttribute LectureDto lectureDto) {
 				boolean result = adminLectureDao.edit(lectureDto);
 				if(result == false) throw new TargetNotFoundException("수정할 학과가 없습니다.");
-				return "redirect:detail?lectureCode="+lectureDto.getLectureCode();
+				return "redirect:detail?lectureCode="+lectureDto.getLectureCode()  + "&message=edit";
 			}
 }
