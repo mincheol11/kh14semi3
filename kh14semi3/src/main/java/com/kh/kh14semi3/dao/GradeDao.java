@@ -178,9 +178,9 @@ public class GradeDao {
 	}
 	
 	// 조회
-	public GradeDto selectOne(String gradeCode) {
-		String sql = "select * from grade where grade_code = ?";
-		Object[] data = {gradeCode};
+	public GradeDto selectOne(String gradeLecture) {
+		String sql = "select * from grade where grade_lecture = ?";
+		Object[] data = {gradeLecture};
 		List<GradeDto> list = jdbcTemplate.query(sql, gradeMapper, data);
 		return list.isEmpty() ? null : list.get(0);
 	}
@@ -191,9 +191,39 @@ public class GradeDao {
 		Object[] data = {gradeLecture};
 		return jdbcTemplate.queryForObject(sql, int.class, data); 
 	}
-	
 
 	
+	// 특정 강의를 듣는 학생 목록(이름,학번, 점수)
+	public List<GradeStudentVO> studentList(String gradeLecture) {
+		String sql = "select member_name, member_id, grade.* "
+								+ "from member join grade "
+									+ "on member_id=grade_student "
+										+ "where grade_lecture=? order by member_id asc";
+		Object[] data = {gradeLecture};
+		return jdbcTemplate.query(sql, gradeStudentMapper, data);
+	}
+	
+	// 점수 수정
+	public boolean updateGrade(GradeDto gradeDto) {
+	    String sql = "update grade set grade_attendance=?, grade_score1=?, "
+	    					+ "grade_score2=?, grade_homework=?, grade_rank=? "
+	    						+ "where grade_code=?";
+	    Object[] data = {
+	    		gradeDto.getGradeAttendance(), gradeDto.getGradeScore1(), 
+	    		gradeDto.getGradeScore2(), gradeDto.getGradeHomework(), 
+	    		gradeDto.getGradeRank(), gradeDto.getGradeCode()};
+	    return jdbcTemplate.update(sql, data) > 0;
+	}
+	
+	
+//	// 특정 강의를 듣는 학생 조회(학번)
+//	public GradeDto selectOneStudent(String gradeLecture) {
+//		String sql = "select grade_student from grade where grade_lecture = ?";
+//		Object[] data = {gradeLecture};
+//		List<GradeDto> list = jdbcTemplate.query(sql, gradeMapper, data);
+//		return list.isEmpty() ? null : list.get(0);
+//	}
+//	
 //	// 특정 강의를 듣는 학생 목록(이름,학번)
 //	public List<GradeStudentVO> studentList(GradeStudentVO gradeStudentVO,  String gradeLecture) {
 //		String sql = "select member_name, member_id "
@@ -204,17 +234,16 @@ public class GradeDao {
 //		return jdbcTemplate.query(sql, gradeStudentMapper, data);
 //	}
 	
-	// 특정 강의를 듣는 학생 목록(이름,학번,점수 전체조회)
-		public List<GradeStudentVO> studentList(GradeStudentVO gradeStudentVO,  String gradeLecture) {
-			String sql = "select member_name, member_id, grade_code, grade_lecture, "
-								+ "grade_attendance, grade_score1, grade_score2, grade_homework, "
-								+ "grade_rank "
-									+ "from member join grade "
-									+ "on member_id=grade_student "
-											+ "where grade_lecture=?";
-			Object[] data = {gradeStudentVO.getGradeLecture()};
-			return jdbcTemplate.query(sql, gradeStudentMapper, data);
-		}
+//	// 특정 강의를 듣는 학생 목록(점수 전체조회)
+//		public List<GradeStudentVO> studentGradeList(GradeStudentVO gradeStudentVO, String gradeLecture) {
+//			String sql = "select grade_attendance, grade_score1, grade_score2, "
+//								+ "grade_homework, grade_rank "
+//									+ "from grade where grade_lecture=?";
+//			Object[] data = {gradeLecture};
+//			return jdbcTemplate.query(sql, gradeStudentMapper, data);
+//		}
+	
+	
 	
 	
 	
