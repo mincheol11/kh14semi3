@@ -42,7 +42,7 @@ public class LectureController {
 			model.addAttribute("registrationList", lectureDao.selectListByRegistration(pageVO, memberId));			
 			int count = lectureDao.countByPagingWithStudent(pageVO ,memberId);
 			pageVO.setCount(count);
- 
+
 		}
 		else {
 			// 교수가 가르치는 강의 목록을 전송
@@ -71,23 +71,23 @@ public class LectureController {
 		pageVO.setCount(count);
 		return "/WEB-INF/views/lecture/grade.jsp";
 	}
-			
+	
 	// 성적 입력 (학생목록조회)
-	@RequestMapping("/grade/insert")
-	public String gradeInsert(
-					@ModelAttribute("gradeStudentVO") GradeStudentVO gradeStudentVO,
-					@RequestParam String lectureCode,
-					@RequestParam String gradeLecture,
-					Model model) {
-		LectureDto lectureDto = lectureDao.selectOne(lectureCode);
-		model.addAttribute("lectureDto", lectureDto);
+		@RequestMapping("/grade/insert")
+		public String gradeInsert(
+						@ModelAttribute("gradeStudentVO") GradeStudentVO gradeStudentVO,
+						@RequestParam String lectureCode,
+						@RequestParam String gradeLecture,
+						Model model) {
+			LectureDto lectureDto = lectureDao.selectOne(lectureCode);
+			model.addAttribute("lectureDto", lectureDto);
+				
+			GradeDto gradeDto = gradeDao.selectOne(gradeLecture);
+			model.addAttribute("gradeDto", gradeDto);
+			model.addAttribute("studentList", gradeDao.studentList(gradeLecture));
 			
-		GradeDto gradeDto = gradeDao.selectOne(gradeLecture);
-		model.addAttribute("gradeDto", gradeDto);
-		model.addAttribute("studentList", gradeDao.studentList(gradeStudentVO, gradeLecture));
-		
-		return "/WEB-INF/views/lecture/gradeInsert.jsp";
-	}
+			return "/WEB-INF/views/lecture/gradeInsert3.jsp";
+		}
 	
 	
 }
