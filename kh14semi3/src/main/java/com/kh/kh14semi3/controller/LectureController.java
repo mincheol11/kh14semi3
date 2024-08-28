@@ -42,7 +42,7 @@ public class LectureController {
 			model.addAttribute("registrationList", lectureDao.selectListByRegistration(pageVO, memberId));			
 			int count = lectureDao.countByPagingWithStudent(pageVO ,memberId);
 			pageVO.setCount(count);
-
+ 
 		}
 		else {
 			// 교수가 가르치는 강의 목록을 전송
