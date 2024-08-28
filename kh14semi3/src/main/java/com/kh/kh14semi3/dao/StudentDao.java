@@ -46,7 +46,4 @@ public class StudentDao {
 		Object[] data = {studentId};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
-	
-	
-	
 }

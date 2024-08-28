@@ -199,8 +199,6 @@ public class AdminMemberController {
 		}
 		return "redirect:detail?memberId="+takeOffDto.getTakeOffTarget();
 	}
-
-	
 	
 	
 	
