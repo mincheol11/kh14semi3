@@ -27,6 +27,29 @@
 				<td>${memberDto.memberRank}</td>
 			</tr>
 			<tr>
+				<c:choose>
+					<c:when test="${memberDto.memberRank=='학생'}">
+						<tr>
+							<th>학년</th>
+							<td>${studentDto.studentLevel}</td>
+						</tr>
+						<tr>
+							<th>학과</th>
+							<td>${studentDto.studentDepartment}</td>
+						</tr>
+					</c:when>
+ 					<c:when test="${memberDto.memberRank=='교수'}">
+ 						<tr>
+ 							<th>학과</th>
+ 							<td>${professorDto.professorDepartment}</td>
+ 						</tr>
+					</c:when>
+					<c:otherwise>
+
+					</c:otherwise>
+				</c:choose>
+			</tr>
+			<tr>
 				<th>생년월일</th>
 				<td>${memberDto.memberBirth}</td>
 			</tr>
@@ -55,6 +78,7 @@
 				</c:if>				
 				<td><fmt:formatDate value="${memberDto.memberJoin}" pattern="yyyy-MM-dd E" /></td>
 			</tr>
+			
 		</table>
 	</div>
 

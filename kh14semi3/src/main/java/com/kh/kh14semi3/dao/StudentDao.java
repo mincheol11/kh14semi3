@@ -36,8 +36,11 @@ public class StudentDao {
 	}
 	
 	public boolean update(StudentDto studentDto) {
-		String sql  = "update student set student_id = ? ";
-		Object[] data = {studentDto.getStudentId()};
+		String sql  = "update student set "
+				+ "student_department = ?, student_level = ? "
+				+ "where student_id = ? ";
+		Object[] data = {studentDto.getStudentDepartment(), studentDto.getStudentLevel(),
+								studentDto.getStudentId()};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
 	
@@ -46,4 +49,5 @@ public class StudentDao {
 		Object[] data = {studentId};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
+
 }

@@ -54,9 +54,26 @@ public class AdminMemberController {
 
 	//회원 상세
 	@RequestMapping("/detail")
-	public String detail(Model model, @RequestParam String memberId) {
+	public String detail(Model model,
+							@RequestParam String memberId,
+							@RequestParam(required = false) String memberRank) {
 		MemberDto memberDto = memberDao.selectOne(memberId);
 		model.addAttribute("memberDto", memberDto);
+		if("학생".equals(memberRank)) {
+			StudentDto studentDto = studentDao.selectOne(memberId);
+			model.addAttribute("studentDto", studentDto);
+		}
+		else if("교수".equals(memberRank)) {
+			ProfessorDto professorDto = professorDao.selectOne(memberId);
+			model.addAttribute("professorDto", professorDto);
+		}
+		else if("관리자".equals(memberRank)) {
+			AdminDto adminDto = adminDao.selectOne(memberId);
+			model.addAttribute("adminDto", adminDto);
+		}
+		else {
+			
+		}
 		return "/WEB-INF/views/admin/member/detail.jsp";
 	}
 	
@@ -78,28 +95,32 @@ public class AdminMemberController {
 	@PostMapping("/join")
 	public String join(@ModelAttribute MemberDto memberDto) {
 		memberDao.insert(memberDto);
-		return "redirect:joinR?memberId="+memberDto.getMemberId()+"&memberRank="+memberDto.getMemberRank();
+		return "redirect:joinR?memberId="+memberDto.getMemberId();
 	}
 	
 	//관리자 - 회원가입(하위테이블)
 	@GetMapping("/joinR")
-	public String joinR() {
+	public String joinR(@RequestParam(required=false) String memberId, Model model) {
+		MemberDto memberDto = memberDao.selectOne(memberId);
+		if(memberDto==null) {
+			throw new TargetNotFoundException();
+		}
+		model.addAttribute("memberDto", memberDto);
 		return "/WEB-INF/views/admin/member/joinR.jsp";
 	}
 	
 	@PostMapping("/joinR")
 	public String joinR(@ModelAttribute StudentDto studentDto,
 							@ModelAttribute ProfessorDto professorDto,
-							@ModelAttribute AdminDto adminDto,
-							@RequestParam String memberRank
+							@ModelAttribute AdminDto adminDto
 							) {
-		if("학생".equals(memberRank)) {
+		if(studentDto != null) {
 			studentDao.insert(studentDto);
 		}
-		else if("교수".equals(memberRank)) {
+		else if(professorDto != null) {
 			professorDao.insert(professorDto);
 		}
-		else if("관리자".equals(memberRank)) {
+		else if(adminDto != null) {
 			adminDao.insert(adminDto);
 		}
 		else {
@@ -113,17 +134,53 @@ public class AdminMemberController {
 	@GetMapping("/change")
 	public String change(@RequestParam String memberId, Model model) {
 		MemberDto memberDto = memberDao.selectOne(memberId);
-		if(memberDto == null)
-			throw new TargetNotFoundException("존재하지 않는 회원입니다.");
 		model.addAttribute("memberDto", memberDto);
+		if(memberDto == null) {
+			throw new TargetNotFoundException("존재하지 않는 회원입니다.");
+		}
+		String memberRank = memberDto.getMemberRank();
+		if("학생".equals(memberRank)) {
+	        StudentDto studentDto = studentDao.selectOne(memberId);
+	        model.addAttribute("studentDto", studentDto);
+	    } 
+		else if("교수".equals(memberRank)) {
+	        ProfessorDto professorDto = professorDao.selectOne(memberId);
+	        model.addAttribute("professorDto", professorDto);
+	    } 
+	    else if("관리자".equals(memberRank)) {
+	        AdminDto adminDto = adminDao.selectOne(memberId);
+	        model.addAttribute("adminDto", adminDto);
+	    }
+	    else {
+	    	
+	    }
+		
 		return "/WEB-INF/views/admin/member/change.jsp";
 	} 
+	
 	@PostMapping("/change")
-	public String change(@ModelAttribute MemberDto memberDto) {
+	public String change(@ModelAttribute MemberDto memberDto,
+				@ModelAttribute StudentDto studentDto,
+				@ModelAttribute ProfessorDto professorDto,
+				@ModelAttribute AdminDto adminDto) {
 		boolean result = memberDao.updateMemberByAdmin(memberDto);
-		if(result == false)
+		if(result == false) {
 			throw new TargetNotFoundException("존재하지 않는 회원ID입니다.");
-		return "redirect:detail?memberId="+memberDto.getMemberId();
+		}
+		if("학생".equals(memberDto.getMemberRank())) {
+			boolean result2 = studentDao.update(studentDto);
+		}
+		else if("교수".equals(memberDto.getMemberRank())) {
+			boolean result3 = professorDao.update(professorDto);
+		}
+		else if("관리자".equals(memberDto.getMemberRank())) {
+			boolean result4 = adminDao.update(adminDto);
+		}
+		else {
+			
+		}
+		
+		return "redirect:list";
 	}
 	
 	//휴학기능
