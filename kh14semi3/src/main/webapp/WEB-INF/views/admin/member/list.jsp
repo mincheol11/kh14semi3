@@ -47,14 +47,14 @@
 			<tbody align="center">
 				<c:forEach var="memberTakeOffVO" items="${memberList}">
 					<tr>
-						<td><a class="link link-animation" href="detail?memberId=${memberTakeOffVO.memberId}">${memberTakeOffVO.memberId}</a></td>
+						<td><a class="link link-animation" href="detail?memberId=${memberTakeOffVO.memberId}&memberRank=${memberTakeOffVO.memberRank}">${memberTakeOffVO.memberId}</a></td>
 						<td>${memberTakeOffVO.memberName}</td>
 						<td>${memberTakeOffVO.memberRank}</td>
 						<td>${memberTakeOffVO.memberEmail}</td>
 						<td>${memberTakeOffVO.memberJoin}</td>
 						<td>${memberTakeOffVO.takeOffType}</td>
 						<td>
-							<a class="link link-animation" href="detail?memberId=${memberTakeOffVO.memberId}">상세</a>
+							<a class="link link-animation" href="detail?memberId=${memberTakeOffVO.memberId}&memberRank=${memberTakeOffVO.memberRank}">상세</a>
 							<a class="link link-animation" href="change?memberId=${memberTakeOffVO.memberId}">수정</a>
 							
 							<c:choose>

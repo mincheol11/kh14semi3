@@ -5,6 +5,61 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+<script>
+$(function(){
+	
+	//엔터 차단 코드
+    $(".check-form").find(".field").keypress(function(e){
+        switch(e.keyCode) {
+            case 13: return false;
+        }
+    });
+	
+	$("[name=memberPost],[name=memberAddress1], .btn-find-address")
+    .click(function(){
+        new daum.Postcode({
+            oncomplete: function(data) {
+                var addr = ''; // 주소 변수
+
+                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                    addr = data.roadAddress;
+                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                    addr = data.jibunAddress;
+                }
+
+                document.querySelector("[name=memberPost]").value = data.zonecode;
+                document.querySelector("[name=memberAddress1]").value = addr;
+                // 커서를 상세주소 필드로 이동한다.
+                document.querySelector("[name=memberAddress2]").focus();
+                $("[name=memberPost]").trigger("input");
+            }
+        }).open();
+    });
+
+    $(".btn-clear-address").click(function(){
+        $("[name=memberPost]").val("");
+        $("[name=memberAddress1]").val("");
+        $("[name=memberAddress2]").val("");
+    });
+
+    $(".btn-clear-address").hide();
+    $("[name=memberPost],[name=memberAddress1],[name=memberAddress2]")
+    .on("input", function(){
+        var len1 = $("[name=memberPost]").val().length;
+        var len2 = $("[name=memberAddress1]").val().length;
+        var len3 = $("[name=memberAddress2]").val().length;
+        if(len1 + len2 + len3 > 0) {
+            $(".btn-clear-address").fadeIn();
+        }
+        else {
+            $(".btn-clear-address").fadeOut();
+        }
+    });
+});
+</script>
+
 <form action="change" method="post" autocomplete="off">
 	<div class="container w-600 my-50">
 		<div class="row center">
@@ -14,17 +69,62 @@
 			<input name="memberId" type="hidden" value="${memberDto.memberId}">		
 		</div>
 		<div class="row">
-			<label>이름</label> <input type="text" name="memberName"
+			<label>이름</label>   <input type="text" name="memberName"
 				value="${memberDto.memberName}" class="field w-100">
 		</div>
 		<div class="row">
-			<label>직급</label> <select name="memberRank" class="field w-100">
+			<label>구분</label>
+			<select name="memberRank" class="field w-100">
 				<option value="">분류</option>
-				<option value="관리자">관리자</option>
-				<option value="교수">교수</option>
-				<option value="학생">학생</option>
+				<option value="관리자"<c:if test="${memberDto.memberRank == '관리자'}">selected</c:if>>관리자</option>
+				<option value="교수"<c:if test="${memberDto.memberRank == '교수'}">selected</c:if>>교수</option>
+				<option value="학생"<c:if test="${memberDto.memberRank == '학생'}">selected</c:if>>학생</option>
 			</select>
 		</div>
+		<c:choose>
+			<c:when test="${memberDto.memberRank == '학생'}">
+				<div class="row">
+					<input name="studentId" value="${memberDto.memberId}" type="hidden" class="field w-100">					
+				</div>
+				<div class="row">
+					<label>학과코드</label>
+				</div>
+				<div class="row center">
+					<input name="studentDepartment" value="${studentDto.studentDepartment}" class="field w-100">
+				</div>
+				<div class="row">
+					<label>학년</label>
+				</div>
+				<div class="row center">
+					<select name="studentLevel" class="field w-100">
+						<option value="">분류</option>
+						<option value="1" <c:if test="${studentDto.studentLevel == '1'}">selected</c:if>>1 학년</option>
+						<option value="2" <c:if test="${studentDto.studentLevel == '2'}">selected</c:if>>2 학년</option>
+						<option value="3" <c:if test="${studentDto.studentLevel == '3'}">selected</c:if>>3 학년</option>
+						<option value="4" <c:if test="${studentDto.studentLevel == '4'}">selected</c:if>>4 학년</option>
+					</select>
+				</div>
+			</c:when>
+			<c:when test="${memberDto.memberRank == '교수'}">
+				<div class="row">
+					<input name="professorId" value="${memberDto.memberId}" type="hidden" class="field w-100">
+				</div>
+				<div class="row">
+					<label>학과코드</label>
+				</div>
+				<div class="row center">
+					<input name="professorDepartment" class="field w-100" value="${professorDto.professorDepartment}">
+				</div>
+			</c:when>
+			<c:when test="${memberDto.memberRank == '관리자'}">
+				<div class="row">
+					<input name="adminId" value="${memberDto.memberId}" type="hidden" class="field w-100">
+				</div>
+			</c:when>
+		</c:choose>
+		
+		
+		
 		<div class="row">
 			<label>생년월일</label> <input type="date" name="memberBirth"
 				value="${memberDto.memberBirth}" class="field w-100">
@@ -38,9 +138,12 @@
 				value="${memberDto.memberEmail}" class="field w-100">
 		</div>
 		<div class="row">
-			<input type="text" name="memberPost" class="field" placeholder="우편번호"
+		<label>주소</label>
+		</div>
+		<div class="row">
+			<input type="text" name="memberPost" class="field" placeholder="우편번호" value="${memberDto.memberPost}"
 				readonly>
-			<button class="btn btn-neutral btn-find-address">
+			<button class="btn btn-neutral btn-find-address" type="button">
 				<i class="fa-solid fa-magnifying-glass"></i>
 			</button>
 			<button class="btn btn-negative btn-clear-address">
@@ -48,15 +151,16 @@
 			</button>
 		</div>
 		<div class="row">
-			<input type="text" name="memberAddress1" class="field w-100"
+			<input type="text" name="memberAddress1" class="field w-100" value="${memberDto.memberAddress1}"
 				placeholder="기본주소" readonly>
 		</div>
 		<div class="row">
-			<input type="text" name="memberAddress2" class="field w-100"
+			<input type="text" name="memberAddress2" class="field w-100" value="${memberDto.memberAddress2}"
 				placeholder="상세주소">
+			<div class="fail-feedback">주소는 비워두거나 모두 입력해야 합니다</div>
 		</div>
 		<div class="row mt-30">
-			<button class="btn btn-positive w-100">수정하기</button>
+			<button class="btn btn-positive w-100" type="submit">수정하기</button>
 		</div>
 		<div class="row">
 			<a class="btn btn-neutral w-100" type="button" href="detail?memberId=${memberDto.memberId}">뒤로가기</a>
