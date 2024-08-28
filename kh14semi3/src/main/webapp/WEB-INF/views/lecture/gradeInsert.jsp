@@ -181,7 +181,7 @@
 								<td>${gradeStudentVO.memberName}</td>
 								<td>${gradeStudentVO.gradeAttendance}</td>
 								<td>${gradeStudentVO.gradeScore1}</td>
-								<td>${gradeStudentVO.gradeScore2}</td>
+								<td>${gradeStudentVO.gradeScore2}</td> 
 								<td>${gradeStudentVO.gradeHomework}</td>
 								<td>${gradeStudentVO.gradeRank}</td> 
 								<td><button type="button" class="btn btn-positive btn-insert"></button></td>

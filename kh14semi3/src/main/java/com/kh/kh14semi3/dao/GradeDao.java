@@ -189,7 +189,7 @@ public class GradeDao {
 	public int count(String gradeLecture) {
 		String sql = "select count(*) from grade where grade_lecture = ?";
 		Object[] data = {gradeLecture};
-		return jdbcTemplate.queryForObject(sql, int.class, data);
+		return jdbcTemplate.queryForObject(sql, int.class, data); 
 	}
 	
 

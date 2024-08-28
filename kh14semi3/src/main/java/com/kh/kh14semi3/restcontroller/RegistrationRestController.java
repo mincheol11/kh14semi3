@@ -45,7 +45,7 @@ public class RegistrationRestController {
 	public RegistrationVO regist(HttpSession session, @RequestParam String lectureCode) {
 		// 학번 추출
 		String studentId = (String) session.getAttribute("createdUser");
-		
+		 
 		boolean isChecked = registrationDao.check(studentId, lectureCode);
 		if(isChecked) { // 삭제(등록 이력 있음)
 			registrationDao.delete(studentId, lectureCode);

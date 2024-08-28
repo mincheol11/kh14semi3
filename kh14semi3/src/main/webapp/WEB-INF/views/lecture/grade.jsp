@@ -53,7 +53,7 @@ createdRank = ${sessionScope.createdRank}
 				</thead>
 				<tbody align="center">
 					<c:forEach var="gradeDto" items="${gradeList}">
-					<tr>
+					<tr> 
 						<td>${gradeDto.gradeLecture}</td>
 						<td></td>
 						<td>${gradeDto.gradeAttendance}</td>
