@@ -105,53 +105,51 @@ public class HomeRestController {
 	}
 	
 	@RequestMapping("/schedule-preview")
-    public Map<String, Object> list(
-            @RequestParam(value = "pageYear", required = false) Integer year,
-            @RequestParam(value = "pageMonth", required = false) Integer month,
-            @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
-            @ModelAttribute("pageVO") PageVO pageVO,
-            Model model) {
-		
-		Map<String, Object> response = new HashMap<>();	
-		
-        // 현재 연도와 월을 기본값으로 설정
-        if (year == null) {
-            year = Calendar.getInstance().get(Calendar.YEAR);
-        }
-        if (month == null) {
-            month = Calendar.getInstance().get(Calendar.MONTH) + 1; // 1월은 0이므로 +1
-        }
+	public Map<String, Object> list(
+	        @RequestParam(value = "pageYear", required = false) Integer year,
+	        @RequestParam(value = "pageMonth", required = false) Integer month,
+	        @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
+	        @ModelAttribute("pageVO") PageVO pageVO,
+	        Model model) {
+	    
+	    Map<String, Object> response = new HashMap<>();
 
-        // 페이지 번호가 1보다 작지 않도록 보장
-        if (page < 1) {
-            page = 1;
-        }
+	    // 현재 연도와 월을 기본값으로 설정
+	    if (year == null) {
+	        year = Calendar.getInstance().get(Calendar.YEAR);
+	    }
+	    if (month == null) {
+	        month = Calendar.getInstance().get(Calendar.MONTH) + 1; // 1월은 0이므로 +1
+	    }
 
-        // pageVO에 연도, 월, 페이지 번호 설정
-        pageVO.setYear(year);
-        pageVO.setMonth(month);
-        pageVO.setPage(page);
+	    // 페이지 번호가 1보다 작지 않도록 보장
+	    if (page < 1) {
+	        page = 1;
+	    }
 
-        // 데이터베이스에서 해당 연도와 월의 데이터를 가져옵니다
-        int pageSize = 10; // 예: 페이지당 10개 항목
-        List<ScheduleDto> scheduleList = scheduleDao.selectListByMonth(year, month, page, pageSize);
-        int count = scheduleDao.countByMonth(year, month);
-        pageVO.setCount(count);
+	    // pageVO에 연도, 월, 페이지 번호 설정
+	    pageVO.setYear(year);
+	    pageVO.setMonth(month);
+	    pageVO.setPage(page);
 
-        // 연도와 월을 모델에 추가
-        Integer currentYear =  year;
-        Integer currentMonth = month;
-        Integer currentPage = page;
+	    // 데이터베이스에서 해당 연도와 월의 데이터를 가져옵니다
+	    int pageSize = 10; // 예: 페이지당 10개 항목
+	    List<ScheduleDto> scheduleList = scheduleDao.selectListByMonth(year, month, page, pageSize);
+	    int count = scheduleDao.countByMonth(year, month);
+	    pageVO.setCount(count);
 
-        response.put("scheduleList", scheduleList);
-		response.put("pageVO", pageVO);
-		
-		response.put("currentYear", currentYear);
-		response.put("currentMonth", currentMonth);
-		response.put("currentPage", currentPage);
-		
-        return response;
-    }
-	
-	
+	    // 연도와 월을 모델에 추가
+	    Integer currentYear = year;
+	    Integer currentMonth = month;
+	    Integer currentPage = page;
+
+	    response.put("scheduleList", scheduleList);
+	    response.put("pageVO", pageVO);
+	    response.put("currentYear", currentYear);
+	    response.put("currentMonth", currentMonth);
+	    response.put("currentPage", currentPage);
+
+	    return response;
+	}
+
 }

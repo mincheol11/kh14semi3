@@ -102,7 +102,7 @@
 						if(index<3){
 	                        $('#boardTable tbody').append(
 	                            '<tr>' +
-	                            '<td>' + ' [' + board.boardType + '] ' + board.boardTitle + '</td>' +
+	                            '<td>' + ' [' + board.boardNo + '] ' + board.boardTitle + '</td>' +
 	                            '<td>' + board.boardWtime + '</td>' +
 	                            '</tr>'
 	                        );							
@@ -169,6 +169,7 @@
           		success: function(response) {
            			var ScheduleList = response.scheduleList;
            			console.log(response);
+           			
 	              	// Clear the existing content
 	              	$('#scheduleTable tbody').empty();
 	
@@ -183,7 +184,9 @@
 							);							
 						}
 					});
-
+	             // Insert the current month, page, and year into the HTML
+	                $('#currentYear').text(response.currentYear + ' 년');
+	                $('#currentMonth').text(response.currentMonth + ' 월');
 					// Update pagination controls if needed
 					// $('#pagination').html('...'); // Update pagination HTML
 				},
@@ -199,6 +202,9 @@
         
 	});
 </script>
+
+
+
 
 <div class="right">
 	createdUser = ${sessionScope.createdUser},
@@ -230,7 +236,13 @@
 		<div class="w-50 mx-10 flex-core preview">
 			<div class="row center">			
 				<h2 class=" mt-0 mb-10">공지사항</h2>
-				 <table id="boardTable" class="left">					 
+				 <table id="boardTable" class="left">		
+				 <thead>
+                <tr>
+                   <th>제목</th>
+                    <th>작성일</th>
+                 </tr>
+            </thead>			 
 			        <tbody>
 			            <!-- AJAX로 채워질 내용 -->
 			        </tbody>
@@ -264,43 +276,45 @@
 		</div>
 		
 		<div class="w-50 mx-10 flex-core preview">
-			<div class="row center">			
-				<h2 class=" mt-0 mb-10">학사일정</h2>
-				<!-- 탐색 버튼 추가 -->
+    <div class="row center">
+        <h2 class="mt-0 mb-10">학사일정</h2>
+        <!-- 탐색 버튼 추가 -->
   <div class="row center nav-buttons">
     <button data-icon="‹" onclick="changeMonth(-1)"></button>
-    <span>${currentYear}년 ${currentMonth}월</span>
+<!--     구분선 -->
+	<span id="currentYear"></span>
+    <span id="currentMonth"></span>
+<!-- 	구분선 -->
     <button data-icon="›" onclick="changeMonth(1)"></button>
   </div>
-				 <table id="scheduleTable" class="left">
-				 	 <thead>
-			            <tr>
-			                <th>제목</th>
-			                <th>작성일</th>
-			            </tr>
-			        </thead>			 
-			        <tbody>
-			           <c:choose>
-          <c:when test="${not empty scheduleList}">
-            <c:forEach var="scheduleDto" items="${scheduleList}">
-            <tr>
-              <td class="schedule-wtime">${scheduleDto.scheduleWtime}</td> <!-- schedule-wtime 클래스 추가 -->
-              <td align="right">
-                <a href="detail?scheduleNo=${scheduleDto.scheduleNo}" class="schedule-title modal-trigger">${scheduleDto.scheduleTitle}</a> <!-- schedule-title 클래스 추가 -->
-              </td>
-            </tr>
-            </c:forEach>
-          </c:when>
-          <c:otherwise>
-            <tr>
-              <td colspan="2">일정이 없습니다.</td>
-            </tr>
-          </c:otherwise>
-        </c:choose>
-			        </tbody>
-			    </table>				
-			</div>
-		</div>
+        <table id="scheduleTable" class="left">
+            <thead>
+                <tr>
+                    <th>제목</th>
+                    <th>작성일</th>
+                </tr>
+            </thead>
+            <tbody>
+                <c:choose>
+                    <c:when test="${not empty scheduleList}">
+                        <c:forEach var="scheduleDto" items="${scheduleList}">
+                            <tr>
+                                <td>${scheduleDto.scheduleTitle}</td>
+                                <td>${scheduleDto.scheduleWtime}</td>
+                            </tr>
+                        </c:forEach>
+                    </c:when>
+                    <c:otherwise>
+                        <tr>
+                            <td colspan="2">일정이 없습니다.</td>
+                        </tr>
+                    </c:otherwise>
+                </c:choose>
+            </tbody>
+        </table>
+    </div>
+</div>
+		
 		
 	</div>
 	
