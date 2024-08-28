@@ -9,9 +9,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.kh14semi3.dao.AdminDao;
 import com.kh.kh14semi3.dao.MemberDao;
+import com.kh.kh14semi3.dao.ProfessorDao;
+import com.kh.kh14semi3.dao.StudentDao;
 import com.kh.kh14semi3.dao.TakeOffDao;
+import com.kh.kh14semi3.dto.AdminDto;
 import com.kh.kh14semi3.dto.MemberDto;
+import com.kh.kh14semi3.dto.ProfessorDto;
+import com.kh.kh14semi3.dto.StudentDto;
 import com.kh.kh14semi3.dto.TakeOffDto;
 import com.kh.kh14semi3.error.TargetNotFoundException;
 import com.kh.kh14semi3.vo.PageVO;
@@ -26,6 +32,14 @@ public class AdminMemberController {
 	@Autowired
 	private TakeOffDao takeOffDao;
 	
+	@Autowired
+	private StudentDao studentDao;
+	
+	@Autowired
+	private ProfessorDao professorDao;
+	
+	@Autowired
+	private AdminDao adminDao;
 	
 	//회원 관리 목록
 	@RequestMapping("/list")
@@ -37,8 +51,6 @@ public class AdminMemberController {
 		
 		return "/WEB-INF/views/admin/member/list.jsp";
 	}
-
-
 
 	//회원 상세
 	@RequestMapping("/detail")
@@ -75,11 +87,26 @@ public class AdminMemberController {
 		return "/WEB-INF/views/admin/member/joinR.jsp";
 	}
 	
-//	@PostMapping("/joinR")
-//	public String joinR(@RequestParam String memberId,
-//							@RequestParam String memberRank) {
-//		
-//	}
+	@PostMapping("/joinR")
+	public String joinR(@ModelAttribute StudentDto studentDto,
+							@ModelAttribute ProfessorDto professorDto,
+							@ModelAttribute AdminDto adminDto,
+							@RequestParam String memberRank
+							) {
+		if("학생".equals(memberRank)) {
+			studentDao.insert(studentDto);
+		}
+		else if("교수".equals(memberRank)) {
+			professorDao.insert(professorDto);
+		}
+		else if("관리자".equals(memberRank)) {
+			adminDao.insert(adminDto);
+		}
+		else {
+			
+		}
+		return "redirect:list";
+	}
 	
 	
 	//관리자 - 회원 정보 수정
@@ -94,7 +121,6 @@ public class AdminMemberController {
 	@PostMapping("/change")
 	public String change(@ModelAttribute MemberDto memberDto) {
 		boolean result = memberDao.updateMemberByAdmin(memberDto);
-		System.out.println(memberDto.getMemberId());
 		if(result == false)
 			throw new TargetNotFoundException("존재하지 않는 회원ID입니다.");
 		return "redirect:detail?memberId="+memberDto.getMemberId();
@@ -137,44 +163,42 @@ public class AdminMemberController {
 		return "redirect:detail?memberId="+takeOffDto.getTakeOffTarget();
 	}
 	
-	
-	
 	//제적기능
-			@GetMapping("/blockGo")
-			public String blockGo(@RequestParam String takeOffTarget) {
-				MemberDto memberDto = memberDao.selectOne(takeOffTarget);
-				if(memberDto == null)
-					throw new TargetNotFoundException("존재하지 않는 학생입니다.");
-				return "/WEB-INF/views/admin/member/blockGo.jsp";
-			}
+	@GetMapping("/blockGo")
+	public String blockGo(@RequestParam String takeOffTarget) {
+		MemberDto memberDto = memberDao.selectOne(takeOffTarget);
+		if(memberDto == null)
+			throw new TargetNotFoundException("존재하지 않는 학생입니다.");
+		return "/WEB-INF/views/admin/member/blockGo.jsp";
+	}
 			
-			@PostMapping("/blockGo")
-			public String blockGo(@ModelAttribute TakeOffDto takeOffDto) {
-				//마지막 이력 조회
-				TakeOffDto lastDto = takeOffDao.selectLastOne(takeOffDto.getTakeOffTarget());
-				if(lastDto == null || !lastDto.getTakeOffType().equals("제적")) {
-					takeOffDao.blockGo(takeOffDto);
-				}
-				return "redirect:detail?memberId="+takeOffDto.getTakeOffTarget();
-			}
+	@PostMapping("/blockGo")
+	public String blockGo(@ModelAttribute TakeOffDto takeOffDto) {
+		//마지막 이력 조회
+		TakeOffDto lastDto = takeOffDao.selectLastOne(takeOffDto.getTakeOffTarget());
+		if(lastDto == null || !lastDto.getTakeOffType().equals("제적")) {
+			takeOffDao.blockGo(takeOffDto);
+		}
+		return "redirect:detail?memberId="+takeOffDto.getTakeOffTarget();
+	}
 			
-			//제적 해제기능
-			@GetMapping("/blockNo")
-			public String blockNo(@RequestParam String takeOffTarget) {
-				MemberDto memberDto = memberDao.selectOne(takeOffTarget);
-				if(memberDto == null)
-					throw new TargetNotFoundException("존재하지 않는 학생입니다.");
-				return "/WEB-INF/views/admin/member/blockNo.jsp";
-			}
+	//제적 해제기능
+	@GetMapping("/blockNo")
+	public String blockNo(@RequestParam String takeOffTarget) {
+		MemberDto memberDto = memberDao.selectOne(takeOffTarget);
+		if(memberDto == null)
+			throw new TargetNotFoundException("존재하지 않는 학생입니다.");
+		return "/WEB-INF/views/admin/member/blockNo.jsp";
+	}
 			
-			@PostMapping("/blockNo")
-			public String blockNo(@ModelAttribute TakeOffDto takeOffDto) {
-				TakeOffDto lastDto = takeOffDao.selectLastOne(takeOffDto.getTakeOffTarget());
-				if(lastDto != null && lastDto.getTakeOffType().equals("제적")) {
-					takeOffDao.blockNo(takeOffDto);
-				}
-				return "redirect:detail?memberId="+takeOffDto.getTakeOffTarget();
-			}
+	@PostMapping("/blockNo")
+	public String blockNo(@ModelAttribute TakeOffDto takeOffDto) {
+		TakeOffDto lastDto = takeOffDao.selectLastOne(takeOffDto.getTakeOffTarget());
+		if(lastDto != null && lastDto.getTakeOffType().equals("제적")) {
+			takeOffDao.blockNo(takeOffDto);
+		}
+		return "redirect:detail?memberId="+takeOffDto.getTakeOffTarget();
+	}
 	
 	
 	

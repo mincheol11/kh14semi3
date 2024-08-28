@@ -20,6 +20,7 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 				"/member/login",
 				"/member/findPw*", //비밀번호 찾는용도
 				"/member/resetPw*"//비밀번호 재설정페이지
+				
 				);
 	}
 }
