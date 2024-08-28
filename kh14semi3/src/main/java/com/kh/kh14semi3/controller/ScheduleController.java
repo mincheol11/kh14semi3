@@ -190,4 +190,5 @@ public class ScheduleController {
             return "redirect:/images/해린-깨물하트.gif";
         }
     }
+    
 }
