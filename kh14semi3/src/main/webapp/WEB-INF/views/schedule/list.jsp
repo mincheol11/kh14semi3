@@ -132,12 +132,11 @@ document.addEventListener('DOMContentLoaded', function() {
   margin: 10% auto; /* 상단 여백을 줄여서 중앙에 더 가까이 위치 */
   padding: 20px;
   border: 1px solid rgb(0, 168, 255); /* 두꺼운 하늘색 테두리 추가 */
-  width: 53.5%; /* 모달 너비를 증가시킴 */
-  max-width: 1200px; /* 최대 너비를 1200px로 증가시킴 */
+  width: 58%; /* 모달 너비를 증가시킴  */
+  max-width: 1400px; /* 최대 너비를 1400px로 증가시킴 (1200px에서 1400px로 변경) */
   box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* 그림자 추가 */
   z-index: 1001; /* 모달 콘텐츠의 z-index 값을 모달보다 더 높게 설정 */
 }
-
 /* 닫기 버튼 스타일 */
 .scheduleModalClose {
   color: #aaa;
