@@ -173,7 +173,7 @@
 	});		
   </script>
 
- <form action="add" method="post"  class="check-form">
+ <form action="add" method="post"  class="check-form" autocomplete="off">
         <div class="container w-400 my-50">
             <div class="row center">
                 <h1>강의 추가</h1>
