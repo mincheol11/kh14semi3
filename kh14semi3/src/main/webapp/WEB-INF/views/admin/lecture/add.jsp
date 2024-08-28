@@ -18,8 +18,7 @@
 	  lectureRoomValid : false, lectureRoomCheckValid:false,
 	  lectureCountValid : false, lectureCountCheckValid:false,
 	  ok : function(){
-		return 
-		this.lectureCodeValid && this.lectureCodeCheckValid &&  
+		return 	this.lectureCodeValid && this.lectureCodeCheckValid &&  
 		this.lectureDepartmentValid && this.lectureDepartmenCheckValid &&
 		this.lectureProfessorValid && this.lectureProfessorCheckValid &&
 		this.lectureTypeValid && this.lectureTypeCheckValid &&
