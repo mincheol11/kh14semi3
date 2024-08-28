@@ -197,9 +197,34 @@ document.addEventListener('DOMContentLoaded', function() {
 .table.table-hover > tbody > tr:hover {
     background-color: rgb(255, 255, 255)!important;
 }
+/* 테이블 스타일 */
+.table {
+  width: 100%;
+  border-collapse: collapse; /* 테두리 중복 제거 */
+}
+
+.table th, .table td {
+  width: 50%; /* 열 너비 설정 */
+  text-align: center; /* 텍스트 중앙 정렬 */
+  min-height: 50px; /* 최소 높이 설정 */
+  vertical-align: middle; /* 세로 정렬 */
+  border: 1px solid #ddd; /* 셀 테두리 설정 */
+}
+
+/* 테이블 헤더 스타일 */
+.table th {
+  background-color: #f4f4f4; /* 헤더 배경색 설정 */
+  font-weight: bold; /* 헤더 글씨를 두껍게 설정 */
+}
+
+/* 테이블의 행에 호버 효과 추가 */
+.table tr:hover {
+  background-color: #f1f1f1; /* 호버 시 배경색 설정 */
+}
+
 </style>
 
-<div class="container w-800">
+<div class="container w-800 p-50">
   <div class="row left">
     <h1>학사 일정</h1>
   </div>
