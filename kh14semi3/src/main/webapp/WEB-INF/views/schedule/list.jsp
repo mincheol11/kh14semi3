@@ -155,7 +155,7 @@ document.addEventListener('DOMContentLoaded', function() {
 /* 탐색 버튼 스타일링 */
 .nav-buttons button {
   background-color: transparent; /* 배경색을 투명으로 설정 */
-  color: rgb(128, 128, 128); /* 기본 기호 색상 설정 (회색) */
+  color: rgb(0, 168, 255) !important; /* 기본 기호 색상 설정 (회색) */
   border: 2px solid rgb(128, 128, 128); /* 버튼 테두리 색상 설정 (회색) */
   padding: 15px 15px; /* 버튼의 패딩을 늘려서 크기를 키움 */
   font-size: 36px; /* 폰트 크기를 증가시켜 버튼을 더 크게 보이게 함 */
@@ -164,12 +164,7 @@ document.addEventListener('DOMContentLoaded', function() {
   transition: color 0.3s, border-color 0.3s; /* 색상 및 테두리 색상 변화에 부드러운 전환 효과 추가 */
 }
 
-/* 탐색 버튼 호버 상태 */
-.nav-buttons button:hover {
-  color: rgb(0, 168, 255); /* 호버 시 기호 색상을 하늘색으로 변경 */
-  border-color: rgb(0, 168, 255); /* 호버 시 테두리 색상도 하늘색으로 변경 */
-  background-color: transparent; /* 호버 시 배경색을 투명으로 설정 */
-}
+
 
 /* 버튼 텍스트를 제거하고 기호만 보이도록 설정 */
 .nav-buttons button {
@@ -223,7 +218,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 </style>
 
-<div class="container w-800 p-50">
+<div class="container w-800 ">
   <div class="row left">
     <h1>학사 일정</h1>
   </div>
