@@ -4,22 +4,40 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include> <!-- hearder 추가 -->
 
  <script type="text/javascript">
-    function checkDelete(){
-        return confirm("정말 삭제하시겠습니까?");
-    }
+ function checkReduce() {
+     return confirm("정말 삭제하시겠습니까?");
+ }
 
+ function showMessage(message) {
+     if (message === 'edit') {
+         alert('수정이 완료되었습니다.');
+     } else if (message === 'reduce') {
+         alert('삭제가 완료되었습니다.');
+     }
+ }
+
+ $(document).ready(function() {
+     var urlParams = new URLSearchParams(window.location.search);
+     var message = urlParams.get('message');
+     if (message) {
+         showMessage(message); 
+     }
+ });
     </script>
     
     <body>
     <div class="container w-600 my-50">
-    <div class="row center">
-    <h1>학과 상세정보</h1>
-    </div>
+  
     <c:choose>
         <c:when test="${adminDepartmentDto == null}">
-            <h2>존재하지 않는 학과 정보 입니다.</h2>
+        <div class="row center">
+            <h1>존재하지 않는 학과 정보 입니다.</h1>
+            </div>
         </c:when>
     <c:otherwise>
+      <div class="row center">
+    <h1>학과 상세정보</h1>
+    </div>
         <table class="table table-border table-hover">
                 <tr>
                     <th width="30%">학과코드</th>
@@ -34,11 +52,11 @@
     </c:choose>
     
      <div class="row center">
-     <a href="expand" class="btn btn-neutral w-20">추가 학과개설</a>
+     <a href="expand" class="btn btn-positive w-20">추가 학과개설</a>
     <a href="list" class="btn btn-neutral w-20">목록이동</a>
     <c:if test="${adminDepartmentDto != null}">
     <a href="edit?departmentCode=${adminDepartmentDto.departmentCode}" class="btn btn-neutral w-20">학과 정보 수정</a>
-    <a href="reduce?departmentCode=${adminDepartmentDto.departmentCode}"class="btn btn-neutral w-20" 	onclick="return checkDelete()">학과 삭제</a>
+    <a href="reduce?departmentCode=${adminDepartmentDto.departmentCode}"class="btn btn-negative w-20" 	onclick="return checkReduce()">학과 삭제</a>
     </c:if>
 </div>
 </div>    

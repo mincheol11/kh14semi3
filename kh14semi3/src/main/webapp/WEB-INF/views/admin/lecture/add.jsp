@@ -8,32 +8,18 @@
 		//상태 객체
 	  var status ={
 	  lectureCodeValid : false, lectureCodeCheckValid:false,
-	  lectureDepartmentValid : false, lectureDepartmentCheckValid:false,
-	  lectureProfessorValid : false, lectureProfessorCheckValid:false,
-	  lectureTypeValid : false, lectureTypeCheckValid:false,
-	  lectureNameValid : false, lectureNameCheckValid:false,
-	  lectureTimeValid : false, lectureTimeCheckValid:false,
-	  lectureDurationValid : false, lectureDurationCheckValid:false,
-	  lectureDayValid : false, lectureDayCheckValid:false,
-	  lectureRoomValid : false, lectureRoomCheckValid:false,
-	  lectureCountValid : false, lectureCountCheckValid:false,
+	  lectureDepartmentValid : false, lectureProfessorValid : false,
+	  lectureTypeValid : false, lectureNameValid : false, 
 	  ok : function(){
-		return 	this.lectureCodeValid && this.lectureCodeCheckValid &&  
-		this.lectureDepartmentValid && this.lectureDepartmenCheckValid &&
-		this.lectureProfessorValid && this.lectureProfessorCheckValid &&
-		this.lectureTypeValid && this.lectureTypeCheckValid &&
-		this.lectureNameValid && this.lectureNameCheckValid &&
-		this.lectureTimeValid && this.lectureTimeCheckValid &&
-		this.lectureDurationValid && this.lectureTypeCheckValid &&
-		this.lectureDayValid && this.lectureDayCheckValid &&
-		this.lectureRoomValid && this.lectureRoomCheckValid &&
-		this.lectureCountValid && this.lectureCountCheckValid
+		return this.lectureCodeValid && this.lectureCodeCheckValid &&  
+		this.lectureDepartmentValid && this.lectureProfessorValid && 
+		this.lectureTypeValid && this.lectureNameValid 
 		},
 	};
 		
 	// 강의 코드 입력창 검사
 	  $("[name=lectureCode]").blur(function(){
-		var regex= /^[l][0-9]{2,3}$/;//형식검사
+		var regex= /^.+$/;//형식검사
 		var lectureCode = $(this).val();
 		var isValid= regex.test(lectureCode);
 		if(isValid){//중복검사
@@ -64,7 +50,7 @@
 		
 	  //학과코드 입력창 검사 // 테이블에 있는값인지 확인코드 추가
 	  $("[name=lectureDepartment]").blur(function(){
-		  	var regex= /^[d][0-9]{2,3}$/;//형식검사
+		  	var regex= /^.+$/;//형식검사
 			var lectureDepartment = $(this).val();
 			var isValid= regex.test(lectureDepartment);
                 $(this).removeClass("success fail")
@@ -74,7 +60,7 @@
 	  
 	  //교수코드 입력창 검사 // 테이블에 있는값인지 확인코드 추가
 	  $("[name=lectureProfessor]").blur(function(){
-		  	var regex= /^prof[0-9]{3}$/;//형식검사
+		  	var regex= /^.+$/;//형식검사
 			var lectureProfessor = $(this).val();
 			var isValid= regex.test(lectureProfessor);
                 $(this).removeClass("success fail")
@@ -87,7 +73,7 @@
                 var isValid = $(this).val().length>0;
                 $(this).removeClass("success fail")
                             .addClass(isValid ? "success" : "fail");
-                status.lectureProfessorValid = isValid;
+                status.lectureTypeValid = isValid;
             });
 	  
 		  //강의명 입력창 검사 // 테이블에 있는값인지 확인코드 추가
@@ -102,7 +88,8 @@
 	  
 			//단축키 폼 검사
 	            $(".check-form").submit(function(){
-	                $("[name]").trigger("input").trigger("blur");
+					console.log(status);
+	                $("[name]").trigger("input").trigger("blur").trigger("click");
 	                return status.ok();
 	            });
 	            //엔터 차단 코드
@@ -125,7 +112,7 @@
                     <input type="text" name="lectureCode" 
                         class="field w-100" placeholder="ex)l01">
                 <div class="success-feedback 00b894">올바른 강의 코드입니다.</div>
-                <div class="fail-feedback d63031">코드는 앞 영문 소문자 'l'로 시작하며,다음 숫자를 2~3자로 작성해주세요.</div>
+                <div class="fail-feedback d63031">코드는 앞 영문 소문자로 시작하며,다음 숫자를 2~3자로 작성해주세요.</div>
                 <div class="fail2-feedback d63031">이미 사용중인 코드입니다.</div>
 			</div>
 <!-- 학과 코드 입력-->
@@ -134,7 +121,7 @@
                       <input type="text" name="lectureDepartment" 
                         class="field w-100" placeholder="ex)d01">
  				<div class="success-feedback 00b894">올바른 학과 코드입니다.</div>
-                <div class="fail-feedback d63031">코드는 앞 영문 소문자 'd'로 시작하며,다음 숫자를 2~3자로 작성해주세요.</div>
+                <div class="fail-feedback d63031">코드는 앞 영문 소문자로 시작하며,다음 숫자를 2~3자로 작성해주세요.</div>
                 </div>
 <!-- 교수 코드 입력-->
 			<div class="row">
@@ -142,7 +129,7 @@
                       <input type="text" name="lectureProfessor" 
                         class="field w-100" placeholder="ex)prof001">
  				<div class="success-feedback 00b894">올바른 교수 코드입니다.</div>
-                <div class="fail-feedback d63031">코드는 앞 영문 소문자 'prof'로 시작하며,다음 숫자를 3자로 작성해주세요.</div>
+                <div class="fail-feedback d63031">코드는 앞 영문 소문자로 시작하며,다음 숫자를 3자로 작성해주세요.</div>
                 </div>
 <!-- 분류 선택-->
 			<div class="row">

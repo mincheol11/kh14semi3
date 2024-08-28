@@ -91,7 +91,7 @@
   </script>
 
  <form action="expand" method="post" autocomplete="off" class="check-form">
-        <div class="container w-400 my-50">
+        <div class="container w-400 my-50 h-70">
             <div class="row center">
                 <h1>학과 증설</h1>
             </div>
@@ -101,7 +101,7 @@
                     <input type="text" name="departmentCode" 
                         class="field w-100" placeholder="ex)d01">
                 <div class="success-feedback 00b894">올바른 코드입니다.</div>
-                <div class="fail-feedback d63031">코드는 앞 영문 'd'로 시작하며,다음 숫자를 2~3자로 작성해주세요.</div>
+                <div class="fail-feedback d63031">코드는 앞 영문 소문자로 시작하며,다음 숫자를 2~3자로 작성해주세요.</div>
                 <div class="fail2-feedback d63031">이미 사용중인 코드입니다</div>
 			</div>
 <!-- 학과명 입력 -->
@@ -119,6 +119,12 @@
                    <i class="fa-solid fa-landmark"></i>
                    학과개설
                 </button>
+                <div class="row">
+                <a href="list" class="btn btn-netraul w-100" >
+                   <i class="fa-solid fa-arrow-rotate-left"></i>
+                   뒤로가기
+                </a>
+                </div>
             </div>
         </div>
     </form>

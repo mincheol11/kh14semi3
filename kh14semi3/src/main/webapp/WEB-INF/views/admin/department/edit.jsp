@@ -68,7 +68,7 @@
             	<div class="row">
             		<label>학과코드</label>
                 	<input type="hidden" name="departmentCode" value="${adminDepartmentDto.departmentCode}">
-                	<div class="field w-100">${adminDepartmentDto.departmentCode}</div>
+                	<div class="field w-100"  style= "background:white">${adminDepartmentDto.departmentCode}</div>
                 	
 <!-- 학과명 입력 -->
 			<div class="row">
@@ -82,6 +82,12 @@
 				 <div class="row mt-40">
                 	<button class="btn btn-positive w-100" onclick="return checkEdit()" >수정하기</button>
             	</div>
+            	<div class="row">
+                <a href="detail?departmentCode=${adminDepartmentDto.departmentCode}" class="btn btn-netraul w-100" >
+                   <i class="fa-solid fa-arrow-rotate-left"></i>
+                   뒤로가기
+                </a>
+                </div>
             </div>
 	</div>
 </form>

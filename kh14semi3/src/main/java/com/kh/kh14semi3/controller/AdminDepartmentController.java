@@ -54,11 +54,11 @@ public class AdminDepartmentController {
 	
 	//학과 통폐합
 	@RequestMapping("/reduce")
-	public String reduce(@RequestParam String departmentCode) {
+	public String reduce(@RequestParam String departmentCode, @ModelAttribute PageVO pageVO) {
 		boolean result = adminDepartmentDao.reduce(departmentCode);
 		if(result == false)
 			throw new TargetNotFoundException("존재하지 않는 학과입니다.");
-		return "redirect:list";//시스템관리로 이동
+		return "redirect:list?page=" + pageVO.getPage() + "&message=reduce"; 
 	}
 	
 	//학과 상세정보 수정
@@ -73,6 +73,6 @@ public class AdminDepartmentController {
 		public String edit(@ModelAttribute AdminDepartmentDto adminDepartmentDto) {
 			boolean result = adminDepartmentDao.edit(adminDepartmentDto);
 			if(result == false) throw new TargetNotFoundException("수정할 학과가 없습니다.");
-			return "redirect:detail?departmentCode="+adminDepartmentDto.getDepartmentCode();
+			return "redirect:detail?departmentCode="+adminDepartmentDto.getDepartmentCode()+ "&message=edit";
 		}
 }
