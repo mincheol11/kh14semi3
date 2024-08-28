@@ -90,7 +90,7 @@
 	 	</c:when>
 	 	<c:when test="${sessionScope.createdRank == '학생'}">	 		
 	 		<div class="sidebar">
-	            <ul class="menu">
+	            <ul class="menu">	             
 	                <li>
 	                    <a href="#">공지사항</a>
 	                    <ul class="submenu">
@@ -117,6 +117,7 @@
 	                    <ul class="submenu">
 	                        <li><a href="/member/mypage">내 정보</a></li>
 	                        <li><a href="/member/findPw">비밀번호 변경</a></li>
+	                        <li><a href="/member/logout">로그아웃</a></li>
 	                    </ul>
 	                </li>
 	            </ul>
@@ -144,6 +145,7 @@
 	                    <ul class="submenu">
 	                        <li><a href="/member/mypage">내 정보</a></li>
 	                        <li><a href="/member/findPw">비밀번호 변경</a></li>
+	                        <li><a href="/member/logout">로그아웃</a></li>
 	                    </ul>
 	                </li>
 	            </ul>
@@ -171,6 +173,14 @@
 	                    <ul class="submenu">
 	                        <li><a href="/admin/department/list">학과 목록</a></li>
 	                        <li><a href="/admin/department/expand">학과 개설</a></li>
+	                    </ul>
+	                </li>
+	                <li>
+	                    <a href="#">마이페이지</a>
+	                    <ul class="submenu">
+	                        <li><a href="/member/mypage">내 정보</a></li>
+	                        <li><a href="/member/findPw">비밀번호 변경</a></li>
+	                        <li><a href="/member/logout">로그아웃</a></li>
 	                    </ul>
 	                </li>
 	            </ul>
