@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.kh14semi3.dao.MemberDao;
 import com.kh.kh14semi3.dao.TakeOffDao;
+import com.kh.kh14semi3.dto.AdminDto;
 import com.kh.kh14semi3.dto.MemberDto;
+import com.kh.kh14semi3.dto.ProfessorDto;
+import com.kh.kh14semi3.dto.StudentDto;
 import com.kh.kh14semi3.dto.TakeOffDto;
 import com.kh.kh14semi3.error.TargetNotFoundException;
 import com.kh.kh14semi3.vo.PageVO;
@@ -76,9 +79,16 @@ public class AdminMemberController {
 	}
 	
 //	@PostMapping("/joinR")
-//	public String joinR(@RequestParam String memberId,
-//							@RequestParam String memberRank) {
+//	public String joinR(@ModelAttribute StudentDto studentDto,
+//							@ModelAttribute ProfessorDto professorDto,
+//							@ModelAttribute AdminDto adminDto,
+//							@) {
+//		MemberDto 
 //		
+//		
+//		
+//		
+//		return "redirect:list";
 //	}
 	
 	
@@ -94,7 +104,6 @@ public class AdminMemberController {
 	@PostMapping("/change")
 	public String change(@ModelAttribute MemberDto memberDto) {
 		boolean result = memberDao.updateMemberByAdmin(memberDto);
-		System.out.println(memberDto.getMemberId());
 		if(result == false)
 			throw new TargetNotFoundException("존재하지 않는 회원ID입니다.");
 		return "redirect:detail?memberId="+memberDto.getMemberId();
