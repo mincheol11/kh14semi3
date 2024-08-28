@@ -72,17 +72,9 @@ public class MemberController {
 		//1번
 		MemberDto memberDto = memberDao.selectOne(memberId);
 		if(memberDto == null) return "redirect:/member/login?error"; //redirect는 get으로 감
-		
-		//2번
-//		boolean isValid = memberPw.equals(memberDto.getMemberPw()); //암호화변되면 equals 못씀 쓰면 false
-//		boolean isValid = encoder.matches(memberDto.getMemberPw(), encrypt);
-//		if(isValid == false) return "redirect:/member/login?error"; //
-		
-		
-		String rawPw = memberDto.getMemberPw(); // 비밀번호 암호화안된것
-		String encPw = encoder.encode(rawPw); // 암호화된 비밀번호
-	
-		boolean isValid = encoder.matches(memberPw,encPw);
+		String rawPw = memberDto.getMemberPw(); // Db에 있는 비밀번호
+
+		boolean isValid = encoder.matches(memberPw,rawPw);
 		if (!isValid) {
 		    return "redirect:/member/login?error";
 		}

@@ -134,8 +134,12 @@ public class MemberDao {
 
 	// 비밀번호 변경
 		public boolean updateMemberPw(String memberId, String memberPw) {
+			//비밀번호 암호화
+			String rawPw = memberPw; // 비밀번호 암호화안된것
+			String encPw = encoder.encode(rawPw); // 암호화된 비밀번호
+			
 			String sql = "update member set member_pw=? where member_id=?";
-			Object[] data = { memberPw, memberId };
+			Object[] data = { encPw, memberId };
 			return jdbcTemplate.update(sql, data) > 0;
 		}
 		
