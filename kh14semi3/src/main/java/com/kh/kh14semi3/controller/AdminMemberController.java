@@ -132,9 +132,11 @@ public class AdminMemberController {
 	
 	//관리자 - 회원 정보 수정
 	@GetMapping("/change")
-	public String change(@RequestParam String memberId, Model model) {
+	public String change(@RequestParam(required=false) String memberId, Model model) {
 		MemberDto memberDto = memberDao.selectOne(memberId);
+		System.out.println(memberDto);
 		model.addAttribute("memberDto", memberDto);
+		
 		if(memberDto == null) {
 			throw new TargetNotFoundException("존재하지 않는 회원입니다.");
 		}
@@ -166,15 +168,28 @@ public class AdminMemberController {
 		boolean result = memberDao.updateMemberByAdmin(memberDto);
 		if(result == false) {
 			throw new TargetNotFoundException("존재하지 않는 회원ID입니다.");
+
 		}
 		if("학생".equals(memberDto.getMemberRank())) {
 			boolean result2 = studentDao.update(studentDto);
+			if(result2 == false) {
+				throw new TargetNotFoundException("존재하지 않는 회원ID입니다.");
+			}
+			return "redirect:list";
 		}
 		else if("교수".equals(memberDto.getMemberRank())) {
 			boolean result3 = professorDao.update(professorDto);
+			if(result3 == false) {
+				throw new TargetNotFoundException("존재하지 않는 회원ID입니다.");
+			}
+			return "redirect:list";
 		}
 		else if("관리자".equals(memberDto.getMemberRank())) {
 			boolean result4 = adminDao.update(adminDto);
+			if(result4 == false) {
+				throw new TargetNotFoundException("존재하지 않는 회원ID입니다.");
+			}
+			return "redirect:list";
 		}
 		else {
 			
