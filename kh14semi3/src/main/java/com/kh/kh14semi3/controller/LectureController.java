@@ -71,14 +71,8 @@ public class LectureController {
 		pageVO.setCount(count);
 		return "/WEB-INF/views/lecture/grade.jsp";
 	}
-	
-	// 학생 목록
-	@PostMapping("/student/list")
-	public List<GradeStudentVO> list(@RequestParam String gradeLecture) {
-	    return gradeDao.studentList(gradeLecture);
-	}
 			
-	// 성적 입력 
+	// 성적 입력 (학생목록조회)
 	@RequestMapping("/grade/insert")
 	public String gradeInsert(
 					@ModelAttribute("gradeStudentVO") GradeStudentVO gradeStudentVO,
@@ -90,7 +84,7 @@ public class LectureController {
 			
 		GradeDto gradeDto = gradeDao.selectOne(gradeLecture);
 		model.addAttribute("gradeDto", gradeDto);
-		model.addAttribute("studentList", gradeDao.studentList(gradeLecture));
+		model.addAttribute("studentList", gradeDao.studentList(gradeStudentVO, gradeLecture));
 		
 		return "/WEB-INF/views/lecture/gradeInsert.jsp";
 	}

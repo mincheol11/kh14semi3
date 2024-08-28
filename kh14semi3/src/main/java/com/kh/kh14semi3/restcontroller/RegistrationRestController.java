@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.kh.kh14semi3.dao.GradeDao;
 import com.kh.kh14semi3.dao.LectureDao;
 import com.kh.kh14semi3.dao.RegistrationDao;
 import com.kh.kh14semi3.vo.RegistrationVO;
@@ -21,6 +22,8 @@ public class RegistrationRestController {
 	private RegistrationDao registrationDao;
 	@Autowired
 	private LectureDao lectureDao;
+	@Autowired
+	private GradeDao gradeDao;
  
 	// 수강신청 확인 매핑
 	@RequestMapping("/check")
@@ -46,9 +49,11 @@ public class RegistrationRestController {
 		boolean isChecked = registrationDao.check(studentId, lectureCode);
 		if(isChecked) { // 삭제(등록 이력 있음)
 			registrationDao.delete(studentId, lectureCode);
+			gradeDao.delete(studentId, lectureCode);
 		}
 		else { // 등록(등록 이력 없음)
 			registrationDao.insert(studentId, lectureCode);
+			gradeDao.insert(studentId, lectureCode);
 		}
 		
 		// 갱신(최신화) - 반정규화

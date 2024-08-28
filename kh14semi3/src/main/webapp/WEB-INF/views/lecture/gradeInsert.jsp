@@ -176,20 +176,16 @@
 					<!-- 학생 목록 -->
 					<tr>
 						<div class="row"> <!-- student-list-wrapper -->
-						
-							<td>${lectureDto.lectureCode}</td>
-							<td>${param.gradeLecture}</td>
-							<c:if test="${param.gradeLecture == null}">
-								<span>와웅</span>
-							</c:if>
-								<%-- <td>${gradeDto.gradeAttendance}</td>
-								<td>${gradeDto.gradeScore1}</td>
-								<td>${gradeDto.gradeScore2}</td>
-								<td>${gradeDto.gradeHomework}</td>
-								<td>${gradeDto.gradeRank}</td> 
-								<td><button type="button" class="btn btn-positive btn-insert"></button></td>--%>
-							<%-- <c:forEach var="gradeStudentVO" items="${studentList}">
-							</c:forEach> --%>
+							<c:forEach var="gradeStudentVO" items="${studentList}">
+								<td>${gradeStudentVO.memberId}</td>
+								<td>${gradeStudentVO.memberName}</td>
+								<td>${gradeStudentVO.gradeAttendance}</td>
+								<td>${gradeStudentVO.gradeScore1}</td>
+								<td>${gradeStudentVO.gradeScore2}</td>
+								<td>${gradeStudentVO.gradeHomework}</td>
+								<td>${gradeStudentVO.gradeRank}</td> 
+								<td><button type="button" class="btn btn-positive btn-insert"></button></td>
+							</c:forEach> 
 						</div>
 					</tr>
 				</tbody>
