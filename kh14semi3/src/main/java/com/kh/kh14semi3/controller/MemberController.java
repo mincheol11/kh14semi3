@@ -87,11 +87,12 @@ public class MemberController {
 		    return "redirect:/member/login?error";
 		}
 		
-//		//3번 차단
-//		BlockDto blockDto = blockDao.selectLastOne(memberId);
-//		boolean isBlock = blockDto != null && blockDto.getBlockType().equals("차단");
-//		if (isBlock)
-//			return "redirect:/member/block";
+		
+		//3번 차단
+		TakeOffDto takeOffDto = takeOffDao.selectLastOne(memberId);
+		boolean isBlock = takeOffDto != null && takeOffDto.getTakeOffType().equals("제적");
+		if (isBlock)
+			return "redirect:block";
 		
 		//4번
 		session.setAttribute("createdUser", memberId);
@@ -118,7 +119,7 @@ public class MemberController {
 	public String logout(HttpSession session) {
 		session.removeAttribute("createdUser");
 		session.removeAttribute("createdRank"); // ? 관리자 메뉴추가 할때 썻던 코드
-		return "redirect:/";
+		return "redirect:/home/main";
 	}
 	
 	//비밀번호 찾기(재설정 링크 방식)
@@ -219,5 +220,11 @@ public class MemberController {
 		return "redirect:mypage";
 		
 	}
+	
+	@RequestMapping("/block") //제적jsp
+	public String block() {
+		return "/WEB-INF/views/member/block.jsp";
+	}
+	
 	
 }
