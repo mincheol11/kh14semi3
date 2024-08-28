@@ -9,15 +9,140 @@
 
 <script>
 $(function(){
-	
-	//엔터 차단 코드
-    $(".check-form").find(".field").keypress(function(e){
-        switch(e.keyCode) {
-            case 13: return false;
+	//입력창 검사
+    $("[name=memberId]").blur(function(){
+        //step 1 : 아이디에 대한 형식 검사
+        var regex = /^[a-z][a-z0-9]{7,19}$/;
+        var memberId = $(this).val();//this.value
+        var isValid = regex.test(memberId);
+        //step 2 : 아이디 중복 검사(형식이 올바른 경우만)
+        if(isValid) {
+            //비동기 통신으로 중복 검사 수행
+            $.ajax({
+                url:"/rest/member/checkId",
+                method:"post",
+                data:{memberId : memberId},
+                success: function(response) {
+                    if(response) {//.success - 아이디가 사용가능한 경우
+                        status.memberIdCheckValid = true;
+                        $("[name=memberId]").removeClass("success fail fail2")
+                                                            .addClass("success");
+                    }
+                    else {//.fail2 - 아이디가 이미 사용중인 경우
+                        status.memberIdCheckValid = false;
+                        $("[name=memberId]").removeClass("success fail fail2")
+                                                            .addClass("fail2");
+                    }
+                },
+            });
+        }
+        else {//.fail - 아이디가 형식에 맞지 않는 경우
+            $("[name=memberId]").removeClass("success fail fail2")
+                                                .addClass("fail");
+        }
+        status.memberIdValid = isValid;
+    });
+    $("[name=memberPw]").blur(function(){
+        var regexStr = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$])[A-Za-z0-9!@#$]{8,16}$/;
+        var regex = new RegExp(regexStr);
+        var isValid = regex.test($(this).val());
+        $(this).removeClass("success fail")
+                    .addClass(isValid ? "success" : "fail");
+        status.memberPwValid = isValid;
+        console.log($(this).val());
+    });
+    $("#password-check").blur(function(){
+        var isValid = $("[name=memberPw]").val().length
+                        && $(this).val() == $("[name=memberPw]").val();
+        $(this).removeClass("success fail")
+                    .addClass(isValid ? "success" : "fail");
+        status.memberPwCheckValid = isValid;
+    });
+    
+    $("[name=memberName]").blur(function(){
+        var regexStr = /^[가-힣]{2,7}$/;
+        var regex = new RegExp(regexStr);
+        var isValid = regex.test($(this).val());
+        $(this).removeClass("success fail").addClass(isValid ? "success" : "fail");
+        status.memberNameValid = isValid;
+    });
+
+    $("[name=memberRank]").on("input", function(){
+        var str = "^(관리자|교수|학생)$";
+        var regex = new RegExp(str);//문자열을 정규표현식으로 변환
+        var isValid = regex.test($(this).val());
+        $(this).removeClass("success fail")
+        .addClass(isValid ? "success" : "fail");
+        status.memberRankValid = isValid;
+    });
+    
+
+    $("[name=memberEmail]").blur(function(){
+        var isValid = $(this).val().length > 0;
+        $(this).removeClass("success fail")
+                    .addClass(isValid ? "success" : "fail");
+        status.memberEmailValid = isValid;
+    });
+    $("[name=memberCell]").blur(function(){
+        var regex = /^010[1-9][0-9]{7}$/;
+        var isValid = $(this).val().length == 0 || regex.test($(this).val());
+        $(this).removeClass("success fail")
+                    .addClass(isValid ? "success" : "fail");
+        status.memberCellValid = isValid;
+    });
+    $("[name=memberBirth]").blur(function(){
+        var regex = /^([0-9]{4})-(02-(0[1-9]|1[0-9]|2[0-9])|(0[469]|11)-(0[1-9]|1[0-9]|2[0-9]|30)|(0[13578]|1[02])-(0[1-9]|1[0-9]|2[0-9]|3[01]))$/;
+        var isValid = $(this).val().length == 0 || regex.test($(this).val());
+        $(this).removeClass("success fail")
+                    .addClass(isValid ? "success" : "fail");
+        status.memberBirthValid = isValid;
+    });
+    //주소는 모두 없거나 모두 있거나 둘 중 하나면 통과
+    $("[name=memberPost],[name=memberAddress1],[name=memberAddress2]").blur(function(){
+        var memberPost = $("[name=memberPost]").val();
+        var memberAddress1 = $("[name=memberAddress1]").val();
+        var memberAddress2 = $("[name=memberAddress2]").val();
+
+        var isEmpty = memberPost.length == 0 
+                            && memberAddress1.length == 0 
+                            && memberAddress2.length == 0;
+        var isFill = memberPost.length > 0
+                            && memberAddress1.length > 0
+                            && memberAddress2.length > 0;
+        var isValid = isEmpty || isFill;
+        $("[name=memberPost],[name=memberAddress1],[name=memberAddress2]")
+                    .removeClass("success fail")
+                    .addClass(isValid ? "success" : "fail");
+        status.memberAddressValid = isValid;
+    });
+
+    //폼 검사
+    $(".check-form").submit(function(){
+        $("[name], #password-check").trigger("input").trigger("blur");    
+        return status.ok();
+    });
+    
+
+    //부가기능
+    $(".field-show").change(function(){
+        var checked = $(this).prop("checked");
+        $("[name=memberPw] , #password-check")
+                    .attr("type", checked ? "text" : "password");
+    });
+    $(".fa-eye").click(function(){
+        var checked = $(this).hasClass("fa-eye");
+        if(checked) {
+            $(this).removeClass("fa-eye").addClass("fa-eye-slash");
+            $("[name=memberPw] , #password-check").attr("type", "text");
+        }
+        else {
+            $(this).removeClass("fa-eye-slash").addClass("fa-eye");
+            $("[name=memberPw] , #password-check").attr("type", "password");
         }
     });
-	
-	$("[name=memberPost],[name=memberAddress1], .btn-find-address")
+
+
+    $("[name=memberPost],[name=memberAddress1], .btn-find-address")
     .click(function(){
         new daum.Postcode({
             oncomplete: function(data) {
@@ -57,10 +182,29 @@ $(function(){
             $(".btn-clear-address").fadeOut();
         }
     });
+
+    //엔터 차단 코드
+    $(".check-form").find(".field").keypress(function(e){
+        switch(e.keyCode) {
+            case 13: return false;
+        }
+    });
+    
+    
+
+    //생년월일 입력창에 DatePicker 설정
+    var picker = new Lightpick({
+        field: document.querySelector("[name=memberBirth]"),//설치대상
+        format: "YYYY-MM-DD",//날짜의 표시 형식(momentJS 형식)
+        firstDay:7,//일요일부터 표시
+        maxDate: moment(),//종료일을 오늘로 설정
+    });
+    
+    
 });
 </script>
 
-<form action="change" method="post" autocomplete="off">
+<form action="change" method="post" autocomplete="off" class="check-form">
 	<div class="container w-600 my-50">
 		<div class="row center">
 			<h1>회원정보수정</h1>

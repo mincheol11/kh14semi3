@@ -35,8 +35,8 @@ public class ProfessorDao {
 	}
 	
 	public boolean update(ProfessorDto professorDto) {
-		String sql = "update admin set professor_name = ? where professor_id = ?";
-		Object[] data = {professorDto.getProfessorId()};
+		String sql = "update professor set professor_department = ? where professor_id = ?";
+		Object[] data = {professorDto.getProfessorDepartment(), professorDto.getProfessorId()};
 		return jdbcTemplate.update(sql, data) > 0 ;
 	}
 	
