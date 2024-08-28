@@ -55,10 +55,10 @@ $(document).ready(function() {
              </tr>
     </thead>
 	<tbody>
-			<c:forEach var="adminDepartmentDto" items="${adminDepartmentList}">
-    			<tr onclick="location.href='detail?departmentCode=${adminDepartmentDto.departmentCode}'" style="cursor: pointer;">
-				        <td>${adminDepartmentDto.departmentCode}</td>
-				        <td>${adminDepartmentDto.departmentName}</td>
+			<c:forEach var="departmentDto" items="${departmentList}">
+    			<tr onclick="location.href='detail?departmentCode=${departmentDto.departmentCode}'" style="cursor: pointer;">
+				        <td>${departmentDto.departmentCode}</td>
+				        <td>${departmentDto.departmentName}</td>
     				</tr>
 				</c:forEach>
 			</tbody>

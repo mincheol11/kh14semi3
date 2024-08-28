@@ -68,13 +68,13 @@
             </div>
             	<div class="row">
             		<label>학과코드</label>
-                	<input type="hidden" name="departmentCode" value="${adminDepartmentDto.departmentCode}">
-                	<div class="field w-100"  style= "background:white">${adminDepartmentDto.departmentCode}</div>
+                	<input type="hidden" name="departmentCode" value="${departmentDto.departmentCode}">
+                	<div class="field w-100"  style= "background:white">${departmentDto.departmentCode}</div>
                 	
 <!-- 학과명 입력 -->
 			<div class="row">
                 <label>학과명 <i class="fa-solid fa-asterisk"></i></label>
-                      <input type="text" name="departmentName"  value="${adminDepartmentDto.departmentName}"
+                      <input type="text" name="departmentName"  value="${departmentDto.departmentName}"
                         class="field w-100" placeholder="ex)기계공학과">
  				<div class="success-feedback 00b894">올바른 학과명입니다.</div>
                 <div class="fail-feedback d63031">학과명은 한글로만 입력해주세요.</div>
@@ -84,7 +84,7 @@
                 	<button class="btn btn-positive w-100" onclick="return checkEdit()" >수정하기</button>
             	</div>
             	<div class="row">
-                <a href="detail?departmentCode=${adminDepartmentDto.departmentCode}" class="btn btn-netraul w-100" >
+                <a href="detail?departmentCode=${departmentDto.departmentCode}" class="btn btn-netraul w-100" >
                    <i class="fa-solid fa-arrow-rotate-left"></i>
                    뒤로가기
                 </a>

@@ -27,7 +27,7 @@
     <div class="container w-600 my-50">
   
     <c:choose>
-        <c:when test="${adminDepartmentDto == null}">
+        <c:when test="${departmentDto == null}">
         <div class="row center">
             <h1>존재하지 않는 학과 정보 입니다.</h1>
             </div>
@@ -39,11 +39,11 @@
         <table class="table table-border table-hover">
                 <tr>
                     <th width="30%">학과코드</th>
-                    <td>${adminDepartmentDto.departmentCode}</td>
+                    <td>${departmentDto.departmentCode}</td>
                 </tr>
                 <tr>
                     <th>학과명</th>
-                    <td>${adminDepartmentDto.departmentName}</td>
+                    <td>${departmentDto.departmentName}</td>
                 </tr>
             </table>
         </c:otherwise>
@@ -52,9 +52,9 @@
      <div class="row center">
      <a href="expand" class="btn btn-positive w-20">추가 학과개설</a>
     <a href="list" class="btn btn-neutral w-20">목록이동</a>
-    <c:if test="${adminDepartmentDto != null}">
-    <a href="edit?departmentCode=${adminDepartmentDto.departmentCode}" class="btn btn-neutral w-20">학과 정보 수정</a>
-    <a href="reduce?departmentCode=${adminDepartmentDto.departmentCode}"class="btn btn-negative w-20" 	onclick="return checkReduce()">학과 삭제</a>
+    <c:if test="${departmentDto != null}">
+    <a href="edit?departmentCode=${departmentDto.departmentCode}" class="btn btn-neutral w-20">학과 정보 수정</a>
+    <a href="reduce?departmentCode=${departmentDto.departmentCode}"class="btn btn-negative w-20" 	onclick="return checkReduce()">학과 삭제</a>
     </c:if>
 </div>
 </div>    
