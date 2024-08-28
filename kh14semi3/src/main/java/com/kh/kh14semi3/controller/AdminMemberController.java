@@ -204,11 +204,4 @@ public class AdminMemberController {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
 }
