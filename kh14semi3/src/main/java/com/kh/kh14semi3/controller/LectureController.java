@@ -96,7 +96,7 @@ public class LectureController {
 			model.addAttribute("gradeDto", gradeDto);
 			model.addAttribute("studentList", gradeDao.studentList(gradeLecture));
 			
-			return "/WEB-INF/views/lecture/gradeInsert3.jsp";
+			return "/WEB-INF/views/lecture/gradeInsert.jsp";
 		}
 	
 	

@@ -21,6 +21,7 @@ public class GradeLectureMapper implements RowMapper<GradeLectureVO> {
 		gradeLectureVO.setGradeScore1(rs.getInt("grade_score1"));
 		gradeLectureVO.setGradeScore2(rs.getInt("grade_score2"));
 		gradeLectureVO.setGradeHomework(rs.getInt("grade_homework"));
+		gradeLectureVO.setGradeRank(rs.getInt("grade_rank"));
 		
 		gradeLectureVO.setLectureCode(rs.getString("lecture_code"));
 		gradeLectureVO.setLectureDepartment(rs.getString("lecture_department"));
