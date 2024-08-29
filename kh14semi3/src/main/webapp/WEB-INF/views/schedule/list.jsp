@@ -7,10 +7,9 @@ document.addEventListener('DOMContentLoaded', function() {
     var modal = document.getElementById("scheduleModal");
     var span = document.getElementsByClassName("scheduleModalClose")[0];
 
-    // 모달 열기
     function openModal(url) {
         var modalBody = document.getElementById("modalBody");
-        modalBody.innerHTML = '<p>Loading...</p>'; // 로딩 메시지
+        modalBody.innerHTML = '<p>Loading...</p>';
 
         fetch(url)
             .then(response => response.text())
@@ -19,23 +18,23 @@ document.addEventListener('DOMContentLoaded', function() {
                 modal.style.display = "block";
             })
             .catch(error => {
-                modalBody.innerHTML = '<p>Failed to load content.</p>'; // 오류 메시지
+                modalBody.innerHTML = '<p>Failed to load content.</p>';
                 console.error('Error:', error);
             });
     }
 
-    // 모달 닫기
     span.onclick = function() {
         modal.style.display = "none";
+        window.location.href = "list"; // 목록 페이지로 이동
     }
 
     window.onclick = function(event) {
         if (event.target == modal) {
             modal.style.display = "none";
+            window.location.href = "list"; // 목록 페이지로 이동
         }
     }
 
-    // 링크 클릭 시 모달 열기
     document.querySelectorAll('.modal-trigger').forEach(function(element) {
         element.addEventListener('click', function(event) {
             event.preventDefault();
@@ -44,7 +43,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // 메시지 표시 함수
     function showMessage(message) {
         if (message === 'updateSuccess') {
             alert('수정이 완료되었습니다.');
@@ -52,33 +50,26 @@ document.addEventListener('DOMContentLoaded', function() {
             alert('삭제가 완료되었습니다.');
         } else if (message === 'deleteFail') {
             alert('삭제에 실패하였습니다.');
-        }
-        else if (message === 'addSuccess') {
+        } else if (message === 'addSuccess') {
             alert('등록되었습니다.');
         }
     }
 
-    // URL의 message 파라미터를 사용하여 메시지를 표시하고, 한 번만 표시되도록 관리
     var urlParams = new URLSearchParams(window.location.search);
     var message = urlParams.get('message');
     if (message) {
         showMessage(message);
-
-        // 메시지 파라미터 제거 후 페이지 이동
         urlParams.delete('message');
         window.history.replaceState(null, '', `${window.location.pathname}?${urlParams}`);
     }
 
-    // 페이지 이동 함수
     function changeMonth(direction) {
         var currentYear = parseInt('${currentYear}');
         var currentMonth = parseInt('${currentMonth}');
-        var currentPage = parseInt('${currentPage}') || 1; // 기본값을 1로 설정
+        var currentPage = parseInt('${currentPage}') || 1;
 
-        // 월을 이동
         currentMonth += direction;
 
-        // 월과 연도 조정
         if (currentMonth > 12) {
             currentMonth = 1;
             currentYear++;
@@ -87,21 +78,17 @@ document.addEventListener('DOMContentLoaded', function() {
             currentYear--;
         }
 
-        // URL 파라미터 업데이트
         var url = new URL(window.location.href);
         url.searchParams.set('pageYear', currentYear);
         url.searchParams.set('pageMonth', currentMonth);
 
-        // 페이지 번호 조정
-        var totalPages = parseInt('${totalPages}') || 1; // 페이지 수를 모델에서 가져와야 함
-        if (currentPage > totalPages) currentPage = totalPages; // 유효한 페이지로 설정
+        var totalPages = parseInt('${totalPages}') || 1;
+        if (currentPage > totalPages) currentPage = totalPages;
         url.searchParams.set('page', currentPage);
 
-        // 페이지 새로 고침
         window.location.href = url.toString();
     }
 
-    // 월 이동 버튼 클릭 시 페이지 이동
     document.querySelectorAll('.nav-buttons button').forEach(function(button) {
         button.addEventListener('click', function(event) {
             var direction = this.getAttribute('data-icon') === '‹' ? -1 : 1;
@@ -112,12 +99,13 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 
+
 <style>
-/* 모달의 기본 스타일링 */
+
 .modal {
-  display: none;  /* 모달은 기본적으로 보이지 않도록 설정 */
+  display: none; 
   position: fixed;
-  z-index: 1000; /* 모달의 z-index 값을 높여서 목록 위에 표시되도록 설정 */
+  z-index: 1000;
   left: 0;
   top: 0;
   width: 100%;
@@ -129,19 +117,26 @@ document.addEventListener('DOMContentLoaded', function() {
 /* 모달 콘텐츠 스타일 */
 .modal-content {
   background-color: #fefefe;
-  margin: 10% auto; /* 상단 여백을 줄여서 중앙에 더 가까이 위치 */
+  margin: 5% auto; /* 모달의 상단과 하단 마진 조정 */
   padding: 20px;
-  border: 1px solid rgb(0, 168, 255); /* 두꺼운 하늘색 테두리 추가 */
-  width: 58%; /* 모달 너비를 증가시킴  */
-  max-width: 1400px; /* 최대 너비를 1400px로 증가시킴 (1200px에서 1400px로 변경) */
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* 그림자 추가 */
-  z-index: 1001; /* 모달 콘텐츠의 z-index 값을 모달보다 더 높게 설정 */
+  border: 1px solid rgb(0, 168, 255);
+  width: 60%; /* 너비 조정 */
+  max-width: 1400px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  z-index: 1001;
+
+  /* 높이 조정 추가 */
+  height: 100%; /* 높이 조정 */
+  max-height: 100%; /* 최대 높이 조정 */
+
+
 }
+
 /* 닫기 버튼 스타일 */
 .scheduleModalClose {
   color: #aaa;
   float: right;
-  font-size: 24px; /* 폰트 크기 줄이기 */
+  font-size: 24px;
   font-weight: bold;
 }
 
@@ -163,8 +158,6 @@ document.addEventListener('DOMContentLoaded', function() {
   border-radius: 5px; /* 버튼의 모서리를 둥글게 함 */
   transition: color 0.3s, border-color 0.3s; /* 색상 및 테두리 색상 변화에 부드러운 전환 효과 추가 */
 }
-
-
 
 /* 버튼 텍스트를 제거하고 기호만 보이도록 설정 */
 .nav-buttons button {
@@ -191,6 +184,7 @@ document.addEventListener('DOMContentLoaded', function() {
 .table.table-hover > tbody > tr:hover {
     background-color: rgb(255, 255, 255)!important;
 }
+
 /* 테이블 스타일 */
 .table {
   width: 100%;
@@ -215,7 +209,6 @@ document.addEventListener('DOMContentLoaded', function() {
 .table tr:hover {
   background-color: #f1f1f1; /* 호버 시 배경색 설정 */
 }
-
 </style>
 
 <div class="container w-800 ">

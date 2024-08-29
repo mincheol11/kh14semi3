@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <form action="edit" method="post" autocomplete="off">
     <div class="container w-800 my-50">
         <div class="row center">
-            <h1>게시글 수정</h1>
+            <h1>학사일정 수정</h1>
         </div>
         <div class="row">
             <input type="hidden" name="scheduleNo" class="field w-100" value="${scheduleDto.scheduleNo}">
