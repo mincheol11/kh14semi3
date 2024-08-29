@@ -4,12 +4,14 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <style>
-
+.pw12{
+	font-size: 75%;
+}
 .menu {
     list-style-type: none;
     padding: 0;
     margin: 0;
-    position: fixed;
+    position: fixed; left: 5%;    
 }
 
 .menu a:hover{
@@ -29,7 +31,9 @@
 }
 
 .menu > li > a:hover {
-    background-color: #ddd;
+	width: 130px;
+	border : 1px solid black;
+    /* background-color: #ddd; */
 }
 
 .submenu {
@@ -50,7 +54,8 @@
 }
 
 .submenu li a:hover {
-    background-color: #f0f0f0;
+	border : 1px solid black;
+    /* border-color: #f0f0f0; */
 }
 </style>
 
@@ -117,7 +122,7 @@
 	                    <a href="#">마이페이지</a>
 	                    <ul class="submenu">
 	                        <li><a href="/member/mypage">내 정보</a></li>
-	                        <li><a href="/member/findPw">비밀번호 변경</a></li>
+	                        <li><a href="/member/findPw" class="pw12">비밀번호 변경</a></li>
 	                        <li><a href="/member/logout">로그아웃</a></li>
 	                    </ul>
 	                </li>
@@ -145,7 +150,7 @@
 	                    <a href="#">마이페이지</a>
 	                    <ul class="submenu">
 	                        <li><a href="/member/mypage">내 정보</a></li>
-	                        <li><a href="/member/findPw">비밀번호 변경</a></li>
+	                        <li><a href="/member/findPw" class="pw12">비밀번호 변경</a></li>
 	                        <li><a href="/member/logout">로그아웃</a></li>
 	                    </ul>
 	                </li>
@@ -180,7 +185,7 @@
 	                    <a href="#">마이페이지</a>
 	                    <ul class="submenu">
 	                        <li><a href="/member/mypage">내 정보</a></li>
-	                        <li><a href="/member/findPw">비밀번호 변경</a></li>
+	                        <li><a href="/member/findPw" class="pw12">비밀번호 변경</a></li>
 	                        <li><a href="/member/logout">로그아웃</a></li>
 	                    </ul>
 	                </li>
