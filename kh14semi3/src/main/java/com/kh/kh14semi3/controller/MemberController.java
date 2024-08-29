@@ -100,6 +100,7 @@ public class MemberController {
 		}
 		else {//아이디저장체크x
 			Cookie ck = new Cookie("saveId", memberId);//쿠키생성
+			ck.setPath("/");
 			ck.setMaxAge(0); //0초=삭제
 			response.addCookie(ck);
 		}		
