@@ -214,7 +214,7 @@ top: 0px;
 </style>
 
 <div class="container w-800 ">
-  <div class="row left">
+  <div class="row center">
     <h1>학사 일정</h1>
   </div>
 

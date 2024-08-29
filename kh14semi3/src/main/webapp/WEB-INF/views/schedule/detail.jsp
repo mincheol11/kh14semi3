@@ -82,7 +82,7 @@
     </style>
 
 
-<div class="flex-core">
+
     <div class="container">
         <!-- 내용 -->
         <div class="content" style="min-height:300px;">
@@ -106,6 +106,6 @@
             </div>
            
         </div>
-    </div>
+   
 
 
