@@ -76,7 +76,7 @@ createdRank = ${sessionScope.createdRank}
 		<h1>강의 목록</h1>
 	</div>
 
-	<div class="row cneter">
+	<div class="row center">
 		<form action="list" method="get" autocomplete="off">
 			<!-- 검색창 --> 
 			<select class="field" name="column">
