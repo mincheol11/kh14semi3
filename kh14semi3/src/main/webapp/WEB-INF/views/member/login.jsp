@@ -4,8 +4,53 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-    
-    <form action="login" method="post" autocomplete="off">
+<script type="text/javascript">
+	$(function() {
+		var status = {
+			memberIdValid : false, //형식검사
+			memberPwValid : false,
+			ok : function() {
+				return this.memberIdValid && this.memberPwValid;
+			},
+		};
+		//입력창 검사
+		$("[name=memberId]").blur(
+				function() {
+					//step 1 : 아이디에 대한 형식 검사
+					var regex = /^.+$/;
+					var memberId = $(this).val();//this.value
+					var isValid = regex.test(memberId);
+					if (isValid) {
+						status.memberIdCheckValid = true;
+						$("[name=memberId]").removeClass("success fail fail2")
+								.addClass("success");
+					} else {//.fail - 아이디가 형식에 맞지 않는 경우
+						status.memberIdCheckValid = false;
+						$("[name=memberId]").removeClass("success fail fail2")
+								.addClass("fail");
+					}
+					status.memberIdValid = isValid;
+				});
+
+		   $("[name=memberPw]").blur(function(){
+               var regex = /^.+$/;
+               var isValid = regex.test($(this).val());
+               $(this).removeClass("success fail")
+                           .addClass(isValid ? "success" : "fail");
+               status.memberPwValid = isValid;
+           });
+
+		//폼 검사
+		$(".check-form").submit(function() {
+			$("[name]").trigger("input").trigger("blur");
+			return status.ok();
+		});
+
+	});
+</script>
+
+
+<form action="login" method="post" autocomplete="off" class="check-form">
     <div class="container w-400 my-50">
     	<div class="row center">
     		<h1>Kh 대학교 로그인</h1>
@@ -14,14 +59,16 @@
     		<label>아이디</label> 
     		<input type="text" name="memberId" class="field w-100"
     																		  value="${cookie.saveId.value}">
+    																		  
+                        <div class="fail-feedback">아이디를 입력하세요</div>
     	</div>
     	
 		<div class="row mb-0">
 			<label>비밀번호</label> <input type="password" name="memberPw" class="field w-100">
+                        <div class="fail-feedback">비밀번호를 입력하세요</div>
 		</div>
 		
 		<div class="row flex-box column-2 my-0">
-		<%--쿠키를 이용한 아이디저장 체크박스 --%>
 		<div class="row left">
 		<label>
 			<input type="checkbox" name="remember" 
@@ -46,5 +93,6 @@
 		</c:if>
 	</div>
 </form>
+ 
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
