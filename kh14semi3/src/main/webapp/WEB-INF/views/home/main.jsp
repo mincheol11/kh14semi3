@@ -80,7 +80,7 @@ h2 span#currentYear, h2 span#currentMonth {
 						if(index<3){
 	                        $('#boardTable tbody').append(
 	                            '<tr>' +
-	                            '<td>' + ' [' + board.boardNo + '] ' + board.boardTitle + '</td>' +
+	                            '<td>'  + board.boardTitle + '</td>' +
 	                            '<td>' + board.boardWtime + '</td>' +
 	                            '</tr>'
 	                        );							
@@ -156,7 +156,7 @@ h2 span#currentYear, h2 span#currentMonth {
 						if(index<3){
 							$('#scheduleTable tbody').append(
 								'<tr>' +
-								'<td>' + ' [' + schedule.scheduleNo + '] ' + schedule.scheduleTitle + '</td>' +
+								'<td>' + schedule.scheduleTitle + '</td>' +
 	                            '<td>' + schedule.scheduleWtime + '</td>' +
                             	'</tr>'
 							);							
