@@ -247,9 +247,6 @@ $(function(){
             <div class="">
                 <div class="page">
                     <div class="row">
-                        <h2>1단계 : 아이디 입력</h2>
-                    </div>
-                    <div class="row">
                         <label>아이디</label>
                         <input type="text" name="memberId" class="field w-100"
                                     placeholder="영문소문자 시작, 숫자 포함 8~20자">
@@ -259,9 +256,6 @@ $(function(){
                     </div>
                 </div>
                 <div class="page">
-                    <div class="row">
-                        <h2>2단계 : 비밀번호 입력</h2>
-                    </div>
                     <div class="row">
                         <label>
                             비밀번호
@@ -290,9 +284,6 @@ $(function(){
                 </div>
                 <div class="page">
                     <div class="row">
-                        <h2>3단계 : 이름 입력</h2>
-                    </div>
-                    <div class="row">
                         <label>이름</label>
                         <input type="text" name="memberName"
                                 class="field w-100" placeholder="이름">
@@ -302,9 +293,6 @@ $(function(){
                 </div>
 <!------------- 교수 관리자 학생-------------->
                 <div class="page">
-                    <div class="row">
-                        <h2>4단계 : 직업 선택</h2>
-                    </div>
                     <div class="row">
                         <label>직업</label>
                         <select name="memberRank" class="field w-100">
@@ -320,9 +308,6 @@ $(function(){
 
                 <div class="page">
                     <div class="row">
-                        <h2>5단계 : 이메일 입력</h2>
-                    </div>
-                    <div class="row">
                         <label>이메일</label>
                         <input type="email" name="memberEmail"
                             class="field w-100" placeholder="test@kh.com">
@@ -330,10 +315,6 @@ $(function(){
                     </div>
                 </div>
                 <div class="page">
-                    <div class="row">
-                        <h2>6단계 : 선택정보 입력</h2> 
-                    </div>
-
                     <div class="row">
                         <label>연락처(휴대전화번호, - 제외)</label>
                         <input type="text" name="memberCell" class="field w-100"
@@ -348,9 +329,9 @@ $(function(){
                 </div>
                 <div class="page">
                     <div class="row">
-                        <h2>7단계 : 주소 입력</h2>
-                    </div>
-                    <div class="row">
+                    	<div class="row">
+	                    	<label>주소</label>
+                    	</div>
                         <input type="text" name="memberPost" class="field"
                                 placeholder="우편번호" readonly>
                         <button class="btn btn-neutral btn-find-address">

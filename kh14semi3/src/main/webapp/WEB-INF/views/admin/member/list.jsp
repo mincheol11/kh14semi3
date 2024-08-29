@@ -20,8 +20,8 @@
 				<option value="member_rank"<c:if test ="${param.column == 'member_rank'}"> selected</c:if>>등급</option>
 			</select>
 			<input class="field" type="text" name="keyword" value="${param.keyword}" placeholder="검색어">
-			<button class="btn btn-positive" type="submit">검색</button>
-			<a class="btn btn-netural" type="button" href="join">등록</a>
+			<button class="btn btn-positive" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+			<a class="btn btn-netural" type="button" href="join"><i class="fa-solid fa-right-to-bracket"></i></a>
 		</form>
 	</div>
 
