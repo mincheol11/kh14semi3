@@ -7,7 +7,11 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.kh14semi3.dto.LectureDto;
+import com.kh.kh14semi3.mapper.GradeLectureMapper;
+import com.kh.kh14semi3.mapper.GradeStudentMapper;
 import com.kh.kh14semi3.mapper.LectureMapper;
+import com.kh.kh14semi3.vo.GradeLectureVO;
+import com.kh.kh14semi3.vo.GradeStudentVO;
 import com.kh.kh14semi3.vo.PageVO;
 
 @Repository
@@ -18,6 +22,9 @@ public class LectureDao {
 	
 	@Autowired
 	private LectureMapper lectureMapper;
+	
+	@Autowired
+	private GradeLectureMapper gradeLectureMapper;
 	
 	// 강의 등록
 	public void insert(LectureDto lectureDto) {
@@ -161,6 +168,21 @@ public class LectureDao {
 		}
 	}
 	
-	
+	// 학생의 성적 조회 리스트
+	public List<GradeLectureVO> selectListWithGrade(PageVO pageVO, String studentId){
+//		if(pageVO.isSearch()) {
+//		}
+//		else {
+			String sql = "select * from lecture L "
+					+ "left outer join grade G on L.lecture_code = G.grade_lecture "
+					+ "where G.grade_student = ? "
+					+ "and G.grade_lecture in ("
+					+ "select R.registration_lecture from registration R "
+					+ "where R.registration_student = ? ) "
+					+ "order by lecture_name asc";	
+			Object[] data = {studentId, studentId};
+			return jdbcTemplate.query(sql, gradeLectureMapper, data);			
+//		}
+	}
 
 }

@@ -12,9 +12,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.kh14semi3.dao.GradeDao;
 import com.kh.kh14semi3.dao.LectureDao;
+import com.kh.kh14semi3.dao.MemberDao;
 import com.kh.kh14semi3.dto.GradeDto;
 import com.kh.kh14semi3.dto.LectureDto;
+import com.kh.kh14semi3.dto.MemberDto;
 import com.kh.kh14semi3.error.TargetNotFoundException;
+import com.kh.kh14semi3.vo.GradeLectureVO;
 import com.kh.kh14semi3.vo.GradeStudentVO;
 import com.kh.kh14semi3.vo.PageVO;
 
@@ -28,6 +31,8 @@ public class LectureController {
 	private LectureDao lectureDao;
 	@Autowired
 	private GradeDao gradeDao;
+	@Autowired
+	private MemberDao memberDao;
 	
 	// 강의 전체 목록 + 검색 기능
 	// 학생이면 수강중인 강의 목록을 보여주고 교수라면 가르치는 강의 목록을 보여준다
@@ -35,6 +40,8 @@ public class LectureController {
 	public String list(HttpSession session, @ModelAttribute("pageVO") PageVO pageVO, Model model) {
 		// 학생인지 교수인지 알 수 없으므로 memberId로 표현
 		String memberId = (String) session.getAttribute("createdUser");
+		MemberDto memberDto = memberDao.selectOne(memberId);
+		model.addAttribute("memberDto", memberDto);
 		// memberId가 학생인지 교수인지 확인
 		String memberRank = (String) session.getAttribute("createdRank");
 		if(memberRank.equals("학생")) {
@@ -64,10 +71,13 @@ public class LectureController {
 	
 	// 성적 조회
 	@RequestMapping("/grade")
-	public String grade(HttpSession session, @ModelAttribute("pageVO") PageVO pageVO, Model model) {		
+	public String grade(HttpSession session, @ModelAttribute("pageVO") PageVO pageVO, 
+			Model model, @ModelAttribute("gradeLectureVO") GradeLectureVO gradeLectureVO) {		
 		String studentId = (String) session.getAttribute("createdUser");
-		model.addAttribute("gradeList", gradeDao.selectListByRegistration(pageVO , studentId));
-		int count = gradeDao.countByPagingWithStudent(pageVO, studentId);
+		MemberDto memberDto = memberDao.selectOne(studentId);
+		model.addAttribute("memberDto", memberDto);
+		model.addAttribute("gradeList", lectureDao.selectListWithGrade(pageVO , studentId));
+		int count = lectureDao.countByPagingWithStudent(pageVO, studentId);
 		pageVO.setCount(count);
 		return "/WEB-INF/views/lecture/grade.jsp";
 	}
