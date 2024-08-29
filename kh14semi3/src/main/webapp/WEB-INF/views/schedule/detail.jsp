@@ -41,19 +41,17 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
+<style>
+
+
+</style>
 
 
 
-<div class="container w-400">
-    <!-- 작성자 -->
-    <div class="row center">${scheduleDto.scheduleWriter}</div>
-    <!-- 작성일 -->
-    <div class="row center">
-        <fmt:formatDate value="${scheduleDto.scheduleWtime}"
-           pattern="y년 M월 d일 E a h시 m분 s초" />
-    </div>
+<div class="container w-300">
+
     <!-- 내용 -->
-    <div class="row center" style="min-height:300px;">
+    <div class="row center"  style="min-height:300px;">
         ${scheduleDto.scheduleContent}
     </div>
     
