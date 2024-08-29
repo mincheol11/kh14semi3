@@ -65,11 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	<!-- 작성자 -->
 	<div class="row">${boardDto.boardWriter}</div>
-	<!-- 작성일 -->
-	<div class="row right">
-		<fmt:formatDate value="${boardDto.boardWtime}"
-			pattern="y년 M월 d일 E a h시 m분 s초" />
-	</div>
+	
 	<!-- 내용 -->
 	<div class="row" style="min-height: 200px">
 		<!-- pre 태그는 내용을 작성된 형태 그대로 출력한다
