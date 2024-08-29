@@ -51,12 +51,9 @@ public class GradeRestController {
     	
     	GradeDto originDto = gradeDao.selectOne(gradeDto.getGradeLecture());
     	model.addAttribute("originDto", originDto);
-    	 System.out.println(originDto);
 	
     	// 점수를 업데이트합니다.
         boolean updated = gradeDao.update(gradeDto);
-        System.out.println(updated);
-        System.out.println("updated= " + gradeDto);
         
         if (updated) {
             // 업데이트된 점수를 반환합니다.
