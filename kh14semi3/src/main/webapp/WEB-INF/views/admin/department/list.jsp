@@ -4,8 +4,9 @@
 		
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include> <!-- hearder 추가 -->
 
+	
+	
 <script type="text/javascript">
-
 function showMessage(message) {
 if (message === 'reduce') 
         alert('삭제가 완료되었습니다.');
@@ -23,10 +24,10 @@ $(document).ready(function() {
         <div class="row center">
             <h1>학과 시스템 관리</h1>
         </div>
-    <div class="row center">
+    <div class="row center mt-50">
         <form action="list" method="get" autocomplete="off">
         <div class="row right">
-		<a href="expand" class="btn btn-neutral w-20">학과개설</a>
+		<a href="expand" class="btn btn-positive w-20"><i class="fa-solid fa-building-columns"></i> 학과개설</a>
 		</div>
 		<div class="row right">
             <select name="column" class="field">
@@ -41,7 +42,7 @@ $(document).ready(function() {
 		</c:choose>
             </select>
         <input type="text" name="keyword" value="${param.keyword}" class="field w-60">
-        <button type="submit" class="btn btn-positive w-20"><i class="fa-solid fa-magnifying-glass">검색</i></button>
+        <button type="submit" class="btn btn- w-20"><i class="fa-solid fa-magnifying-glass"> 검색</i></button>
             </div>
         </form>
     </div>

@@ -3,6 +3,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include> <!-- hearder 추가 -->
+<style>
+.red.bounce {
+	color: red;
+	animation: bounce 0.1s ease-in-out infinite;
+	}
+.green.beat {
+	color: green;
+	animation: beat 0.1s ease-in-out infinite;
+	}
+</style>
 
   <script type="text/javascript">
   function checkEdit(){
@@ -32,11 +42,15 @@
 								status.departmentNameCheckValid=true;
 								$("[name=departmentName]").removeClass("success fail fail2")
 								.addClass("success");
+								$("[name=departmentName]").parent().find("label").find("i").removeClass("fa-bounce");
+								$("[name=departmentName]").parent().find("label").find("i").addClass("green fa-beat");
 							}
 							else{
 		                        status.departmentNameCheckValid=false;
 		                        $("[name=departmentName]").removeClass("success fail fail2")
 		                        .addClass("fail2");
+		                        $("[name=departmentName]").parent().find("label").find("i").removeClass("green fa-beat");
+		                        $("[name=departmentName]").parent().find("label").find("i").addClass("fa-bounce");
 		                    }
 						},
 					});
@@ -44,6 +58,8 @@
 		 		 else{
 		     			 $("[name=departmentName]").removeClass("success fail fail2")
 		      			.addClass("fail");
+		     			$("[name=departmentName]").parent().find("label").find("i").removeClass("green fa-beat");
+		     			$("[name=departmentName]").parent().find("label").find("i").addClass("fa-bounce");
 		  			}
 		  			status.departmentNameValid = isValid;
 		});
@@ -73,7 +89,7 @@
                 	
 <!-- 학과명 입력 -->
 			<div class="row">
-                <label>학과명 <i class="fa-solid fa-asterisk"></i></label>
+                <label>학과명 <i class="fa-solid fa-asterisk red"></i></label>
                       <input type="text" name="departmentName"  value="${departmentDto.departmentName}"
                         class="field w-100" placeholder="ex)기계공학과">
  				<div class="success-feedback 00b894">올바른 학과명입니다.</div>

@@ -33,7 +33,7 @@
             </div>
         </c:when>
     <c:otherwise>
-      <div class="row center">
+      <div class="row center my-50">
     <h1>학과 상세정보</h1>
     </div>
         <table class="table table-border table-hover">
@@ -49,12 +49,12 @@
         </c:otherwise>
     </c:choose>
     
-     <div class="row center">
-     <a href="expand" class="btn btn-positive w-20">추가 학과개설</a>
-    <a href="list" class="btn btn-neutral w-20">목록이동</a>
+     <div class="row center mt-50">
+     <a href="expand" class="btn btn-positive w-20"><i class="fa-solid fa-building-columns"></i> 학과개설</a>
+    <a href="list" class="btn btn-neutral w-20"><i class="fa-solid fa-list"></i> 목록이동</a>
     <c:if test="${departmentDto != null}">
-    <a href="edit?departmentCode=${departmentDto.departmentCode}" class="btn btn-neutral w-20">학과 정보 수정</a>
-    <a href="reduce?departmentCode=${departmentDto.departmentCode}"class="btn btn-negative w-20" 	onclick="return checkReduce()">학과 삭제</a>
+    <a href="edit?departmentCode=${departmentDto.departmentCode}" class="btn btn-neutral w-20"><i class="fa-solid fa-eraser"></i> 학과수정</a>
+    <a href="reduce?departmentCode=${departmentDto.departmentCode}"class="btn btn-negative w-20" 	onclick="return checkReduce()"><i class="fa-solid fa-trash"></i> 학과삭제</a>
     </c:if>
 </div>
 </div>    

@@ -4,25 +4,41 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include> <!-- hearder 추가 -->
 
+<style>
+.red.bounce {
+	color: red;
+	animation: bounce 0.1s ease-in-out infinite;
+	}
+.green.beat {
+	color: green;
+	animation: beat 0.1s ease-in-out infinite;
+	}	
+</style>
+
   <script type="text/javascript">
   function checkEdit(){
 		return confirm("정말 수정하시겠습니까?");
   	}
   $(function(){
-		//상태 객체
+	//상태 객체
 	  var status ={
-	  lectureCodeValid : true, lectureDepartmentValid : false,
-	  lectureDepartmentCheckValid : false, lectureProfessorCheckValid : false,
-	  lectureProfessorValid : false, lectureTypeValid : true,
-	  lectureNameValid : false, lectureDateValid : false,
+	  lectureCodeValid : false, lectureCodeCheckValid : false,
+	  lectureDepartmentValid : false, lectureDepartmentCheckValid : false,
+	  lectureProfessorValid : false, lectureProfessorCheckValid : false,
+	  lectureTypeValid : false, 
+	  lectureNameValid : false,  lectureNameCheckValid : false,
+	  lectureDateValid : false, lectureCountValid : false,
 	  ok : function(){
-		return 	this.lectureCodeValid &&  this.lectureDepartmentValid &&
-		this.lectureProfessorValid && this.lectureTypeValid &&
-		this.lectureNameValid && this.lectureDateValid
+		return this.lectureCodeValid && this.lectureCodeCheckValid &&  
+		this.lectureDepartmentValid && this.lectureDepartmentCheckValid &&
+		this.lectureProfessorValid && this.lectureProfessorCheckValid &&
+		this.lectureTypeValid && 
+		this.lectureNameValid && this.lectureNameCheckValid &&
+		this.lectureDateValid && this.lectureCountValid
 		},
 	};
-//학과코드 입력창 검사 // 테이블에 있는값인지 확인코드 추가
-  $("[name=lectureDepartment]").blur(function(){
+	//학과코드 입력창 검사 // 테이블에 있는값인지 확인코드 추가
+	  $("[name=lectureDepartment]").blur(function(){
 		var regex= /^.+$/;//형식검사
 		var lectureDepartment = $(this).val();
 		var isValid= regex.test(lectureDepartment);
@@ -36,11 +52,15 @@
 							status.lectureDepartmentCheckValid=true;
 							$("[name=lectureDepartment]").removeClass("success fail fail2")
 							.addClass("success");
+							$("[name=lectureDepartment]").parent().find("label").find("i").removeClass("red fa-bounce");
+							$("[name=lectureDepartment]").parent().find("label").find("i").addClass("green fa-beat");
 						}
 						else{
 	                        status.lectureDepartmentCheckValid=false;
 	                        $("[name=lectureDepartment]").removeClass("success fail fail2")
 	                        .addClass("fail2");
+	                        $("[name=lectureDepartment]").parent().find("label").find("i").removeClass("green fa-beat");
+	                        $("[name=lectureDepartment]").parent().find("label").find("i").addClass("red fa-bounce");
 	                    }
 					},
 				});
@@ -48,12 +68,14 @@
 	 		 else{
 	     			 $("[name=lectureDepartment]").removeClass("success fail fail2")
 	      			.addClass("fail");
+	     			$("[name=lectureDepartment]").parent().find("label").find("i").removeClass("green fa-beat");
+	     			$("[name=lectureDepartment]").parent().find("label").find("i").addClass("red fa-bounce");
 	  			}
 	  			status.lectureDepartmentValid = isValid;
 		});
-  
-  //교수코드 입력창 검사 // 테이블에 있는값인지 확인코드 추가
-  $("[name=lectureProfessor]").blur(function(){
+		
+	  //교수코드 입력창 검사 // 테이블에 있는값인지 확인코드 추가
+	  $("[name=lectureProfessor]").blur(function(){
 		var regex= /^.+$/;//형식검사
 		var lectureProfessor = $(this).val();
 		var isValid= regex.test(lectureProfessor);
@@ -67,11 +89,15 @@
 							status.lectureProfessorCheckValid=true;
 							$("[name=lectureProfessor]").removeClass("success fail fail2")
 							.addClass("success");
+							$("[name=lectureProfessor]").parent().find("label").find("i").removeClass("red fa-bounce");
+							$("[name=lectureProfessor]").parent().find("label").find("i").addClass("green fa-beat");
 						}
 						else{
 	                        status.lectureProfessorCheckValid=false;
 	                        $("[name=lectureProfessor]").removeClass("success fail fail2")
 	                        .addClass("fail2");
+	                        $("[name=lectureProfessor]").parent().find("label").find("i").removeClass("green fa-beat");
+	                        $("[name=lectureProfessor]").parent().find("label").find("i").addClass("red fa-bounce");
 	                    }
 					},
 				});
@@ -79,27 +105,65 @@
 	 		 else{
 	     			 $("[name=lectureProfessor]").removeClass("success fail fail2")
 	      			.addClass("fail");
+	     			$("[name=lectureProfessor]").parent().find("label").find("i").removeClass("green fa-beat");
+	     			$("[name=lectureProfessor]").parent().find("label").find("i").addClass("red fa-bounce");
 	  			}
 	  			status.lectureProfessorValid = isValid;
 		});
-  
-  //분류코드 선택창 검사
-     $("[name=lectureType]").blur(function(){
-            var isValid = $(this).val().length>0;
-            $(this).removeClass("success fail")
-                        .addClass(isValid ? "success" : "fail");
-            status.lectureTypeValid = isValid;
-        });
-  
-	  //강의명 입력창 검사 // 테이블에 있는값인지 확인코드 추가
-	  $("[name=lectureName]").blur(function(){
-		  	var regex= /^[가-힣()]{1,10}$/;//형식검사
+		
+	  //분류코드 선택창 검사
+	   $("[name=lectureType]").click(function(){
+             var isValid = $(this).val().length>0;
+          		 $(this).removeClass("success fail")
+                            .addClass(isValid ? "success" : "fail");
+          		 if(isValid){
+          			$("[name=lectureType]").parent().find("label").find("i").removeClass("red fa-bounce");
+          			$("[name=lectureType]").parent().find("label").find("i").addClass("green fa-beat");
+				}
+          		 else{
+          			$("[name=lectureType]").parent().find("label").find("i").removeClass("green fa-beat");
+          			$("[name=lectureType]").parent().find("label").find("i").addClass("red fa-bounce");
+				}
+                status.lectureTypeValid = isValid;
+            });
+	  
+	//강의명 입력창 검사 
+	 $("[name=lectureName]").blur(function(){
+			var regex= /^[가-힣A-Za-z()]{1,10}$/;//형식검사
 			var lectureName = $(this).val();
 			var isValid= regex.test(lectureName);
-                $(this).removeClass("success fail")
-                            .addClass(isValid ? "success" : "fail");
-                status.lectureNameValid = isValid;
-            });
+			if(isValid){//중복검사
+				$.ajax({
+					url:"/rest/admin/lecture/checkLectureName",
+					method:"post",
+					data:{lectureName:lectureName},
+					success:function(response){
+						if(response){
+							status.lectureNameCheckValid=true;
+							$("[name=lectureName]").removeClass("success fail fail2")
+							.addClass("success");
+							$("[name=lectureName]").parent().find("label").find("i").removeClass("red fa-bounce");
+							$("[name=lectureName]").parent().find("label").find("i").addClass("green fa-beat");
+						}
+						else{
+	                        status.lectureNameCheckValid=false;
+	                        $("[name=lectureName]").removeClass("success fail fail2")
+	                        .addClass("fail2");
+	                        $("[name=lectureName]").parent().find("label").find("i").removeClass("green fa-beat");
+	                        $("[name=lectureName]").parent().find("label").find("i").addClass("red fa-bounce");
+	                    }
+					},
+				});
+			}
+	 		 else{
+	     			 $("[name=lectureName]").removeClass("success fail fail2")
+	      			.addClass("fail");
+	     			$("[name=lectureName]").parent().find("label").find("i").removeClass("green fa-beat");
+	     			$("[name=lectureName]").parent().find("label").find("i").addClass("red fa-bounce");
+	  			}
+	  			status.lectureNameValid = isValid;
+		});
+	  
 		//강의시작시간+강의수업시간+강의요일 모두 선택 or 모두 불 선택	            
       $("[name=lectureTime],[name=lectureDuration],[name=lectureDay]").blur(function(){
           var lectureTime = $("[name=lectureTime]").val();
@@ -188,6 +252,7 @@
                         class="field w-100" placeholder="ex)학교보건교육론">
  				<div class="success-feedback 00b894">올바른 입력입니다.</div>
                 <div class="fail-feedback d63031">한/영 으로만 입력하세요.</div>
+                 <div class="fail2-feedback d63031">존재하는 강의명 입력하세요.</div>
                 </div>
 <!-- 강의 시작 시간입력-->
 		<div class="row">
