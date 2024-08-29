@@ -1,6 +1,7 @@
 package com.kh.kh14semi3.controller;
 
 import java.util.ArrayList;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -40,7 +41,7 @@ public class ScheduleController {
     @Autowired
     private AttachmentService attachmentService;
 
-    @GetMapping("/list2")
+    @GetMapping("/list")
     public String list(
             @RequestParam(value = "pageYear", required = false) Integer year,
             @RequestParam(value = "pageMonth", required = false) Integer month,
@@ -129,7 +130,7 @@ public class ScheduleController {
         model.addAttribute("showPreviousButton", showPreviousButton);
         model.addAttribute("showNextButton", showNextButton);
 
-        return "/WEB-INF/views/schedule/list2.jsp"; 
+        return "/WEB-INF/views/schedule/list.jsp"; 
     }
 
 
@@ -159,7 +160,7 @@ public class ScheduleController {
         scheduleDto.setScheduleNo(seq);
 
         scheduleDao.insert(scheduleDto);
-        return "redirect:/schedule/list2?page=" + pageVO.getPage() + "&message=addSuccess";
+        return "redirect:/schedule/list?page=" + pageVO.getPage() + "&message=addSuccess";
     }
 
     @GetMapping("/edit")
@@ -207,7 +208,7 @@ public class ScheduleController {
         scheduleDao.update(scheduleDto);
 
         // 수정 완료 후 목록 페이지로 리다이렉트하고 메시지 전달
-        return "redirect:/schedule/list2?page=" + pageVO.getPage() + "&message=updateSuccess";
+        return "redirect:/schedule/list?page=" + pageVO.getPage() + "&message=updateSuccess";
     }
 
     @RequestMapping("/delete")
@@ -231,9 +232,9 @@ public class ScheduleController {
             // 게시글 삭제
             boolean result = scheduleDao.delete(scheduleNo);
             if (result) {
-                return "redirect:/schedule/list2?page=" + page + "&message=deleteSuccess";
+                return "redirect:/schedule/list?page=" + page + "&message=deleteSuccess";
             } else {
-                return "redirect:/schedule/list2?page=" + page + "&message=deleteFail";
+                return "redirect:/schedule/list?page=" + page + "&message=deleteFail";
             }
         } else {
             return "redirect:/schedule/detail?scheduleNo=" + scheduleNo + "&confirm=show";
