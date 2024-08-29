@@ -75,7 +75,7 @@
         .content {
             height: 600px;
             border: 1px solid #ddd;
-            padding: 300px;
+            padding: 350px;
             background-color: #f9f9f9;
             border-radius: 5px;
         }
@@ -85,7 +85,7 @@
 <div class="flex-core">
     <div class="container">
         <!-- 내용 -->
-        <div class="row center content" style="min-height:300px;">
+        <div class="content" style="min-height:300px;">
             ${scheduleDto.scheduleContent}
         </div>
         
