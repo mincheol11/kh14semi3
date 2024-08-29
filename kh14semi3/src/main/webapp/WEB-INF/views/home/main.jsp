@@ -39,6 +39,11 @@ h2 span#currentYear, h2 span#currentMonth {
     font-size: 0.9em; /* 상대적인 크기로 조정, 필요에 따라 px로도 조정 가능 */
     /* 추가 스타일을 여기에 넣을 수 있습니다 */
 }
+.link-more {
+	color: D1DFEC;
+	font-size: 14px;
+	text-decoration: underline;
+}
 
 </style>
 
@@ -215,7 +220,8 @@ h2 span#currentYear, h2 span#currentMonth {
 		
 		<div class="w-50 mx-10 flex-core preview">
 			<div class="row center">			
-				<h2 class=" mt-0 mb-10">공지사항</h2>
+				<h2 class=" mt-0 mb-10">공지사항
+				 	<a href="/board/list" class="link link-more">더보기</a></h2>
 				 <table id="boardTable" class="left">		
 				 <thead>
                 <tr>
@@ -235,7 +241,8 @@ h2 span#currentYear, h2 span#currentMonth {
 	
 		<div class="w-50 mx-10 flex-core preview">
 			<div class="row center">			
-				<h2 class=" mt-0 mb-10">강의목록</h2>
+				<h2 class=" mt-0 mb-10">강의목록
+				<a href="/lecture/list" class="link link-more">더보기</a></h2>
 				 <table id="lectureTable">
 				 	 <thead>
 			            <tr>
@@ -257,11 +264,8 @@ h2 span#currentYear, h2 span#currentMonth {
 		<div class="w-50 mx-10 flex-core preview">
     <div class="row center">
         <h2 class="mt-0 mb-10">학사일정 (<span id="currentYear"></span>
-    <span id="currentMonth"></span>)</h2>
-
-  
-
-    
+    <span id="currentMonth"></span>)
+    <a href="/schedule/list" class="link link-more">더보기</a></h2>
   
         <table id="scheduleTable" class="left">
             <thead>
