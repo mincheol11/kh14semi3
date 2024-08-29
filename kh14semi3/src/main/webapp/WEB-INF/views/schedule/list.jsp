@@ -2,6 +2,36 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+   
+    // 메시지 표시 함수
+    function showMessage(message) {
+        if (message === 'updateSuccess') {
+            alert('수정이 완료되었습니다.');
+        } else if (message === 'deleteSuccess') {
+            alert('삭제가 완료되었습니다.');
+        } else if (message === 'deleteFail') {
+            alert('삭제에 실패하였습니다.');
+        }
+        else if (message === 'addSuccess') {
+            alert('등록되었습니다.');
+        }
+    }
+    // URL의 message 파라미터를 사용하여 메시지를 표시하고, 한 번만 표시되도록 관리
+    var urlParams = new URLSearchParams(window.location.search);
+    var message = urlParams.get('message');
+    if (message) {
+        showMessage(message);
+        // 메시지 파라미터 제거 후 페이지 이동
+        urlParams.delete('message');
+        window.history.replaceState(null, '', `${window.location.pathname}?${urlParams}`);
+    }
+  
+    });
+
+</script>
+
 
 <!-- CSS 스타일 -->
 <style>
@@ -122,22 +152,9 @@
     width: 80%;
   }
 
-  .close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-  }
-
-  .close:hover,
-  .close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-  }
+  
 </style>
 
-<!-- 캘린더 영역 -->
 <div class="calendar-container">
   <div class="calendar-header">
     <div class="nav-buttons">
@@ -150,7 +167,7 @@
           </form>
         </c:when>
         <c:otherwise>
-          <span></span> <!-- 빈 공간을 추가하여 버튼 위치 맞추기 -->
+          <span></span>
         </c:otherwise>
       </c:choose>
     </div>
@@ -168,7 +185,7 @@
           </form>
         </c:when>
         <c:otherwise>
-          <span></span> <!-- 빈 공간을 추가하여 버튼 위치 맞추기 -->
+          <span></span>
         </c:otherwise>
       </c:choose>
     </div>
@@ -212,17 +229,15 @@
                       <div class="event-marker"></div>
                     </c:when>
                   </c:choose>
-                  <!-- 목록 페이지에서 이벤트 링크 수정 -->
-<c:forEach var="event" items="${eventList}">
-  <c:choose>
-    <c:when test="${event.dayOfMonth == currentDay}">
-      <a href="#" onclick="openModal('detail?scheduleNo=${event.scheduleNo}&title=' + encodeURIComponent('${event.scheduleTitle}')); return false;" class="event">
-        ${event.scheduleTitle}
-      </a>
-    </c:when>
-  </c:choose>
-</c:forEach>
-                  
+                  <c:forEach var="event" items="${eventList}">
+                    <c:choose>
+                      <c:when test="${event.dayOfMonth == currentDay}">
+                        <a href="#" onclick="openModal('detail?scheduleNo=${event.scheduleNo}&title=' + encodeURIComponent('${event.scheduleTitle}')); return false;" class="event">
+                          ${event.scheduleTitle}
+                        </a>
+                      </c:when>
+                    </c:choose>
+                  </c:forEach>
                 </td>
               </c:otherwise>
             </c:choose>
@@ -232,11 +247,10 @@
     </tbody>
   </table>
 </div>
-
 <!-- 모달 팝업 HTML -->
 <div id="eventModal" class="modal">
   <div class="modal-content">
-    <span class="close">&times;</span>
+   
     <div id="modal-body">
       <!-- 상세페이지 내용이 여기에 동적으로 로드됩니다. -->
     </div>
@@ -246,9 +260,9 @@
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
 
 <script>
-  // 모달과 닫기 버튼
+  // 모달
   var modal = document.getElementById("eventModal");
-  var span = document.getElementsByClassName("close")[0];
+ 
 
   // 모달 열기
   function openModal(url) {
@@ -268,10 +282,7 @@
     xhr.send();
   }
 
-  // 닫기 버튼 클릭 시 모달 닫기
-  span.onclick = function() {
-    modal.style.display = "none";
-  }
+  
 
   // 모달 외부 클릭 시 모달 닫기
   window.onclick = function(event) {

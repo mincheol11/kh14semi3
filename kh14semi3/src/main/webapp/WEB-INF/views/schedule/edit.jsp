@@ -7,7 +7,6 @@
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.js"></script>
 <link rel="stylesheet" type="text/css" href="/editor/editor.css">
 <script src="/editor/editor.js"></script>
-
 <script type="text/javascript">
 document.addEventListener('DOMContentLoaded', function() {
     function showMessage(message) {
@@ -22,15 +21,16 @@ document.addEventListener('DOMContentLoaded', function() {
             alert('등록되었습니다.');
         }
     }
-
     var urlParams = new URLSearchParams(window.location.search);
     var message = urlParams.get('message');
-
     if (message) {
         showMessage(message);
     }
 });
 </script>
+
+
+
 
 
 <form action="edit" method="post" autocomplete="off">

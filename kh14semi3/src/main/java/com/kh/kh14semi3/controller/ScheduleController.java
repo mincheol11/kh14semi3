@@ -49,7 +49,6 @@ public class ScheduleController {
             @ModelAttribute("pageVO") PageVO pageVO,
             Model model) {
 
-        // 현재 연도 및 월 기본값 설정
         if (year == null) {
             year = Calendar.getInstance().get(Calendar.YEAR);
         }
@@ -60,7 +59,6 @@ public class ScheduleController {
             page = 1;
         }
 
-        // 월과 연도 조정
         if (month < 1) {
             month = 12;
             year -= 1;
@@ -69,16 +67,12 @@ public class ScheduleController {
             year += 1;
         }
 
-        // PageVO 설정
         pageVO.setYear(year);
         pageVO.setMonth(month);
         pageVO.setPage(page);
 
-        // 일정 리스트 조회
-        int pageSize = 10;
-        List<ScheduleDto> scheduleList = scheduleDao.selectListByMonth(year, month, page, pageSize);
+        List<ScheduleDto> scheduleList = scheduleDao.selectListByMonth(year, month, page, 10);
 
-        // 이벤트 리스트 생성
         List<Map<String, Object>> eventList = new ArrayList<>();
         for (ScheduleDto dto : scheduleList) {
             Map<String, Object> event = new HashMap<>();
@@ -93,10 +87,9 @@ public class ScheduleController {
             eventList.add(event);
         }
 
-        // 모델에 데이터 추가
-        Set<Integer> eventDays = scheduleDao.getEventDaysByMonth(year, month); // 이벤트 날짜 조회
+        Set<Integer> eventDays = scheduleDao.getEventDaysByMonth(year, month);
         model.addAttribute("eventList", eventList);
-        model.addAttribute("eventDays", eventDays); // 이벤트가 있는 날을 모델에 추가
+        model.addAttribute("eventDays", eventDays);
 
         Calendar calendar = Calendar.getInstance();
         calendar.set(year, month - 1, 1);
@@ -110,27 +103,17 @@ public class ScheduleController {
         model.addAttribute("firstDayOfWeek", firstDayOfWeek);
         model.addAttribute("daysInMonth", daysInMonth);
         model.addAttribute("firstDayOfMonthDate", firstDayOfMonthDate);
-
-        int count = scheduleDao.countByMonth(year, month);
-        pageVO.setCount(count);
-
         model.addAttribute("currentYear", year);
         model.addAttribute("currentMonth", month);
         model.addAttribute("currentPage", page);
 
-        // 이전 및 다음 버튼 활성화 상태 결정
-        int minYear = 2020;
-        int minMonth = 1; // 1월
-        int maxYear = 2030;
-        int maxMonth = 12; // 12월
-
-        boolean showPreviousButton = (year > minYear) || (year == minYear && month > minMonth);
-        boolean showNextButton = (year < maxYear) || (year == maxYear && month < maxMonth);
+        boolean showPreviousButton = (year > 2020) || (year == 2020 && month > 1);
+        boolean showNextButton = (year < 2030) || (year == 2030 && month < 12);
 
         model.addAttribute("showPreviousButton", showPreviousButton);
         model.addAttribute("showNextButton", showNextButton);
 
-        return "/WEB-INF/views/schedule/list.jsp"; 
+        return "/WEB-INF/views/schedule/list.jsp";
     }
 
 
