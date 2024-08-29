@@ -30,7 +30,7 @@ public class ScheduleDao {
 
     public void insert(ScheduleDto scheduleDto) {
         String sql = "insert into schedule"
-                + " (schedule_no, SCHEDULE_WRITER, SCHEDULE_TYPE, SCHEDULE_TITLE, SCHEDULE_CONTENT)"
+                + " (schedule_no, SCHEDULE_WRITER, SCHEDULE_TYPE, SCHEDULE_TITLE, SCHEDULE_CONTENT) "
                 + " values(?, ?, ?, ?, ?)";
         Object[] data = {
             scheduleDto.getScheduleNo(),
