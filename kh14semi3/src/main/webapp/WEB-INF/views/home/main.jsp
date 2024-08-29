@@ -34,34 +34,12 @@
 	padding-left:30px;
 	padding-right:30px;
 }
-/* 탐색 버튼 스타일링 */
-.nav-buttons button {
-  background-color: transparent; /* 배경색을 투명으로 설정 */
-  color: rgb(0, 168, 255) !important; /* 기본 기호 색상 설정 (하늘색) */
-  border: 2px solid rgb(128, 128, 128); /* 버튼 테두리 색상 설정 (회색) */
-  padding: 15px 15px; /* 버튼의 패딩을 늘려서 크기를 키움 */
-  font-size: 36px; /* 폰트 크기를 증가시켜 버튼을 더 크게 보이게 함 */
-  cursor: pointer;
-  border-radius: 5px; /* 버튼의 모서리를 둥글게 함 */
-  transition: color 0.3s, border-color 0.3s; /* 색상 및 테두리 색상 변화에 부드러운 전환 효과 추가 */
+/* 특정 h2 요소 내의 <span> 스타일을 정의 */
+h2 span#currentYear, h2 span#currentMonth {
+    font-size: 0.9em; /* 상대적인 크기로 조정, 필요에 따라 px로도 조정 가능 */
+    /* 추가 스타일을 여기에 넣을 수 있습니다 */
 }
 
-
-
-/* 버튼 텍스트를 제거하고 기호만 보이도록 설정 */
-.nav-buttons button {
-  font-family: 'Arial', sans-serif; /* 글꼴 설정 */
-  font-size: 36px; /* 글꼴 크기 설정 */
-  color: rgb(128, 128, 128); /* 기본 기호 색상 설정 (회색) */
-  border: none; /* 테두리 제거 */
-  background: none; /* 배경 제거 */
-  width: 50px; /* 버튼 너비 설정 */
-  height: 50px;  /* 버튼 높이 설정 */
-}
-
-.nav-buttons button::before {
-  content: attr(data-icon); /* data-icon 속성의 값을 사용하여 기호를 표시 */
-}
 </style>
 
 <script type="text/javascript">
@@ -185,8 +163,8 @@
 						}
 					});
 	             // Insert the current month, page, and year into the HTML
-	                $('#currentYear').text(response.currentYear + ' 년');
-	                $('#currentMonth').text(response.currentMonth + ' 월');
+	                $('#currentYear').text(response.currentYear +'년');
+	                $('#currentMonth').text(response.currentMonth +'월');
 					// Update pagination controls if needed
 					// $('#pagination').html('...'); // Update pagination HTML
 				},
@@ -278,16 +256,13 @@
 		
 		<div class="w-50 mx-10 flex-core preview">
     <div class="row center">
-        <h2 class="mt-0 mb-10">학사일정</h2>
-        <!-- 탐색 버튼 추가 -->
-  <div class="row center nav-buttons">
+        <h2 class="mt-0 mb-10">학사일정 (<span id="currentYear"></span>
+    <span id="currentMonth"></span>)</h2>
+
   
-<!--     구분선 -->
-	<span id="currentYear"></span>
-    <span id="currentMonth"></span>
-<!-- 	구분선 -->
+
     
-  </div>
+  
         <table id="scheduleTable" class="left">
             <thead>
                 <tr>
