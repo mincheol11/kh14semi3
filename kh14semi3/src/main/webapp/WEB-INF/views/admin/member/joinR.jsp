@@ -7,12 +7,15 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <div class="container w-600 my-50">
-	<form action="joinR" method="post" autocomplete="off">
 
 	<c:choose>
-			<c:when test="${memberDto.memberRank == '학생'}">
+		<c:when test="${memberDto.memberRank == '학생'}">
+		<form action="joinR" method="post" autocomplete="off">
 				<div class="row">
-					<input name="studentId" value="${memberDto.memberId}" type="hidden" class="field w-100">					
+					<input name="memberId" value="${memberDto.memberId}" type="hidden"
+						class="field w-100">
+					<input name="studentId" value="${memberDto.memberId}" type="hidden"
+						class="field w-100">
 				</div>
 				<div class="row">
 					<label>학과코드</label>
@@ -32,10 +35,18 @@
 						<option value="4">4 학년</option>
 					</select>
 				</div>
-			</c:when>
-			<c:when test="${memberDto.memberRank == '교수'}">
+				<div class="right">
+					<button class="btn btn-positive" type="submit">등록완료</button>
+				</div>
+		</form>
+		</c:when>
+		<c:when test="${memberDto.memberRank == '교수'}">
+		<form action="joinR" method="post" autocomplete="off">
 				<div class="row">
-					<input name="professorId" value="${memberDto.memberId}" type="hidden" class="field w-100">
+				<input name="memberId" value="${memberDto.memberId}" type="hidden"
+						class="field w-100">
+					<input name="professorId" value="${memberDto.memberId}"
+						type="hidden" class="field w-100">
 				</div>
 				<div class="row center">
 					<label>학과코드</label>
@@ -43,17 +54,25 @@
 				<div class="row center">
 					<input name="professorDepartment" class="field w-100">
 				</div>
-			</c:when>
-			<c:when test="${memberDto.memberRank == '관리자'}">
-				<div class="row">
-					<input name="adminId" value="${memberDto.memberId}" type="hidden" class="field w-100">
+				<div class="right">
+					<button class="btn btn-positive" type="submit">등록완료</button>
 				</div>
-			</c:when>
-		</c:choose>
-		<div class="right">
-			<button class="btn btn-positive" type="submit">등록완료</button>
-		</div>
-	</form>
+		</form>
+		</c:when>
+		<c:when test="${memberDto.memberRank == '관리자'}">
+		<form action="joinR" method="post" autocomplete="off">
+				<div class="row">
+				<input name="memberId" value="${memberDto.memberId}" type="hidden"
+						class="field w-100">
+					<input name="adminId" value="${memberDto.memberId}" type="hidden"
+						class="field w-100">
+				</div>
+			<div class="right">
+				<button class="btn btn-positive" type="submit">등록완료</button>
+			</div>
+		</form>
+		</c:when>
+	</c:choose>
 </div>
 
 

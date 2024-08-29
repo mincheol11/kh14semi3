@@ -15,6 +15,6 @@ public class ProfessorMapper implements RowMapper<ProfessorDto> {
 		ProfessorDto professorDto = new ProfessorDto();
 		professorDto.setProfessorId(rs.getString("professor_id"));
 		professorDto.setProfessorDepartment(rs.getString("professor_department"));
-		return null;
+		return professorDto;
 	}
 }

@@ -42,22 +42,6 @@ $(function(){
         }
         status.memberIdValid = isValid;
     });
-    $("[name=memberPw]").blur(function(){
-        var regexStr = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$])[A-Za-z0-9!@#$]{8,16}$/;
-        var regex = new RegExp(regexStr);
-        var isValid = regex.test($(this).val());
-        $(this).removeClass("success fail")
-                    .addClass(isValid ? "success" : "fail");
-        status.memberPwValid = isValid;
-        console.log($(this).val());
-    });
-    $("#password-check").blur(function(){
-        var isValid = $("[name=memberPw]").val().length
-                        && $(this).val() == $("[name=memberPw]").val();
-        $(this).removeClass("success fail")
-                    .addClass(isValid ? "success" : "fail");
-        status.memberPwCheckValid = isValid;
-    });
     
     $("[name=memberName]").blur(function(){
         var regexStr = /^[가-힣]{2,7}$/;
@@ -114,12 +98,6 @@ $(function(){
                     .removeClass("success fail")
                     .addClass(isValid ? "success" : "fail");
         status.memberAddressValid = isValid;
-    });
-
-    //폼 검사
-    $(".check-form").submit(function(){
-        $("[name], #password-check").trigger("input").trigger("blur");    
-        return status.ok();
     });
     
 

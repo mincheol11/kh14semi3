@@ -20,7 +20,7 @@ public class ProfessorDao {
 	
 	public void insert(ProfessorDto professorDto) {
 		String sql = "insert into professor("
-				+ "professior_id, department_code "
+				+ "professor_id, professor_department "
 				+ ") "
 				+ "values(?, ?)";
 		Object[] data = {professorDto.getProfessorId(), professorDto.getProfessorDepartment()};
