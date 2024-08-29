@@ -44,13 +44,13 @@ public class ScheduleDao {
 
     public List<ScheduleDto> selectList() {
         String sql = "select schedule_no, SCHEDULE_WRITER, SCHEDULE_TYPE, SCHEDULE_TITLE, SCHEDULE_CONTENT, SCHEDULE_WTIME "
-                   + "from schedule order by schedule_no desc";
+                   + "from schedule order by schedule_no asc";
         return jdbcTemplate.query(sql, scheduleListMapper);
     }
 
     public List<ScheduleDto> selectList(String column, String keyword) {
         String sql = "select schedule_no, SCHEDULE_WRITER, SCHEDULE_TYPE, SCHEDULE_TITLE, SCHEDULE_CONTENT, SCHEDULE_WTIME "
-                   + "from schedule where instr(#1, ?) > 0 order by schedule_no desc";
+                   + "from schedule where instr(#1, ?) > 0 order by schedule_no asc";
         sql = sql.replace("#1", column);
         Object[] data = {keyword};
         return jdbcTemplate.query(sql, scheduleListMapper, data);
@@ -86,7 +86,7 @@ public class ScheduleDao {
         String sql = "select * from ("
                    + "select rownum rn, TMP.* from ("
                    + "select schedule_no, SCHEDULE_WRITER, SCHEDULE_TYPE, SCHEDULE_TITLE, SCHEDULE_CONTENT, SCHEDULE_WTIME "
-                   + "from schedule order by schedule_no desc"
+                   + "from schedule order by schedule_no asc"
                    + ") TMP"
                    + ") where rn between ? and ?";
         
@@ -101,7 +101,7 @@ public class ScheduleDao {
         String sql = "select * from ("
                    + "select rownum rn, TMP.* from ("
                    + "select schedule_no, SCHEDULE_WRITER, SCHEDULE_TYPE, SCHEDULE_TITLE, SCHEDULE_CONTENT, SCHEDULE_WTIME "
-                   + "from schedule where instr(#1, ?) > 0 order by schedule_no desc"
+                   + "from schedule where instr(#1, ?) > 0 order by schedule_no asc"
                    + ") TMP"
                    + ") where rn between ? and ?";
         sql = sql.replace("#1", column);
@@ -174,7 +174,7 @@ public class ScheduleDao {
                    + "select schedule_no, SCHEDULE_WRITER, SCHEDULE_TYPE, SCHEDULE_TITLE, SCHEDULE_CONTENT, SCHEDULE_WTIME "
                    + "from schedule "
                    + "where EXTRACT(YEAR FROM SCHEDULE_WTIME) = ? and EXTRACT(MONTH FROM SCHEDULE_WTIME) = ? "
-                   + "order by schedule_no desc"
+                   + "order by schedule_no asc"
                    + ") TMP"
                    + ") where rn between ? and ?";
         
