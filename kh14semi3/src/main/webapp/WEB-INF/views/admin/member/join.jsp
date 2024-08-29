@@ -235,7 +235,7 @@ $(function(){
 
 <div class="container w-600 my-50">
         <div class="row center">
-            <h1>회원 가입 페이지</h1>
+            <h1>회원 등록 페이지</h1>
         </div>
         <div class="row">
             <div class="progressbar"><div class="guage"></div></div>
