@@ -2,7 +2,17 @@
     pageEncoding="UTF-8"%>
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include> <!-- hearder 추가 -->
-
+<style>
+.red.bounce {
+	color: red;
+	animation: bounce 0.1s ease-in-out infinite;
+	}
+.green.beat {
+	color: green;
+	animation: beat 0.1s ease-in-out infinite;
+	}
+</style>
+	
   <script type="text/javascript">
 	$(function(){
 		//상태 객체
@@ -30,11 +40,15 @@
 							status.departmentCodeCheckValid=true;
 							$("[name=departmentCode]").removeClass("success fail fail2")
 							.addClass("success");
+							$("[name=departmentCode]").parent().find("label").find("i").removeClass("red fa-bounce");
+							$("[name=departmentCode]").parent().find("label").find("i").addClass("green fa-beat");
 						}
 						else{
 	                        status.departmentCodeCheckValid=false;
 	                        $("[name=departmentCode]").removeClass("success fail fail2")
 	                        .addClass("fail2");
+	                        $("[name=departmentCode]").parent().find("label").find("i").removeClass("green fa-beat");
+	                        $("[name=departmentCode]").parent().find("label").find("i").addClass("red fa-bounce");
 	                    }
 					},
 				});
@@ -42,6 +56,8 @@
 	 		 else{
 	     			 $("[name=departmentCode]").removeClass("success fail fail2")
 	      			.addClass("fail");
+	     			$("[name=departmentCode]").parent().find("label").find("i").removeClass("green fa-beat");
+	     			$("[name=departmentCode]").parent().find("label").find("i").addClass("fa-bounce");
 	  			}
 	  			status.departmentCodeValid = isValid;
 		});
@@ -61,11 +77,15 @@
 										status.departmentNameCheckValid=true;
 										$("[name=departmentName]").removeClass("success fail fail2")
 										.addClass("success");
+										$("[name=departmentName]").parent().find("label").find("i").removeClass("fa-bounce");
+										$("[name=departmentName]").parent().find("label").find("i").addClass("green fa-beat");
 									}
 									else{
 				                        status.departmentNameCheckValid=false;
 				                        $("[name=departmentName]").removeClass("success fail fail2")
 				                        .addClass("fail2");
+				                        $("[name=departmentName]").parent().find("label").find("i").removeClass("green fa-beat");
+				                        $("[name=departmentName]").parent().find("label").find("i").addClass("fa-bounce");
 				                    }
 								},
 							});
@@ -73,6 +93,8 @@
 				 		 else{
 				     			 $("[name=departmentName]").removeClass("success fail fail2")
 				      			.addClass("fail");
+				     			 $("[name=departmentName]").parent().find("label").find("i").removeClass("green fa-beat");
+				     			$("[name=departmentName]").parent().find("label").find("i").addClass("fa-bounce");
 				  			}
 				  			status.departmentNameValid = isValid;
 				});
@@ -93,11 +115,11 @@
  <form action="expand" method="post" autocomplete="off" class="check-form">
         <div class="container w-400 my-50 h-70">
             <div class="row center">
-                <h1>학과 증설</h1>
+                <h1>학과 개설</h1>
             </div>
  <!-- 학과 코드 입력 -->               
 			<div class="row">
-                <label>학과 코드 <i class="fa-solid fa-asterisk red"></i></label>
+                <label>학과코드 <i class="fa-solid fa-asterisk red"></i></label>
                     <input type="text" name="departmentCode" 
                         class="field w-100" placeholder="ex)d01">
                 <div class="success-feedback 00b894">올바른 코드입니다.</div>
@@ -121,8 +143,8 @@
                 </button>
                 <div class="row">
                 <a href="list" class="btn btn-netraul w-100" >
-                   <i class="fa-solid fa-arrow-rotate-left"></i>
-                   뒤로가기
+                   <i class="fa-solid fa-list"></i>
+                   목록이동
                 </a>
                 </div>
             </div>

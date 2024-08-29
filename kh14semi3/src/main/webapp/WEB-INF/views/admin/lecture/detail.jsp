@@ -77,12 +77,12 @@
         </c:otherwise>
     </c:choose>
     
-     <div class="row center">
-     <a href="add" class="btn btn-positive w-20">추가 강의개설</a>
-    <a href="list" class="btn btn-neutral w-20">목록이동</a>
+     <div class="row center mt-50">
+     <a href="add" class="btn btn-positive w-20"><i class="fa-regular fa-square-plus"></i> 강의개설</a>
+    <a href="list" class="btn btn-neutral w-20"><i class="fa-solid fa-list"></i> 목록이동</a>
     <c:if test="${lectureDto != null}">
-    <a href="edit?lectureCode=${lectureDto.lectureCode}" class="btn btn-neutral w-20">강의 정보 수정</a>
-    <a href="remove?lectureCode=${lectureDto.lectureCode}"class="btn btn-negative w-20" 	onclick="return checkRemove()">강의 삭제</a>
+    <a href="edit?lectureCode=${lectureDto.lectureCode}" class="btn btn-neutral w-20"><i class="fa-solid fa-eraser"></i> 강의수정</a>
+    <a href="remove?lectureCode=${lectureDto.lectureCode}"class="btn btn-negative w-20"  onclick="return checkRemove()"><i class="fa-solid fa-trash"></i> 강의삭제</a>
     </c:if>
 </div>
 </div>    

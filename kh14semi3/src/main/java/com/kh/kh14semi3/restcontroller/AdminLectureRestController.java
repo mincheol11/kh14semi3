@@ -23,19 +23,26 @@ public class AdminLectureRestController {
 						adminLectureDao.selectOneByLectureCode(lectureCode);
 				return lectureDto==null;
 			}
-			
+			//과목코드 DB에 있는것만 검사
 			@PostMapping("/checkLectureDepartment")
 			public boolean checkLectureDepartment(@RequestParam String lectureDepartment) {
 				LectureDto lectureDto =
 						adminLectureDao.selectOneByLectureDepartment(lectureDepartment);
 				return lectureDto!=null; 
 			}
-			
+			//교수코드 DB에 있는것만 검사
 			@PostMapping("/checkLectureProfessor")
 			public boolean checkLectureProfessor(@RequestParam String lectureProfessor) {
 				LectureDto lectureDto =
 						adminLectureDao.selectOneByLectureProfessor(lectureProfessor);
 				return lectureDto!=null; 
+			}
+			//강의명 중복검사
+			@PostMapping("/checkLectureName")
+			public boolean checkLectureName(@RequestParam String lectureName) {
+				LectureDto lectureDto =
+						adminLectureDao.selectOneByLectureName(lectureName);
+				return lectureDto==null; 
 			}
 			
 }
