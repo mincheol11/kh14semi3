@@ -73,18 +73,19 @@
         }
 
         .content {
-            min-height: 300px;
+            height: 600px;
             border: 1px solid #ddd;
-            padding: 20px;
+            padding: 300px;
             background-color: #f9f9f9;
             border-radius: 5px;
         }
     </style>
-</head>
-<body>
+
+
+<div class="flex-core">
     <div class="container">
         <!-- 내용 -->
-        <div class="row center content">
+        <div class="row center content" style="min-height:300px;">
             ${scheduleDto.scheduleContent}
         </div>
         
@@ -102,9 +103,9 @@
                 <!-- 관리자만 등록 버튼을 볼 수 있음 -->
                 <a class="btn btn-positive" href="add">등록</a>
             </c:if>
-            
+            </div>
            
         </div>
     </div>
-</body>
+
 

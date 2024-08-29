@@ -98,40 +98,41 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-
-
 <style>
 
 .modal {
   display: none; 
   position: fixed;
-  z-index: 1000;
-  left: 0;
-  top: 0;
+  z-index: 1100;
+top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
   width: 100%;
   height: 100%;
-  overflow: auto;
-  background-color: rgba(0,0,0,0.4);
+ background-color: rgba(0,0,0,0.4);
 }
 
 /* 모달 콘텐츠 스타일 */
 .modal-content {
   background-color: #fefefe;
-  margin: 5% auto; /* 모달의 상단과 하단 마진 조정 */
-  padding: 20px;
+  margin: auto;
   border: 1px solid rgb(0, 168, 255);
-  width: 60%; /* 너비 조정 */
-  max-width: 1400px;
+  width: 100%;
+  max-width: 1000px;
+  height: 80%; /* 높이를 줄여서 아래쪽 여백을 확보합니다 */
+  min-height: 300px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.2);
   z-index: 1001;
-
-  /* 높이 조정 추가 */
-  height: 100%; /* 높이 조정 */
-  max-height: 100%; /* 최대 높이 조정 */
-
-
+  overflow-y: auto;
+  padding: 20px; /* 콘텐츠에 패딩을 추가하여 여백 조정 */
+  box-sizing: border-box; /* 패딩과 테두리가 높이 및 너비에 포함되도록 설정 */
 }
 
+/* 모달 콘텐츠 내부 여백 조정 */
+.modal-content {
+  margin-bottom: 350px; /* 모달 콘텐츠의 아래쪽 여백을 없애거나 줄입니다 */
+}
 /* 닫기 버튼 스타일 */
 .scheduleModalClose {
   color: #aaa;
@@ -144,7 +145,7 @@ document.addEventListener('DOMContentLoaded', function() {
 .scheduleModalClose:focus {
   color: black;
   text-decoration: none;
-  cursor: pointer;
+  cursor: pointer; 
 }
 
 /* 탐색 버튼 스타일링 */
@@ -191,21 +192,21 @@ document.addEventListener('DOMContentLoaded', function() {
   border-collapse: collapse; /* 테두리 중복 제거 */
 }
 
-.table th, .table td {
+.table th, .table td {  
   width: 50%; /* 열 너비 설정 */
   text-align: center; /* 텍스트 중앙 정렬 */
   min-height: 50px; /* 최소 높이 설정 */
   vertical-align: middle; /* 세로 정렬 */
   border: 1px solid #ddd; /* 셀 테두리 설정 */
 }
-
+ 
 /* 테이블 헤더 스타일 */
 .table th {
   background-color: #f4f4f4; /* 헤더 배경색 설정 */
   font-weight: bold; /* 헤더 글씨를 두껍게 설정 */
 }
 
-/* 테이블의 행에 호버 효과 추가 */
+/* 테이블의 행에 호버 효과 추가 */     
 .table tr:hover {
   background-color: #f1f1f1; /* 호버 시 배경색 설정 */
 }
@@ -264,13 +265,16 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 
 <!-- 모달 구조 추가 -->
+
 <div id="scheduleModal" class="modal">
+<div class="screen-wrapper flex-core">
   <div class="modal-content">
     <span class="scheduleModalClose">&times;</span>
     <div id="modalBody">
       <!-- 상세 페이지 내용이 여기에 로드됩니다 -->
     </div>
   </div>
+</div>
 </div>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
