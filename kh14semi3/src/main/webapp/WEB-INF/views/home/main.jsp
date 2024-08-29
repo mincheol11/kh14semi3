@@ -206,6 +206,8 @@
 
 
 
+
+
 <div class="right">
 	createdUser = ${sessionScope.createdUser},
 	createdRank = ${sessionScope.createdRank}
@@ -239,8 +241,7 @@
 				 <table id="boardTable" class="left">		
 				 <thead>
                 <tr>
-                   <th>제목</th>
-                    <th>작성일</th>
+                  
                  </tr>
             </thead>			 
 			        <tbody>
@@ -280,18 +281,17 @@
         <h2 class="mt-0 mb-10">학사일정</h2>
         <!-- 탐색 버튼 추가 -->
   <div class="row center nav-buttons">
-    <button data-icon="‹" onclick="changeMonth(-1)"></button>
+  
 <!--     구분선 -->
 	<span id="currentYear"></span>
     <span id="currentMonth"></span>
 <!-- 	구분선 -->
-    <button data-icon="›" onclick="changeMonth(1)"></button>
+    
   </div>
         <table id="scheduleTable" class="left">
             <thead>
                 <tr>
-                    <th>제목</th>
-                    <th>작성일</th>
+                    
                 </tr>
             </thead>
             <tbody>
