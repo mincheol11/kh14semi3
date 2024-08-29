@@ -1,281 +1,282 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-<script type="text/javascript">
-document.addEventListener('DOMContentLoaded', function() {
-    var modal = document.getElementById("scheduleModal");
-    var span = document.getElementsByClassName("scheduleModalClose")[0];
-
-    function openModal(url) {
-        var modalBody = document.getElementById("modalBody");
-        modalBody.innerHTML = '<p>Loading...</p>';
-
-        fetch(url)
-            .then(response => response.text())
-            .then(data => {
-                modalBody.innerHTML = data;
-                modal.style.display = "block";
-            })
-            .catch(error => {
-                modalBody.innerHTML = '<p>Failed to load content.</p>';
-                console.error('Error:', error);
-            });
-    }
-
-    span.onclick = function() {
-        modal.style.display = "none";
-        window.location.href = "list"; // 목록 페이지로 이동
-    }
-
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-            window.location.href = "list"; // 목록 페이지로 이동
-        }
-    }
-
-    document.querySelectorAll('.modal-trigger').forEach(function(element) {
-        element.addEventListener('click', function(event) {
-            event.preventDefault();
-            var url = this.getAttribute('href');
-            openModal(url);
-        });
-    });
-
-    function showMessage(message) {
-        if (message === 'updateSuccess') {
-            alert('수정이 완료되었습니다.');
-        } else if (message === 'deleteSuccess') {
-            alert('삭제가 완료되었습니다.');
-        } else if (message === 'deleteFail') {
-            alert('삭제에 실패하였습니다.');
-        } else if (message === 'addSuccess') {
-            alert('등록되었습니다.');
-        }
-    }
-
-    var urlParams = new URLSearchParams(window.location.search);
-    var message = urlParams.get('message');
-    if (message) {
-        showMessage(message);
-        urlParams.delete('message');
-        window.history.replaceState(null, '', `${window.location.pathname}?${urlParams}`);
-    }
-
-    function changeMonth(direction) {
-        var currentYear = parseInt('${currentYear}');
-        var currentMonth = parseInt('${currentMonth}');
-        var currentPage = parseInt('${currentPage}') || 1;
-
-        currentMonth += direction;
-
-        if (currentMonth > 12) {
-            currentMonth = 1;
-            currentYear++;
-        } else if (currentMonth < 1) {
-            currentMonth = 12;
-            currentYear--;
-        }
-
-        var url = new URL(window.location.href);
-        url.searchParams.set('pageYear', currentYear);
-        url.searchParams.set('pageMonth', currentMonth);
-
-        var totalPages = parseInt('${totalPages}') || 1;
-        if (currentPage > totalPages) currentPage = totalPages;
-        url.searchParams.set('page', currentPage);
-
-        window.location.href = url.toString();
-    }
-
-    document.querySelectorAll('.nav-buttons button').forEach(function(button) {
-        button.addEventListener('click', function(event) {
-            var direction = this.getAttribute('data-icon') === '‹' ? -1 : 1;
-            changeMonth(direction);
-        });
-    });
-});
-</script>
-
+<!-- CSS 스타일 -->
 <style>
+  .calendar-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative; /* 버튼 위치 조정을 위한 설정 */
+  }
 
-.modal {
-  display: none; 
-  position: fixed;
-  z-index: 1100;
-top: 0px;
-    left: 0px;
-    right: 0px;
-    bottom: 0px;
-  width: 100%;
-  height: 100%;
- background-color: rgba(0,0,0,0.4);
-}
+  .calendar-header {
+    display: flex; /* 플렉스 박스 사용 */
+    align-items: center; /* 세로 정렬 */
+    justify-content: center; /* 중앙 정렬 */
+    margin-bottom: 20px;
+  }
 
-/* 모달 콘텐츠 스타일 */
-.modal-content {
-  background-color: #fefefe;
-  margin: auto;
-  border: 1px solid rgb(0, 168, 255);
-  width: 100%;
-  max-width: 1000px;
-  height: 95%; /* 높이를 줄여서 아래쪽 여백을 확보합니다 */
-  min-height: 300px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-  z-index: 1001;
-  overflow-y: auto;
-  padding: 20px; /* 콘텐츠에 패딩을 추가하여 여백 조정 */
-  box-sizing: border-box; /* 패딩과 테두리가 높이 및 너비에 포함되도록 설정 */
+  .calendar-header .nav-buttons {
+    display: flex; /* 플렉스 박스 사용 */
+    align-items: center; /* 세로 정렬 */
+  }
 
-}
+  .calendar-header .nav-buttons form {
+    display: inline-block; /* 폼을 버튼처럼 보이도록 설정 */
+  }
 
-/* 모달 콘텐츠 내부 여백 조정 */
-.modal-content {
-  margin-bottom: 350px; /* 모달 콘텐츠의 아래쪽 여백을 없애거나 줄입니다 */
-}
-/* 닫기 버튼 스타일 */
-.scheduleModalClose {
-  color: #aaa;
-  float: right;
-  font-size: 24px;
-  font-weight: bold;
-}
+  .calendar-header .nav-buttons button {
+    background-color: transparent; /* 기본 배경 제거 */
+    color: #007bff; /* 버튼 텍스트 색상 설정 */
+    border: none; /* 기본 테두리 제거 */
+    font-size: 24px; /* 버튼 크기 조정 */
+    cursor: pointer; /* 클릭 커서 변경 */
+    margin: 0 10px; /* 버튼 사이 간격 */
+  }
 
-.scheduleModalClose:hover,
-.scheduleModalClose:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer; 
-}
+  .calendar-header .nav-buttons button:hover {
+    color: #0056b3; /* 버튼에 마우스를 올렸을 때 색상 변경 */
+  }
 
-/* 탐색 버튼 스타일링 */
-.nav-buttons button {
-  background-color: transparent; /* 배경색을 투명으로 설정 */
-  color: rgb(0, 168, 255) !important; /* 기본 기호 색상 설정 (회색) */
-  border: 2px solid rgb(128, 128, 128); /* 버튼 테두리 색상 설정 (회색) */
-  padding: 15px 15px; /* 버튼의 패딩을 늘려서 크기를 키움 */
-  font-size: 36px; /* 폰트 크기를 증가시켜 버튼을 더 크게 보이게 함 */
-  cursor: pointer;
-  border-radius: 5px; /* 버튼의 모서리를 둥글게 함 */
-  transition: color 0.3s, border-color 0.3s; /* 색상 및 테두리 색상 변화에 부드러운 전환 효과 추가 */
-}
+  .calendar-header h2 {
+    margin: 0 20px; /* 텍스트와 버튼 사이의 여백 */
+  }
 
-/* 버튼 텍스트를 제거하고 기호만 보이도록 설정 */
-.nav-buttons button {
-  font-family: 'Arial', sans-serif; /* 글꼴 설정 */
-  font-size: 36px; /* 글꼴 크기 설정 */
-  color: rgb(128, 128, 128); /* 기본 기호 색상 설정 (회색) */
-  border: none; /* 테두리 제거 */
-  background: none; /* 배경 제거 */
-  width: 50px; /* 버튼 너비 설정 */
-  height: 50px;  /* 버튼 높이 설정 */
-}
+  .calendar-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
 
-.nav-buttons button::before {
-  content: attr(data-icon); /* data-icon 속성의 값을 사용하여 기호를 표시 */
-}
+  .calendar-table th, .calendar-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+    vertical-align: top;
+    width: 14.28%; /* 100% / 7 days */
+    box-sizing: border-box;
+    position: relative; /* 빨간색 원을 표시하기 위한 설정 */
+  }
 
-/* 링크에 마우스를 올렸을 때 스타일 변경 */
-.schedule-title {
-  color: black;  /* 기본 텍스트 색상을 검은색으로 설정 */
-  text-decoration: none; /* 기본 상태에서 밑줄 제거 */
-  transition: transform 0.3s; /* 확대 효과에 부드러운 전환 추가 */
-}
+  .calendar-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
 
-.table.table-hover > tbody > tr:hover {
-    background-color: rgb(255, 255, 255)!important;
-}
+  .calendar-table td {
+    height: 60px;
+  }
 
-/* 테이블 스타일 */
-.table {
-  width: 100%;
-  border-collapse: collapse; /* 테두리 중복 제거 */
-}
+  .calendar-table .empty {
+    background-color: #f9f9f9;
+    border: none;
+    color: #999;
+  }
 
-.table th, .table td {  
-  width: 50%; /* 열 너비 설정 */
-  text-align: center; /* 텍스트 중앙 정렬 */
-  min-height: 50px; /* 최소 높이 설정 */
-  vertical-align: middle; /* 세로 정렬 */
-  border: 1px solid #ddd; /* 셀 테두리 설정 */
-}
- 
-/* 테이블 헤더 스타일 */
-.table th {
-  background-color: #f4f4f4; /* 헤더 배경색 설정 */
-  font-weight: bold; /* 헤더 글씨를 두껍게 설정 */
-}
+  .event {
+    display: block;
+    background-color: #007bff;
+    color: white;
+    padding: 2px;
+    margin: 2px 0;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 12px;
+  }
 
-/* 테이블의 행에 호버 효과 추가 */     
-.table tr:hover {
-  background-color: #f1f1f1; /* 호버 시 배경색 설정 */
-}
+  .event-marker {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    width: 8px;
+    height: 8px;
+    background-color: red;
+    border-radius: 50%;
+  }
+
+  /* 모달 스타일 */
+  .modal {
+    display: none; /* 기본적으로 모달을 숨김 */
+    position: fixed;
+    z-index: 1; /* 가장 위에 표시 */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0); /* 배경 색상 */
+    background-color: rgba(0,0,0,0.4); /* 배경 색상 투명도 */
+  }
+
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+  }
+
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
 </style>
 
-<div class="container w-800 ">
-  <div class="row center">
-    <h1>학사 일정</h1>
-  </div>
-
-  <!-- 탐색 버튼 추가 -->
-  <div class="row center nav-buttons">
-    <button data-icon="‹" onclick="changeMonth(-1)"></button>
-    <span>${currentYear}년 ${currentMonth}월</span>
-    <button data-icon="›" onclick="changeMonth(1)"></button>
-  </div>
-  
-  <c:set var="isAdmin" value="${sessionScope.createdRank == '관리자'}" />
-  <c:set var="isLogin" value="${sessionScope.createdUser != null}" />
-
-  <c:if test="${isLogin && isAdmin}">
-    <div class="row right">
-      <a href="add" class="btn btn-neutral">신규등록</a>
+<!-- 캘린더 영역 -->
+<div class="calendar-container">
+  <div class="calendar-header">
+    <div class="nav-buttons">
+      <c:choose>
+        <c:when test="${showPreviousButton}">
+          <form action="${pageContext.request.contextPath}list" method="get">
+            <input type="hidden" name="pageYear" value="${currentYear}" />
+            <input type="hidden" name="pageMonth" value="${currentMonth - 1}" />
+            <button type="submit">&lt;</button>
+          </form>
+        </c:when>
+        <c:otherwise>
+          <span></span> <!-- 빈 공간을 추가하여 버튼 위치 맞추기 -->
+        </c:otherwise>
+      </c:choose>
     </div>
-  </c:if>
+    <h2>
+      <fmt:formatDate value="${firstDayOfMonthDate}" pattern="yyyy"/>년 
+      <fmt:formatDate value="${firstDayOfMonthDate}" pattern="MM"/>월
+    </h2>
+    <div class="nav-buttons">
+      <c:choose>
+        <c:when test="${showNextButton}">
+          <form action="${pageContext.request.contextPath}list" method="get">
+            <input type="hidden" name="pageYear" value="${currentYear}" />
+            <input type="hidden" name="pageMonth" value="${currentMonth + 1}" />
+            <button type="submit">&gt;</button>
+          </form>
+        </c:when>
+        <c:otherwise>
+          <span></span> <!-- 빈 공간을 추가하여 버튼 위치 맞추기 -->
+        </c:otherwise>
+      </c:choose>
+    </div>
+  </div>
 
-  <div class="row">
-    <table class="table table-border table-hover w-800">
-      <thead>
+  <table class="calendar-table">
+    <thead>
+      <tr>
+        <th>일</th>
+        <th>월</th>
+        <th>화</th>
+        <th>수</th>
+        <th>목</th>
+        <th>금</th>
+        <th>토</th>
+      </tr>
+    </thead>
+    <tbody>
+      <c:forEach var="week" begin="0" end="${(daysInMonth + firstDayOfWeek - 1) / 7}">
         <tr>
-          <th>작성일</th>
-          <th>제목</th>
+          <c:forEach var="day" begin="0" end="6">
+            <c:set var="currentDay" value="${week * 7 + day - firstDayOfWeek + 1}" />
+            <c:choose>
+              <c:when test="${currentDay < 1 || currentDay > daysInMonth}">
+                <td class="empty">
+                  <c:choose>
+                    <c:when test="${currentDay < 1}">
+                      <c:out value="${daysInMonth + currentDay}"/>
+                    </c:when>
+                    <c:otherwise>
+                      <c:out value="${currentDay - daysInMonth}"/>
+                    </c:otherwise>
+                  </c:choose>
+                </td>
+              </c:when>
+              <c:otherwise>
+                <td class="day">
+                  <c:out value="${currentDay}"/>
+                  <c:choose>
+                    <c:when test="${eventDays.contains(currentDay)}">
+                      <div class="event-marker"></div>
+                    </c:when>
+                  </c:choose>
+                  <!-- 목록 페이지에서 이벤트 링크 수정 -->
+<c:forEach var="event" items="${eventList}">
+  <c:choose>
+    <c:when test="${event.dayOfMonth == currentDay}">
+      <a href="#" onclick="openModal('detail?scheduleNo=${event.scheduleNo}&title=' + encodeURIComponent('${event.scheduleTitle}')); return false;" class="event">
+        ${event.scheduleTitle}
+      </a>
+    </c:when>
+  </c:choose>
+</c:forEach>
+                  
+                </td>
+              </c:otherwise>
+            </c:choose>
+          </c:forEach>
         </tr>
-      </thead>
-      <tbody align="center">
-        <c:choose>
-          <c:when test="${not empty scheduleList}">
-            <c:forEach var="scheduleDto" items="${scheduleList}">
-            <tr>
-              <td class="schedule-wtime">${scheduleDto.scheduleWtime}</td> <!-- schedule-wtime 클래스 추가 -->
-              <td align="right">
-                <a href="detail?scheduleNo=${scheduleDto.scheduleNo}" class="schedule-title modal-trigger">${scheduleDto.scheduleTitle}</a> <!-- schedule-title 클래스 추가 -->
-              </td>
-            </tr>
-            </c:forEach>
-          </c:when>
-          <c:otherwise>
-            <tr>
-              <td colspan="2">일정이 없습니다.</td>
-            </tr>
-          </c:otherwise>
-        </c:choose>
-      </tbody>
-    </table>
-  </div>
+      </c:forEach>
+    </tbody>
+  </table>
 </div>
 
-<!-- 모달 구조 추가 -->
-
-<div id="scheduleModal" class="modal">
-<div class="screen-wrapper flex-core">
+<!-- 모달 팝업 HTML -->
+<div id="eventModal" class="modal">
   <div class="modal-content">
-    <span class="scheduleModalClose">&times;</span>
-    <div id="modalBody">
-      <!-- 상세 페이지 내용이 여기에 로드됩니다 -->
+    <span class="close">&times;</span>
+    <div id="modal-body">
+      <!-- 상세페이지 내용이 여기에 동적으로 로드됩니다. -->
     </div>
   </div>
-</div>
 </div>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+
+<script>
+  // 모달과 닫기 버튼
+  var modal = document.getElementById("eventModal");
+  var span = document.getElementsByClassName("close")[0];
+
+  // 모달 열기
+  function openModal(url) {
+    var modalBody = document.getElementById("modal-body");
+
+    // AJAX 요청으로 상세 페이지 내용 로드
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", url, true);
+    xhr.onload = function() {
+      if (xhr.status === 200) {
+        modalBody.innerHTML = xhr.responseText;
+        modal.style.display = "block"; // 모달 열기
+      } else {
+        modalBody.innerHTML = "내용을 불러오는 데 실패했습니다.";
+      }
+    };
+    xhr.send();
+  }
+
+  // 닫기 버튼 클릭 시 모달 닫기
+  span.onclick = function() {
+    modal.style.display = "none";
+  }
+
+  // 모달 외부 클릭 시 모달 닫기
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+</script>
