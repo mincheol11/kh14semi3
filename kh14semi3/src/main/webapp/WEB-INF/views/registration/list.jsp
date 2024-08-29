@@ -90,7 +90,7 @@ createdRank = ${sessionScope.createdRank}
 		</form>
 	</div>
 	
-
+ 
 	<div class="row center">
 		<c:choose>
 			<%-- 결과가 없을 때 --%>
