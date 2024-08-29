@@ -6,6 +6,35 @@
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.js"></script>
 <link rel="stylesheet" type="text/css" href="/editor/editor.css">
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelector('a[href*="delete"]').addEventListener('click', function(event) {
+        event.preventDefault();
+        if (confirm('정말 삭제하시겠습니까?')) {
+            window.location.href = this.href + "&confirm=true";
+        }
+    });
+    function showMessage(message) {
+        if (message === 'updateSuccess') {
+            alert('수정이 완료되었습니다.');
+        } else if (message === 'deleteSuccess') {
+            alert('삭제가 완료되었습니다.');
+        } else if (message === 'deleteFail') {
+            alert('삭제에 실패하였습니다.');
+        }
+        else if (message === 'addSuccess') {
+            alert('등록되었습니다.');
+        }
+    }
+    var urlParams = new URLSearchParams(window.location.search);
+    var message = urlParams.get('message');
+    
+    if (message) {
+        showMessage(message);
+    }
+});
+</script>
+
 
 <!-- CSS 스타일 -->
 <style>
@@ -113,19 +142,7 @@
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   }
 
-  .close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-  }
-
-  .close:hover,
-  .close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
-  }
+  
 </style>
 
 <!-- 페이지 내용 -->
@@ -175,7 +192,7 @@
 <!-- 모달 팝업 HTML -->
 <div id="eventModal" class="modal">
   <div class="modal-content">
-    <span class="close">&times;</span>
+   
     <div id="modal-body">
       <!-- 상세페이지 내용이 여기에 동적으로 로드됩니다. -->
     </div>
@@ -183,9 +200,9 @@
 </div>
 
 <script>
-  // 모달과 닫기 버튼
+  // 모달
   var modal = document.getElementById("eventModal");
-  var span = document.getElementsByClassName("close")[0];
+ 
 
   // 모달 열기
   function openModal(url) {
@@ -205,11 +222,7 @@
     xhr.send();
   }
 
-  // 닫기 버튼 클릭 시 모달 닫기
-  span.onclick = function() {
-    modal.style.display = "none";
-  }
-
+  
   // 모달 외부 클릭 시 모달 닫기
   window.onclick = function(event) {
     if (event.target == modal) {
