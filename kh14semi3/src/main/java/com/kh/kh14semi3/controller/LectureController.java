@@ -72,7 +72,7 @@ public class LectureController {
 		return "/WEB-INF/views/lecture/grade.jsp";
 	}
 	
-	// 성적 입력 (학생목록조회)
+	// 성적 입력 (+학생목록조회)
 		@RequestMapping("/grade/insert")
 		public String gradeInsert(
 						@ModelAttribute("gradeStudentVO") GradeStudentVO gradeStudentVO,
