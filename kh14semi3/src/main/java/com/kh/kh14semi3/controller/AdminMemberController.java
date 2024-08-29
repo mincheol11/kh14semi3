@@ -112,15 +112,17 @@ public class AdminMemberController {
 	@PostMapping("/joinR")
 	public String joinR(@ModelAttribute StudentDto studentDto,
 							@ModelAttribute ProfessorDto professorDto,
-							@ModelAttribute AdminDto adminDto
-							) {
-		if(studentDto != null) {
+							@ModelAttribute AdminDto adminDto,
+							@RequestParam(required=false) String memberId) {
+		MemberDto memberDto = memberDao.selectOne(memberId);
+		
+		if("학생".equals(memberDto.getMemberRank())) {
 			studentDao.insert(studentDto);
 		}
-		else if(professorDto != null) {
+		else if("교수".equals(memberDto.getMemberRank())) {
 			professorDao.insert(professorDto);
 		}
-		else if(adminDto != null) {
+		else if("관리자".equals(memberDto.getMemberRank())) {
 			adminDao.insert(adminDto);
 		}
 		else {
@@ -134,7 +136,6 @@ public class AdminMemberController {
 	@GetMapping("/change")
 	public String change(@RequestParam(required=false) String memberId, Model model) {
 		MemberDto memberDto = memberDao.selectOne(memberId);
-		System.out.println(memberDto);
 		model.addAttribute("memberDto", memberDto);
 		
 		if(memberDto == null) {
@@ -185,10 +186,10 @@ public class AdminMemberController {
 			return "redirect:list";
 		}
 		else if("관리자".equals(memberDto.getMemberRank())) {
-			boolean result4 = adminDao.update(adminDto);
-			if(result4 == false) {
-				throw new TargetNotFoundException("존재하지 않는 회원ID입니다.");
-			}
+//			boolean result4 = adminDao.update(adminDto);
+//			if(result4 == false) {
+//				throw new TargetNotFoundException("존재하지 않는 회원ID입니다.");
+//			}
 			return "redirect:list";
 		}
 		else {

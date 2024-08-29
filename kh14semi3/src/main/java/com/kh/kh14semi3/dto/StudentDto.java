@@ -6,5 +6,5 @@ import lombok.Data;
 public class StudentDto {
 	private String studentId;
 	private String studentDepartment;
-	private int studentLevel;
+	private Integer studentLevel;
 }
