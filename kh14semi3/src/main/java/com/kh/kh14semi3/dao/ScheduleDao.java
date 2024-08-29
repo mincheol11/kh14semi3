@@ -1,11 +1,12 @@
-	package com.kh.kh14semi3.dao;
+package com.kh.kh14semi3.dao;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-
 import com.kh.kh14semi3.dto.ScheduleDto;
 import com.kh.kh14semi3.mapper.ScheduleDetailMapper;
 import com.kh.kh14semi3.mapper.ScheduleListMapper;
@@ -16,10 +17,10 @@ public class ScheduleDao {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
-    
+
     @Autowired
     private ScheduleDetailMapper scheduleDetailMapper;
-    
+
     @Autowired
     private ScheduleListMapper scheduleListMapper;
 
@@ -40,20 +41,6 @@ public class ScheduleDao {
             scheduleDto.getScheduleContent()
         };
         jdbcTemplate.update(sql, data);
-    }
-
-    public List<ScheduleDto> selectList() {
-        String sql = "select schedule_no, SCHEDULE_WRITER, SCHEDULE_TYPE, SCHEDULE_TITLE, SCHEDULE_CONTENT, SCHEDULE_WTIME "
-                   + "from schedule order by schedule_no asc";
-        return jdbcTemplate.query(sql, scheduleListMapper);
-    }
-
-    public List<ScheduleDto> selectList(String column, String keyword) {
-        String sql = "select schedule_no, SCHEDULE_WRITER, SCHEDULE_TYPE, SCHEDULE_TITLE, SCHEDULE_CONTENT, SCHEDULE_WTIME "
-                   + "from schedule where instr(#1, ?) > 0 order by schedule_no asc";
-        sql = sql.replace("#1", column);
-        Object[] data = {keyword};
-        return jdbcTemplate.query(sql, scheduleListMapper, data);
     }
 
     public ScheduleDto selectOne(int scheduleNo) {
@@ -79,83 +66,41 @@ public class ScheduleDao {
         return jdbcTemplate.update(sql, data) > 0;
     }
 
-    public List<ScheduleDto> selectListByPaging(int page, int size) {
-        int endRow = page * size;
-        int beginRow = endRow - (size - 1);
-        
-        String sql = "select * from ("
-                   + "select rownum rn, TMP.* from ("
-                   + "select schedule_no, SCHEDULE_WRITER, SCHEDULE_TYPE, SCHEDULE_TITLE, SCHEDULE_CONTENT, SCHEDULE_WTIME "
-                   + "from schedule order by schedule_no asc"
-                   + ") TMP"
-                   + ") where rn between ? and ?";
-        
-        Object[] data = {beginRow, endRow};
-        return jdbcTemplate.query(sql, scheduleListMapper, data);
-    }
-
-    public List<ScheduleDto> selectListByPaging(String column, String keyword, int page, int size) {
-        int endRow = page * size;
-        int beginRow = endRow - (size - 1);
-        
-        String sql = "select * from ("
-                   + "select rownum rn, TMP.* from ("
-                   + "select schedule_no, SCHEDULE_WRITER, SCHEDULE_TYPE, SCHEDULE_TITLE, SCHEDULE_CONTENT, SCHEDULE_WTIME "
-                   + "from schedule where instr(#1, ?) > 0 order by schedule_no asc"
-                   + ") TMP"
-                   + ") where rn between ? and ?";
-        sql = sql.replace("#1", column);
-        
-        Object[] data = {keyword, beginRow, endRow};
-        return jdbcTemplate.query(sql, scheduleListMapper, data);
-    }
-
-    public int countByPaging() {
-        String sql = "select count(*) from schedule";
-        return jdbcTemplate.queryForObject(sql, int.class);
-    }
-
-    public int countByPaging(String column, String keyword) {
-        String sql = "select count(*) from schedule where instr(#1, ?) > 0";
-        sql = sql.replace("#1", column);
-        Object[] data = {keyword};
-        return jdbcTemplate.queryForObject(sql, int.class, data);
-    }
-
     public List<ScheduleDto> selectListByPaging(PageVO pageVO) {
-        if (pageVO.isSearch()) {
-            String sql = "select * from ("
-                       + "select rownum rn, TMP.* from ("
-                       + "select schedule_no, SCHEDULE_WRITER, SCHEDULE_TYPE, SCHEDULE_TITLE, SCHEDULE_CONTENT, SCHEDULE_WTIME "
-                       + "from schedule where instr(#1, ?) > 0 order by schedule_no asc"
-                       + ") TMP"
-                       + ") where rn between ? and ?";
-            sql = sql.replace("#1", pageVO.getColumn());
+        int endRow = pageVO.getPage() * pageVO.getSize();
+        int beginRow = endRow - (pageVO.getSize() - 1);
 
-            Object[] data = {pageVO.getKeyword(), pageVO.getBeginRow(), pageVO.getEndRow()};
-            return jdbcTemplate.query(sql, scheduleListMapper, data);
-        } else {
-            String sql = "select * from ("
-                       + "select rownum rn, TMP.* from ("
-                       + "select schedule_no, SCHEDULE_WRITER, SCHEDULE_TYPE, SCHEDULE_TITLE, SCHEDULE_CONTENT, SCHEDULE_WTIME "
-                       + "from schedule order by schedule_no asc"
-                       + ") TMP"
-                       + ") where rn between ? and ?";
-            
-            Object[] data = {pageVO.getBeginRow(), pageVO.getEndRow()};
-            return jdbcTemplate.query(sql, scheduleListMapper, data);
+        StringBuilder sql = new StringBuilder("select * from ("
+                + "select rownum rn, TMP.* from ("
+                + "select schedule_no, SCHEDULE_WRITER, SCHEDULE_TYPE, SCHEDULE_TITLE, SCHEDULE_CONTENT, SCHEDULE_WTIME "
+                + "from schedule");
+
+        if (pageVO.isSearch()) {
+            sql.append(" where instr(").append(pageVO.getColumn()).append(", ?) > 0");
         }
+
+        sql.append(" order by schedule_no asc"
+                + ") TMP"
+                + ") where rn between ? and ?");
+
+        Object[] data;
+        if (pageVO.isSearch()) {
+            data = new Object[] {pageVO.getKeyword(), beginRow, endRow};
+        } else {
+            data = new Object[] {beginRow, endRow};
+        }
+
+        return jdbcTemplate.query(sql.toString(), scheduleListMapper, data);
     }
 
     public int countByPaging(PageVO pageVO) {
+        StringBuilder sql = new StringBuilder("select count(*) from schedule");
+
         if (pageVO.isSearch()) {
-            String sql = "select count(*) from schedule where instr(#1, ?) > 0";
-            sql = sql.replace("#1", pageVO.getColumn());
-            Object[] data = {pageVO.getKeyword()};
-            return jdbcTemplate.queryForObject(sql, int.class, data);
+            sql.append(" where instr(").append(pageVO.getColumn()).append(", ?) > 0");
+            return jdbcTemplate.queryForObject(sql.toString(), int.class, pageVO.getKeyword());
         } else {
-            String sql = "select count(*) from schedule";
-            return jdbcTemplate.queryForObject(sql, int.class);
+            return jdbcTemplate.queryForObject(sql.toString(), int.class);
         }
     }
 
@@ -165,27 +110,38 @@ public class ScheduleDao {
         return jdbcTemplate.queryForObject(sql, int.class, data);
     }
 
+    // 기존 selectListByMonth 메서드
     public List<ScheduleDto> selectListByMonth(int year, int month, int page, int size) {
         int endRow = page * size;
         int beginRow = endRow - (size - 1);
-        
-        String sql = "select * from ("
-                   + "select rownum rn, TMP.* from ("
-                   + "select schedule_no, SCHEDULE_WRITER, SCHEDULE_TYPE, SCHEDULE_TITLE, SCHEDULE_CONTENT, SCHEDULE_WTIME "
-                   + "from schedule "
-                   + "where EXTRACT(YEAR FROM SCHEDULE_WTIME) = ? and EXTRACT(MONTH FROM SCHEDULE_WTIME) = ? "
-                   + "order by schedule_no asc"
+
+        String sql = "SELECT * FROM ("
+                   + "SELECT rownum rn, TMP.* FROM ("
+                   + "SELECT schedule_no, SCHEDULE_WRITER, SCHEDULE_TYPE, SCHEDULE_TITLE, SCHEDULE_CONTENT, SCHEDULE_WTIME "
+                   + "FROM schedule "
+                   + "WHERE EXTRACT(YEAR FROM SCHEDULE_WTIME) = ? AND EXTRACT(MONTH FROM SCHEDULE_WTIME) = ? "
+                   + "ORDER BY schedule_no ASC"
                    + ") TMP"
-                   + ") where rn between ? and ?";
-        
+                   + ") WHERE rn BETWEEN ? AND ?";
+
         Object[] data = {year, month, beginRow, endRow};
         return jdbcTemplate.query(sql, scheduleListMapper, data);
     }
 
+    // 기존 countByMonth 메서드
     public int countByMonth(int year, int month) {
-        String sql = "select count(*) from schedule "
-                   + "where EXTRACT(YEAR FROM SCHEDULE_WTIME) = ? and EXTRACT(MONTH FROM SCHEDULE_WTIME) = ?";
+        String sql = "SELECT COUNT(*) FROM schedule "
+                   + "WHERE EXTRACT(YEAR FROM SCHEDULE_WTIME) = ? AND EXTRACT(MONTH FROM SCHEDULE_WTIME) = ?";
         Object[] data = {year, month};
-        return jdbcTemplate.queryForObject(sql, int.class, data);
+        return jdbcTemplate.queryForObject(sql, Integer.class, data);
+    }
+
+    // 추가: 이벤트가 있는 날짜를 조회하는 메서드
+    public Set<Integer> getEventDaysByMonth(int year, int month) {
+        String sql = "SELECT EXTRACT(DAY FROM SCHEDULE_WTIME) AS event_day FROM schedule "
+                   + "WHERE EXTRACT(YEAR FROM SCHEDULE_WTIME) = ? AND EXTRACT(MONTH FROM SCHEDULE_WTIME) = ?";
+
+        List<Integer> days = jdbcTemplate.query(sql, (rs, rowNum) -> rs.getInt("event_day"), year, month);
+        return new HashSet<>(days); // 날짜를 Set으로 반환하여 중복 제거
     }
 }

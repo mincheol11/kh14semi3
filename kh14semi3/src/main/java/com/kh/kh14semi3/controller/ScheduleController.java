@@ -1,7 +1,12 @@
 package com.kh.kh14semi3.controller;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.jsoup.Jsoup;
@@ -28,13 +33,14 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 @RequestMapping("/schedule")
 public class ScheduleController {
+
     @Autowired
     private ScheduleDao scheduleDao;
 
     @Autowired
     private AttachmentService attachmentService;
 
-    @RequestMapping("/list")
+    @GetMapping("/list2")
     public String list(
             @RequestParam(value = "pageYear", required = false) Integer year,
             @RequestParam(value = "pageMonth", required = false) Integer month,
@@ -42,37 +48,91 @@ public class ScheduleController {
             @ModelAttribute("pageVO") PageVO pageVO,
             Model model) {
 
-        // 현재 연도와 월을 기본값으로 설정
+        // 현재 연도 및 월 기본값 설정
         if (year == null) {
             year = Calendar.getInstance().get(Calendar.YEAR);
         }
         if (month == null) {
-            month = Calendar.getInstance().get(Calendar.MONTH) + 1; // 1월은 0이므로 +1
+            month = Calendar.getInstance().get(Calendar.MONTH) + 1;
         }
-
-        // 페이지 번호가 1보다 작지 않도록 보장
         if (page < 1) {
             page = 1;
         }
 
-        // pageVO에 연도, 월, 페이지 번호 설정
+        // 월과 연도 조정
+        if (month < 1) {
+            month = 12;
+            year -= 1;
+        } else if (month > 12) {
+            month = 1;
+            year += 1;
+        }
+
+        // PageVO 설정
         pageVO.setYear(year);
         pageVO.setMonth(month);
         pageVO.setPage(page);
 
-        // 데이터베이스에서 해당 연도와 월의 데이터를 가져옵니다
-        int pageSize = 10; // 예: 페이지당 10개 항목
-        model.addAttribute("scheduleList", scheduleDao.selectListByMonth(year, month, page, pageSize));
+        // 일정 리스트 조회
+        int pageSize = 10;
+        List<ScheduleDto> scheduleList = scheduleDao.selectListByMonth(year, month, page, pageSize);
+
+        // 이벤트 리스트 생성
+        List<Map<String, Object>> eventList = new ArrayList<>();
+        for (ScheduleDto dto : scheduleList) {
+            Map<String, Object> event = new HashMap<>();
+            event.put("scheduleNo", dto.getScheduleNo());
+            event.put("scheduleTitle", dto.getScheduleTitle());
+            event.put("scheduleWtime", dto.getScheduleWtime());
+
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(dto.getScheduleWtime());
+            event.put("dayOfMonth", cal.get(Calendar.DAY_OF_MONTH));
+
+            eventList.add(event);
+        }
+
+        // 모델에 데이터 추가
+        Set<Integer> eventDays = scheduleDao.getEventDaysByMonth(year, month); // 이벤트 날짜 조회
+        model.addAttribute("eventList", eventList);
+        model.addAttribute("eventDays", eventDays); // 이벤트가 있는 날을 모델에 추가
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, month - 1, 1);
+        int firstDayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+        int daysInMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+
+        Date firstDayOfMonthDate = calendar.getTime();
+
+        model.addAttribute("year", year);
+        model.addAttribute("month", month);
+        model.addAttribute("firstDayOfWeek", firstDayOfWeek);
+        model.addAttribute("daysInMonth", daysInMonth);
+        model.addAttribute("firstDayOfMonthDate", firstDayOfMonthDate);
+
         int count = scheduleDao.countByMonth(year, month);
         pageVO.setCount(count);
 
-        // 연도와 월을 모델에 추가
         model.addAttribute("currentYear", year);
         model.addAttribute("currentMonth", month);
         model.addAttribute("currentPage", page);
 
-        return "/WEB-INF/views/schedule/list.jsp";
+        // 이전 및 다음 버튼 활성화 상태 결정
+        int minYear = 2020;
+        int minMonth = 1; // 1월
+        int maxYear = 2030;
+        int maxMonth = 12; // 12월
+
+        boolean showPreviousButton = (year > minYear) || (year == minYear && month > minMonth);
+        boolean showNextButton = (year < maxYear) || (year == maxYear && month < maxMonth);
+
+        model.addAttribute("showPreviousButton", showPreviousButton);
+        model.addAttribute("showNextButton", showNextButton);
+
+        return "/WEB-INF/views/schedule/list2.jsp"; 
     }
+
+
 
     @RequestMapping("/detail")
     public String detail(@RequestParam int scheduleNo, Model model) {
@@ -91,7 +151,7 @@ public class ScheduleController {
     }
 
     @PostMapping("/add")
-    public String add(@ModelAttribute ScheduleDto scheduleDto, HttpSession session,@ModelAttribute PageVO pageVO) {
+    public String add(@ModelAttribute ScheduleDto scheduleDto, HttpSession session, @ModelAttribute PageVO pageVO) {
         String createdUser = (String) session.getAttribute("createdUser");
         scheduleDto.setScheduleWriter(createdUser);
 
@@ -99,7 +159,7 @@ public class ScheduleController {
         scheduleDto.setScheduleNo(seq);
 
         scheduleDao.insert(scheduleDto);
-        return "redirect:/schedule/list?page=" + pageVO.getPage() + "&message=addSuccess";
+        return "redirect:/schedule/list2?page=" + pageVO.getPage() + "&message=addSuccess";
     }
 
     @GetMapping("/edit")
@@ -120,7 +180,7 @@ public class ScheduleController {
         }
 
         // 게시글 내용의 첨부파일을 비교하여 삭제할 항목을 찾음
-        Set<Integer> before = new HashSet<>();
+        Set <Integer> before = new HashSet<>();
         Document beforeDocument = Jsoup.parse(originDto.getScheduleContent());
         for (Element el : beforeDocument.select(".schedule-attach")) {
             String keyStr = el.attr("data-key");
@@ -147,7 +207,7 @@ public class ScheduleController {
         scheduleDao.update(scheduleDto);
 
         // 수정 완료 후 목록 페이지로 리다이렉트하고 메시지 전달
-        return "redirect:/schedule/list?page=" + pageVO.getPage() + "&message=updateSuccess";
+        return "redirect:/schedule/list2?page=" + pageVO.getPage() + "&message=updateSuccess";
     }
 
     @RequestMapping("/delete")
@@ -171,16 +231,15 @@ public class ScheduleController {
             // 게시글 삭제
             boolean result = scheduleDao.delete(scheduleNo);
             if (result) {
-                return "redirect:/schedule/list?page=" + page + "&message=deleteSuccess";
+                return "redirect:/schedule/list2?page=" + page + "&message=deleteSuccess";
             } else {
-                return "redirect:/schedule/list?page=" + page + "&message=deleteFail";
+                return "redirect:/schedule/list2?page=" + page + "&message=deleteFail";
             }
         } else {
             return "redirect:/schedule/detail?scheduleNo=" + scheduleNo + "&confirm=show";
         }
     }
 
-    
     @RequestMapping("/image")
     public String image(@RequestParam int scheduleNo) {
         try {
@@ -190,5 +249,4 @@ public class ScheduleController {
             return "redirect:/images/해린-깨물하트.gif";
         }
     }
-    
 }
