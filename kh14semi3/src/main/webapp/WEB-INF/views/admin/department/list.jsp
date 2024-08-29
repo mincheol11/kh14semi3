@@ -4,6 +4,9 @@
 		
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include> <!-- hearder 추가 -->
 
+<style>
+
+</style>
 	
 	
 <script type="text/javascript">
@@ -42,7 +45,7 @@ $(document).ready(function() {
 		</c:choose>
             </select>
         <input type="text" name="keyword" value="${param.keyword}" class="field w-60">
-        <button type="submit" class="btn btn- w-20"><i class="fa-solid fa-magnifying-glass"> 검색</i></button>
+        <button type="submit"  id="search" class="btn btn- w-20" style="background-color:white;"><i class="fa-solid fa-magnifying-glass"> 검색</i></button>
             </div>
         </form>
     </div>

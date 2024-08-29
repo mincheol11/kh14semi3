@@ -120,13 +120,14 @@ top: 0px;
   border: 1px solid rgb(0, 168, 255);
   width: 100%;
   max-width: 1000px;
-  height: 80%; /* 높이를 줄여서 아래쪽 여백을 확보합니다 */
+  height: 95%; /* 높이를 줄여서 아래쪽 여백을 확보합니다 */
   min-height: 300px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.2);
   z-index: 1001;
   overflow-y: auto;
   padding: 20px; /* 콘텐츠에 패딩을 추가하여 여백 조정 */
   box-sizing: border-box; /* 패딩과 테두리가 높이 및 너비에 포함되도록 설정 */
+
 }
 
 /* 모달 콘텐츠 내부 여백 조정 */
@@ -213,7 +214,7 @@ top: 0px;
 </style>
 
 <div class="container w-800 ">
-  <div class="row left">
+  <div class="row center">
     <h1>학사 일정</h1>
   </div>
 
