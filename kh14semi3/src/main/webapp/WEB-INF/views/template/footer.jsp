@@ -17,10 +17,10 @@
 			            서울시 어쩌구 아무동 OOO-OOO
 			        </div>
 			        <div class="row">
-			            이사장 : 박이사장
+			            이사장 : 권이사장
 		            </div>
 		            <div class="row">
-			            총장 : 김총장
+			            총장 : 권총장
 			        </div>
 			        <div class="row">
 			            문의전화 : OOO-OOOO-OOOO
