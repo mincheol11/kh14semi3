@@ -71,7 +71,7 @@
 	            <div class="w-50">
 	                <h2 class="center">
 	                	<a href="/home/main" class="link">
-		                	KH 대학교 학사정보 사이트
+		                	<img src="/images/KH-LOGO.png" width="250px" height="200px">
 	                	</a>
 	                </h2>
 	            </div>
