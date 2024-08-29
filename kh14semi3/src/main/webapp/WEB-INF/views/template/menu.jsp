@@ -5,13 +5,13 @@
 
 <style>
 .pw12{
-	font-size: 75%;
+	font-size: 90%;
 }
 .menu {
+	width: 150px;
     list-style-type: none;
     padding: 0;
-    margin: 0;
-    position: fixed; left: 5%;    
+    margin: auto; 
 }
 
 .menu a:hover{
@@ -31,7 +31,6 @@
 }
 
 .menu > li > a:hover {
-	width: 130px;
 	border : 1px solid black;
     /* background-color: #ddd; */
 }
@@ -85,7 +84,7 @@
 		- 로그인 상태일 때와 비로그인 상태일 때 다르게 표시
 		- 로그인 상태 : sessionScope.creadtedUser != null
 	 -->
-	 <div class="mt-50">
+	 <div class="mt-30">
 	 <c:choose>
 	 	<c:when test="${sessionScope.createdUser == null}">
 		 	<div class="row center">

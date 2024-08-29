@@ -146,7 +146,7 @@ h2 span#currentYear, h2 span#currentMonth {
           		dataType: 'json',
           		success: function(response) {
            			var ScheduleList = response.scheduleList;
-           			console.log(response);
+           			// console.log(response);
            			
 	              	// Clear the existing content
 	              	$('#scheduleTable tbody').empty();

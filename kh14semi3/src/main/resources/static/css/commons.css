@@ -22,6 +22,35 @@ div{
    - 컨테이너는 가운데 정렬되도록 구현
    - 폭은 다른 클래스로 지정하도록 구현
 */
+html, body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	width: 100%;
+}
+.kh-container{
+	display: flex;
+	flex-direction: column;
+	height: 100vh; /* 뷰포트 높이의 100% */
+	width: 100%;
+}
+.kh-header{
+	width: 100%;
+	height: 150px;
+	background-color: #f8f9fa;
+	/* z-index:1; */
+}
+.kh-body{
+	flex:1;        	
+	background-color: #ffffff;
+}
+.kh-footer{
+	width: 100%;
+	height: 250px; /* 푸터의 높이 설정 */
+	background-color: #f8f9fa;
+	/* z-index:1; */
+}
+
 .container{
     /* 좌우 여백을 자동으로 설정하여 가운데 정렬 */
     margin-left: auto;

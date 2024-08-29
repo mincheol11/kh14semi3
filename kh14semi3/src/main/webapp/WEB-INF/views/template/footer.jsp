@@ -6,9 +6,9 @@
 			</div>
 		
 		<!-- 하단(Footer) -->
-			<hr>
+			<%-- <hr> --%>
 			
-			<div class="row my-0 flex-box">
+			<div class="row my-0 flex-box kh-footer">
 			    <div class="w-50 center">
 			        <div class="row">
 			            <h3>KH 대학교</h3>
