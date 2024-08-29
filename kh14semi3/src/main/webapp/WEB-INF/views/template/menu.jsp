@@ -9,6 +9,7 @@
     list-style-type: none;
     padding: 0;
     margin: 0;
+    position: fixed;
 }
 
 .menu a:hover{
