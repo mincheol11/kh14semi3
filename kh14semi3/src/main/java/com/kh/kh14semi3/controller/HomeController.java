@@ -20,4 +20,10 @@ public class HomeController {
 	public String home() {
 		return "/WEB-INF/views/home/main.jsp";
 	}
+	
+	//지도 추가
+	@RequestMapping("map")
+	public String map() {
+		return "/WEB-INF/views/map/map.jsp";
+	}
 }

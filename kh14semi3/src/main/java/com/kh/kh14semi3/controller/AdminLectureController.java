@@ -74,4 +74,7 @@ public class AdminLectureController {
 				if(result == false) throw new TargetNotFoundException("수정할 학과가 없습니다.");
 				return "redirect:detail?lectureCode="+lectureDto.getLectureCode()  + "&message=edit";
 			}
+		
+			
+			
 }
