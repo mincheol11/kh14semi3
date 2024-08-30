@@ -57,29 +57,27 @@
             padding-left: 0;
             padding-right: 0;
             border-radius: 0;
+            background-color: #D1DFEC;
         }        
 	    </style>
 	</head>
 	<body>
 	
-	<div class="container kh-container m-0">
+	<div class="container kh-container mx-0 my-0">
 		
-	        <div class="row my-0 flex-box kh-header">
-	            <div class="w-25 flex-core">
-	                <img src="https://placehold.co/480x150" style="width:100%; height:100%;">
+		<div class="row my-0 flex-box flex-core kh-header">
+	            <!-- <div class="w-20">
+	            	<img src="https://placehold.co/480x150" style="width:100%; height:100%;">
+	            </div> -->
+	            	<a href="/home/main" class="link center">
+		            	<img src="/images/NEW-KH-LOGO.png" style="width:35%; height:35%;">
+	            	</a>
+	            <div class="w-20">
+	            	createdUser = ${sessionScope.createdUser},
+					createdRank = ${sessionScope.createdRank}
 	            </div>
-	            <div class="w-50">
-	                <h2 class="center">
-	                	<a href="/home/main" class="link">
-		                	<img src="/images/NEW-KH-LOGO.png" width="300px" height="100%">
-	                	</a>
-	                </h2>
-	            </div>
-	            <div class="w-25 flex-core">
-	                <img src="https://placehold.co/480x150" style="width:100%; height:100%;">
-	            </div>
-	        </div>	      
-	          
+	        </div>	
+	
 	        
 	        
 	        <div class="row my-0 flex-box kh-body">
@@ -87,4 +85,5 @@
 	        <%-- menu.jsp에 존재하는 내용을 불러오도록 설정 --%>
 			<jsp:include page="/WEB-INF/views/template/menu.jsp"></jsp:include>
 			
-			<div style="flex-grow: 1; background-color:#dfe6e9;">
+			<!-- <div style="flex-grow: 1;"> -->
+			<div class="flex-core"></div>

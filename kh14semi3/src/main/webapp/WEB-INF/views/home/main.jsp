@@ -19,6 +19,8 @@
 	border-radius: 25%;
 }
 .preview{
+	height: 300px !important; 
+	width: 500px !important;
 	background-color : white;
 	border-radius: 30px;
 }
@@ -187,51 +189,41 @@ h2 span#currentYear, h2 span#currentMonth {
 </script>
 
 
-
-
-
-
-<div class="right">
-	createdUser = ${sessionScope.createdUser},
-	createdRank = ${sessionScope.createdRank}
-</div>
-
-<div class="container w-1000 mb-30">
-
-	<div class="row flex-box">
-		
+<div class="container w-1000">
+	<div class="row flex-box my-50">
+	
 		<div class="w-50 mx-10 flex-core preview">
-			<div class="row">			
-				<h2 class="left ps-50 my-0">개인정보</h2>
-				<div id="mypage-preview" class="flex-box mt-10">
-					<div id="preview-text" class="w-40 center">
-						<img src="https://placehold.co/100x100">
-						<p id="memberName" class="my-0"></p>					
-					</div>
-					<div id="preview-text" class="w-60 ms-10">
-						<p id="memberId"></p>
-						<p id="memberRank"></p>
-						<%-- <p id="takeOffType"></p> --%>
-						<p id="memberJoin"></p>
-					</div>
-				</div>				
+			<div class="row center">			
+				<h2 class="mt-0 mb-20">개인정보</h2>
+					<div id="mypage-preview" class="flex-box mt-10">
+						<div id="preview-text" class="w-40 center">
+							<img src="https://placehold.co/100x100">
+							<p id="memberName" class="my-0"></p>					
+						</div>
+						<div id="preview-text" class="left w-60 ms-10">
+							<p id="memberId"></p>
+							<p id="memberRank"></p>
+							<%-- <p id="takeOffType"></p> --%>
+							<p id="memberJoin"></p>
+						</div>
+					</div>				
 			</div>
 		</div>
 		
 		<div class="w-50 mx-10 flex-core preview">
 			<div class="row center">			
-				<h2 class=" mt-0 mb-10">공지사항
-				 	<a href="/board/list" class="link link-more">더보기</a></h2>
-				 <table id="boardTable" class="left">		
-				 <thead>
-                <tr>
-                  
-                 </tr>
-            </thead>			 
-			        <tbody>
-			            <!-- AJAX로 채워질 내용 -->
-			        </tbody>
-			    </table>				
+				<h2 class="mt-0 mb-20">공지사항
+					<a href="/board/list" class="link link-more">더보기</a>
+				</h2>
+				 	<table id="boardTable" class="left">		
+				 		<thead>
+							<tr>
+                 			</tr>
+            			</thead>			 
+			        	<tbody>
+			            	<!-- AJAX로 채워질 내용 -->
+			        	</tbody>
+			    	</table>				
 			</div>
 		</div>
 		
@@ -241,62 +233,61 @@ h2 span#currentYear, h2 span#currentMonth {
 	
 		<div class="w-50 mx-10 flex-core preview">
 			<div class="row center">			
-				<h2 class=" mt-0 mb-10">강의목록
-				<a href="/lecture/list" class="link link-more">더보기</a></h2>
-				 <table id="lectureTable">
-				 	 <thead>
-			            <tr>
-			                <th>학과</th>
-			                <th>교수</th>
-			                <th>분류</th>
-			                <th>강의명</th>
-			                <th>시간</th>
-			                <th>교실</th>
-			            </tr>
-			        </thead>			 
-			        <tbody>
-			            <!-- AJAX로 채워질 내용 -->
-			        </tbody>
-			    </table>				
+				<h2 class=" mt-0 mb-20">강의목록
+					<a href="/lecture/list" class="link link-more">더보기</a>
+				</h2>
+				 	<table id="lectureTable">
+				 	 	<thead>
+							<tr>
+			                	<th>학과</th>
+			                	<th>교수</th>
+			                	<th>분류</th>
+			                	<th>강의명</th>
+			                	<th>시간</th>
+			                	<th>교실</th>
+			            	</tr>
+						</thead>			 
+			        	<tbody>
+			            	<!-- AJAX로 채워질 내용 -->
+			        	</tbody>
+					</table>				
 			</div>
 		</div>
 		
 		<div class="w-50 mx-10 flex-core preview">
-    <div class="row center">
-        <h2 class="mt-0 mb-10">학사일정 (<span id="currentYear"></span>
-    <span id="currentMonth"></span>)
-    <a href="/schedule/list" class="link link-more">더보기</a></h2>
-  
-        <table id="scheduleTable" class="left">
-            <thead>
-                <tr>
-                    
-                </tr>
-            </thead>
-            <tbody>
-                <c:choose>
-                    <c:when test="${not empty scheduleList}">
-                        <c:forEach var="scheduleDto" items="${scheduleList}">
-                            <tr>
-                                <td>${scheduleDto.scheduleTitle}</td>
-                                <td>${scheduleDto.scheduleWtime}</td>
-                            </tr>
-                        </c:forEach>
-                    </c:when>
-                    <c:otherwise>
-                        <tr>
-                            <td colspan="2">일정이 없습니다.</td>
-                        </tr>
-                    </c:otherwise>
-                </c:choose>
-            </tbody>
-        </table>
-    </div>
-</div>
+			<div class="row center">
+				<h2 class="mt-0 mb-20">학사일정 (<span id="currentYear"></span>
+					<span id="currentMonth"></span>)
+    				<a href="/schedule/list" class="link link-more">더보기</a>
+    			</h2>
+		        	<table id="scheduleTable" class="left">
+            			<thead>
+                			<tr>
+                			</tr>
+            			</thead>
+            			<tbody>
+							<c:choose>
+								<c:when test="${not empty scheduleList}">
+									<c:forEach var="scheduleDto" items="${scheduleList}">
+										<tr>
+                                			<td>${scheduleDto.scheduleTitle}</td>
+                                			<td>${scheduleDto.scheduleWtime}</td>
+                            			</tr>
+                        			</c:forEach>
+                    			</c:when>
+                    			<c:otherwise>
+                        			<tr>
+                            			<td colspan="2">일정이 없습니다.</td>
+                        			</tr>
+                    			</c:otherwise>
+                			</c:choose>
+            			</tbody>
+        			</table>
+    		</div>
+		</div>
 		
 		
 	</div>
-	
 </div>
 
 <%-- footer.jsp에 존재하는 내용을 불러오도록 설정 --%>
