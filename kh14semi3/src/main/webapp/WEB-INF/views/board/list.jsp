@@ -39,16 +39,18 @@
   text-decoration: none; /* 기본 상태에서 밑줄 제거 */
   transition: transform 0.3s; /* 확대 효과에 부드러운 전환 추가 */
 }
+
+.target {
+	display: none;
 }
 </style>
 
    
-</script>
     <script type="text/javascript">
         $(function(){
         	$(document).ready(function(){
-                $(".target").slideUp();
-        	 });
+        		
+        	});
             $(".btn-toggle").click(function(){
                 $(".target").slideToggle();
             });
@@ -149,11 +151,11 @@
     }
 
     .info-block .info-content {
-        background: #fff;
-        padding: 8px; /* 패딩을 줄임 */
-        border-radius: 5px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        font-size: 14px; /* 폰트 크기 조정 */
+/*         background: none; */
+/*         padding: 8px; /* 패딩을 줄임 */ */
+/*         border-radius: 5px; */
+/*         box-shadow: 0 2px 4px rgba(0,0,0,0.1); */
+/*         font-size: 14px; /* 폰트 크기 조정 */ */
     }
 
     .info-block .info-contentViews {
