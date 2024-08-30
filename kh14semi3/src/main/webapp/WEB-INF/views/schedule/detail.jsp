@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <!-- CSS 스타일 -->
 <style>
   .container {
-    max-width: 800px;
+    
     margin: auto;
     padding: 20px;
     background-color: #f9f9f9;
