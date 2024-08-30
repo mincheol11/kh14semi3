@@ -28,6 +28,21 @@
         urlParams.delete('message');
         window.history.replaceState(null, '', `${window.location.pathname}?${urlParams}`);
     }
+<<<<<<< HEAD
+=======
+</script>
+
+<style>
+
+/* 링크에 마우스를 올렸을 때 스타일 변경 */
+.board-title {
+  color: black;  /* 기본 텍스트 색상을 검은색으로 설정 */
+  text-decoration: none; /* 기본 상태에서 밑줄 제거 */
+  transition: transform 0.3s; /* 확대 효과에 부드러운 전환 추가 */
+}
+}
+</style>
+>>>>>>> refs/remotes/origin/main
    
 </script>
     <script type="text/javascript">

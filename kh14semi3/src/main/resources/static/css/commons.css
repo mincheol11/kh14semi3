@@ -3,6 +3,7 @@
 
 /* 모든 태그에 폭 설정 기준을 "테두리"로 지정 */
 *{
+	color: #2D3436;
     box-sizing: border-box; 
     font-family: "Noto Sans KR", sans-serif;
     font-optical-sizing: auto;
@@ -13,12 +14,12 @@
 
 /* 영역을 시각적으로 표시하기 위한 테스트 코드 */
 div{
-    box-shadow: 0 0 0px 0 gray;
+    box-shadow: 0 0 0px 0 #B2BEC3;
     /* 그림자는 폭에 영향을 주지 않는다 */
 }
 
 /* 
-   화면을 만들기 위한 컨테이너(container)와 행(row)에 대한 디자인
+   화면을 만들기 위한 컨테이너()와 행(row)에 대한 디자인
    - 컨테이너는 가운데 정렬되도록 구현
    - 폭은 다른 클래스로 지정하도록 구현
 */
@@ -28,11 +29,12 @@ html, body {
 	height: 100%;
 	width: 100%;
 }
+
 .kh-container{
 	display: flex;
 	flex-direction: column;
 	height: 100vh; /* 뷰포트 높이의 100% */
-	background-image: url("/images/background.jpg");
+	background-image: url("/images/background_main.png");
 	background-position: center;
 	background-repeat: no-repeat;
     background-size: cover; 
@@ -43,7 +45,7 @@ html, body {
 	/* z-index:1; */
 }
 .kh-body{
-	border: 1px solid #F1F5F9;
+	border: 1px solid #2D3436;
 	border-right: none;
 	border-left: none;
 	flex:1;
@@ -52,7 +54,7 @@ html, body {
     margin-right: 10%;
 }
 .kh-footer{
-	color: #F1F5F9;
+	color: #2D3436;
 	font-size: 12px;
 	height: 150px; /* 푸터의 높이 설정 */
 	width: 100%;
@@ -241,7 +243,7 @@ html, body {
     font-size: 16px;
     padding: 0.5em 0.5em;
     outline: none; /* 브라우저에서 제공하는 자동강조효과 제거 */
-    border: 1px solid #636e72;
+    border: 1px solid #B2BEC3;
     border-radius: 0.1em;
     line-height: 1.2;
 }
@@ -253,7 +255,7 @@ html, body {
 .field:focus{ 
     /* :hover 마우스를 올렸을 때만 적용 */
     /* :focus 선택하여 커서가 위치할 때만 적용 */
-    border-color: #2d3436;
+    border-color: #2D3436;
 }
 
 /* 
@@ -312,21 +314,21 @@ textarea.field{
 
 /* 긍정 버튼 디자인 */
 .btn.btn-positive{
-    border-color: #00b894;
-    background-color: #00b894;
-    color: white;
+    border-color: #6695C4;
+    background-color: #6695C4;
+    color: #F1F5F9;;
 }
 /* 부정 버튼 디자인 */
 .btn.btn-negative{
     border-color: #d63031;
     background-color: #d63031;
-    color: white;
+    color: #F1F5F9;
 }
 /* 중립 버튼 디자인 */
 .btn.btn-neutral{
-    border-color: #636e72;
-    background-color: #636e72;
-    color: white;
+    border-color: #B2BEC3;
+    background-color: #B2BEC3;
+    color: #F1F5F9;
 }
 
 /* 이미지가 있는 입력필드 */
@@ -357,6 +359,11 @@ textarea.field{
     border-collapse: collapse;
     font-size: 16px;
 }
+
+.table > thead > tr > th{
+	font-weight: bold;
+}
+
 .table > thead > tr > th,
 .table > thead > tr > td,
 .table > tbody > tr > th,
@@ -366,6 +373,7 @@ textarea.field{
 {
     text-align: center;
     padding: 0.25em;
+    background-color: #F1F5F9; /* 각 셀의 배경색 */
 }
 
 /* 확장스타일 - 테두리가 있는 테이블 */
@@ -377,32 +385,37 @@ textarea.field{
 .table.table-border > tfoot > tr > th,
 .table.table-border > tfoot > tr > td
 {
-    border: 1px solid black;
+	
+	border: 1px solid #2D3436;
 }
 
 /* 확장스타일 - 마우스에 반응하는 테이블 */
-.table.table-hover > tbody > tr:hover
-{
-    background-color: #777777 !important;
-    background-color: #7eb6c5 !important;
+/* 행 전체의 호버 스타일 */
+.table-hover > tbody > tr:hover > td {
+    background-color: #D1DFEC; /* 호버 시 셀의 배경색 변경 */
+}
+
+/* 셀 호버 시 색상 변경 (행 전체가 아닌 셀만) */
+.table-hover > tbody > tr > td:hover {
+    background-color: #D1DFEC; /* 셀 호버 시 배경색 */
 }
 
 /* 확장스타일 - 줄무늬 테이블 */
 .table.table-stripe > tbody > tr:nth-child(2n-1)
 {
-    background-color: #dddddd;
+    background-color:  #F1F5F9 !important;
 }
 
 /* 확장스타일 - 가로선만 있는 테이블 */
 .table.table-horizontal {
-    border-top: 3px solid black;
-    border-bottom: 3px solid black;
+    border-top: 2px solid #2D3436;
+    border-bottom: 2px solid #2D3436;
 }
 .table.table-horizontal > thead {
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #2D3436;;
 }
 .table.table-horizontal > tfoot {
-    border-top: 1px solid black;
+    border-top: 1px solid #2D3436;
 }
 
 /* 
@@ -429,7 +442,7 @@ textarea.field{
 }
 
 .link.link-animation > .min, .campus, .items {
-	color: #F1F5F9 !important;
+	color: #2D3436 !important;
 } 
 
 /* 페이지 네비게이터 디자인 */

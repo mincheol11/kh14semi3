@@ -21,16 +21,18 @@
   	}
   $(function(){
 	//상태 객체
-	  var status ={
+ var status ={
 	  lectureCodeValid : true, lectureCodeCheckValid : true,
-	  lectureDepartmentValid : false, lectureDepartmentCheckValid : false,
-	  lectureProfessorValid : false, lectureProfessorCheckValid : false,
-	  lectureTypeValid : false, lectureNameValid : false,
+	  lectureDepartmentValid : true, lectureDepartmentCheckValid : true,
+	  lectureProfessorValid : true, lectureProfessorCheckValid : true,
+	  lectureTypeValid : true, lectureDateValid : true,
+	  lectureNameValid : true, lectureCountValid : true,
 	  ok : function(){
 		return this.lectureCodeValid && this.lectureCodeCheckValid &&  
 		this.lectureDepartmentValid && this.lectureDepartmentCheckValid &&
 		this.lectureProfessorValid && this.lectureProfessorCheckValid &&
-		this.lectureTypeValid && this.lectureNameValid
+		this.lectureTypeValid && this.lectureDateValid &&
+		this.lectureNameValid && this.lectureCountValid
 		},
 	};
 	//학과코드 입력창 검사 // 테이블에 있는값인지 확인코드 추가
@@ -158,7 +160,15 @@
   	            $(this).removeClass("success fail")
   	                            .addClass(isValid ? "success" : "fail");
   	                status.lectureRoomValid = isValid;
-  	            });		
+  	            });	
+  	$(".onlyFive").on("input", function(){
+        var count = $(this).val().length;
+        while(count > 5) {
+            var content = $(this).val();
+            $(this).val(content.substring(0, count-1));
+            count--;
+        }
+    });
 		
     //인원 입력
  	 $("[name=lectureCount]").blur(function(){
@@ -171,6 +181,7 @@
 		//단축키 폼 검사
             $(".check-form").submit(function(){
                 $("[name]").trigger("input").trigger("blur");
+                console.log(status);
                 return status.ok();
             });
             //엔터 차단 코드
@@ -260,8 +271,8 @@
 <!-- 강의실 입력-->
 			<div class="row">
                 <label>강의실</label>
-                      <input type="text" name="lectureRoom" value="${lectureDto.lectureRoom}" 
-                        class="field w-100" placeholder="ex)강의실">
+                      <input type="text" name="lectureRoom" class="field w-100 onlyFive" placeholder="5글자 이하만 입력하세요"
+                      value="${lectureDto.lectureRoom}" >
                 </div>
 <!-- 인원 입력-->
 			<div class="row">

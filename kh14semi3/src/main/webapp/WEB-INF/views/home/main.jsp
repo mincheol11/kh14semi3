@@ -203,12 +203,9 @@ h2 span#currentYear, h2 span#currentMonth {
 
 
 <div class="container w-1000 my-50">
-
 	<div class="row flex-box mx-10 my-20">
 		
-
 		<div class="w-50 mx-10 flex-core preview">
-
 			<div class="row center w-80">	
 				<div>		
 					<h2>개인정보
