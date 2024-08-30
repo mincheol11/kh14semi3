@@ -46,7 +46,34 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 
+<style>
+ .info-block {
+    margin-bottom: 20px;
+  }
 
+  .info-block strong {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+  }
+
+  .info-block .info-content {
+    background: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+   .info-block .info-contentViews {
+    background: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    width: 29px; /* 원하는 너비로 조정 */
+    max-width: 100%; /* 부모 요소에 따라 너비가 제한되지 않도록 */
+    height: 35px; /* 원하는 높이로 조정 */
+    line-height: 1; /* 텍스트 줄 간격 조정 */
+}
+</style>
 
 		
 
@@ -64,22 +91,26 @@ document.addEventListener('DOMContentLoaded', function() {
 	</div>
 
 	<!-- 작성자 -->
-	<div class="row">${boardDto.boardWriter}</div>
+<div class="info-block">
+<strong>작성자:</strong>
+<div class="info-content">${boardDto.boardWriter}
+</div>
+</div>
 	
 	<!-- 내용 -->
-	<div class="row" style="min-height: 200px">
+	<div class="info-block" >
 		<!-- pre 태그는 내용을 작성된 형태 그대로 출력한다
 				Rich Text Editor를 쓸 경우는 할 필요가 없다 -->
-		${boardDto.boardContent}
+				<strong>내용:</strong>
+		<div class="info-content">${boardDto.boardContent}
+	</div>
 	</div>
 	<!-- 정보 -->
-	<div class="row">
-		조회
-		<fmt:formatNumber value="${boardDto.boardViews}" pattern="#,##0" />
-		
-		
-		
-	</div>
+	<div class="info-block">
+		 <strong>조회:</strong>
+		 <div class="info-contentViews"><fmt:formatNumber value="${boardDto.boardViews}" pattern="#,##0" />
+		</div>
+		</div>
 
 	
 

@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   .calendar-table th, .calendar-table td {
     padding: 10px;
-    border: 1px solid #ddd;
+    border: 1px solid #ddd; /* 기본 테두리 색상 설정 */
     text-align: center;
     vertical-align: top;
     width: 14.28%; /* 100% / 7 days */
@@ -105,8 +105,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
   .calendar-table .empty {
     background-color: #f9f9f9;
-    border: none;
-    color: #999;
+    color: #999; /* 회색 숫자 유지 */
+    border: 2px solid #ddd; /* 회색 네모난 테두리 추가 */
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1); /* 테두리 강조를 위한 그림자 */
+  }
+
+  .calendar-table td:hover {
+    background-color: #eaeaea; /* 마우스 오버 시 배경색 변경 */
   }
 
   .event {
@@ -150,9 +155,24 @@ document.addEventListener('DOMContentLoaded', function() {
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
+    position: relative; /* 닫기 버튼을 위한 설정 */
+ 
   }
 
-  
+  .modal-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    color: #aaa;
+  }
+
+  .modal-close:hover {
+    color: #000;
+  }
+ 
+
 </style>
 
 <div class="calendar-container">
@@ -250,7 +270,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <!-- 모달 팝업 HTML -->
 <div id="eventModal" class="modal">
   <div class="modal-content">
-   
+    <span class="modal-close" onclick="closeModal()">&times;</span>
     <div id="modal-body">
       <!-- 상세페이지 내용이 여기에 동적으로 로드됩니다. -->
     </div>
@@ -262,7 +282,6 @@ document.addEventListener('DOMContentLoaded', function() {
 <script>
   // 모달
   var modal = document.getElementById("eventModal");
- 
 
   // 모달 열기
   function openModal(url) {
@@ -282,12 +301,15 @@ document.addEventListener('DOMContentLoaded', function() {
     xhr.send();
   }
 
-  
+  // 모달 닫기
+  function closeModal() {
+    modal.style.display = "none";
+  }
 
   // 모달 외부 클릭 시 모달 닫기
   window.onclick = function(event) {
     if (event.target == modal) {
-      modal.style.display = "none";
+      closeModal();
     }
   }
 </script>

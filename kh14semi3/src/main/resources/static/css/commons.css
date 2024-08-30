@@ -46,9 +46,15 @@ html, body {
 	background-color: #F1F5F9;
 }
 .kh-footer{
+<<<<<<< HEAD
 	height: 200px; /* 푸터의 높이 설정 */
 	background-image: url("/images/background_footer1_opacity.png");
 	z-index:1;
+=======
+	height: 250px; /* 푸터의 높이 설정 */
+	background-color: #f8f9fa;
+	z-index:1; 
+>>>>>>> refs/remotes/origin/main
 }
 
 .container{
@@ -137,6 +143,9 @@ html, body {
 .mt-30{margin-top: 30px !important;}
 .mt-40{margin-top: 40px !important;}
 .mt-50{margin-top: 50px !important;}
+.mt-100{margin-top: 100px !important;}
+.mt-150{margin-top: 150px !important;}
+.mt-200{margin-top: 200px !important;}
 
 .mb-0{margin-bottom: 0 !important;}
 .mb-10{margin-bottom: 10px !important;}
