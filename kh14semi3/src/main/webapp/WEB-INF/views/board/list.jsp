@@ -31,55 +31,40 @@
 
 </script>
 
-<style>
-
-/* 링크에 마우스를 올렸을 때 스타일 변경 */
-.board-title {
-  color: black;  /* 기본 텍스트 색상을 검은색으로 설정 */
-  text-decoration: none; /* 기본 상태에서 밑줄 제거 */
-  transition: transform 0.3s; /* 확대 효과에 부드러운 전환 추가 */
-}
-
-.target {
-	display: none;
-}
-</style>
-
-   
-    <script type="text/javascript">
+   <script type="text/javascript">
         $(function(){
         	$(document).ready(function(){
-        		
-        	});
+        	  });
             $(".btn-toggle").click(function(){
                 $(".target").slideToggle();
             });
         });
-    </script>
+   </script>
+   
 <style>
+	.target {
+		display: none;
+	}
     .container {
-        background-color: #ffffff;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        background-color: #F1F5F9;
         padding: 20px;
         margin: 1px 20px; /* 위아래 여백을 20px로 설정 */
-      
     }
 
     .row {
         margin-bottom: 10px; /* 여백을 10px로 설정 */
     }
 
-    .btn {
+  /*   .btn {
         display: inline-block;
-        padding: 8px 16px; /* 버튼의 패딩을 줄임 */
-        font-size: 14px; /* 버튼 폰트 크기 조정 */
+        padding: 8px 16px;
+        font-size: 14px;
         border-radius: 5px;
         text-decoration: none;
         color: #ffffff;
         background-color: #007bff;
         transition: background-color 0.3s, transform 0.2s;
-    }
+    } */
 
     .btn:hover {
         background-color: #0056b3;
@@ -93,7 +78,7 @@
 
     .btn-neutral:hover {
         background-color: #e2e6ea;
-    }
+    } */
 
     .field {
         padding: 6px;
@@ -111,7 +96,6 @@
         border-collapse: collapse;
         width: 100%; /* 테이블 너비를 100%로 설정 */
         margin-top: 20px;
-        
     }
 
     .table th, .table td {
@@ -122,7 +106,6 @@
 
     .table th {
         background-color: #007bff;
-        color: #ffffff;
     }
 
     .table tbody tr:hover {
@@ -134,6 +117,7 @@
         text-decoration: none;
         transition: color 0.3s, text-decoration 0.3s;
     }
+
 
     .board-title:hover {
         color: #0056b3;
@@ -151,23 +135,25 @@
     }
 
     .info-block .info-content {
+/*         background: #fff; */
 /*         background: none; */
-/*         padding: 8px; /* 패딩을 줄임 */ */
+/*         padding: 8px; /* 패딩을 줄임 */ 
 /*         border-radius: 5px; */
 /*         box-shadow: 0 2px 4px rgba(0,0,0,0.1); */
-/*         font-size: 14px; /* 폰트 크기 조정 */ */
+/*         font-size: 14px; /* 폰트 크기 조정 */
     }
 
     .info-block .info-contentViews {
-        background: #fff;
-        padding: 8px; /* 패딩을 줄임 */
+        /* background: #fff;
+        padding: 8px;
         border-radius: 5px;
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        width: 30px; /* 너비 조정 */
+        width: 30px;
         max-width: 100%;
-        height: 30px; /* 높이 조정 */
+        height: 30px;
         line-height: 1;
-        font-size: 12px; /* 폰트 크기 조정 */
+        font-size: 12px;
+        */
     }
 
     .faq-section {
@@ -184,6 +170,14 @@
         display: block;
         margin-bottom: 5px;
     }
+    
+    /* 링크에 마우스를 올렸을 때 스타일 변경 */
+.board-title {
+  color: black;  /* 기본 텍스트 색상을 검은색으로 설정 */
+  text-decoration: none; /* 기본 상태에서 밑줄 제거 */
+  transition: transform 0.3s; /* 확대 효과에 부드러운 전환 추가 */
+}
+
 </style>
 
 <div class="container">
@@ -240,7 +234,7 @@
         </table>
     </div>
 
-        <h3><button type="button" class="btn btn-neutral btn-toggle">자주 묻는 질문</button></h3>
+    <h3><button type="button" class="btn btn-neutral btn-toggle">자주 묻는 질문</button></h3>
     <div class="faq-section target">
         <div class="faq-item">
             <strong>Q1: 공지사항을 어떻게 검색하나요?</strong>
