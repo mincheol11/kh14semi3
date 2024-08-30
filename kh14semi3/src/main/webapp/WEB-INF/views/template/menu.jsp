@@ -15,7 +15,7 @@
 }
 
 .menu a:hover{
-    color: red;
+    color: #004E9C;
 }
 
 .menu > li {
@@ -26,12 +26,12 @@
     display: block;
     padding: 15px;
     text-decoration: none;
-    color: #333;
-    border-bottom: 1px solid #ddd;
+    color: #F1F5F9;
+    border-bottom: 1px solid #F1F5F9;
 }
 
 .menu > li > a:hover {
-	border : 1px solid black;
+	border : 1px solid #F1F5F9;
     /* background-color: #ddd; */
 }
 
@@ -47,13 +47,12 @@
     padding: 10px 15px;
     display: block;
     text-decoration: none;
-    color: #333;
-    background-color: #fff;
-    border-bottom: 1px solid #ddd;
+    color: #F1F5F9;
+    border-bottom: 1px solid #F1F5F9;
 }
 
 .submenu li a:hover {
-	border : 1px solid black;
+	border : 1px solid #F1F5F9;
     /* border-color: #f0f0f0; */
 }
 </style>
