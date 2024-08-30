@@ -84,7 +84,7 @@
             width: 100%;
             max-width: 500px; /* 최대 너비 조정 */
             margin: 0 auto; /* 화면 중앙에 폼을 위치시키기 위해 자동 마진 설정 */
-            
+            height: 500px;
             margin-top: 100px; /* 상단 여백을 설정하여 화면 중앙에 배치 */
         } 
         

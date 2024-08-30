@@ -87,7 +87,7 @@
             margin: 0 auto; /* 화면 중앙에 폼을 위치시키기 위해 자동 마진 설정 */
             
             margin-top: 100px; /* 상단 여백을 설정하여 화면 중앙에 배치 */
-            min-heigth: 500px;
+            height: 500px;
         } 
         
 
