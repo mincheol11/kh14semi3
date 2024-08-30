@@ -160,7 +160,9 @@
 <form action="login" method="post" autocomplete="off" class="check-form">
     <div class="container w-400 my-50">
     	<div class="row center">
-    		<h1>Kh 대학교 로그인</h1>
+    		<a href="/home/login">
+	    		<img src="/images/kh.png" width=60% style="margin-top: -50">
+    		</a>
     	</div>
     	<div class="row">
     		<label>아이디</label> 
