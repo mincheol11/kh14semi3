@@ -28,7 +28,7 @@
 		},
 	};
 	//학과명 입력창 검사
-		$("[name=departmentName]").blur(function(){
+		$("[name=departmentName]").on("input", function(){
 			var regex= /^[가-힣]{2,20}$/;//형식검사
 			var departmentName = $(this).val();
 			var isValid= regex.test(departmentName);
