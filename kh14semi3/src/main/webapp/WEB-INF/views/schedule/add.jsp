@@ -19,7 +19,7 @@
 <form action="add" method="post" autocomplete="off">
     <div class="container w-800 my-50">
         <div class="row center">
-            <h1>게시글 작성</h1>
+            <h1>학사일정 작성</h1>
             <p>욕설 또는 무분별한 광고, 비방은 예고 없이 삭제될 수 있습니다</p>
         </div>
         <div class="row">
