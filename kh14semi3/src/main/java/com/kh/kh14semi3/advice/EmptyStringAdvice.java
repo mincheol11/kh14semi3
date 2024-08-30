@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 
 //@ControllerAdvice(대상 지정과 관련된 옵션)
 //@ControllerAdvice(basePackages = {"com.kh.spring06.controller"})
-//@ControllerAdvice(annotations = {Controller.class})
+@ControllerAdvice(annotations = {Controller.class})
 public class EmptyStringAdvice { // 제목 > 기능 설명, 비어있는 문자열에 대한 간섭
 	
 	// 이 컨트롤러에서 파라미터를 처리하는 규칙을 변경 
