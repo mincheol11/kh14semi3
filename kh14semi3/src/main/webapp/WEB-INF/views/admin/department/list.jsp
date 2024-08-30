@@ -4,11 +4,6 @@
 		
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include> <!-- hearder 추가 -->
 
-<style>
-
-</style>
-	
-	
 <script type="text/javascript">
 function showMessage(message) {
 if (message === 'reduce') 
