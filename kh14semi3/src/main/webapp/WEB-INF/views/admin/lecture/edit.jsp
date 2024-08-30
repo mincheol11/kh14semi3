@@ -21,20 +21,18 @@
   	}
   $(function(){
 	//상태 객체
-	  var status ={
-	  lectureCodeValid : false, lectureCodeCheckValid : false,
-	  lectureDepartmentValid : false, lectureDepartmentCheckValid : false,
-	  lectureProfessorValid : false, lectureProfessorCheckValid : false,
-	  lectureTypeValid : false, 
-	  lectureNameValid : false,  lectureNameCheckValid : false,
-	  lectureDateValid : false, lectureCountValid : false,
+ var status ={
+	  lectureCodeValid : true, lectureCodeCheckValid : true,
+	  lectureDepartmentValid : true, lectureDepartmentCheckValid : true,
+	  lectureProfessorValid : true, lectureProfessorCheckValid : true,
+	  lectureTypeValid : true, lectureDateValid : true,
+	  lectureNameValid : true, lectureCountValid : true,
 	  ok : function(){
 		return this.lectureCodeValid && this.lectureCodeCheckValid &&  
 		this.lectureDepartmentValid && this.lectureDepartmentCheckValid &&
 		this.lectureProfessorValid && this.lectureProfessorCheckValid &&
-		this.lectureTypeValid && 
-		this.lectureNameValid && this.lectureNameCheckValid &&
-		this.lectureDateValid && this.lectureCountValid
+		this.lectureTypeValid && this.lectureDateValid &&
+		this.lectureNameValid && this.lectureCountValid
 		},
 	};
 	//학과코드 입력창 검사 // 테이블에 있는값인지 확인코드 추가
@@ -112,7 +110,7 @@
 		});
 		
 	  //분류코드 선택창 검사
-	   $("[name=lectureType]").click(function(){
+	   $("[name=lectureType]").on("input", function(){
              var isValid = $(this).val().length>0;
           		 $(this).removeClass("success fail")
                             .addClass(isValid ? "success" : "fail");
@@ -132,35 +130,8 @@
 			var regex= /^[가-힣A-Za-z()]{1,10}$/;//형식검사
 			var lectureName = $(this).val();
 			var isValid= regex.test(lectureName);
-			if(isValid){//중복검사
-				$.ajax({
-					url:"/rest/admin/lecture/checkLectureName",
-					method:"post",
-					data:{lectureName:lectureName},
-					success:function(response){
-						if(response){
-							status.lectureNameCheckValid=true;
-							$("[name=lectureName]").removeClass("success fail fail2")
-							.addClass("success");
-							$("[name=lectureName]").parent().find("label").find("i").removeClass("red fa-bounce");
-							$("[name=lectureName]").parent().find("label").find("i").addClass("green fa-beat");
-						}
-						else{
-	                        status.lectureNameCheckValid=false;
-	                        $("[name=lectureName]").removeClass("success fail fail2")
-	                        .addClass("fail2");
-	                        $("[name=lectureName]").parent().find("label").find("i").removeClass("green fa-beat");
-	                        $("[name=lectureName]").parent().find("label").find("i").addClass("red fa-bounce");
-	                    }
-					},
-				});
-			}
-	 		 else{
-	     			 $("[name=lectureName]").removeClass("success fail fail2")
-	      			.addClass("fail");
-	     			$("[name=lectureName]").parent().find("label").find("i").removeClass("green fa-beat");
-	     			$("[name=lectureName]").parent().find("label").find("i").addClass("red fa-bounce");
-	  			}
+			  $(this).removeClass("success fail")
+                .addClass(isValid ? "success" : "fail");
 	  			status.lectureNameValid = isValid;
 		});
 	  
@@ -183,6 +154,22 @@
           status.lectureDateValid = isValid;
       });   
 		
+      //강의실 입력
+  	 $("[name=lectureRoom]").blur(function(){
+  	        var isValid = $(this).val().length>=0;
+  	            $(this).removeClass("success fail")
+  	                            .addClass(isValid ? "success" : "fail");
+  	                status.lectureRoomValid = isValid;
+  	            });	
+  	$(".onlyFive").on("input", function(){
+        var count = $(this).val().length;
+        while(count > 5) {
+            var content = $(this).val();
+            $(this).val(content.substring(0, count-1));
+            count--;
+        }
+    });
+		
     //인원 입력
  	 $("[name=lectureCount]").blur(function(){
  	        var isValid = $(this).val()>0;
@@ -193,8 +180,8 @@
   
 		//단축키 폼 검사
             $(".check-form").submit(function(){
-				console.log(status);
                 $("[name]").trigger("input").trigger("blur");
+                console.log(status);
                 return status.ok();
             });
             //엔터 차단 코드
@@ -252,7 +239,6 @@
                         class="field w-100" placeholder="ex)학교보건교육론">
  				<div class="success-feedback 00b894">올바른 입력입니다.</div>
                 <div class="fail-feedback d63031">한/영 으로만 입력하세요.</div>
-                 <div class="fail2-feedback d63031">존재하는 강의명 입력하세요.</div>
                 </div>
 <!-- 강의 시작 시간입력-->
 		<div class="row">
@@ -285,8 +271,8 @@
 <!-- 강의실 입력-->
 			<div class="row">
                 <label>강의실</label>
-                      <input type="text" name="lectureRoom" value="${lectureDto.lectureRoom}" 
-                        class="field w-100" placeholder="ex)강의실">
+                      <input type="text" name="lectureRoom" class="field w-100 onlyFive" placeholder="5글자 이하만 입력하세요"
+                      value="${lectureDto.lectureRoom}" >
                 </div>
 <!-- 인원 입력-->
 			<div class="row">

@@ -65,7 +65,7 @@ h2 span#currentYear, h2 span#currentMonth {
 					$('#memberJoin').text("최근접속일 : "+data.memberJoin);
 				},
 				error: function() {
-				    $('#mypage-preview').html('<p>Error loading preview</p>');
+				    $('#mypage-preview').html('<p>로그인 시 확인 가능합니다</p>');
 				}
 			});
 		});
@@ -97,9 +97,9 @@ h2 span#currentYear, h2 span#currentMonth {
                     // Update pagination controls if needed
                     // $('#pagination').html('...'); // Update pagination HTML
                 },
-                error: function(xhr, status, error) {
+                /* error: function(xhr, status, error) {
                     console.error('Error fetching data:', status, error);
-                }
+                } */
             });
         }
 
@@ -115,29 +115,42 @@ h2 span#currentYear, h2 span#currentMonth {
           		success: function(response) {
            			var LectureList = response.lectureList;
 	              	// Clear the existing content
-	              	$('#lectureTable tbody').empty();
-	
+	              	$('#lectureTable').empty();
+	              	$('#lectureTable').append(
+						'<thead>'+	
+					        '<tr>'+    
+						        '<th>학과</th>'+        
+						        '<th>교수</th>'+        
+						        '<th>분류</th>'+        
+						        '<th>강의명</th>'+        
+						        '<th>시간</th>'+        
+						        '<th>교실</th>'+        
+					        '</tr>'+    
+				        '</thead>'+			 
+				        '<tbody>'	              			
+	              			);
 	              	// Populate the table with new data
 	              	$.each(LectureList, function(index, lecture) {
 						if(index<3){
-							$('#lectureTable tbody').append(
-								'<tr>' +
+							$('#lectureTable').append(
+								'<tr>'+
 	                            '<td>' + lecture.lectureDepartment + '</td>' +
 	                            '<td>' + lecture.lectureProfessor + '</td>' +
 	                            '<td>' + lecture.lectureType + '</td>' +
 	                            '<td>' + lecture.lectureName + '[' + lecture.lectureCode + ']' + '</td>' +
 	                            '<td>' + lecture.lectureTime + '</td>' +
 	                            '<td>' + lecture.lectureRoom + '</td>' +
-                            	'</tr>'
+	                            '</tr>'
 							);							
 						}
 					});
+	              	$('#lectureTable').append('</tbody>');
 
 					// Update pagination controls if needed
 					// $('#pagination').html('...'); // Update pagination HTML
 				},
 				error: function(xhr, status, error) {
-					console.error('Error fetching data:', status, error);
+					$('#lectureTable').html('<p>로그인 시 확인 가능합니다</p>');
 				}
 			});
 		}
@@ -175,9 +188,9 @@ h2 span#currentYear, h2 span#currentMonth {
 					// Update pagination controls if needed
 					// $('#pagination').html('...'); // Update pagination HTML
 				},
-				error: function(xhr, status, error) {
+				/* error: function(xhr, status, error) {
 					console.error('Error fetching data:', status, error);
-				}
+				} */
 			});
 		}
       	
@@ -193,14 +206,24 @@ h2 span#currentYear, h2 span#currentMonth {
 	<div class="row flex-box mx-10 my-20">
 		
 		<div class="w-50 mx-10 flex-core preview">
+<<<<<<< HEAD
 			<div class="row center w-60">	
+=======
+
+			<div class="row center w-80">	
+>>>>>>> refs/remotes/origin/main
 				<div>		
-					<h2>개인정보</h2>
+					<h2>개인정보
+						<a href="/member/mypage">
+							<i class="fa-regular fa-square-plus"></i>
+						</a>
+					</h2>					
 				</div>
 				<div id="mypage-preview" class="left flex-box flex-core">
 					<div id="preview-text" class="w-40 center">
-						<img src="https://placehold.co/100x100">
-						<p id="memberName" class="my-0"></p>					
+						<!-- <img src="https://placehold.co/100x100"> -->
+						<img src="/images/empGo.png" width="100px;" height="100px;">
+						<p id="memberName" class="my-0"></p>						
 					</div>
 					<div id="preview-text" class="w-60 ms-10">
 						<p id="memberId"></p>
@@ -215,10 +238,12 @@ h2 span#currentYear, h2 span#currentMonth {
 		
 		<div class="w-50 mx-10 flex-core preview">
 
-			<div class="row center w-80">			
+			<div class="row center w-80 mb-40">			
 				<div>
 					<h2>공지사항
-				 		<a href="/board/list" class="link link-more">더보기</a>
+				 		<a href="/board/list">
+				 			<i class="fa-regular fa-square-plus"></i>
+				 		</a>
 					</h2>
 				</div>
 				 <table id="boardTable" class="left">		
@@ -244,41 +269,31 @@ h2 span#currentYear, h2 span#currentMonth {
 			<div class="row center w-90">	
 				<div>
 					<h2>강의목록
-						<a href="/lecture/list" class="link link-more">더보기</a>
+						<a href="/lecture/list">
+							<i class="fa-regular fa-square-plus"></i>
+						</a>
 					</h2>
 				</div>		
-				 <table id="lectureTable">
-				 	 <thead>
-			            <tr>
-			                <th>학과</th>
-			                <th>교수</th>
-			                <th>분류</th>
-			                <th>강의명</th>
-			                <th>시간</th>
-			                <th>교실</th>
-			            </tr>
-			        </thead>			 
-			        <tbody>
-			            <!-- AJAX로 채워질 내용 -->
-			        </tbody>
-			    </table>				
-
+			 	<table id="lectureTable">
+		            <!-- AJAX로 채워질 내용 -->
+			    </table>		
 			</div>
+			
 		</div>
 		
 
 		<div class="w-50 mx-10 flex-box flex-core preview">
-			<div class="row center w-80">
+			<div class="row center w-80 mb-40">
 				<div>
-					<h2>학사일정
-						 <a href="/schedule/list" class="link link-more">더보기</a>
-						<div>
-							(
-							<span id="currentYear"></span>
-    						<span id="currentMonth"></span>
-    						)
-    					</div>
+					<h2 class="my-0">학사일정
+						<a href="/schedule/list">
+							<i class="fa-regular fa-square-plus"></i>
+						</a>
 					</h2>
+					<div class="mt-0 mb-10">
+						(<span id="currentYear"></span>
+   						<span id="currentMonth"></span>)
+   					</div>					
 				</div>	
        		 	<table id="scheduleTable" class="left">
             		<thead>
@@ -286,28 +301,26 @@ h2 span#currentYear, h2 span#currentMonth {
                     
                 		</tr>
             		</thead>
-            	<tbody>
-                <c:choose>
-                    <c:when test="${not empty scheduleList}">
-                        <c:forEach var="scheduleDto" items="${scheduleList}">
-                            <tr>
-                                <td>${scheduleDto.scheduleTitle}</td>
-                                <td>${scheduleDto.scheduleWtime}</td>
-                            </tr>
-                        </c:forEach>
-                    </c:when>
-				<c:otherwise>
-					<tr>
-						<td colspan="2">일정이 없습니다.</td>
-					</tr>
-				</c:otherwise>
-			</c:choose>
-			</tbody>
-        </table>
-    </div>
-</div>
-
-		
+            		<tbody>
+	                	<c:choose>
+		                    <c:when test="${not empty scheduleList}">
+		                        <c:forEach var="scheduleDto" items="${scheduleList}">
+		                            <tr>
+		                                <td>${scheduleDto.scheduleTitle}</td>
+		                                <td>${scheduleDto.scheduleWtime}</td>
+		                            </tr>
+		                        </c:forEach>
+		                    </c:when>
+							<c:otherwise>
+							<tr>
+								<td colspan="2">일정이 없습니다.</td>
+							</tr>
+							</c:otherwise>
+						</c:choose>
+					</tbody>
+        		</table>
+    		</div>
+		</div>		
 		
 	</div>
 </div>

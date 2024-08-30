@@ -21,16 +21,14 @@
 	  lectureCodeValid : false, lectureCodeCheckValid : false,
 	  lectureDepartmentValid : false, lectureDepartmentCheckValid : false,
 	  lectureProfessorValid : false, lectureProfessorCheckValid : false,
-	  lectureTypeValid : false, 
-	  lectureNameValid : false,  lectureNameCheckValid : false,
-	  lectureDateValid : false, lectureCountValid : false,
+	  lectureTypeValid : false, lectureDateValid : false,
+	  lectureNameValid : false, lectureCountValid : false,
 	  ok : function(){
 		return this.lectureCodeValid && this.lectureCodeCheckValid &&  
 		this.lectureDepartmentValid && this.lectureDepartmentCheckValid &&
 		this.lectureProfessorValid && this.lectureProfessorCheckValid &&
-		this.lectureTypeValid && 
-		this.lectureNameValid && this.lectureNameCheckValid &&
-		this.lectureDateValid && this.lectureCountValid
+		this.lectureTypeValid && this.lectureDateValid &&
+		this.lectureNameValid && this.lectureCountValid
 		},
 	};
 		
@@ -162,39 +160,12 @@
             });
 	  
 	//강의명 입력창 검사 
-	 $("[name=lectureName]").on("input", function(){
+	$("[name=lectureName]").blur(function(){
 			var regex= /^[가-힣A-Za-z()]{1,10}$/;//형식검사
 			var lectureName = $(this).val();
 			var isValid= regex.test(lectureName);
-			if(isValid){//중복검사
-				$.ajax({
-					url:"/rest/admin/lecture/checkLectureName",
-					method:"post",
-					data:{lectureName:lectureName},
-					success:function(response){
-						if(response){
-							status.lectureNameCheckValid=true;
-							$("[name=lectureName]").removeClass("success fail fail2")
-							.addClass("success");
-							$("[name=lectureName]").parent().find("label").find("i").removeClass("red fa-bounce");
-							$("[name=lectureName]").parent().find("label").find("i").addClass("green fa-beat");
-						}
-						else{
-	                        status.lectureNameCheckValid=false;
-	                        $("[name=lectureName]").removeClass("success fail fail2")
-	                        .addClass("fail2");
-	                        $("[name=lectureName]").parent().find("label").find("i").removeClass("green fa-beat");
-	                        $("[name=lectureName]").parent().find("label").find("i").addClass("red fa-bounce");
-	                    }
-					},
-				});
-			}
-	 		 else{
-	     			 $("[name=lectureName]").removeClass("success fail fail2")
-	      			.addClass("fail");
-	     			$("[name=lectureName]").parent().find("label").find("i").removeClass("green fa-beat");
-	     			$("[name=lectureName]").parent().find("label").find("i").addClass("red fa-bounce");
-	  			}
+			  $(this).removeClass("success fail")
+                .addClass(isValid ? "success" : "fail");
 	  			status.lectureNameValid = isValid;
 		});
 	  
@@ -216,7 +187,24 @@
 	                            .addClass(isValid ? "success" : "fail");
 	                status.lectureDateValid = isValid;
 	            });   
-				
+	
+	//강의실 입력
+		 $("[name=lectureRoom]").blur(function(){
+		        var isValid = $(this).val().length>=0;
+		            $(this).removeClass("success fail")
+		                            .addClass(isValid ? "success" : "fail");
+		                status.lectureRoomValid = isValid;
+		            });
+	        $(".onlyFive").on("input", function(){//입력수 5글자까지만
+	            var count = $(this).val().length;
+	            while(count > 5) {
+	                var content = $(this).val();
+	                $(this).val(content.substring(0, count-1));
+	                count--;
+	            }
+	        });
+		});		
+	
 	//인원 입력
 	 $("[name=lectureCount]").blur(function(){
 	        var isValid = $(this).val()>0;
@@ -228,6 +216,7 @@
    //단축키 폼 검사
 	 $(".check-form").submit(function(){
 	 $("[name]").trigger("input").trigger("blur").trigger("click");
+	 console.log(status);
 	                return status.ok();
 	            });
    //엔터 차단 코드
@@ -236,7 +225,7 @@
 	         	      case 13 : return false; 
 	                }
 	           });
-	});		
+  
   </script>
 
  <form action="add" method="post"  class="check-form" autocomplete="off">
@@ -322,7 +311,7 @@
 <!-- 강의실 입력-->
 			<div class="row">
                 <label>강의실</label>
-                      <input type="text" name="lectureRoom"   class="field w-100" placeholder="ex)강의실">
+                      <input type="text" name="lectureRoom" class="field w-100 onlyFive" placeholder="5글자 이하만 입력하세요">
                 </div>
 <!-- 인원 입력-->
 			<div class="row">
