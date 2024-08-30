@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.kh14semi3.dao.BoardDao;
 import com.kh.kh14semi3.dto.BoardDto;
-import com.kh.kh14semi3.dto.ScheduleDto;
+
 import com.kh.kh14semi3.error.TargetNotFoundException;
 import com.kh.kh14semi3.service.AttachmentService;
 import com.kh.kh14semi3.vo.PageVO;
