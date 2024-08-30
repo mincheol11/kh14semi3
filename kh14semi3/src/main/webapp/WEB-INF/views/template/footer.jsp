@@ -20,7 +20,7 @@
 			    </div>
 			    
 			    <div class="w-25">
-			        <div class="row left">
+			        <div class="row center">
 
 			            <h3>캠퍼스 정보</h3>
 			            <div>

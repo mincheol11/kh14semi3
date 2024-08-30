@@ -274,7 +274,7 @@ h2 span#currentYear, h2 span#currentMonth {
 			<div class="row center w-80">
 				<div>
 					<h2>학사일정
-						 <a href="/lecture/list" class="link link-more">더보기</a>
+						 <a href="/schedule/list" class="link link-more">더보기</a>
 						<div>
 							(
 							<span id="currentYear"></span>
