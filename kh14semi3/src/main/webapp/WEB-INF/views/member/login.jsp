@@ -77,7 +77,7 @@
       	.check-form {
             position: relative;
             z-index: 1; /* 로그인 폼이 배경 이미지 위에 오도록 설정 */
-            background: rgba(250, 250, 250, 0); /* 반투명 배경 */
+            background: rgba(250, 250, 250, 0.5); /* 반투명 배경 */
             padding: 2rem;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -85,7 +85,7 @@
             max-width: 500px; /* 최대 너비 조정 */
             margin: 0 auto; /* 화면 중앙에 폼을 위치시키기 위해 자동 마진 설정 */
             height: 570px;
-            margin-top: 100px; /* 상단 여백을 설정하여 화면 중앙에 배치 */
+            margin-top: 150px; /* 상단 여백을 설정하여 화면 중앙에 배치 */
         } 
         
 
