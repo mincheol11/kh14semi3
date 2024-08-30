@@ -50,14 +50,13 @@
 		    
 	    <style>	    
         .profile{
-        	border: 1px solid black;
+        	border: 1px solid #F1F5F9;
         	border-top: none;
             border-left: none;
             border-bottom: none;
             padding-left: 0;
             padding-right: 0;
             border-radius: 0;
-            background-color: #D1DFEC;
         }        
 	    </style>
 	</head>

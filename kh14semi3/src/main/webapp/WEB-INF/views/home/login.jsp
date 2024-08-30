@@ -57,9 +57,10 @@
             overflow: hidden; /* 스크롤바 제거 */
         }
         body{
-        	background-image: url("/images/loginpage.png");
+        	background-image: url("/images/background_gray.png");
         	background-repeat: no-repeat;
-        	background-size: cover; 
+        	background-size: cover;
+        	
         }
 
         .background {
