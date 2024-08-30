@@ -131,7 +131,6 @@ h2 span#currentYear, h2 span#currentMonth {
 	              			);
 	              	// Populate the table with new data
 	              	$.each(LectureList, function(index, lecture) {
-	              		console.log(lecture);
 						if(index<3){
 							$('#lectureTable').append(
 								'<tr>'+
@@ -220,7 +219,8 @@ h2 span#currentYear, h2 span#currentMonth {
 				</div>
 				<div id="mypage-preview" class="left flex-box flex-core">
 					<div id="preview-text" class="w-40 center">
-						<img src="https://placehold.co/100x100">
+						<!-- <img src="https://placehold.co/100x100"> -->
+						<img src="/images/empGo.png" width="100px;" height="100px;">
 						<p id="memberName" class="my-0"></p>						
 					</div>
 					<div id="preview-text" class="w-60 ms-10">
