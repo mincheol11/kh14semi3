@@ -100,7 +100,7 @@ public class MemberController {
 		boolean nullCheck = memberDto != null && studentDto == null 
 									&& professorDto == null && adminDto == null;
 		if(nullCheck) {
-			memberDao.delete(memberId);
+			return "redirect:/member/login?error";
 		}
 		
 		
