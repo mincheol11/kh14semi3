@@ -8,7 +8,7 @@
 		<!-- 하단(Footer) -->
 			<%-- <hr> --%>
 			
-			<div class="row my-0 flex-box kh-footer">
+			<div class="row my-0 flex-box flex-core column-3 kh-footer">
 			    <div class="w-50 center">
 			        <div class="row">
 			            <h3>KH 대학교</h3>
@@ -21,6 +21,7 @@
 			    
 			    <div class="w-25">
 			        <div class="row left">
+
 			            <h3>캠퍼스 정보</h3>
 			            <div>
 			            	<a href="#" class="link link-animation">강남 캠퍼스
@@ -35,9 +36,11 @@
 			                <i class="fa-solid fa-square-arrow-up-right"></i></a>
 			            </div>
 					</div>
+
 			    </div>
 			    
 			    <div class="w-25">
+
 			    	<div class="row">
 			            <h3>KH 대학교</h3>
 			        	<div>
@@ -64,7 +67,8 @@
 			        	
 			        	
 			    </div>
-			</div>			
+			</div>	
+					
 		</div>	
 	</body>
 </html>

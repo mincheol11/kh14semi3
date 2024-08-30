@@ -189,12 +189,13 @@ h2 span#currentYear, h2 span#currentMonth {
 </script>
 
 
-
 <div class="container w-1000 my-50">
 
 	<div class="row flex-box mx-10 my-20">
 		
+
 		<div class="w-50 mx-10 flex-core preview">
+
 			<div class="row center w-60">	
 				<div>		
 					<h2>개인정보</h2>
@@ -211,10 +212,12 @@ h2 span#currentYear, h2 span#currentMonth {
 						<p id="memberJoin"></p>
 					</div>
 				</div>				
+
 			</div>
 		</div>
 		
 		<div class="w-50 mx-10 flex-core preview">
+
 			<div class="row center w-80">			
 				<div>
 					<h2>공지사항
@@ -231,6 +234,7 @@ h2 span#currentYear, h2 span#currentMonth {
 			            <!-- AJAX로 채워질 내용 -->
 			        </tbody>
 			    </table>				
+
 			</div>
 		</div>
 		
@@ -239,6 +243,7 @@ h2 span#currentYear, h2 span#currentMonth {
 	<div class="row flex-box mx-10 my-20">
 	
 		<div class="w-50 mx-10 flex-core preview">
+
 			<div class="row center w-90">	
 				<div>
 					<h2>강의목록
@@ -260,9 +265,11 @@ h2 span#currentYear, h2 span#currentMonth {
 			            <!-- AJAX로 채워질 내용 -->
 			        </tbody>
 			    </table>				
+
 			</div>
 		</div>
 		
+
 		<div class="w-50 mx-10 flex-box flex-core preview">
 			<div class="row center w-80">
 				<div>
@@ -302,10 +309,10 @@ h2 span#currentYear, h2 span#currentMonth {
         </table>
     </div>
 </div>
+
 		
 		
 	</div>
-	
 </div>
 
 <%-- footer.jsp에 존재하는 내용을 불러오도록 설정 --%>

@@ -24,6 +24,6 @@ public class HomeController {
 	//지도 추가
 	@RequestMapping("map")
 	public String map() {
-		return "/WEB-INF/views/map/map.jsp";
+		return "/WEB-INF/views/home/map.jsp";
 	}
 }

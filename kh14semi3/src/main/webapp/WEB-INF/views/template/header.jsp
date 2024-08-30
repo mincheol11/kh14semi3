@@ -75,12 +75,12 @@
 						createdRank = ${sessionScope.createdRank}
 	            </div>
 	        </div>	      
-	          
-	        
+     
 	        
 	        <div class="row my-0 flex-box kh-body">
 	        
 	        <%-- menu.jsp에 존재하는 내용을 불러오도록 설정 --%>
 			<jsp:include page="/WEB-INF/views/template/menu.jsp"></jsp:include>
 			
-			<div style="flex-grow: 1; background-color:#dfe6e9;">
+			<!-- <div style="flex-grow: 1;"> -->
+			<div class="flex-core"></div>
