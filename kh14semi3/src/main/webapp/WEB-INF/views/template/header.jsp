@@ -63,22 +63,19 @@
 	</head>
 	<body>
 	
-	<div class="container kh-container mx-0 my-0">
-		
-		<div class="row my-0 flex-box flex-core kh-header">
-	            <!-- <div class="w-20">
-	            	<img src="https://placehold.co/480x150" style="width:100%; height:100%;">
-	            </div> -->
-	            	<a href="/home/main" class="link center">
-		            	<img src="/images/NEW-KH-LOGO.png" style="width:35%; height:35%;">
-	            	</a>
-	            <div class="w-20">
-	            	createdUser = ${sessionScope.createdUser},
-					createdRank = ${sessionScope.createdRank}
-	            </div>
-	        </div>	
-	
+	<div class="container kh-container m-0">
+	        <div class="row my-0 flex-box flex-core kh-header">
 	        
+	            <div class="w-50 center">
+	                	<a href="/home/main" class="link">
+		                	<img src="/images/NEW-KH-LOGO.png" width="30%" height="30%">
+	                	</a>
+	                	
+						createdUser = ${sessionScope.createdUser},
+						createdRank = ${sessionScope.createdRank}
+	            </div>
+	        </div>	      
+     
 	        
 	        <div class="row my-0 flex-box kh-body">
 	        

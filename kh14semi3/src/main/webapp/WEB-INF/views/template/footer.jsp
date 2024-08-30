@@ -19,39 +19,53 @@
 			        </div>
 			    </div>
 			    
-			    <div class="w-20 center">
-			        <div class="row">
+			    <div class="w-25">
+			        <div class="row left">
+
 			            <h3>캠퍼스 정보</h3>
-			            <div><a href="#" class="link link-animation">강남 캠퍼스
+			            <div>
+			            	<a href="#" class="link link-animation">강남 캠퍼스
 			                <i class="fa-solid fa-square-arrow-up-right"></i></a>
 			            </div>
-			            <div><a href="#" class="link link-animation">종로 캠퍼스
+			            <div>
+			            	<a href="#" class="link link-animation">종로 캠퍼스
 			                <i class="fa-solid fa-square-arrow-up-right"></i></a>
 			            </div>
-			            <div><a href="#" class="link link-animation">당산 캠퍼스
+			            <div>
+			            	<a href="#" class="link link-animation">당산 캠퍼스
 			                <i class="fa-solid fa-square-arrow-up-right"></i></a>
 			            </div>
-			        </div>
+					</div>
+
 			    </div>
 			    
-			    <div class="w-20">
+			    <div class="w-25">
+
 			    	<div class="row">
 			            <h3>KH 대학교</h3>
-			        <div><a href="#" class="link link-animation">개인정보 처리방침 
-			        	<i class="fa-solid fa-square-arrow-up-right"></i></a>
-			        </div>
-			        <div><a href="#" class="link link-animation">대학정보공시
-			        	<i class="fa-solid fa-square-arrow-up-right"></i></a>
-			        </div>
-			        <div><a href="#" class="link link-animation">예결산공고
-			        	<i class="fa-solid fa-square-arrow-up-right"></i></a>
-			        </div>
-			        <div><a href="#" class="link link-animation">이용약관
-			        	<i class="fa-solid fa-square-arrow-up-right"></i></a>
-			        </div>
-			        <div><a href="#" class="link link-animation">공익 신고
-			        	<i class="fa-solid fa-square-arrow-up-right"></i></a>
-			        </div>
+			        	<div>
+			            	<a href="#" class="link link-animation">개인정보 처리방침
+			                <i class="fa-solid fa-square-arrow-up-right"></i></a>
+			        	</div>
+			        	<div>
+			            	<a href="#" class="link link-animation">대학정보공시
+			                <i class="fa-solid fa-square-arrow-up-right"></i></a>
+			        	</div>
+			        	<div>
+			            	<a href="#" class="link link-animation">예결산공고
+			                <i class="fa-solid fa-square-arrow-up-right"></i></a>
+			        	</div>
+			        	<div>
+			            	<a href="#" class="link link-animation">이용약관
+			                <i class="fa-solid fa-square-arrow-up-right"></i></a>
+			        	</div>
+			        	<div>
+			            	<a href="#" class="link link-animation">공익 신고
+			                <i class="fa-solid fa-square-arrow-up-right"></i></a>
+			        	</div>
+			        	
+			        	
+			        	
 			    </div>
 			</div>	
 					

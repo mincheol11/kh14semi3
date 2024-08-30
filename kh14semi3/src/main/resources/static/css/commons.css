@@ -36,7 +36,6 @@ html, body {
 .kh-header{
 	height: 150px;
 	width: 100%;
-	background-color: #ffffff;
 	background-image: url("/images/background_header2_opacity.png");
 	/* z-index:1; */
 }
@@ -46,15 +45,11 @@ html, body {
 	background-color: #F1F5F9;
 }
 .kh-footer{
-<<<<<<< HEAD
-	height: 200px; /* 푸터의 높이 설정 */
+	font-size: 12px;
+	height: 150px; /* 푸터의 높이 설정 */
+	width: 100%;
 	background-image: url("/images/background_footer1_opacity.png");
 	z-index:1;
-=======
-	height: 250px; /* 푸터의 높이 설정 */
-	background-color: #f8f9fa;
-	z-index:1; 
->>>>>>> refs/remotes/origin/main
 }
 
 .container{
