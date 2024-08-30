@@ -12,7 +12,7 @@
         .kakao-map{
         	position: absolute;
 			width:100%;
-			height: 85vh;
+			height: 84.3vh;
 			z-index: 1;
 		}
 		.btn{
@@ -133,17 +133,9 @@
     
 	});
     </script>
-  <!-- HTML 템플릿-->
-   <script type="text/template" id="infowindow-template">
-    <div class="p-10 w-200 center">
-      #1
-    </div>
-   </script>
    
 <form action="map" method="get" autocomplete="off">
-  <div class="container w-100 mt-0">
-    <div>
-    <div class="omega px-10 mx-20 my-20">
+    <div class="container  omega px-10 mx-20 my-20">
 			        <div class=" center">
 			            <h3 class="my-0 underline">캠퍼스 정보</h3>
 			        </div>
@@ -167,9 +159,6 @@
 			        </div>
 			    </div>
         <div class="kakao-map"></div>
-    </div>
-  </div>
-</body>
 <form>
 
 
