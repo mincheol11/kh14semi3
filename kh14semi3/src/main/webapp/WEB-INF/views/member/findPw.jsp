@@ -46,6 +46,12 @@
             btn.find("i").addClass("fa-bounce");
             return true;
         });
+        
+        // 비밀번호 찾기 페이지에서 사이드바 안나오게 하기
+        $(document).ready(function(){
+        	$(".profile").css("display","none");
+        });
+        
     });
 </script>
 
