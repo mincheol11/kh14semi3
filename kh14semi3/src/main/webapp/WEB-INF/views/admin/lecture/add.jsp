@@ -23,14 +23,12 @@
 	  lectureProfessorValid : false, lectureProfessorCheckValid : false,
 	  lectureTypeValid : false, 
 	  lectureNameValid : false,  lectureNameCheckValid : false,
-	  lectureDateValid : false, lectureCountValid : false,
 	  ok : function(){
 		return this.lectureCodeValid && this.lectureCodeCheckValid &&  
 		this.lectureDepartmentValid && this.lectureDepartmentCheckValid &&
 		this.lectureProfessorValid && this.lectureProfessorCheckValid &&
 		this.lectureTypeValid && 
-		this.lectureNameValid && this.lectureNameCheckValid &&
-		this.lectureDateValid && this.lectureCountValid
+		this.lectureNameValid && this.lectureNameCheckValid
 		},
 	};
 		
@@ -216,6 +214,14 @@
 	                            .addClass(isValid ? "success" : "fail");
 	                status.lectureDateValid = isValid;
 	            });   
+	
+	//강의실 입력
+		 $("[name=lectureRoom]").blur(function(){
+		        var isValid = $(this).val().length>=0;
+		            $(this).removeClass("success fail")
+		                            .addClass(isValid ? "success" : "fail");
+		                status.lectureRoomValid = isValid;
+		            });
 				
 	//인원 입력
 	 $("[name=lectureCount]").blur(function(){
