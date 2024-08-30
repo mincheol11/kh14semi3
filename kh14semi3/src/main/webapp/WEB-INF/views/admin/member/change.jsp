@@ -9,39 +9,28 @@
 
 <script>
 $(function(){
-	//입력창 검사
-    $("[name=memberId]").blur(function(){
-        //step 1 : 아이디에 대한 형식 검사
-        var regex = /^[a-z][a-z0-9]{7,19}$/;
-        var memberId = $(this).val();//this.value
-        var isValid = regex.test(memberId);
-        //step 2 : 아이디 중복 검사(형식이 올바른 경우만)
-        if(isValid) {
-            //비동기 통신으로 중복 검사 수행
-            $.ajax({
-                url:"/rest/member/checkId",
-                method:"post",
-                data:{memberId : memberId},
-                success: function(response) {
-                    if(response) {//.success - 아이디가 사용가능한 경우
-                        status.memberIdCheckValid = true;
-                        $("[name=memberId]").removeClass("success fail fail2")
-                                                            .addClass("success");
-                    }
-                    else {//.fail2 - 아이디가 이미 사용중인 경우
-                        status.memberIdCheckValid = false;
-                        $("[name=memberId]").removeClass("success fail fail2")
-                                                            .addClass("fail2");
-                    }
-                },
-            });
-        }
-        else {//.fail - 아이디가 형식에 맞지 않는 경우
-            $("[name=memberId]").removeClass("success fail fail2")
-                                                .addClass("fail");
-        }
-        status.memberIdValid = isValid;
-    });
+	//상태 객체
+    var status = {
+		// admin/member/change는 비밀번호와 아이디 검사가 필요 없다
+        memberIdValid : true, //형식검사
+        memberIdCheckValid : true, //중복검사
+        memberPwValid : true, // /admin/member/change 페이지는 비밀번호 바꾸는거 안함
+        memberPwCheckValid : true, 
+        memberNameValid : false, //형식검사
+        memberRankValid: false,
+        memberEmailValid : false,
+        memberCellValid : true , //선택항목
+        memberBirthValid : true , //선택항목
+        memberAddressValid : true , //선택항목
+        ok : function(){
+            return this.memberIdValid && this.memberIdCheckValid
+                && this.memberPwValid && this.memberPwCheckValid 
+                && this.memberNameValid && this.memberRankValid
+                && this.memberEmailValid && this.memberCellValid
+                && this.memberBirthValid && this.memberAddressValid;
+        },
+    };
+	
     
     $("[name=memberName]").blur(function(){
         var regexStr = /^[가-힣]{2,7}$/;
@@ -168,6 +157,12 @@ $(function(){
         }
     });
     
+  	//폼 검사
+    $(".check-form").submit(function(){
+    	$("[name]").trigger("input").trigger("blur");    
+        console.log(status);
+    	return status.ok();
+    });
     
 
     //생년월일 입력창에 DatePicker 설정
