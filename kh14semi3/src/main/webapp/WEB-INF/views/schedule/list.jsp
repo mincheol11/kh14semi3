@@ -182,16 +182,7 @@ document.addEventListener('DOMContentLoaded', function() {
   .modal-close:hover {
     color: #000;
   }
-   .btn-success {
-    background-color: #28a745; /* Green */
-    color: white;
-    text-decoration: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-  }
-   .btn-success:hover {
-    background-color: #218838;
-  }
+
 </style>
 
 <div class="calendar-container">
@@ -200,7 +191,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <c:set var="isLogin" value="${sessionScope.createdUser != null}" />
     <c:if test="${isLogin && isAdmin}">
      
-      <a class="btn btn-success" href="add">학사 일정등록</a>
+      <a class="btn btn-positive" href="add">학사 일정등록</a>
     </c:if>
     <div class="nav-buttons">
       <c:choose>
