@@ -12,7 +12,7 @@
         .kakao-map{
         	position: absolute;
 			width:100%;
-			height: 84.3vh;
+			height: 85vh;
 			z-index: 1;
 		}
 		.btn{
