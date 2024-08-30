@@ -71,8 +71,8 @@
 		                	<img src="/images/NEW-KH-LOGO.png" width="30%" height="30%">
 	                	</a>
 	                	
-						createdUser = ${sessionScope.createdUser},
-						createdRank = ${sessionScope.createdRank}
+						<%-- createdUser = ${sessionScope.createdUser},
+						createdRank = ${sessionScope.createdRank} --%>
 	            </div>
 	        </div>	      
      
@@ -82,5 +82,5 @@
 	        <%-- menu.jsp에 존재하는 내용을 불러오도록 설정 --%>
 			<jsp:include page="/WEB-INF/views/template/menu.jsp"></jsp:include>
 			
-			<!-- <div style="flex-grow: 1;"> -->
-			<div class="flex-core"></div>
+			<div style="flex-grow: 1;">
+			
