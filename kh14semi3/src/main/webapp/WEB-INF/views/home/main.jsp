@@ -206,12 +206,7 @@ h2 span#currentYear, h2 span#currentMonth {
 	<div class="row flex-box mx-10 my-20">
 		
 		<div class="w-50 mx-10 flex-core preview">
-<<<<<<< HEAD
-			<div class="row center w-60">	
-=======
-
 			<div class="row center w-80">	
->>>>>>> refs/remotes/origin/main
 				<div>		
 					<h2>개인정보
 						<a href="/member/mypage">

@@ -29,7 +29,7 @@ html, body {
 	height: 100%;
 	width: 100%;
 }
-.kh-{
+.kh-container{
 	display: flex;
 	flex-direction: column;
 	height: 100vh; /* 뷰포트 높이의 100% */
