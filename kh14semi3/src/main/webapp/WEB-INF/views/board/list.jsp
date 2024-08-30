@@ -28,8 +28,7 @@
         urlParams.delete('message');
         window.history.replaceState(null, '', `${window.location.pathname}?${urlParams}`);
     }
-<<<<<<< HEAD
-=======
+
 </script>
 
 <style>
@@ -42,7 +41,7 @@
 }
 }
 </style>
->>>>>>> refs/remotes/origin/main
+
    
 </script>
     <script type="text/javascript">
