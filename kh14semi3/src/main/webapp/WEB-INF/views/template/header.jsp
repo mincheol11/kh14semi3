@@ -57,26 +57,22 @@
             padding-left: 0;
             padding-right: 0;
             border-radius: 0;
+            background-color: #D1DFEC;
         }        
 	    </style>
 	</head>
 	<body>
 	
 	<div class="container kh-container m-0">
-		
-	        <div class="row my-0 flex-box kh-header">
-	            <div class="w-25 flex-core">
-	                <img src="https://placehold.co/480x150" style="width:100%; height:100%;">
-	            </div>
-	            <div class="w-50">
-	                <h2 class="center">
+	        <div class="row my-0 flex-box flex-core kh-header">
+	        
+	            <div class="w-50 center">
 	                	<a href="/home/main" class="link">
-		                	<img src="/images/NEW-KH-LOGO.png" width="300px" height="100%">
+		                	<img src="/images/NEW-KH-LOGO.png" width="30%" height="30%">
 	                	</a>
-	                </h2>
-	            </div>
-	            <div class="w-25 flex-core">
-	                <img src="https://placehold.co/480x150" style="width:100%; height:100%;">
+	                	
+						createdUser = ${sessionScope.createdUser},
+						createdRank = ${sessionScope.createdRank}
 	            </div>
 	        </div>	      
 	          

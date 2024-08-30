@@ -76,7 +76,7 @@
 </script>
 
 
-<div class="w-200 profile" style="background-color:80808020;">
+<div class="w-200 profile">
 	<!-- 	
 		메뉴(Navbar)
 		- (중요) 템플릿 페이지의 모든 경로는 전부 다 절대경로를 써야한다
