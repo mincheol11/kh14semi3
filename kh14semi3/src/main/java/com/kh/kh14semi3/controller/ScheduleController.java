@@ -1,6 +1,7 @@
 package com.kh.kh14semi3.controller;
 
-import java.util.ArrayList;
+
+
 
 import java.util.Calendar;
 import java.util.Date;
@@ -9,6 +10,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -49,16 +51,16 @@ public class ScheduleController {
             @ModelAttribute("pageVO") PageVO pageVO,
             Model model) {
 
+        Calendar calendar = Calendar.getInstance();
         if (year == null) {
-            year = Calendar.getInstance().get(Calendar.YEAR);
+            year = calendar.get(Calendar.YEAR);
         }
         if (month == null) {
-            month = Calendar.getInstance().get(Calendar.MONTH) + 1;
+            month = calendar.get(Calendar.MONTH) + 1;
         }
         if (page < 1) {
             page = 1;
         }
-
         if (month < 1) {
             month = 12;
             year -= 1;
@@ -73,8 +75,7 @@ public class ScheduleController {
 
         List<ScheduleDto> scheduleList = scheduleDao.selectListByMonth(year, month, page, 10);
 
-        List<Map<String, Object>> eventList = new ArrayList<>();
-        for (ScheduleDto dto : scheduleList) {
+        List<Map<String, Object>> eventList = scheduleList.stream().map(dto -> {
             Map<String, Object> event = new HashMap<>();
             event.put("scheduleNo", dto.getScheduleNo());
             event.put("scheduleTitle", dto.getScheduleTitle());
@@ -83,19 +84,16 @@ public class ScheduleController {
             Calendar cal = Calendar.getInstance();
             cal.setTime(dto.getScheduleWtime());
             event.put("dayOfMonth", cal.get(Calendar.DAY_OF_MONTH));
-
-            eventList.add(event);
-        }
+            return event;
+        }).collect(Collectors.toList());
 
         Set<Integer> eventDays = scheduleDao.getEventDaysByMonth(year, month);
         model.addAttribute("eventList", eventList);
         model.addAttribute("eventDays", eventDays);
 
-        Calendar calendar = Calendar.getInstance();
         calendar.set(year, month - 1, 1);
         int firstDayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
         int daysInMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
-
         Date firstDayOfMonthDate = calendar.getTime();
 
         model.addAttribute("year", year);
@@ -107,14 +105,15 @@ public class ScheduleController {
         model.addAttribute("currentMonth", month);
         model.addAttribute("currentPage", page);
 
-        boolean showPreviousButton = (year > 2020) || (year == 2020 && month > 1);
-        boolean showNextButton = (year < 2030) || (year == 2030 && month < 12);
+        boolean showPreviousButton = !(year == 2020 && month == 1) && (year > 2020 || year < 2030);
+        boolean showNextButton = !(year == 2030 && month == 12) && (year < 2030 || year > 2020);
 
         model.addAttribute("showPreviousButton", showPreviousButton);
         model.addAttribute("showNextButton", showNextButton);
 
         return "/WEB-INF/views/schedule/list.jsp";
     }
+
 
 
 
