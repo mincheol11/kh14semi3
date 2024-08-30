@@ -28,19 +28,19 @@
         urlParams.delete('message');
         window.history.replaceState(null, '', `${window.location.pathname}?${urlParams}`);
     }
+
 </script>
 
-   
    <script type="text/javascript">
         $(function(){
         	$(document).ready(function(){
-                
-        	 });
+        	  });
             $(".btn-toggle").click(function(){
                 $(".target").slideToggle();
             });
         });
-    </script>
+   </script>
+   
 <style>
 	.target {
 		display: none;
@@ -118,6 +118,7 @@
         transition: color 0.3s, text-decoration 0.3s;
     }
 
+
     .board-title:hover {
         color: #0056b3;
         text-decoration: underline;
@@ -135,10 +136,11 @@
 
     .info-block .info-content {
 /*         background: #fff; */
-/*         padding: 8px; /* 패딩을 줄임 */ */
+/*         background: none; */
+/*         padding: 8px; /* 패딩을 줄임 */ 
 /*         border-radius: 5px; */
 /*         box-shadow: 0 2px 4px rgba(0,0,0,0.1); */
-/*         font-size: 14px; /* 폰트 크기 조정 */ */
+/*         font-size: 14px; /* 폰트 크기 조정 */
     }
 
     .info-block .info-contentViews {
@@ -175,7 +177,7 @@
   text-decoration: none; /* 기본 상태에서 밑줄 제거 */
   transition: transform 0.3s; /* 확대 효과에 부드러운 전환 추가 */
 }
-    
+
 </style>
 
 <div class="container">
@@ -232,7 +234,7 @@
         </table>
     </div>
 
-        <h3><button type="button" class="btn btn-neutral btn-toggle">자주 묻는 질문</button></h3>
+    <h3><button type="button" class="btn btn-neutral btn-toggle">자주 묻는 질문</button></h3>
     <div class="faq-section target">
         <div class="faq-item">
             <strong>Q1: 공지사항을 어떻게 검색하나요?</strong>
