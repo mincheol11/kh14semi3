@@ -26,12 +26,12 @@
     display: block;
     padding: 15px;
     text-decoration: none;
-    color: #F1F5F9;
-    border-bottom: 1px solid #F1F5F9;
+    color: #2D3436;
+    border-bottom: 1px solid #2D3436;
 }
 
 .menu > li > a:hover {
-	border : 1px solid #F1F5F9;
+	border : 1px solid #004E9C;
     /* background-color: #ddd; */
 }
 
@@ -47,12 +47,12 @@
     padding: 10px 15px;
     display: block;
     text-decoration: none;
-    color: #F1F5F9;
-    border-bottom: 1px solid #F1F5F9;
+    color: #2D3436;
+    border-bottom: 1px solid #2D3436;
 }
 
 .submenu li a:hover {
-	border : 1px solid #F1F5F9;
+	border : 1px solid #004E9C;
     /* border-color: #f0f0f0; */
 }
 </style>

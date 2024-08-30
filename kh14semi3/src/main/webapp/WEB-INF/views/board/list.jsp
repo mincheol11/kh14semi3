@@ -39,9 +39,6 @@
   text-decoration: none; /* 기본 상태에서 밑줄 제거 */
   transition: transform 0.3s; /* 확대 효과에 부드러운 전환 추가 */
 }
-
-.table.table-hover > tbody > tr:hover {
-    background-color: rgb(255, 255, 255)!important;
 }
 </style>
    

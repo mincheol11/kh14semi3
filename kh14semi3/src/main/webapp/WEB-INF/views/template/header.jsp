@@ -50,7 +50,7 @@
 		    
 	    <style>	    
         .profile{
-        	border: 1px solid #F1F5F9;
+        	border: 1px solid #2D3436;
         	border-top: none;
             border-left: none;
             border-bottom: none;
