@@ -183,7 +183,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <c:if test="${isLogin && isAdmin}">
       <a class="btn btn-primary" href="edit?scheduleNo=${scheduleDto.scheduleNo}">수정</a>
       <a class="btn btn-danger" href="delete?scheduleNo=${scheduleDto.scheduleNo}">삭제</a>
-      <a class="btn btn-success" href="add">등록</a>
+     
     </c:if>
     <a class="btn btn-secondary" href="list">목록</a>
   </div>
