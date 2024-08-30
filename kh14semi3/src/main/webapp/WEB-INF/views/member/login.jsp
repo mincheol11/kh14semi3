@@ -84,7 +84,7 @@
             width: 100%;
             max-width: 500px; /* 최대 너비 조정 */
             margin: 0 auto; /* 화면 중앙에 폼을 위치시키기 위해 자동 마진 설정 */
-            height: 500px;
+            height: 570px;
             margin-top: 100px; /* 상단 여백을 설정하여 화면 중앙에 배치 */
         } 
         
@@ -160,9 +160,7 @@
 <form action="login" method="post" autocomplete="off" class="check-form">
     <div class="container w-400 my-50">
     	<div class="row center">
-    		<a href="/home/login">
 	    		<img src="/images/kh.png" width=60% style="margin-top: -50">
-    		</a>
     	</div>
     	<div class="row">
     		<label>아이디</label> 
