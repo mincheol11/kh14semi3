@@ -97,7 +97,6 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 </div>
 	
-	<!-- 내용 -->
 	<div class="info-block" >
 		<!-- pre 태그는 내용을 작성된 형태 그대로 출력한다
 				Rich Text Editor를 쓸 경우는 할 필요가 없다 -->
@@ -105,6 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		<div class="info-content">${boardDto.boardContent}
 	</div>
 	</div>
+
 	<!-- 정보 -->
 	<div class="info-block">
 		 <strong>조회:</strong>
