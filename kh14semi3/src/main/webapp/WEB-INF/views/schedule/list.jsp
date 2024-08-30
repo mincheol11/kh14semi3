@@ -38,14 +38,13 @@ document.addEventListener('DOMContentLoaded', function() {
   .calendar-container {
     width: 100%;
     max-width: 800px;
-    margin: 20px auto;
+    margin: 0 370px;
     padding: 20px;
     background: #fff;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    position: relative; /* 버튼 위치 조정을 위한 설정 */
-  }
-
+    position: absolute;
+}
   .calendar-header {
     display: flex; /* 플렉스 박스 사용 */
     align-items: center; /* 세로 정렬 */
