@@ -1,4 +1,4 @@
-package com.kh.kh14semi3.controller;
+ package com.kh.kh14semi3.controller;
 
 import java.io.IOException;
 
@@ -13,15 +13,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.kh14semi3.configuration.CustomCertProperties;
+import com.kh.kh14semi3.dao.AdminDao;
 import com.kh.kh14semi3.dao.CertDao;
 import com.kh.kh14semi3.dao.MemberDao;
+import com.kh.kh14semi3.dao.ProfessorDao;
+import com.kh.kh14semi3.dao.StudentDao;
 import com.kh.kh14semi3.dao.TakeOffDao;
+import com.kh.kh14semi3.dto.AdminDto;
 import com.kh.kh14semi3.dto.CertDto;
 import com.kh.kh14semi3.dto.MemberDto;
+import com.kh.kh14semi3.dto.ProfessorDto;
+import com.kh.kh14semi3.dto.StudentDto;
 import com.kh.kh14semi3.dto.TakeOffDto;
 import com.kh.kh14semi3.error.TargetNotFoundException;
 import com.kh.kh14semi3.service.EmailService;
-import com.kh.kh14semi3.vo.PageVO;
 
 import jakarta.mail.MessagingException;
 import jakarta.servlet.http.Cookie;
@@ -51,6 +56,16 @@ public class MemberController {
 	
 	@Autowired
 	private TakeOffDao takeOffDao;	
+	
+	@Autowired
+	private StudentDao studentDao;
+	
+	@Autowired
+	private ProfessorDao professorDao;
+	
+	@Autowired
+	private AdminDao adminDao;
+	
 	//로그인
 	@GetMapping("/login")
 	public String login() {
@@ -78,6 +93,15 @@ public class MemberController {
 //		if (!isValid) {
 //		    return "redirect:/member/login?error";
 //		}
+		
+		StudentDto studentDto = studentDao.selectOne(memberId);
+		ProfessorDto professorDto = professorDao.selectOne(memberId);
+		AdminDto adminDto = adminDao.selectOne(memberId);
+		boolean nullCheck = memberDto != null && studentDto == null 
+									&& professorDto == null && adminDto == null;
+		if(nullCheck) {
+			memberDao.delete(memberId);
+		}
 		
 		
 		//3번 차단
