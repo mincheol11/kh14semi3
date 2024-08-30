@@ -83,4 +83,4 @@
 			<jsp:include page="/WEB-INF/views/template/menu.jsp"></jsp:include>
 			
 			<div style="flex-grow: 1;">
-			<!-- <div class="flex-core"></div> -->
+	
