@@ -22,7 +22,7 @@ public class HomeController {
 	}
 	
 	//지도 추가
-	@RequestMapping("map")
+	@RequestMapping("/map")
 	public String map() {
 		return "/WEB-INF/views/home/map.jsp";
 	}
