@@ -57,10 +57,10 @@
 
 <div class="container w-400 my-50">
     <div class="row center">
-        <h1>비밀번호 찾기</h1>
+        <h1>비밀번호 변경</h1>
     </div>
     
-    <form action="findPw" method="post" class="check-form">
+    <form action="changePw" method="post" class="check-form">
         <div class="container w-400 my-0">
             <label>아이디</label>
             <input type="text" name="memberId" class="field w-100" required>
@@ -74,7 +74,7 @@
         <div class="container w-400 my-0">
             <button type="submit" class="btn btn-positive w-100">
                 <i class="fa-regular fa-envelope"></i>
-                <span>비밀번호 재설정 메일 발송</span>
+                <span>비밀번호 변경 메일 발송</span>
             </button>
         </div>
     </form>
