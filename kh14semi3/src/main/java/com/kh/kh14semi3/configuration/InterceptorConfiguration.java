@@ -33,17 +33,27 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 		
 		// 회원 검사 인터셉터 설정
 		registry.addInterceptor(memberInterceptor)
-				.addPathPatterns( // 접속불가
-					"/**" // 모든 페이지
+				.addPathPatterns( // member만 접속가능
+					"/member/**", // 모든 페이지
+					"/home/**",
+					"/registration/**",
+					"/lecture/**",
+					"/schedule/**",
+					"/board/**",
+					"/home/**", // map, main
+					"/rest/board/**",
+					"/rest/grade/**",
+					"/rest/home/main/**",
+					"/rest/lecture/**",
+					"/rest/registration/**",
+					"/api/**" // 로그인 남은 시간 페이지
 				) // 해당 설정은 화이트 리스트 방식
-				.excludePathPatterns( // 접속가능
-//					"/**", // 나중에 지워야 함
-					"/home/main", // HomeController 관련 페이지
-					"/home/login", // /home/map 페이지는 제외
+				.excludePathPatterns( // member 아니어도 접속 가능
 					"/member/login", // 로그인 페이지
 					"/member/findPw*", //비밀번호 찾기 관련 페이지
 					"/member/resetPw*", //비밀번호 재설정 관련 페이지		
-					"/rest/cert/**" // 비밀번호 인증 관련 비동기 통신
+					"/rest/cert/**", // 비밀번호 인증 관련 비동기 통신
+					"/rest/member/**" // 회원 정보 형식 검사 관련 비동기 통신
 				);
 		
 		// 관리자 검사 인터셉터 설정
