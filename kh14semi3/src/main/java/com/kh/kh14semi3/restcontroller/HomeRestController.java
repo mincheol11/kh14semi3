@@ -85,7 +85,7 @@ public class HomeRestController {
 		String memberId = (String) session.getAttribute("createdUser");
 		// memberId가 학생인지 교수인지 확인
 		String memberRank = (String) session.getAttribute("createdRank");
-		if(memberRank.equals("학생")) {
+		if("학생".equals(memberRank)) {
 			// 학생이 수강중인 강의 목록을 전송
 			List<LectureDto> lectureList = lectureDao.selectListByRegistration(pageVO, memberId);			
 			int count = lectureDao.countByPagingWithStudent(pageVO ,memberId);
