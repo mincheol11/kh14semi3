@@ -46,7 +46,9 @@ h2 span#currentYear, h2 span#currentMonth {
 	font-size: 14px;
 	text-decoration: underline;
 }
-
+.mb-60{
+	margin-bottom: 60px !important;
+}
 </style>
 
 <script type="text/javascript">
@@ -233,7 +235,7 @@ h2 span#currentYear, h2 span#currentMonth {
 		
 		<div class="w-50 mx-10 flex-core preview">
 
-			<div class="row center w-80 mb-40">			
+			<div class="row center w-80 mb-60">			
 				<div>
 					<h2>공지사항
 				 		<a href="/board/list">
@@ -261,7 +263,7 @@ h2 span#currentYear, h2 span#currentMonth {
 	
 		<div class="w-50 mx-10 flex-core preview">
 
-			<div class="row center w-90">	
+			<div class="row center w-90 mb-40">	
 				<div>
 					<h2>강의목록
 						<a href="/lecture/list">
