@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 
+<html lang="ko">
+<head>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link
@@ -111,7 +113,8 @@
             background-color: #0056b3;
         }
 </style>
-
+</head>
+<body>
 <script type="text/javascript">
     $(function(){
         // 비밀번호 찾기 페이지에서 사이드바 안나오게 하기
@@ -193,3 +196,5 @@
     </c:if>
 </div>
 </form>
+</body>
+</html>

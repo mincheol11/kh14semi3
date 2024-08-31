@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<html lang="ko">
+<head>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link
@@ -109,7 +111,8 @@
             background-color: #0056b3;
         }
 </style>
-
+</head>
+<body>
 <div class="container w-600 my-50 check-form">
 	<div class="row center my-50">
 		<h1>비밀번호 재설정 링크 발송 완료</h1>
@@ -119,3 +122,5 @@
 		비밀번호를 재설정 하시기 바랍니다
 	</div>
 </div>
+</body>
+</html>
