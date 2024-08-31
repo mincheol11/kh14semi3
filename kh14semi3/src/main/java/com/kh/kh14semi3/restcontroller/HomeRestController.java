@@ -18,13 +18,10 @@ import com.kh.kh14semi3.dao.LectureDao;
 import com.kh.kh14semi3.dao.MemberDao;
 import com.kh.kh14semi3.dao.ScheduleDao;
 import com.kh.kh14semi3.dao.StudentDao;
-import com.kh.kh14semi3.dao.TakeOffDao;
 import com.kh.kh14semi3.dto.BoardDto;
 import com.kh.kh14semi3.dto.LectureDto;
 import com.kh.kh14semi3.dto.MemberDto;
 import com.kh.kh14semi3.dto.ScheduleDto;
-import com.kh.kh14semi3.dto.StudentDto;
-import com.kh.kh14semi3.dto.TakeOffDto;
 import com.kh.kh14semi3.error.TargetNotFoundException;
 import com.kh.kh14semi3.vo.PageVO;
 
