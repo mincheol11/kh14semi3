@@ -112,7 +112,8 @@
             background-color: #0056b3;
         }
 </style>
-
+</head>
+<body>
 <div class="check-form">
 	<div class="container w-400 my-50">
 		<div class="row center">
@@ -126,3 +127,5 @@
 		</div>
 	</div>
 </div>
+</body>
+</html>
