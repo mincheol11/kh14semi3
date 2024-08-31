@@ -45,8 +45,8 @@
 	.target {
 		display: none;
 	}
-    .container {
-        background-color: #F1F5F9;
+    .kwon-con {
+        /* background-color: #F1F5F9; */
         padding: 20px;
         margin: 1px 20px; /* 위아래 여백을 20px로 설정 */
     }
@@ -180,7 +180,7 @@
 
 </style>
 
-<div class="container">
+<div class="container kwon-con">
     <div class="row center">
         <h1>학생 공지 사항</h1>
     </div>
