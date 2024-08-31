@@ -168,6 +168,36 @@ public class MemberController {
 		return "/WEB-INF/views/member/findPwFinish.jsp";
 	}	
 	
+	
+	//비밀번호 변경(홈페이지에서 로그인 했을 경우)
+	@GetMapping("/changePw")
+	public String changePw() {
+		return "/WEB-INF/views/member/changePw.jsp";
+	}
+	
+	@PostMapping("/changePw")
+	public String changePw(@RequestParam(required = true) String memberId,
+			@RequestParam(required = true) String memberEmail) throws IOException, MessagingException {
+		// 아이디로 회원 정보 조회
+		MemberDto memberDto = memberDao.selectOne(memberId);
+		if(memberDto == null) {
+			return "redirect:findPw?error";
+		}
+		// 이메일 비교
+		if(!memberEmail.equals(memberDto.getMemberEmail())) {
+			return "redirect:findPw?error";
+		}
+		// 템플릿을 불러와 재설정 메일 발송
+		emailService.sendResetPw(memberId, memberEmail);
+		return "redirect:changePwFinish";
+	}
+	
+	
+	@RequestMapping("/changePwFinish")
+	public String changePwFinish() {
+		return "/WEB-INF/views/member/changePwFinish.jsp";
+	}	
+	
 	//비밀번호 재설정 페이지
 	@GetMapping("/resetPw") 
 	public String resetPw(@ModelAttribute CertDto certDto,
