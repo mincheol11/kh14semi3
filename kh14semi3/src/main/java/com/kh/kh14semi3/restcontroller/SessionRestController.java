@@ -18,6 +18,7 @@ public class SessionRestController {
 	// 로그인 남은 시간 호출
 	@GetMapping("/session-time")
     public ResponseEntity<Map<String, Long>> getSessionTime(HttpSession session) {
+		if(session.getAttribute("createdTime") == null) {session.setAttribute("createdTime", System.currentTimeMillis());}
         long remainingTime = session.getMaxInactiveInterval() - (System.currentTimeMillis() - (long) session.getAttribute("createdTime")) / 1000;
         if(remainingTime<=0) {remainingTime = 0;}
         Map<String, Long> response = new HashMap<>();

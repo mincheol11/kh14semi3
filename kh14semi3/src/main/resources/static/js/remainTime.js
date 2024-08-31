@@ -45,10 +45,11 @@ $(function(){
     }
 
     $(document).ready(function() {
-        fetchSessionTime(); // 페이지 로드 시 초기 호출
-        setInterval(fetchSessionTime, 1000); // 매초마다 호출		
-		
-		// 사용자의 클릭이나 키보드 입력 시 세션을 초기화
+        fetchSessionTime(); // 시스템 호출
+		resetSession(); // 페이지 변경 시 남은 시간 초기화
+        setInterval(fetchSessionTime, 1000); // 매초마다 호출	
+			
+		// 사용자가 연장 버튼 클릭 시 남은 시간 초기화
         $(".login-time-reset").on('click', function() {
             resetSession();
         });

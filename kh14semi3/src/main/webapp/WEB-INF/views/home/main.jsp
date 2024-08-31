@@ -86,7 +86,7 @@ h2 span#currentYear, h2 span#currentMonth {
 
                     // Populate the table with new data
                     $.each(boardList, function(index, board) {
-						if(index<3){
+						if(index<5){
 	                        $('#boardTable tbody').append(
 	                            '<tr>' +
 	                            '<td>' + ' [' + board.boardNo + '] ' + board.boardTitle + '</td>' +
@@ -133,7 +133,7 @@ h2 span#currentYear, h2 span#currentMonth {
 	              			);
 	              	// Populate the table with new data
 	              	$.each(LectureList, function(index, lecture) {
-						if(index<3){
+						if(index<5){
 							$('#lectureTable').append(
 								'<tr>'+
 	                            '<td>' + lecture.lectureDepartment + '</td>' +
@@ -175,7 +175,7 @@ h2 span#currentYear, h2 span#currentMonth {
 	
 	              	// Populate the table with new data
 	              	$.each(ScheduleList, function(index, schedule) {
-						if(index<3){
+						if(index<5){
 							$('#scheduleTable tbody').append(
 								'<tr>' +
 								'<td>' + schedule.scheduleTitle + '</td>' +
@@ -219,7 +219,9 @@ h2 span#currentYear, h2 span#currentMonth {
 				<div id="mypage-preview" class="left flex-box flex-core">
 					<div id="preview-text" class="w-40 center">
 						<!-- <img src="https://placehold.co/100x100"> -->
-						<img src="/images/empGo.png" width="100px;" height="100px;">
+						<c:if test="${sessionScope.createdUser != null}">
+							<img src="/images/empGo.png" width="100px;" height="100px;">
+						</c:if>
 						<p id="memberName" class="my-0"></p>						
 					</div>
 					<div id="preview-text" class="w-60 ms-10">
@@ -235,7 +237,7 @@ h2 span#currentYear, h2 span#currentMonth {
 		
 		<div class="w-50 mx-10 flex-core preview">
 
-			<div class="row center w-80 mb-60">			
+			<div class="row center w-80 mb-20">			
 				<div>
 					<h2>공지사항
 				 		<a href="/board/list">
@@ -271,16 +273,21 @@ h2 span#currentYear, h2 span#currentMonth {
 						</a>
 					</h2>
 				</div>		
+				<c:if test="${sessionScope.createdUser == null}">
+					<p class="mt-40">로그인 시 확인 가능합니다</p>
+				</c:if>
+				<c:if test="${sessionScope.createdUser != null}">
 			 	<table id="lectureTable">
 		            <!-- AJAX로 채워질 내용 -->
-			    </table>		
+			    </table>	
+			    </c:if>	
 			</div>
 			
 		</div>
 		
 
 		<div class="w-50 mx-10 flex-box flex-core preview">
-			<div class="row center w-80 mb-40">
+			<div class="row center w-80 ">
 				<div>
 					<h2 class="my-0">학사일정
 						<a href="/schedule/list">
