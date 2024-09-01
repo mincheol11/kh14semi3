@@ -31,7 +31,7 @@ public class AdminDao {
 	}
 	
 	public boolean update(AdminDto adminDto) {
-		String sql = "update admin set admin_id = ?";
+		String sql = "update admin set where admin_id = ?"; // 수정할 컬럼이 없어서 오류 발생 중
 		Object[] data = {adminDto.getAdminId()};
 		return jdbcTemplate.update(sql, data) > 0 ;
 	}

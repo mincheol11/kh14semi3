@@ -271,11 +271,11 @@ $(function(){
 		</div>
 		<div> <!-- 숨겨서 전달하는 정보들 -->
 			<input type="hidden" name="studentId" value="${studentDto.studentId}" readonly>
-			<input type="hidden" name="professorId" value="${porfessorDto.professorId}" readonly>
+			<input type="hidden" name="professorId" value="${professorDto.professorId}" readonly>
 			<input type="hidden" name="studentLevel" value="${studentDto.studentLevel}" readonly>
 			<input type="hidden" name="studentDepartment" value="${studentDto.studentDepartment}" readonly>
 			<input type="hidden" name="professorDepartment" value="${professorDto.professorDepartment}" readonly>
-			<!-- <input type="hidden" name="" value="" readonly>  -->
+			<%-- <input type="hidden" name="adminId" value="${adminDto.adminId}" readonly> --%>
 		</div>
 		<div class="row mt-30">
 			<button class="btn btn-positive w-100">수정하기</button>
