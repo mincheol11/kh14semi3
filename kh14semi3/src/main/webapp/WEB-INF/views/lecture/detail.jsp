@@ -51,9 +51,9 @@
             <tr>
                 <th>강의시간</th>
                 <td>
-	                ${lectureDto.lectureDay} <br>
-	                ${lectureDto.lectureTime} <br>
-	                ${lectureDto.lectureDuration}시간
+	                ${lectureDto.lectureDay}
+	                ${lectureDto.lectureTime}
+	                (${lectureDto.lectureDuration}시간)
                 </td>
             </tr>	
             <tr>
