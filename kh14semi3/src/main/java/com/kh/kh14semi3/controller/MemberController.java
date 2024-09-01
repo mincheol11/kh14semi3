@@ -285,21 +285,27 @@ public class MemberController {
 	@PostMapping("/edit")
 	public String edit(@ModelAttribute MemberDto memberDto,
 						@ModelAttribute StudentDto studentDto,
-						@ModelAttribute ProfessorDto professorDto) {
+						@ModelAttribute ProfessorDto professorDto,
+						@ModelAttribute AdminDto adminDto) {
 		boolean member = memberDao.updateMemberByAdmin(memberDto); 
 		// 메서드가 관리자전용이지만 memberId와 memberRank를 readonly로 수정불가하게 하여 전달함으로 
 		// 사용 가능하게 됨 그래서 씀
 		
 		boolean student = false;
 		boolean professor = false;
+		boolean admin = false;
 		if("학생".equals(memberDto.getMemberRank())){
 			student = studentDao.update(studentDto);
 		}
 		else if("교수".equals(memberDto.getMemberRank())) {
 			professor = professorDao.update(professorDto);
 		}
+		else if("관리자".equals(memberDto.getMemberRank())) {
+//			admin = adminDao.update(adminDto); // admin 테이블의 컬럼이 PK 1개뿐이라 수정 불가
+			admin = true; // 그래서 true로 설정해 통과 시켜주어야 한다
+		}
 		else {}
-		boolean result = member && (student || professor);
+		boolean result = member && (student || professor || admin);
 		if(result == false)
 			throw new TargetNotFoundException("존재하지 않는 회원ID입니다.");
 		return "redirect:mypage";
