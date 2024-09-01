@@ -18,7 +18,8 @@ public class SessionRestController {
 	// 로그인 남은 시간 호출
 	@GetMapping("/session-time")
     public ResponseEntity<Map<String, Long>> getSessionTime(HttpSession session) {
-		if(session.getAttribute("createdTime") == null) {session.setAttribute("createdTime", System.currentTimeMillis());}
+		if(session.getAttribute("createdUser") == null) return null; // 비로그인 시 남은 시간 전달 X
+		if(session.getAttribute("createdTime") == null) {session.setAttribute("createdTime", System.currentTimeMillis());} // 최초 로그인 시 생성시간 입력
         long remainingTime = session.getMaxInactiveInterval() - (System.currentTimeMillis() - (long) session.getAttribute("createdTime")) / 1000;
         if(remainingTime<=0) {remainingTime = 0;}
         Map<String, Long> response = new HashMap<>();
@@ -37,7 +38,9 @@ public class SessionRestController {
 	// 프론트는 인터셉터 처리로 해결이 되므로 따로 필요 없음
 	@GetMapping("/logout")
 	public ResponseEntity<Void> logout(HttpSession session) {
-	    session.invalidate(); // 세션을 무효화하여 로그아웃 처리
+//	    session.invalidate(); // 세션을 무효화하여 로그아웃 처리 >> 세션 아이디가 바뀌는 이유로 인해 권장되지않음
+		session.removeAttribute("createdUser");
+		session.removeAttribute("createdRank");
 	    return ResponseEntity.ok().build();
 	}
 

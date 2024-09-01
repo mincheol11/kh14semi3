@@ -83,19 +83,24 @@ h2 span#currentYear, h2 span#currentMonth {
                     
                     // Clear the existing content
                     $('#boardTable tbody').empty();
-
-                    // Populate the table with new data
-                    $.each(boardList, function(index, board) {
-						if(index<5){
-	                        $('#boardTable tbody').append(
-	                            '<tr>' +
-	                            '<td>' + ' [' + board.boardNo + '] ' + board.boardTitle + '</td>' +
-	                            '<td>' + board.boardWtime + '</td>' +
-	                            '</tr>'
-	                        );							
-						}
-                    });
-
+					
+                    if(boardList.length > 0){ 
+	                    // Populate the table with new data
+	                    $.each(boardList, function(index, board) {
+							if(index<5){
+		                        $('#boardTable tbody').append(
+		                            '<tr>' +
+		                            '<td>' + ' [' + board.boardNo + '] ' + board.boardTitle + '</td>' +
+		                            '<td>' + board.boardWtime + '</td>' +
+		                            '</tr>'
+		                        );							
+							}
+	                    });
+                    }
+                    else{
+                    	$('#boardTable').parent().append('<p>등록된 공지사항이 없습니다</p>');
+                    }
+                    
                     // Update pagination controls if needed
                     // $('#pagination').html('...'); // Update pagination HTML
                 },
@@ -116,38 +121,44 @@ h2 span#currentYear, h2 span#currentMonth {
           		dataType: 'json',
           		success: function(response) {
            			var LectureList = response.lectureList;
+           			
 	              	// Clear the existing content
 	              	$('#lectureTable').empty();
-	              	$('#lectureTable').append(
-						'<thead>'+	
-					        '<tr>'+    
-						        '<th>학과</th>'+        
-						        '<th>교수</th>'+        
-						        '<th>분류</th>'+        
-						        '<th>강의명</th>'+        
-						        '<th>시간</th>'+        
-						        '<th>교실</th>'+        
-					        '</tr>'+    
-				        '</thead>'+			 
-				        '<tbody>'	              			
-	              			);
-	              	// Populate the table with new data
-	              	$.each(LectureList, function(index, lecture) {
-						if(index<5){
-							$('#lectureTable').append(
-								'<tr>'+
-	                            '<td>' + lecture.lectureDepartment + '</td>' +
-	                            '<td>' + lecture.lectureProfessor + '</td>' +
-	                            '<td>' + lecture.lectureType + '</td>' +
-	                            '<td>' + lecture.lectureName + '[' + lecture.lectureCode + ']' + '</td>' +
-	                            '<td>' + lecture.lectureTime + '</td>' +
-	                            '<td>' + lecture.lectureRoom + '</td>' +
-	                            '</tr>'
-							);							
-						}
-					});
-	              	$('#lectureTable').append('</tbody>');
-
+	              	
+	              	if(LectureList.length > 0){ 
+		              	$('#lectureTable').append(
+							'<thead>'+	
+						        '<tr>'+    
+							        '<th>학과</th>'+        
+							        '<th>교수</th>'+        
+							        '<th>분류</th>'+        
+							        '<th>강의명</th>'+        
+							        '<th>시간</th>'+        
+							        '<th>교실</th>'+        
+						        '</tr>'+    
+					        '</thead>'+			 
+					        '<tbody>'	              			
+		              			);
+		              	// Populate the table with new data
+		              	$.each(LectureList, function(index, lecture) {
+							if(index<5){
+								$('#lectureTable').append(
+									'<tr>'+
+		                            '<td>' + lecture.lectureDepartment + '</td>' +
+		                            '<td>' + lecture.lectureProfessor + '</td>' +
+		                            '<td>' + lecture.lectureType + '</td>' +
+		                            '<td>' + lecture.lectureName + '[' + lecture.lectureCode + ']' + '</td>' +
+		                            '<td>' + lecture.lectureTime + '</td>' +
+		                            '<td>' + lecture.lectureRoom + '</td>' +
+		                            '</tr>'
+								);							
+							}
+						});
+		              	$('#lectureTable').append('</tbody>');
+	              	}
+	              	else{
+           				$('#lectureTable').parent().append('<p>등록된 강의 목록이 없습니다</p>');           				
+           			}
 					// Update pagination controls if needed
 					// $('#pagination').html('...'); // Update pagination HTML
 				},
@@ -168,27 +179,34 @@ h2 span#currentYear, h2 span#currentMonth {
           		dataType: 'json',
           		success: function(response) {
            			var ScheduleList = response.scheduleList;
-           			// console.log(response);
+           			// console.log(ScheduleList.length);
            			
 	              	// Clear the existing content
 	              	$('#scheduleTable tbody').empty();
 	
-	              	// Populate the table with new data
-	              	$.each(ScheduleList, function(index, schedule) {
-						if(index<5){
-							$('#scheduleTable tbody').append(
-								'<tr>' +
-								'<td>' + schedule.scheduleTitle + '</td>' +
-	                            '<td>' + schedule.scheduleWtime + '</td>' +
-                            	'</tr>'
-							);							
-						}
-					});
-	             // Insert the current month, page, and year into the HTML
+           			if(ScheduleList.length > 0){           			
+		              	// Populate the table with new data
+		              	$.each(ScheduleList, function(index, schedule) {
+							if(index<5){
+								$('#scheduleTable tbody').append(
+									'<tr>' +
+									'<td>' + schedule.scheduleTitle + '</td>' +
+		                            '<td>' + schedule.scheduleWtime + '</td>' +
+	                            	'</tr>'
+								);							
+							}
+						});
+           			}
+           			else{
+           				$('#scheduleTable').parent().append('<p>등록된 학사 일정이 없습니다</p>');           				
+           			}
+           			
+	             	// Insert the current month, page, and year into the HTML
 	                $('#currentYear').text(response.currentYear +'년');
 	                $('#currentMonth').text(response.currentMonth +'월');
 					// Update pagination controls if needed
 					// $('#pagination').html('...'); // Update pagination HTML
+					
 				},
 				/* error: function(xhr, status, error) {
 					console.error('Error fetching data:', status, error);
