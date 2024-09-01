@@ -181,11 +181,11 @@ public class MemberController {
 		// 아이디로 회원 정보 조회
 		MemberDto memberDto = memberDao.selectOne(memberId);
 		if(memberDto == null) {
-			return "redirect:findPw?error";
+			return "redirect:changePw?error";
 		}
 		// 이메일 비교
 		if(!memberEmail.equals(memberDto.getMemberEmail())) {
-			return "redirect:findPw?error";
+			return "redirect:changePw?error";
 		}
 		// 템플릿을 불러와 재설정 메일 발송
 		emailService.sendResetPw(memberId, memberEmail);
