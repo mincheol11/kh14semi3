@@ -141,7 +141,7 @@
 	                    <a href="#">강의 관리</a>
 	                    <ul class="submenu">
 	                        <li><a href="/lecture/list">강의 목록</a></li>
-	                        <li><a href="/lecture/grade">성적 입력</a></li>
+	                        <!-- <li><a href="/lecture/grade">성적 입력</a></li> -->
 	                    </ul>
 	                </li>
 	                <li>
@@ -158,6 +158,13 @@
 	 	<c:when test="${sessionScope.createdRank == '관리자'}">
 	 		<div class="sidebar">
 	            <ul class="menu">
+	            	<li>
+	                    <a href="#">공지사항</a>
+	                    <ul class="submenu">
+	                        <li><a href="/board/list">공지사항</a></li>
+	                        <li><a href="/schedule/list">학사일정</a></li>
+	                    </ul>
+	                </li>
 	                <li>
 	                    <a href="#">회원 관리</a>
 	                    <ul class="submenu">
