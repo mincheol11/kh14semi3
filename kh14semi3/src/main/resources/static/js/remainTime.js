@@ -5,8 +5,8 @@ $(function(){
             url: '/api/session-time',
             method: 'GET',
             success: function(data) {
-                var remainingTime = data.remainingTime;
-                $('#timer').text(formatTime(remainingTime));
+	            var remainingTime = data.remainingTime;
+	            $('#timer').text(formatTime(remainingTime));
 				if(remainingTime <=0) {
 					goLogout();
 				}
@@ -39,6 +39,10 @@ $(function(){
 	}
 
     function formatTime(seconds) {
+		if(seconds==null) {
+			$('#timer').attr("id", "stop"); // 비로그인 시 비동기통신 전달 차단
+			return "0:00"; // 비로그인 시 전달 정보가 null이므로 0:00 출력
+		}
         var minutes = Math.floor(seconds / 60);
         var secs = seconds % 60;
         return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
