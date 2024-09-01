@@ -98,7 +98,7 @@
         });
     </script>
     
-    <div class="container w-1000 my-50">
+    <div class="container w-900 my-50">
         <div class="row center">
             <h1>성적입력</h1>
         </div>
@@ -191,4 +191,8 @@
             </div>
         </form>
     </div>
+
+	
+<%-- footer.jsp에 존재하는 내용을 불러오도록 설정 --%>
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
 
