@@ -20,8 +20,9 @@
             <br><br>
         </div>
         <div class="row">
-            <label>날짜 <i class="fa-solid fa-asterisk fa-fade"></i></label>
-            <input type="date" name="scheduleDate" class="field w-200" required>
+           <label>날짜 <i class="fa-solid fa-asterisk fa-fade"></i></label>
+<input type="date" name="scheduleWtime" class="field w-200" required>
+           
             <br><br>
         </div>
         <div class="row">

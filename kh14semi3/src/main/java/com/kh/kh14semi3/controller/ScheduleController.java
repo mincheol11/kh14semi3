@@ -1,11 +1,13 @@
 package com.kh.kh14semi3.controller;
 
 
-
-
+ 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+// Java Util Date 타입
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -43,11 +45,14 @@ public class ScheduleController {
     @Autowired
     private AttachmentService attachmentService;
 
+    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+
     @GetMapping("/list")
     public String list(
             @RequestParam(value = "pageYear", required = false) Integer year,
             @RequestParam(value = "pageMonth", required = false) Integer month,
             @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
+            @RequestParam(value = "selectedDate", required = false) String selectedDate, // 추가: 선택된 날짜
             @ModelAttribute("pageVO") PageVO pageVO,
             Model model) {
 
@@ -73,7 +78,21 @@ public class ScheduleController {
         pageVO.setMonth(month);
         pageVO.setPage(page);
 
-        List<ScheduleDto> scheduleList = scheduleDao.selectListByMonth(year, month, page, 10);
+        List<ScheduleDto> scheduleList;
+        if (selectedDate != null && !selectedDate.isEmpty()) {
+            // 선택된 날짜가 있을 경우, 날짜 기반 조회
+            try {
+                java.util.Date utilDate = DATE_FORMAT.parse(selectedDate);
+                java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+                scheduleList = scheduleDao.selectListByDate(sqlDate, page, 10);
+            } catch (ParseException e) {
+                e.printStackTrace(); // 예외 발생 시 로그 출력
+                scheduleList = scheduleDao.selectListByMonth(year, month, page, 10); // 기본 월 조회
+            }
+        } else {
+            // 선택된 날짜가 없을 경우, 월 기반 조회
+            scheduleList = scheduleDao.selectListByMonth(year, month, page, 10);
+        }
 
         List<Map<String, Object>> eventList = scheduleList.stream().map(dto -> {
             Map<String, Object> event = new HashMap<>();
@@ -94,7 +113,7 @@ public class ScheduleController {
         calendar.set(year, month - 1, 1);
         int firstDayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
         int daysInMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
-        Date firstDayOfMonthDate = calendar.getTime();
+        Date firstDayOfMonthDate = new Date(calendar.getTimeInMillis());
 
         model.addAttribute("year", year);
         model.addAttribute("month", month);
@@ -114,9 +133,6 @@ public class ScheduleController {
         return "/WEB-INF/views/schedule/list.jsp";
     }
 
-
-
-
     @RequestMapping("/detail")
     public String detail(@RequestParam int scheduleNo, Model model) {
         ScheduleDto scheduleDto = scheduleDao.selectOne(scheduleNo);
@@ -133,10 +149,32 @@ public class ScheduleController {
         return "/WEB-INF/views/schedule/add.jsp";
     }
 
+   
+
     @PostMapping("/add")
-    public String add(@ModelAttribute ScheduleDto scheduleDto, HttpSession session, @ModelAttribute PageVO pageVO) {
-        String createdUser = (String) session.getAttribute("createdUser");
-        scheduleDto.setScheduleWriter(createdUser);
+    public String add(
+            @RequestParam String scheduleTitle,
+            @RequestParam String scheduleWtime, // 날짜를 String으로 받기
+            @RequestParam String scheduleContent,
+            HttpSession session,
+            @ModelAttribute PageVO pageVO) {
+
+        ScheduleDto scheduleDto = new ScheduleDto();
+        scheduleDto.setScheduleTitle(scheduleTitle);
+        scheduleDto.setScheduleContent(scheduleContent);
+        scheduleDto.setScheduleWriter((String) session.getAttribute("createdUser"));
+
+        // 문자열을 java.util.Date로 파싱
+        try {
+            java.util.Date utilDate = DATE_FORMAT.parse(scheduleWtime);
+            // java.util.Date를 java.sql.Date로 변환
+            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+            scheduleDto.setScheduleWtime(sqlDate);
+        } catch (ParseException e) {
+            e.printStackTrace(); // 예외 발생 시 로그 출력
+            // 날짜 파싱 실패 시 현재 날짜를 설정
+            scheduleDto.setScheduleWtime(new java.sql.Date(System.currentTimeMillis()));
+        }
 
         int seq = scheduleDao.sequence();
         scheduleDto.setScheduleNo(seq);
@@ -144,6 +182,8 @@ public class ScheduleController {
         scheduleDao.insert(scheduleDto);
         return "redirect:/schedule/list?page=" + pageVO.getPage() + "&message=addSuccess";
     }
+
+
 
     @GetMapping("/edit")
     public String edit(@RequestParam int scheduleNo, Model model) {
@@ -156,14 +196,36 @@ public class ScheduleController {
     }
 
     @PostMapping("/edit")
-    public String edit(@ModelAttribute ScheduleDto scheduleDto, @ModelAttribute PageVO pageVO) {
-        ScheduleDto originDto = scheduleDao.selectOne(scheduleDto.getScheduleNo());
+    public String edit(
+            @RequestParam Integer scheduleNo,
+            @RequestParam String scheduleTitle,
+            @RequestParam String scheduleWtime, // 날짜를 String으로 받기
+            @RequestParam String scheduleContent,
+            @ModelAttribute PageVO pageVO) {
+
+        // 기존 데이터 조회
+        ScheduleDto originDto = scheduleDao.selectOne(scheduleNo);
         if (originDto == null) {
             throw new TargetNotFoundException("존재하지 않는 글번호");
         }
 
+        // 업데이트할 데이터 설정
+        ScheduleDto scheduleDto = new ScheduleDto();
+        scheduleDto.setScheduleNo(scheduleNo);
+        scheduleDto.setScheduleTitle(scheduleTitle);
+        scheduleDto.setScheduleContent(scheduleContent);
+
+        // 문자열을 java.sql.Date로 변환
+        try {
+            java.util.Date utilDate = DATE_FORMAT.parse(scheduleWtime);
+            scheduleDto.setScheduleWtime(new java.sql.Date(utilDate.getTime())); // 변환 후 java.sql.Date로 설정
+        } catch (ParseException e) {
+            // 날짜 파싱 실패 시 원래 날짜를 유지
+            scheduleDto.setScheduleWtime(originDto.getScheduleWtime());
+        }
+
         // 게시글 내용의 첨부파일을 비교하여 삭제할 항목을 찾음
-        Set <Integer> before = new HashSet<>();
+        Set<Integer> before = new HashSet<>();
         Document beforeDocument = Jsoup.parse(originDto.getScheduleContent());
         for (Element el : beforeDocument.select(".schedule-attach")) {
             String keyStr = el.attr("data-key");
@@ -192,7 +254,6 @@ public class ScheduleController {
         // 수정 완료 후 목록 페이지로 리다이렉트하고 메시지 전달
         return "redirect:/schedule/list?page=" + pageVO.getPage() + "&message=updateSuccess";
     }
-
     @RequestMapping("/delete")
     public String delete(@RequestParam int scheduleNo, @RequestParam(defaultValue = "1") int page, @RequestParam(value = "confirm", required = false) String confirm) {
         if ("true".equals(confirm)) {

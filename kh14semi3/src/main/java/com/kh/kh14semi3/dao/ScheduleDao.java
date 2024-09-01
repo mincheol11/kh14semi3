@@ -31,14 +31,15 @@ public class ScheduleDao {
 
     public void insert(ScheduleDto scheduleDto) {
         String sql = "insert into schedule"
-                + " (schedule_no, SCHEDULE_WRITER, SCHEDULE_TYPE, SCHEDULE_TITLE, SCHEDULE_CONTENT) "
-                + " values(?, ?, ?, ?, ?)";
+                + " (schedule_no, SCHEDULE_WRITER, SCHEDULE_TYPE, SCHEDULE_TITLE, SCHEDULE_CONTENT, SCHEDULE_WTIME) "
+                + " values(?, ?, ?, ?, ?, ?)";
         Object[] data = {
             scheduleDto.getScheduleNo(),
             scheduleDto.getScheduleWriter(),
             scheduleDto.getScheduleType(),
             scheduleDto.getScheduleTitle(),
-            scheduleDto.getScheduleContent()
+            scheduleDto.getScheduleContent(),
+            scheduleDto.getScheduleWtime()
         };
         jdbcTemplate.update(sql, data);
     }
@@ -51,10 +52,11 @@ public class ScheduleDao {
     }
 
     public boolean update(ScheduleDto scheduleDto) {
-        String sql = "update schedule set schedule_title=?, schedule_content=? where schedule_no=?";
+        String sql = "update schedule set schedule_title=?, schedule_content=?, schedule_wtime=? where schedule_no=?";
         Object[] data = {
             scheduleDto.getScheduleTitle(),
             scheduleDto.getScheduleContent(),
+            scheduleDto.getScheduleWtime(),
             scheduleDto.getScheduleNo()
         };
         return jdbcTemplate.update(sql, data) > 0;
@@ -110,7 +112,25 @@ public class ScheduleDao {
         return jdbcTemplate.queryForObject(sql, int.class, data);
     }
 
-    // 기존 selectListByMonth 메서드
+    // 날짜 기반 게시글 목록 조회
+    public List<ScheduleDto> selectListByDate(java.sql.Date date, int page, int size) {
+        int endRow = page * size;
+        int beginRow = endRow - (size - 1);
+
+        String sql = "SELECT * FROM ("
+                   + "SELECT rownum rn, TMP.* FROM ("
+                   + "SELECT schedule_no, SCHEDULE_WRITER, SCHEDULE_TYPE, SCHEDULE_TITLE, SCHEDULE_CONTENT, SCHEDULE_WTIME "
+                   + "FROM schedule "
+                   + "WHERE SCHEDULE_WTIME = ? "
+                   + "ORDER BY schedule_no ASC"
+                   + ") TMP"
+                   + ") WHERE rn BETWEEN ? AND ?";
+
+        Object[] data = {date, beginRow, endRow};
+        return jdbcTemplate.query(sql, scheduleListMapper, data);
+    }
+
+    // 월 기반 게시글 목록 조회
     public List<ScheduleDto> selectListByMonth(int year, int month, int page, int size) {
         int endRow = page * size;
         int beginRow = endRow - (size - 1);
@@ -128,7 +148,7 @@ public class ScheduleDao {
         return jdbcTemplate.query(sql, scheduleListMapper, data);
     }
 
-    // 기존 countByMonth 메서드
+    // 월 기반 게시글 수 카운트
     public int countByMonth(int year, int month) {
         String sql = "SELECT COUNT(*) FROM schedule "
                    + "WHERE EXTRACT(YEAR FROM SCHEDULE_WTIME) = ? AND EXTRACT(MONTH FROM SCHEDULE_WTIME) = ?";
@@ -136,7 +156,7 @@ public class ScheduleDao {
         return jdbcTemplate.queryForObject(sql, Integer.class, data);
     }
 
-    // 추가: 이벤트가 있는 날짜를 조회하는 메서드
+    // 이벤트가 있는 날짜 조회
     public Set<Integer> getEventDaysByMonth(int year, int month) {
         String sql = "SELECT EXTRACT(DAY FROM SCHEDULE_WTIME) AS event_day FROM schedule "
                    + "WHERE EXTRACT(YEAR FROM SCHEDULE_WTIME) = ? AND EXTRACT(MONTH FROM SCHEDULE_WTIME) = ?";

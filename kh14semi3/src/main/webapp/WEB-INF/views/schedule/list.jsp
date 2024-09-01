@@ -265,15 +265,16 @@ document.addEventListener('DOMContentLoaded', function() {
                       <div class="event-marker"></div>
                     </c:when>
                   </c:choose>
-                  <c:forEach var="event" items="${eventList}">
-                    <c:choose>
-                      <c:when test="${event.dayOfMonth == currentDay}">
-                        <a href="#" onclick="openModal('detail?scheduleNo=${event.scheduleNo}&title=' + encodeURIComponent('${event.scheduleTitle}')); return false;" class="event">
-                          ${event.scheduleTitle}
-                        </a>
-                      </c:when>
-                    </c:choose>
-                  </c:forEach>
+                 <c:forEach var="event" items="${eventList}">
+    <c:choose>
+        <c:when test="${event.dayOfMonth == currentDay}">
+            <a href="#" onclick="openModal('detail?scheduleNo=${event.scheduleNo}&title=' + encodeURIComponent('${event.scheduleTitle}')); return false;" class="event">
+                ${event.scheduleTitle}
+            </a>
+        </c:when>
+    </c:choose>
+</c:forEach>
+                 
                 </td>
               </c:otherwise>
             </c:choose>
