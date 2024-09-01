@@ -84,7 +84,7 @@ h2 span#currentYear, h2 span#currentMonth {
                     // Clear the existing content
                     $('#boardTable tbody').empty();
 					
-                    if(LectureList.length > 0){ 
+                    if(boardList.length > 0){ 
 	                    // Populate the table with new data
 	                    $.each(boardList, function(index, board) {
 							if(index<5){
