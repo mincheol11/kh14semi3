@@ -24,10 +24,10 @@
 	background-color : white;
 	border-radius: 30px;
 }
-#boardTable td{
+/* #boardTable td{
 	padding-left:30px;
 	padding-right:30px;
-}
+} */
 #lectureTable td{
 	padding-left:10px;
 	padding-right:10px;
@@ -222,8 +222,8 @@ h2 span#currentYear, h2 span#currentMonth {
 </script>
 
 
-<div class="container w-1000 my-50">
-	<div class="row flex-box mx-10 my-20">
+<div class="container w-100 my-50 px-50">
+	<div class="row flex-box mx-10 my-20" style="min-height:50%">
 		
 		<div class="w-50 mx-10 flex-core preview">
 			<div class="row center w-80">	
