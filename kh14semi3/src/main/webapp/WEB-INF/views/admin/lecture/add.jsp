@@ -205,7 +205,6 @@
 	                $(this).val(content.substring(0, count-1));
 	                count--;
 	            }
-	            
 	            if(count == 5){
 		            $(this).removeClass("fail").addClass("success");	
 		            $(this).css("border-color","green");
@@ -296,13 +295,13 @@
 		<div class="row">
                         <label>강의시작</label>
                         <input type="time" name="lectureTime" class="field w-100">
-                        <div class="fail-feedback d63031">3개 모두 입력 해야 합니다</div>
+                        <div class="fail-feedback d63031">3개 모두 입력해야 합니다</div>
                     </div>
 <!-- 강의 수업시간 입력-->
 			<div class="row">
 				<label>강의시간</label>
     			<input type="number" name="lectureDuration" class="field w-100" placeholder="시간">
-    			  <div class="fail-feedback d63031">3개 모두 입력 해야 합니다</div>
+    			  <div class="fail-feedback d63031">3개 모두 입력해야 합니다</div>
 				</div> 
 <!-- 강의 수업요일 입력-->
 			<div class="row">
@@ -317,13 +316,13 @@
                     <option value="토요일">토요일</option>
                     <option value="일요일">일요일</option>
                 </select>
-                <div class="fail-feedback d63031">3개 모두 입력 해야 합니다</div>
+                <div class="fail-feedback d63031">3개 모두 입력해야 합니다</div>
             </div>
 <!-- 강의실 입력-->
 			<div class="row">
                 <label>강의실</label>
                       <input type="text" name="lectureRoom" class="field w-100 onlyFive" placeholder="5글자 이하만 입력하세요">
-                      <div class="success-feedback">최대 5글자 제한</div>
+                      <div class="success-feedback">최대 5글자까지 입력 가능합니다</div>
                 </div>
 <!-- 인원 입력-->
 			<div class="row">

@@ -10,12 +10,14 @@
 
 <style>
 .kakao-map{
-   	position: absolute;
-	width: 65%;
-	height: 70%;
+   	position: relative;
+	width: 100%;
+	height: 100%;
 	/* width: 100%; */
 	/* height: 84.3vh; */
 	z-index: 1;
+	margin: auto;
+	padding: auto;
 }
 .btn{
 	position: absolute;
@@ -55,13 +57,13 @@ $(function(){
 	//- level:지도의 확대수준(1~15)
 	var options = {
 		center: new kakao.maps.LatLng(37.533826, 126.896837),
-		level: 5
+		level: 3
 	};
 
 	//태그와 옵션을 이용하여 카카오 지도를 생성한다
     //(window.)자유롭게 접근 가능하도록 window 탑재
 	window.kakaoMap = new kakao.maps.Map(container, options);
-
+	kakaoMap.setLevel(3);
     var marker;
 	
     function loadMapList(map){
@@ -71,28 +73,31 @@ $(function(){
           case 'jongRo':
             lat = 37.5679;
             lng = 126.983;
+            kakaoMap.setLevel(3);
             $(".jongRo").removeClass("black").addClass("red");
             break;
           case 'dangSan':
             lat = 37.533826;
             lng = 126.896837;
+            kakaoMap.setLevel(3);
             $(".dangSan").removeClass("black").addClass("red");
             break;
           case 'gangNam':
             lat = 37.499;
             lng = 127.0328;
+            kakaoMap.setLevel(3);
             $(".gangNam").removeClass("black").addClass("red");
             break;
           default:
             lat = 37.533826;
             lng = 126.896837;
+            kakaoMap.setLevel(3);
             $(".dangSan").removeClass("black").addClass("red");
             break;
         }
         
         var location = new kakao.maps.LatLng(lat, lng);
         kakaoMap.setCenter(location);
-
         if (window.kakaoMapMarker) {
           kakaoMapMarker.setMap(null);
           kakaoMapMarker = null;
@@ -118,6 +123,7 @@ $(function(){
       $(this).removeClass("black").addClass("red");
       //지도를 이동하는 코드
       var location = new kakao.maps.LatLng(lat, lng);
+      kakaoMap.setLevel(3);
       kakaoMap.setCenter(location);
 
       // 마커(Marker) 생성
@@ -164,8 +170,9 @@ $(function(){
 		</div>
 	</div>
 	
-<div class="kakao-map"></div>
-
+	<!-- <div class="flex-box"> -->
+		<div class="kakao-map"></div>
+	<!-- </div> -->	
 
 
 
