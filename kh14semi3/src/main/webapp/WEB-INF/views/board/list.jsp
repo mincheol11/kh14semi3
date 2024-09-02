@@ -88,20 +88,18 @@
     <c:set var="isAdmin" value="${sessionScope.createdRank == '관리자'}" />
     <c:set var="isLogin" value="${sessionScope.createdUser != null}" />
 
-    <c:if test="${isLogin && isAdmin}">
-        <div class="row center">
-            <a href="write" class="btn btn-neutral">신규등록</a>
-        </div>
-    </c:if>
-
+    
     <div class="row center">
-        <form action="list" method="get" class="search-form">
+        <form action="list" method="get" autocomplete="off" class="search-form">
             <select name="column" class="field">
                 <option value="board_title" <c:if test="${param.column == 'board_title'}">selected</c:if>>제목</option>
                 <option value="board_writer" <c:if test="${param.column == 'board_writer'}">selected</c:if>>작성자</option>
             </select>
             <input type="text" name="keyword" placeholder="검색어" value="${param.keyword}" class="field">
-            <button type="submit" class="btn btn-positive">검색</button>
+            <button type="submit" class="btn btn-positive"><i class="fa-solid fa-magnifying-glass"></i></button>
+        	<c:if test="${isLogin && isAdmin}">
+				<a class="btn btn-neutral" type="button" href="write" ><i class="fa-solid fa-right-to-bracket"></i> 등록</a>
+    		</c:if>
         </form>
     </div>
 
@@ -142,7 +140,7 @@
         </div>
         <div class="faq-item">
             <strong>Q2: 공지사항을 작성하려면 어떻게 하나요?</strong>
-            <p>A2: 관리자인 경우, 페이지 상단의 '신규등록' 버튼을 클릭하여 새로운 공지사항을 작성할 수 있습니다.</p>
+            <p>A2: 관리자인 경우, 페이지 상단의 '등록' 버튼을 클릭하여 새로운 공지사항을 작성할 수 있습니다.</p>
         </div>
     </div>
 </div>

@@ -21,7 +21,7 @@
 			</select>
 			<input class="field" type="text" name="keyword" value="${param.keyword}" placeholder="검색어">
 			<button class="btn btn-positive" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
-			<a class="btn btn-netural" type="button" href="join"><i class="fa-solid fa-right-to-bracket"></i></a>
+			<a class="btn btn-neutral" type="button" href="join"><i class="fa-solid fa-right-to-bracket"></i> 등록</a>
 		</form>
 	</div>
 

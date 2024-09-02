@@ -296,7 +296,7 @@ textarea.field{
     /* 한줄에 여러개 배치 + 블럭이 있어야 폭 조절 가능 */
     font-size: 16px; /* 입력창과 동일하게 */
     padding: 0.5em 0.5em; /* 입력창과 동일하게 */
-    color: #2d3436;
+    color: #2D3436;
     background-color: #dfe6e9;
     border: 1px solid #2d3436;
     border-radius: 0.1em;
