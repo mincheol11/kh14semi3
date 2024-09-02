@@ -13,9 +13,12 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <style>
-	.fa-asterisk {
-		color:#d63031;
-	}
+.kh-container{
+    height: auto !important; 
+}
+.fa-asterisk {
+	color:#d63031;
+}
 </style>
 
 <script>
