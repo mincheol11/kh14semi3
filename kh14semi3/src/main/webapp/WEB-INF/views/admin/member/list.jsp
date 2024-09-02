@@ -21,7 +21,7 @@
 			</select>
 			<input class="field" type="text" name="keyword" value="${param.keyword}" placeholder="검색어">
 			<button class="btn btn-positive" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
-			<a class="btn btn-netural" type="button" href="join"><i class="fa-solid fa-right-to-bracket"></i></a>
+			<a class="btn btn-neutral" type="button" href="join"><i class="fa-solid fa-right-to-bracket"></i> 등록</a>
 		</form>
 	</div>
 
@@ -46,17 +46,14 @@
 			</thead>
 			<tbody align="center">
 				<c:forEach var="memberTakeOffVO" items="${memberList}">
-					<tr>
-						<td><a class="link link-animation" href="detail?memberId=${memberTakeOffVO.memberId}&memberRank=${memberTakeOffVO.memberRank}">${memberTakeOffVO.memberId}</a></td>
+					<tr onclick="location.href='detail?memberId=${memberTakeOffVO.memberId}&memberRank=${memberTakeOffVO.memberRank}'" style="cursor: pointer">
+						<td>${memberTakeOffVO.memberId}</td>
 						<td>${memberTakeOffVO.memberName}</td>
 						<td>${memberTakeOffVO.memberRank}</td>
 						<td>${memberTakeOffVO.memberEmail}</td>
 						<td>${memberTakeOffVO.memberJoin}</td>
 						<td>${memberTakeOffVO.takeOffType}</td>
 						<td>
-							<a class="link link-animation" href="detail?memberId=${memberTakeOffVO.memberId}&memberRank=${memberTakeOffVO.memberRank}">상세</a>
-							<a class="link link-animation" href="change?memberId=${memberTakeOffVO.memberId}">수정</a>
-							
 							<c:choose>
 								<c:when test="${memberTakeOffVO.takeOffType == '재학'}">
 									<a class="link link-animation" href="takeOff?takeOffTarget=${memberTakeOffVO.memberId}">휴학</a>

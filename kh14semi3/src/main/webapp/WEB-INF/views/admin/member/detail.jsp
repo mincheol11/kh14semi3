@@ -11,13 +11,13 @@
 }
 </style>
 
-<div class="container w-600 my-50">
+<div class="container w-500 my-50">
 	<div class="row center">
-		<h2>회원 정보 상세</h2>
+		<h1>회원 정보 상세</h1>
 	</div>
 
 	<div class="row center">
-		<table class="table table-hover table-horizontal w-100">
+		<table class="table table-border w-100">
 			<tr>
 				<th width="30%">아이디</th>
 				<td>${memberDto.memberId}</td>
@@ -87,12 +87,13 @@
 	</div>
 
 	<!-- 메뉴 배치 -->
-	<div class="row float-box">
-		<div class="float-right">
-			<a href="" class="btn btn-positive"><i class="fa-regular fa-square-plus"></i> 회원등록</a>
+
+	<div class="row float-box center mt-20">
+			<a href="join" class="btn btn-positive"><i class="fa-regular fa-square-plus"></i> 회원등록</a>
 			<a href="list" class="btn btn-neutral"><i class="fa-solid fa-list"></i> 목록이동</a> 
 			<a href="change?memberId=${memberDto.memberId}" class="btn btn-neutral"> <i class="fa-solid fa-eraser"></i> 회원 수정</a> 
-			<a href="delete?memberId=${memberDto.memberId}" class="btn btn-negative"><i class="fa-solid fa-trash"></i> 회원 삭제</a>
+			<a href="delete?memberId=${memberDto.memberId}" class="btn btn-negative confirm-link" 
+			data-text="정말 삭제하시겠습니까?"><i class="fa-solid fa-trash"></i> 회원 삭제</a>
 		</div>
 	</div>
 

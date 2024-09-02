@@ -283,7 +283,7 @@ $(function(){
 			<%-- <input type="hidden" name="adminId" value="${adminDto.adminId}" readonly> --%>
 		</div>
 		<div class="row mt-30">
-			<button class="btn btn-positive w-100">수정하기</button>
+			<button class="btn btn-positive w-100"><i class="fa-solid fa-eraser" style="color: white"></i> 수정하기</button>
 		</div>
 		<div class="row mt-30">
 			<a href="mypage" class="btn btn-neutral w-100">

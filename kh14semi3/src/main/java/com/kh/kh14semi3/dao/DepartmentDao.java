@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.kh14semi3.dto.DepartmentDto;
+import com.kh.kh14semi3.dto.ProfessorDto;
 import com.kh.kh14semi3.mapper.DepartmentMapper;
 import com.kh.kh14semi3.vo.PageVO;
 
@@ -61,6 +62,13 @@ public class DepartmentDao {
 			String sql = "select count(*) from department";		
 			return jdbcTemplate.queryForObject(sql, int.class);	
 		}
+	}
+
+	public DepartmentDto selectOne(String lectureDepartment) {
+		String sql = "select * from department where department_code = ?";
+		Object[] data = {lectureDepartment};
+		List<DepartmentDto> list = jdbcTemplate.query(sql, departmentMapper, data);
+		return list.isEmpty() ? null : list.get(0);
 	}
 	
 	

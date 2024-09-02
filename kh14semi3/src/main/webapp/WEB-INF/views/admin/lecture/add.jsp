@@ -164,7 +164,7 @@
 	  
 	//강의명 입력창 검사 
 	$("[name=lectureName]").blur(function(){
-			var regex= /^[가-힣A-Za-z()]{1,10}$/;//형식검사
+			var regex= /^[가-힣A-Za-z()\s]{1,10}$/;//형식검사
 			var lectureName = $(this).val();
 			var isValid= regex.test(lectureName);
 			  $(this).removeClass("success fail")
@@ -192,7 +192,7 @@
 	            });   
 	
 	//강의실 입력
-		 $("[name=lectureRoom]").blur(function(){
+		 $("[name=lectureRoom]").on("input", function(){
 		        var isValid = $(this).val().length>=0;
 		            $(this).removeClass("success fail")
 		                            .addClass(isValid ? "success" : "fail");
@@ -204,6 +204,14 @@
 	                var content = $(this).val();
 	                $(this).val(content.substring(0, count-1));
 	                count--;
+	            }
+	            
+	            if(count == 5){
+		            $(this).removeClass("fail").addClass("success");	
+		            $(this).css("border-color","green");
+	            }
+	            else{
+	            	$(this).removeClass("success");	  
 	            }
 	        });
 		});		
@@ -240,27 +248,27 @@
 			<div class="row">
                 <label>강의코드 <i class="fa-solid fa-asterisk red"></i></label>
                     <input type="text" name="lectureCode" 
-                        class="field w-100" placeholder="ex)l01">
+                        class="field w-100" placeholder="ex)KHL01003">
                 <div class="success-feedback 00b894">올바른 강의 코드입니다.</div>
-                <div class="fail-feedback d63031">코드는 앞 영문 소문자로 시작하며,다음 숫자를 2~3자로 작성해주세요.</div>
+                <div class="fail-feedback d63031">코드는 영문 대문자와 숫자로 작성해주세요.</div>
                 <div class="fail2-feedback d63031">이미 사용중인 코드입니다.</div>
 			</div>
 <!-- 학과 코드 입력-->
 			<div class="row">
                 <label>학과코드 <i class="fa-solid fa-asterisk red"></i></label>
                       <input type="text" name="lectureDepartment" 
-                        class="field w-100" placeholder="ex)d01">
+                        class="field w-100" placeholder="ex)KHD01001">
  				<div class="success-feedback 00b894">올바른 학과 코드입니다.</div>
-                <div class="fail-feedback d63031">코드는 앞 영문 소문자로 시작하며,다음 숫자를 2~3자로 작성해주세요.</div>
+                 <div class="fail-feedback d63031">코드는 영문 대문자와 숫자로 작성해주세요.</div>
                 <div class="fail2-feedback d63031">존재하지 않는 코드입니다.</div>
                 </div>
 <!-- 교수 코드 입력-->
 			<div class="row">
                 <label>교수코드 <i class="fa-solid fa-asterisk red"></i></label>
                       <input type="text" name="lectureProfessor" 
-                        class="field w-100" placeholder="ex)prof001">
+                        class="field w-100" placeholder="ex)KHP01240002">
  				<div class="success-feedback 00b894">올바른 교수 코드입니다.</div>
-                <div class="fail-feedback d63031">코드는 앞 영문 소문자로 시작하며,다음 숫자를 3자로 작성해주세요.</div>
+                 <div class="fail-feedback d63031">코드는 영문 소문자와 숫자로 작성해주세요.</div>
                 <div class="fail2-feedback d63031">존재하지 않는 코드입니다.</div>
                 </div>
 <!-- 분류 선택-->
@@ -315,6 +323,7 @@
 			<div class="row">
                 <label>강의실</label>
                       <input type="text" name="lectureRoom" class="field w-100 onlyFive" placeholder="5글자 이하만 입력하세요">
+                      <div class="success-feedback">최대 5글자 제한</div>
                 </div>
 <!-- 인원 입력-->
 			<div class="row">
@@ -330,9 +339,8 @@
                    강의개설
                 </button>
                 <div class="row">
-                <a href="list" class="btn btn-netraul w-100" >
-                   <i class="fa-solid fa-list"></i>
-                  목록이동
+                <a href="list" class="btn btn-neutral w-100" >
+                   <i class="fa-solid fa-list"></i> 목록이동
                 </a>
                 </div>
             </div>

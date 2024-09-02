@@ -236,135 +236,132 @@ $(function(){
 });
 </script>
 
-<div class="container w-600 my-50">
-        <div class="row center">
-            <h1>회원 등록 페이지</h1>
-        </div>
-        <div class="row">
-            <div class="progressbar"><div class="guage"></div></div>
-        </div>
+<div class="container w-500 my-50">
+	<div class="row center">
+		<h1>회원 등록 페이지</h1>
+	</div>
 
-        <form class="check-form" action="join" method="post"  >
+	<form class="check-form" action="join" method="post"  >
 
-        <div class="row">
-            <div class="">
-                <div class="page">
-                    <div class="row">
-                        <label>아이디</label>
-                        <input type="text" name="memberId" class="field w-100"
+		<div class="row">
+ 			<div class="page">
+				<div class="row">
+					<label>아이디</label>
+					<input type="text" name="memberId" class="field w-100"
                                     placeholder="영문소문자 시작, 숫자 포함 8~20자">
-                        <div class="success-feedback">멋진 아이디입니다!</div>
-                        <div class="fail-feedback">올바른 형식으로 작성해주세요</div>
-                        <div class="fail2-feedback">아이디가 이미 사용중입니다</div>
-                    </div>
-                </div>
-                <div class="page">
-                    <div class="row">
-                        <label>
-                            비밀번호
-
-                            <!-- 방법1 : 체크박스 사용 -->
-                            <label class="ms-20">
-                                <input type="checkbox" class="field-show">
-                                <span>표시하기</span>
-                            </label>
-
-                            <!-- 방법2 : 아이콘 사용 -->
-                            <i class="fa-solid fa-eye"></i>
-                        </label>
-                        <input type="password" name="memberPw" class="field w-100"
-                                    placeholder="영문 대소문자, 숫자, !@#$중 하나 반드시 포함">
-                        <div class="success-feedback">올바른 형식입니다!</div>
+					<div class="success-feedback">멋진 아이디입니다!</div>
+					<div class="fail-feedback">올바른 형식으로 작성해주세요</div>
+					<div class="fail2-feedback">아이디가 이미 사용중입니다</div>
+			</div>
+                
+			<div class="page">
+				<div class="row">
+					<label>비밀번호
+						<!-- 방법1 : 체크박스 사용 -->
+						<label class="ms-20">
+							<input type="checkbox" class="field-show">
+							<span>표시하기</span>
+						</label>
+						<!-- 방법2 : 아이콘 사용 -->
+						<i class="fa-solid fa-eye"></i>
+					</label>
+                        
+					<input type="password" name="memberPw" class="field w-100" 	
+								placeholder="영문 대소문자, 숫자, !@#$중 하나 반드시 포함">
+						<div class="success-feedback">올바른 형식입니다!</div>
                         <div class="fail-feedback">형식에 맞춰 8~16자로 작성하세요</div>
-                    </div>
-                    <div class="row">
-                        <label>비밀번호 확인</label>
-                        <input type="password" id="password-check" class="field w-100"
-                                    placeholder="확인을 위해 비밀번호 한번 더 입력">
+				</div>
+				
+			<div class="page">
+				<div class="row">
+					<label>비밀번호 확인</label>
+					<input type="password" id="password-check" class="field w-100" 
+								placeholder="확인을 위해 비밀번호 한번 더 입력">
                         <div class="success-feedback">비밀번호가 일치합니다</div>
                         <div class="fail-feedback">비밀번호가 일치하지 않습니다</div>
-                    </div>
-                </div>
-                <div class="page">
-                    <div class="row">
-                        <label>이름</label>
-                        <input type="text" name="memberName"
-                                class="field w-100" placeholder="이름">
+				</div>
+			</div>
+			
+			<div class="page">
+				<div class="row">
+					<label>이름</label>
+					<input type="text" name="memberName" class="field w-100" placeholder="이름">
                         <div class="success-feedback">완료</div>
                         <div class="fail-feedback">이름이 형식에 맞지 않습니다</div>
-                    </div>
-                </div>
-<!------------- 교수 관리자 학생-------------->
-                <div class="page">
-                    <div class="row">
-                        <label>직업</label>
-                        <select name="memberRank" class="field w-100">
-                            <option value="">분류</option>
-                            <option value="관리자">관리자</option>
-                            <option value="교수">교수</option>
-                            <option value="학생">학생</option>
-                        </select>    
+				</div>
+			</div>
+			
+			<!------------- 교수 관리자 학생-------------->
+			<div class="page">
+				<div class="row">
+   					<label>직업</label>
+ 					<select name="memberRank" class="field w-100">
+						<option value="">분류</option>
+						<option value="관리자">관리자</option>
+						<option value="교수">교수</option>
+						<option value="학생">학생</option>
+					</select>    
                         <div class="success-feedback">완료</div>
                         <div class="fail-feedback">필수 선택사항 입니다.</div>
-                    </div>
-                </div>
+				</div>
+			</div>
 
-                <div class="page">
-                    <div class="row">
-                        <label>이메일</label>
-                        <input type="email" name="memberEmail"
-                            class="field w-100" placeholder="test@kh.com">
+			<div class="page">
+				<div class="row">
+					<label>이메일</label>
+					<input type="email" name="memberEmail" class="field w-100" 
+								placeholder="test@kh.com">
                         <div class="fail-feedback">이메일은 반드시 입력해야 합니다</div>
-                    </div>
-                </div>
-                <div class="page">
-                    <div class="row">
-                        <label>연락처(휴대전화번호, - 제외)</label>
-                        <input type="text" name="memberCell" class="field w-100"
-                                    placeholder="010XXXXXXXX">
+				</div>
+			</div>
+			
+			<div class="page">
+				<div class="row">
+					<label>연락처(휴대전화번호, - 제외)</label>
+					<input type="text" name="memberCell" class="field w-100" placeholder="010XXXXXXXX">
                         <div class="fail-feedback">입력한 번호가 형식에 맞지 않습니다</div>
-                    </div>
-
-                    <div class="row">
-                        <label>생년월일</label>
-                        <input type="text" name="memberBirth" class="field w-100">
-                    </div>
-                </div>
-                <div class="page">
-                    <div class="row">
-                    	<div class="row">
-	                    	<label>주소</label>
-                    	</div>
-                        <input type="text" name="memberPost" class="field"
-                                placeholder="우편번호" readonly>
-                        <button class="btn btn-neutral btn-find-address">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                        </button>
-                        <button class="btn btn-negative btn-clear-address">
-                            <i class="fa-solid fa-xmark"></i>
-                        </button>
-                    </div>
-                    <div class="row">
-                        <input type="text" name="memberAddress1" class="field w-100"
-                                placeholder="기본주소" readonly>
-                    </div>
-                    <div class="row">
-                        <input type="text" name="memberAddress2" class="field w-100"
+				</div>
+			</div>
+			
+			<div class="page">
+				<div class="row">
+					<label>생년월일</label>
+					<input type="text" name="memberBirth" class="field w-100">
+				</div>
+			</div>
+			
+			<div class="page">
+				<div class="row">
+					<label>주소</label>
+					<div>
+						<input type="text" name="memberPost" class="field"
+	                                placeholder="우편번호" readonly>
+						<button class="btn btn-neutral btn-find-address">
+							<i class="fa-solid fa-magnifying-glass"></i>
+						</button>
+						<button class="btn btn-negative btn-clear-address">
+							<i class="fa-solid fa-xmark"></i>
+						</button>
+					</div>
+				</div>
+			
+				<div class="row">
+					<input type="text" name="memberAddress1" class="field w-100" 
+								placeholder="기본주소" readonly>
+				</div>
+				<div class="row">
+					<input type="text" name="memberAddress2" class="field w-100"
                                 placeholder="상세주소">
-                        <div class="fail-feedback">주소는 비워두거나 모두 입력해야 합니다</div>
-                    </div>
-                    <div class="row mt-50">
-                        <div class="flex-box">
-                            <div class="w-100 right">
-                                <button type="submit" class="btn btn-positive">
-                                    <i class="fa-solid fa-right-to-bracket"></i>
-                                    회원가입
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+					<div class="fail-feedback">주소는 비워두거나 모두 입력해야 합니다</div>
+				</div>
+			</div>
+			
+			<div class="row w-100 mt-30">
+				<button type="submit" class="btn btn-positive">
+					<i class="fa-solid fa-right-to-bracket"></i> 회원등록
+				</button>
+			</div>
+                
         </div>
     </form>
 </div>

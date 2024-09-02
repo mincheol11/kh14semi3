@@ -12,4 +12,4 @@ createdRank = ${sessionScope.createdRank}
     궁금한 사항이 있으시면 학부에 연락 부탁드리겠습니다.
  </p>
     <a href="logout">로그아웃</a>
-<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include> 

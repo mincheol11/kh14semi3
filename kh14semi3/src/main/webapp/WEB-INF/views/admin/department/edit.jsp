@@ -93,7 +93,7 @@
                 <div class="fail2-feedback d63031">이미 사용중인 학과명입니다</div>
                 	</div>
 				 <div class="row mt-40">
-                	<button class="btn btn-positive w-100 confirm-link" data-text="정말 수정하시겠습니까?" onclick="return checkEdit()" >수정하기</button>
+                	<button class="btn btn-positive w-100 confirm-link" data-text="정말 수정하시겠습니까?">수정하기</button>
             	</div>
             	<div class="row">
                 <a href="detail?departmentCode=${departmentDto.departmentCode}" class="btn btn-netraul w-100" >

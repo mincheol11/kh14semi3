@@ -33,12 +33,14 @@
 
    
 <style>
-.kh-container{
-    height: auto !important; 
-}
+	.kh-container{
+  	  height: auto !important; 
+	}
+	
 	.target {
 		display: none;
 	}
+	
     .search-form {
         display: flex;
         justify-content: center;
@@ -67,8 +69,6 @@
         display: block;
         margin-bottom: 5px;
     }
-    
-
 </style>
 
 <div class="container w-900 my-50">
@@ -79,20 +79,18 @@
     <c:set var="isAdmin" value="${sessionScope.createdRank == '관리자'}" />
     <c:set var="isLogin" value="${sessionScope.createdUser != null}" />
 
-    <c:if test="${isLogin && isAdmin}">
-        <div class="row center">
-            <a href="write" class="btn btn-neutral">신규등록</a>
-        </div>
-    </c:if>
-
+    
     <div class="row center">
-        <form action="list" method="get" class="search-form">
+        <form action="list" method="get" autocomplete="off" class="search-form">
             <select name="column" class="field">
                 <option value="board_title" <c:if test="${param.column == 'board_title'}">selected</c:if>>제목</option>
                 <option value="board_writer" <c:if test="${param.column == 'board_writer'}">selected</c:if>>작성자</option>
             </select>
             <input type="text" name="keyword" placeholder="검색어" value="${param.keyword}" class="field">
-            <button type="submit" class="btn btn-positive">검색</button>
+            <button type="submit" class="btn btn-positive"><i class="fa-solid fa-magnifying-glass"></i></button>
+        	<c:if test="${isLogin && isAdmin}">
+				<a class="btn btn-neutral" type="button" href="write" ><i class="fa-solid fa-right-to-bracket"></i> 등록</a>
+    		</c:if>
         </form>
     </div>
 
@@ -125,7 +123,7 @@
         </table>
     </div>
 
-    
+
 </div>
 <jsp:include page="/WEB-INF/views/template/navigator.jsp"></jsp:include>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

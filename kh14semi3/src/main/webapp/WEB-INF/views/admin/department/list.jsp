@@ -24,47 +24,46 @@ $(document).ready(function() {
 });
 </script>
 
-    <div class="container w-900 my-50">
+    <div class="container w-600 my-50">
         <div class="row center">
             <h1>학과 시스템 관리</h1>
         </div>
-    <div class="row center mt-50">
+        
+    	<div class="row center">
         <form action="list" method="get" autocomplete="off">
-        <div class="row right">
-		<a href="expand" class="btn btn-positive"><i class="fa-solid fa-building-columns"></i> 학과개설</a>
-		</div>
-		<div class="row right">
+
             <select name="column" class="field">
             <option value="department_code">학과코드</option>
-		<c:choose>
-			<c:when test="${param.column == 'department_name'}">
-				<option value="department_name" selected>학과명</option>
-			</c:when>
-			<c:otherwise>
-				<option value="department_name">학과명</option>
-			</c:otherwise>
-		</c:choose>
+				<c:choose>
+					<c:when test="${param.column == 'department_name'}">
+						<option value="department_name" selected>학과명</option>
+					</c:when>
+					<c:otherwise>
+						<option value="department_name">학과명</option>
+					</c:otherwise>
+				</c:choose>
             </select>
-        <input type="text" name="keyword" value="${param.keyword}" class="field w-60">
-        <button type="submit"  id="search" class="btn btn-neutral" ><i class="fa-solid fa-magnifying-glass"> 검색</i></button>
-            </div>
+
+        <input type="text" name="keyword" value="${param.keyword}" class="field">
+        <button type="submit"  id="search" class="btn btn-positive" ><i class="fa-solid fa-magnifying-glass"></i></button>
+		<a href="expand" class="btn btn-neutral"><i class="fa-solid fa-building-columns"></i> 학과개설</a>
         </form>
     </div>
                 
     <div class="row">
         <table class="table table-horizontal table-hover">
             <thead>
-              <tr>
+				<tr>
                     <th>학과코드</th>
                     <th>학과명</th>
-             </tr>
-    </thead>
-	<tbody>
-			<c:forEach var="departmentDto" items="${departmentList}">
-    			<tr onclick="location.href='detail?departmentCode=${departmentDto.departmentCode}'" style="cursor: pointer;">
-				        <td>${departmentDto.departmentCode}</td>
-				        <td>${departmentDto.departmentName}</td>
-    				</tr>
+				</tr>
+		    </thead>
+			<tbody>
+				<c:forEach var="departmentDto" items="${departmentList}">
+		    		<tr onclick="location.href='detail?departmentCode=${departmentDto.departmentCode}'" style="cursor: pointer;">
+						<td>${departmentDto.departmentCode}</td>
+						<td>${departmentDto.departmentName}</td>
+					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
