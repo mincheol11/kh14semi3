@@ -7,6 +7,13 @@
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
+<style>
+.kh-container{
+    height: auto !important; 
+}
+</style>
+
+
 <script>
 $(function(){
 	//상태 객체

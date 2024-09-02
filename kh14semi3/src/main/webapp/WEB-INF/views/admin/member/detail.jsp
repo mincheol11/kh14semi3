@@ -6,6 +6,8 @@
 <%-- header.jsp에 존재하는 내용을 불러오도록 설정 --%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
+<style>
+</style>
 
 <div class="container w-600 my-50">
 	<div class="row center">
@@ -94,3 +96,6 @@
 	</div>
 
 </div>
+
+<%-- footer.jsp에 존재하는 내용을 불러오도록 설정 --%>
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
