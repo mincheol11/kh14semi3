@@ -4,14 +4,9 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include> <!-- hearder 추가 -->
 
  <script type="text/javascript">
- function checkReduce() {
-     return confirm("정말 삭제하시겠습니까?");
- }
-
  function showMessage(message) {
      if (message === 'edit') 
          alert('수정이 완료되었습니다.');
-     
  }
 
  $(document).ready(function() {
@@ -49,14 +44,15 @@
         </c:otherwise>
     </c:choose>
     
-     <div class="row center mt-50">
-     <a href="expand" class="btn btn-positive w-20"><i class="fa-solid fa-building-columns"></i> 학과개설</a>
-    <a href="list" class="btn btn-neutral w-20"><i class="fa-solid fa-list"></i> 목록이동</a>
-    <c:if test="${departmentDto != null}">
-    <a href="edit?departmentCode=${departmentDto.departmentCode}" class="btn btn-neutral w-20"><i class="fa-solid fa-eraser"></i> 학과수정</a>
-    <a href="reduce?departmentCode=${departmentDto.departmentCode}"class="btn btn-negative w-20" 	onclick="return checkReduce()"><i class="fa-solid fa-trash"></i> 학과삭제</a>
-    </c:if>
-</div>
+     <div class="row float-box">
+     	<div class="float-right">
+		     <a href="expand" class="btn btn-positive"><i class="fa-solid fa-building-columns"></i> 학과개설</a>
+		    <a href="list" class="btn btn-neutral"><i class="fa-solid fa-list"></i> 목록이동</a>
+		    <a href="edit?departmentCode=${departmentDto.departmentCode}" class="btn btn-neutral"><i class="fa-solid fa-eraser"></i> 학과수정</a>
+		    <a href="reduce?departmentCode=${departmentDto.departmentCode}"class="btn btn-negative confirm-link" 
+		    	data-text="정말 삭제하시겠습니까?" onclick="return checkReduce()"><i class="fa-solid fa-trash"></i> 학과삭제</a>
+    	</div>
+	</div>
 </div>    
 </body>
 
