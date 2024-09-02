@@ -5,7 +5,11 @@
 
 <%-- header.jsp에 존재하는 내용을 불러오도록 설정 --%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
-
+<style>
+.kh-container{
+	height: 100vh;  /* 뷰포트 높이의 100% */
+}
+</style>
 
 <div class="container w-600 my-50">
 	<div class="row center">
@@ -85,11 +89,10 @@
 	<!-- 메뉴 배치 -->
 	<div class="row float-box">
 		<div class="float-right">
-			<a href="list" class="btn btn-neutral">회원 정보 목록</a> <a
-				href="change?memberId=${memberDto.memberId}"
-				class="btn btn-neutral ms-10">회원 정보 수정</a> <a
-				href="delete?memberId=${memberDto.memberId}"
-				class="btn btn-neutral ms-10">회원 정보 삭제</a>
+			<a href="" class="btn btn-positive"><i class="fa-regular fa-square-plus"></i> 회원등록</a>
+			<a href="list" class="btn btn-neutral"><i class="fa-solid fa-list"></i> 목록이동</a> 
+			<a href="change?memberId=${memberDto.memberId}" class="btn btn-neutral"> <i class="fa-solid fa-eraser"></i> 회원 수정</a> 
+			<a href="delete?memberId=${memberDto.memberId}" class="btn btn-negative"><i class="fa-solid fa-trash"></i> 회원 삭제</a>
 		</div>
 	</div>
 

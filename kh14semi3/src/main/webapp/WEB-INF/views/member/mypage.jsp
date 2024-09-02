@@ -87,7 +87,7 @@
 	
 	<div class="row float-box">
 		<div class="float-right">
-		<a href="edit?memberId=${memberDto.memberId}" class="btn btn-neutral ms-10">내 정보 수정</a> 
+		<a href="edit?memberId=${memberDto.memberId}" class="btn btn-neutral ms-10"><i class="fa-solid fa-eraser"></i> 내 정보 수정</a> 
 		</div>
 	</div>
 	
