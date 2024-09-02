@@ -189,10 +189,7 @@ document.addEventListener('DOMContentLoaded', function() {
   <div class="calendar-header">
   <c:set var="isAdmin" value="${sessionScope.createdRank == '관리자'}" />
     <c:set var="isLogin" value="${sessionScope.createdUser != null}" />
-    <c:if test="${isLogin && isAdmin}">
-     
-      <a class="btn btn-positive" href="add">학사 일정등록</a>
-    </c:if>
+    
     <div class="nav-buttons">
       <c:choose>
         <c:when test="${showPreviousButton}">
@@ -201,6 +198,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <input type="hidden" name="pageMonth" value="${currentMonth - 1}" />
             <button type="submit">&lt;</button>
           </form>
+          
         </c:when>
         <c:otherwise>
           <span></span>
@@ -225,6 +223,9 @@ document.addEventListener('DOMContentLoaded', function() {
         </c:otherwise>
       </c:choose>
     </div>
+    <c:if test="${isLogin && isAdmin}">
+     <a class="btn btn-positive" href="add">학사 일정등록</a>
+    </c:if>
   </div>
 
   <table class="calendar-table">
