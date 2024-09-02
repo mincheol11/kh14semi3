@@ -46,8 +46,8 @@
 			</thead>
 			<tbody align="center">
 				<c:forEach var="memberTakeOffVO" items="${memberList}">
-					<tr>
-						<td><a class="link link-animation" href="detail?memberId=${memberTakeOffVO.memberId}&memberRank=${memberTakeOffVO.memberRank}">${memberTakeOffVO.memberId}</a></td>
+					<tr onclick="location.href='detail?memberId=${memberTakeOffVO.memberId}&memberRank=${memberTakeOffVO.memberRank}'" style="cursor: pointer">
+						<td>${memberTakeOffVO.memberId}</td>
 						<td>${memberTakeOffVO.memberName}</td>
 						<td>${memberTakeOffVO.memberRank}</td>
 						<td>${memberTakeOffVO.memberEmail}</td>
