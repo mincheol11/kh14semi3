@@ -7,13 +7,13 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 
-<div class="container w-600 my-50">
+<div class="container w-500 my-50">
 	<div class="row center">
-		<h2>개인 정보 상세</h2>
+		<h1>내 정보</h1>
 	</div>
 
 	<div class="row center">
-		<table class="table table-hover table-horizontal w-100">
+		<table class="table table-border w-100">
 			<tr>
 				<th width="30%">아이디</th>
 				<td>${memberDto.memberId}</td>
@@ -86,10 +86,8 @@
 		</table>
 	</div>
 	
-	<div class="row float-box">
-		<div class="float-right">
+	<div class="row float-box center mt-30">
 		<a href="edit?memberId=${memberDto.memberId}" class="btn btn-neutral ms-10"><i class="fa-solid fa-eraser"></i> 내 정보 수정</a> 
-		</div>
 	</div>
 	
 </div>
