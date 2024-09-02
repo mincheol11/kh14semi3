@@ -227,7 +227,7 @@ $(function(){
 </script>
 
 <form action="edit" method="post" autocomplete="off" class="check-form">
-	<div class="container w-600 my-50">
+	<div class="container w-500 my-50">
 		<div class="row center">
 			<h1>내 정보 수정</h1>
 		</div>
@@ -283,13 +283,11 @@ $(function(){
 			<%-- <input type="hidden" name="adminId" value="${adminDto.adminId}" readonly> --%>
 		</div>
 		<div class="row mt-30">
-			<button class="btn btn-positive w-100"><i class="fa-solid fa-eraser" style="color: white"></i> 수정하기</button>
+			<button class="btn btn-positive w-100 confirm-link" data-text="정말 수정하시겠습니까?" type="submit"><i class="fa-solid fa-eraser"></i> 수정하기</button>
 		</div>
-		<div class="row mt-30">
-			<a href="mypage" class="btn btn-neutral w-100">
-			<i class="fa-solid fa-arrow-rotate-left" style="color: white"></i>
-			수정취소
-			</a>
+		<div class="row">
+			<a href="mypage" type="button" class="btn btn-neutral w-100">
+			<i class="fa-solid fa-arrow-rotate-left"></i> 뒤로가기</a>
 		</div>
 	</div>
 </form>
