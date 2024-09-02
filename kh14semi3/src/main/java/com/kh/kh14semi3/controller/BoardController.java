@@ -72,11 +72,12 @@ public class BoardController {
 		//세션에서 아이디 추출 후 boardDto에 첨부
 		String createdUser = (String)session.getAttribute("createdUser");
 		boardDto.setBoardWriter(createdUser);
+		System.out.println(boardDto);
 		//시퀀스 번호를 먼저 생성하도록 지시한다
 		int seq = boardDao.sequence();
 		
 		//등록할 정보에 번호를 첨부한다
-		boardDto.setBoardNo(seq);
+		
 		  boardDto.setBoardNo(seq);
 		  return "redirect:/board/list?page=" + pageVO.getPage() + "&message=writeSuccess";
     }

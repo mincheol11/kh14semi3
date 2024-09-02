@@ -31,15 +31,6 @@
 
 </script>
 
-   <script type="text/javascript">
-        $(function(){
-        	$(document).ready(function(){
-        	  });
-            $(".btn-toggle").click(function(){
-                $(".target").slideToggle();
-            });
-        });
-   </script>
    
 <style>
 .kh-container{
@@ -134,17 +125,7 @@
         </table>
     </div>
 
-    <h3><button type="button" class="btn btn-neutral btn-toggle">자주 묻는 질문</button></h3>
-    <div class="faq-section target">
-        <div class="faq-item">
-            <strong>Q1: 공지사항을 어떻게 검색하나요?</strong>
-            <p>A1: 페이지 상단의 검색 기능을 사용하여 제목이나 작성자명으로 공지사항을 검색할 수 있습니다.</p>
-        </div>
-        <div class="faq-item">
-            <strong>Q2: 공지사항을 작성하려면 어떻게 하나요?</strong>
-            <p>A2: 관리자인 경우, 페이지 상단의 '신규등록' 버튼을 클릭하여 새로운 공지사항을 작성할 수 있습니다.</p>
-        </div>
-    </div>
+    
 </div>
-
+<jsp:include page="/WEB-INF/views/template/navigator.jsp"></jsp:include>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

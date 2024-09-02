@@ -26,22 +26,34 @@ public class BoardDao {
     }
 
     public void insert(BoardDto boardDto) {
-        String sql = "insert into board(BOARD_NO, BOARD_WRITER, BOARD_TITLE, BOARD_CONTENT, BOARD_VIEWS) values(?, ?, ?, ?, ?)";
+        String sql = "insert into board(BOARD_NO,BOARD_WRITER, "
+        		+ "BOARD_TYPE,BOARD_TITLE,BOARD_CONTENT, "
+        		+ "BOARD_WTIME,BOARD_UTIME,BOARD_VIEWS) "
+        		+ "values(?,? ,?, ?, ?, ?,?,?)";
         Object[] data = {
             boardDto.getBoardNo(), boardDto.getBoardWriter(),
+            boardDto.getBoardType(),
             boardDto.getBoardTitle(), boardDto.getBoardContent(),
+           boardDto.getBoardWtime(),
+           boardDto.getBoardUtime(),
             boardDto.getBoardViews()
         };
         jdbcTemplate.update(sql, data);
     }
 
     public List<BoardDto> selectList() {
-        String sql = "select BOARD_NO, BOARD_WRITER, BOARD_TYPE, BOARD_TITLE, BOARD_CONTENT, BOARD_WTIME, BOARD_UTIME, BOARD_VIEWS from board order by board_no desc";
+        String sql = "select BOARD_NO, BOARD_WRITER, BOARD_TYPE,"
+        		+ " BOARD_TITLE, BOARD_CONTENT, BOARD_WTIME,"
+        		+ " BOARD_UTIME, BOARD_VIEWS "
+        		+ " from board order by board_no desc";
         return jdbcTemplate.query(sql, boardListMapper);
     }
 
     public List<BoardDto> selectList(String column, String keyword) {
-        String sql = "select BOARD_NO, BOARD_WRITER, BOARD_TYPE, BOARD_TITLE, BOARD_CONTENT, BOARD_WTIME, BOARD_UTIME, BOARD_VIEWS from board where instr(#1, ?) > 0 order by board_no desc";
+        String sql = "select BOARD_NO, BOARD_WRITER, BOARD_TYPE,"
+        		+ " BOARD_TITLE, BOARD_CONTENT, BOARD_WTIME, "
+        		+ "BOARD_UTIME, BOARD_VIEWS "
+        		+ "from board where instr(#1, ?) > 0 order by board_no desc";
         sql = sql.replace("#1", column);
         Object[] data = { keyword };
         return jdbcTemplate.query(sql, boardListMapper, data);
@@ -55,7 +67,8 @@ public class BoardDao {
     }
 
     public boolean update(BoardDto boardDto) {
-        String sql = "update board set board_title=?, board_content=?, board_utime=sysdate where board_no=?";
+        String sql = "update board set board_title=?,"
+        		+ " board_content=?, board_utime=sysdate where board_no=?";
         Object[] data = {
             boardDto.getBoardTitle(), boardDto.getBoardContent(),
             boardDto.getBoardNo()
@@ -79,7 +92,11 @@ public class BoardDao {
         int endRow = page * size;
         int beginRow = endRow - (size - 1);
 
-        String sql = "select * from (select rownum rn, TMP.* from (select BOARD_NO, BOARD_WRITER, BOARD_TYPE, BOARD_TITLE, BOARD_CONTENT, BOARD_WTIME, BOARD_UTIME, BOARD_VIEWS from board order by board_no desc) TMP) where rn between ? and ?";
+        String sql = "select * from (select rownum rn, TMP.* from "
+        		+ "(select BOARD_NO, BOARD_WRITER, BOARD_TYPE, "
+        		+ "BOARD_TITLE, BOARD_CONTENT, BOARD_WTIME,"
+        		+ " BOARD_UTIME, BOARD_VIEWS from board "
+        		+ "order by board_no desc) TMP) where rn between ? and ?";
         Object[] data = { beginRow, endRow };
         return jdbcTemplate.query(sql, boardListMapper, data);
     }
@@ -88,7 +105,10 @@ public class BoardDao {
         int endRow = page * size;
         int beginRow = endRow - (size - 1);
 
-        String sql = "select * from (select rownum rn, TMP.* from (select BOARD_NO, BOARD_WRITER, BOARD_TYPE, BOARD_TITLE, BOARD_CONTENT, BOARD_WTIME, BOARD_UTIME, BOARD_VIEWS from board where instr(#1, ?) > 0 order by board_no desc) TMP) where rn between ? and ?";
+        String sql = "select * from (select rownum rn, TMP.* from (select BOARD_NO, "
+        		+ "BOARD_WRITER, BOARD_TYPE, BOARD_TITLE, BOARD_CONTENT, "
+        		+ "BOARD_WTIME, BOARD_UTIME, BOARD_VIEWS from "
+        		+ "board where instr(#1, ?) > 0 order by board_no desc) TMP) where rn between ? and ?";
         sql = sql.replace("#1", column);
 
         Object[] data = { keyword, beginRow, endRow };
