@@ -25,7 +25,7 @@ $(document).ready(function() {
 });
 </script>
 
-    <div class="container w-900 my-50">
+    <div class="container w-1000 my-50">
         <div class="row center">
             <h1>강의 시스템 관리</h1>
         </div>
@@ -77,7 +77,7 @@ $(document).ready(function() {
         </div>
                 
     <div class="row">
-        <table class="table table-horizontal table-hover">
+        <table class="table table-horizontal table-hover w-100">
             <thead>
               <tr>
                     <th>강의코드</th>
@@ -85,14 +85,11 @@ $(document).ready(function() {
                      <th>교수코드</th>
                     <th>분류</th>
                      <th>강의명</th>
-                    <th>강의시작 시간</th>
-                    <th>강의수업 시간</th>
+                    <th>시작시간</th>
+                    <th>수업시간</th>
                     <th>강의요일</th>
                     <th>강의실</th>
                     <th>정원</th>
-                    
-                    
-                    
              </tr>
     </thead>
 	<tbody>

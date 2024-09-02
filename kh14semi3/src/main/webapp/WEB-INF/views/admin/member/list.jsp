@@ -32,9 +32,6 @@
 	</c:if>
 
 	<c:if test="${memberList.size() >0}">
-		<div class="right">
-			<i class="fa-brands fa-slack red"></i> 아이디 클릭시 상세 정보 페이지로 이동
-		</div>
 		<table class="table table-horizontal table-hover w-100">
 			<thead>
 				<tr>
@@ -49,8 +46,8 @@
 			</thead>
 			<tbody align="center">
 				<c:forEach var="memberTakeOffVO" items="${memberList}">
-					<tr>
-						<td><a href="detail?memberId=${memberTakeOffVO.memberId}&memberRank=${memberTakeOffVO.memberRank}" class="link link-animation">${memberTakeOffVO.memberId}</a></td>
+					<tr onclick="location.href='detail?memberId=${memberTakeOffVO.memberId}'" style="cursor: pointer;">
+						<td>${memberTakeOffVO.memberId}</td>
 						<td>${memberTakeOffVO.memberName}</td>
 						<td>${memberTakeOffVO.memberRank}</td>
 						<td>${memberTakeOffVO.memberEmail}</td>

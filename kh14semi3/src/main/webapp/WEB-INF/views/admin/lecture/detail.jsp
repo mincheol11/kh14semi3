@@ -19,7 +19,7 @@
     </script>
     
     <body>
-    <div class="container w-600 my-50">
+    <div class="container w-500 my-50">
     <div class="row center">
     <h1>강의 상세정보</h1>
     </div>
@@ -28,7 +28,7 @@
             <h2>존재하지 않는 강의 정보 입니다.</h2>
         </c:when>
     <c:otherwise>
-        <table class="table table-border table-hover">
+        <table class="table table-border">
                 <tr>
                     <th width="30%">강의코드</th>
                     <td>${lectureDto.lectureCode}</td>
@@ -73,13 +73,11 @@
         </c:otherwise>
     </c:choose>
     
-     <div class="row float-box">
-     	<div class="float-right">
-     <a href="add" class="btn btn-positive"><i class="fa-regular fa-square-plus"></i> 강의개설</a>
-    <a href="list" class="btn btn-neutral"><i class="fa-solid fa-list"></i> 목록이동</a>
-    <a href="edit?lectureCode=${lectureDto.lectureCode}" class="btn btn-neutral"><i class="fa-solid fa-eraser"></i> 강의수정</a>
-    <a href="remove?lectureCode=${lectureDto.lectureCode}"class="btn btn-negative confirm-link" data-text="정말 삭제하시겠습니까?"  onclick="return checkRemove()"><i class="fa-solid fa-trash"></i> 강의삭제</a>
-    	</div>
+	<div class="row float-box center mt-30">
+		<a href="add" class="btn btn-positive"><i class="fa-regular fa-square-plus"></i> 강의개설</a>
+		<a href="list" class="btn btn-neutral"><i class="fa-solid fa-list"></i> 목록이동</a>
+		<a href="edit?lectureCode=${lectureDto.lectureCode}" class="btn btn-neutral"><i class="fa-solid fa-eraser"></i> 강의수정</a>
+		<a href="remove?lectureCode=${lectureDto.lectureCode}"class="btn btn-negative confirm-link" data-text="정말 삭제하시겠습니까?"  onclick="return checkRemove()"><i class="fa-solid fa-trash"></i> 강의삭제</a>
 	</div>
 </div>    
 </body>
