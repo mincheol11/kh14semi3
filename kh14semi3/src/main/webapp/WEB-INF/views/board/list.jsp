@@ -33,9 +33,7 @@
 
    
 <style>
-	.kh-container{
-  	  height: auto !important; 
-	}
+	
 	
 	.target {
 		display: none;
