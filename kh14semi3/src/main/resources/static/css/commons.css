@@ -332,6 +332,11 @@ textarea.field{
     color: #F1F5F9;
 }
 
+.fa-solid,
+.fa-regular{
+	color: white;
+}
+
 /* 이미지가 있는 입력필드 */
 .field.field-image{
     /* background-image: url("images/id.png"); */
