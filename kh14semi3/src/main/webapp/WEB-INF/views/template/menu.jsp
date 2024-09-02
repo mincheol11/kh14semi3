@@ -148,7 +148,7 @@
 	                    <a href="#">마이페이지</a>
 	                    <ul class="submenu">
 	                        <li><a href="/member/mypage">내 정보</a></li>
-	                        <li><a href="/member/findPw" class="pw12">비밀번호 변경</a></li>
+	                        <li><a href="/member/changePw" class="pw12">비밀번호 변경</a></li>
 	                        <li><a href="/member/logout">로그아웃</a></li>
 	                    </ul>
 	                </li>
@@ -190,7 +190,7 @@
 	                    <a href="#">마이페이지</a>
 	                    <ul class="submenu">
 	                        <li><a href="/member/mypage">내 정보</a></li>
-	                        <li><a href="/member/findPw" class="pw12">비밀번호 변경</a></li>
+	                        <li><a href="/member/changePw" class="pw12">비밀번호 변경</a></li>
 	                        <li><a href="/member/logout">로그아웃</a></li>
 	                    </ul>
 	                </li>
