@@ -387,6 +387,13 @@ textarea.field{
 {
 	
 	border: 1px solid #2D3436;
+	padding: 12px;
+}
+.table.table-border > tbody > tr > th{
+    background-color: rgba(45, 147, 237, 0.3);
+}
+.table.table-border {
+    border-radius: 15px;
 }
 
 /* 확장스타일 - 마우스에 반응하는 테이블 */
