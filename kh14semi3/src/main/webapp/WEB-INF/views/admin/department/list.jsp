@@ -24,16 +24,15 @@ $(document).ready(function() {
 });
 </script>
 
-    <div class="container w-600 my-50">
+    <div class="container w-500 my-50">
         <div class="row center">
             <h1>학과 시스템 관리</h1>
         </div>
         
     	<div class="row center">
         <form action="list" method="get" autocomplete="off">
-
             <select name="column" class="field">
-            <option value="department_code">학과코드</option>
+            	<option value="department_code">학과코드</option>
 				<c:choose>
 					<c:when test="${param.column == 'department_name'}">
 						<option value="department_name" selected>학과명</option>
@@ -43,10 +42,9 @@ $(document).ready(function() {
 					</c:otherwise>
 				</c:choose>
             </select>
-
-        <input type="text" name="keyword" value="${param.keyword}" class="field">
-        <button type="submit"  id="search" class="btn btn-positive" ><i class="fa-solid fa-magnifying-glass"></i></button>
-		<a href="expand" class="btn btn-neutral"><i class="fa-solid fa-building-columns"></i> 학과개설</a>
+        	<input type="text" name="keyword" value="${param.keyword}" class="field" placeholder="검색어">
+       		<button type="submit"  id="search" class="btn btn-positive" ><i class="fa-solid fa-magnifying-glass"></i></button>
+			<a href="expand" class="btn btn-neutral"><i class="fa-solid fa-building-columns"></i> 학과개설</a>
         </form>
     </div>
                 
