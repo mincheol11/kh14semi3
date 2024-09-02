@@ -155,7 +155,7 @@ $(function(){
   			$("[name=memberRank]").parent().find("label").find("i").addClass("red fa-bounce");
 		}
         status.memberRankValid = isValid;
-    });
+    }); 
     
 
     $("[name=memberEmail]").blur(function(){
