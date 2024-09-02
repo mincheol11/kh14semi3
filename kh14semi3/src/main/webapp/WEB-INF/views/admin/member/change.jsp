@@ -5,7 +5,13 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
+
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
 <style>
+.kh-container{
+    height: auto !important; 
+}
 .red.bounce {
 	color: red;
 	animation: bounce 0.1s ease-in-out infinite;
@@ -16,7 +22,6 @@
 	}	
 </style>
 
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 function checkEdit(){
 	return confirm("정말 수정하시겠습니까?");

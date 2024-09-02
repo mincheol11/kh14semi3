@@ -5,6 +5,9 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include> <!-- hearder 추가 -->
 
 <style>
+.kh-container{
+    height: auto !important; 
+}
 .red.bounce {
 	color: red;
 	animation: bounce 0.1s ease-in-out infinite;
@@ -16,9 +19,6 @@
 </style>
 
   <script type="text/javascript">
-  function checkEdit(){
-		return confirm("정말 수정하시겠습니까?");
-  	}
   $(function(){
 	//상태 객체
  var status ={
@@ -282,7 +282,7 @@
                         <div class="fail-feedback d63031">1명 이상이어야 합니다</div>
                 </div>	
 				 <div class="row mt-40">
-                	<button class="btn btn-positive w-100" onclick="return checkEdit()" >수정하기</button>
+                	<button class="btn btn-positive w-100 confirm-link" data-text="정말 수정하시겠습니까?" onclick="return checkEdit()" >수정하기</button>
                 	<div class="row">
                 	<a href="detail?lectureCode=${lectureDto.lectureCode}" class="btn btn-netraul w-100" >
                    <i class="fa-solid fa-arrow-rotate-left" style="color: white"></i>

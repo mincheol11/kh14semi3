@@ -4,6 +4,12 @@
 		
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include> <!-- hearder 추가 -->
 
+<style>
+.kh-container{
+    height: auto !important; 
+}
+</style>
+
 <script type="text/javascript">
 function showMessage(message) {
 if (message === 'reduce') 
@@ -18,14 +24,14 @@ $(document).ready(function() {
 });
 </script>
 
-    <div class="container w-700 my-50">
+    <div class="container w-900 my-50">
         <div class="row center">
             <h1>학과 시스템 관리</h1>
         </div>
     <div class="row center mt-50">
         <form action="list" method="get" autocomplete="off">
         <div class="row right">
-		<a href="expand" class="btn btn-positive w-20"><i class="fa-solid fa-building-columns"></i> 학과개설</a>
+		<a href="expand" class="btn btn-positive"><i class="fa-solid fa-building-columns"></i> 학과개설</a>
 		</div>
 		<div class="row right">
             <select name="column" class="field">
@@ -40,7 +46,7 @@ $(document).ready(function() {
 		</c:choose>
             </select>
         <input type="text" name="keyword" value="${param.keyword}" class="field w-60">
-        <button type="submit"  id="search" class="btn btn- w-20" ><i class="fa-solid fa-magnifying-glass"> 검색</i></button>
+        <button type="submit"  id="search" class="btn btn-neutral" ><i class="fa-solid fa-magnifying-glass"> 검색</i></button>
             </div>
         </form>
     </div>

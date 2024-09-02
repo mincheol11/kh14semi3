@@ -9,15 +9,15 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
 <style>
-	[name$='-input'] {
-		max-width: 70px;
-	}
+[name$='-input'] {
+	max-width: 70px;
+}
 	
-	.grade-input-btn,
-	.grade-save-btn {
-		font-size: 14px;
-		padding: 0.3em 0.3em;
-	}
+.grade-input-btn,
+.grade-save-btn {
+	font-size: 14px;
+	padding: 0.3em 0.3em;
+}
 </style>
 
     <script type="text/javascript">

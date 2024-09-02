@@ -4,6 +4,14 @@
 		
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include> <!-- hearder 추가 -->
 
+<style>
+.kh-container{
+    height: auto !important; 
+}
+
+</style>
+
+
 <script type="text/javascript">
 function showMessage(message) {
 	if (message === 'remove') 
@@ -18,7 +26,7 @@ $(document).ready(function() {
 });
 </script>
 
-    <div class="container w-1000 my-50">
+    <div class="container w-900 my-50">
         <div class="row center">
             <h1>강의 시스템 관리</h1>
         </div>
@@ -26,9 +34,9 @@ $(document).ready(function() {
         <form action="list" method="get" autocomplete="off">
     <div class="row right">
         <div class="row right">
-		<a href="add" class="btn btn-positive w-25"><i class="fa-regular fa-square-plus"></i> 강의개설</a>
+		<a href="add" class="btn btn-positive"><i class="fa-regular fa-square-plus"></i> 강의개설</a>
 		</div>
-            <select name="column" class="field w-10">
+            <select name="column" class="field">
             <option value="lecture_code">강의코드</option>
             
 		<c:choose>
@@ -69,7 +77,7 @@ $(document).ready(function() {
 		
             </select>
         <input type="text" name="keyword" value="${param.keyword}" class="field w-60">
-        <button type="submit" class="btn btn-neutral w-25"><i class="fa-solid fa-magnifying-glass"> 검색</i></button>
+        <button type="submit" class="btn btn-neutral"><i class="fa-solid fa-magnifying-glass"> 검색</i></button>
 			    </div>
         </form>
         </div>
