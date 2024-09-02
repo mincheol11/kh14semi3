@@ -42,86 +42,16 @@
    </script>
    
 <style>
+.kh-container{
+    height: auto !important; 
+}
 	.target {
 		display: none;
 	}
-    .kwon-con {
-        /* background-color: #F1F5F9; */
-        padding: 20px;
-        margin: 1px 20px; /* 위아래 여백을 20px로 설정 */
-    }
-
-    .row {
-        margin-bottom: 10px; /* 여백을 10px로 설정 */
-    }
-
-  /*   .btn {
-        display: inline-block;
-        padding: 8px 16px;
-        font-size: 14px;
-        border-radius: 5px;
-        text-decoration: none;
-        color: #ffffff;
-        background-color: #007bff;
-        transition: background-color 0.3s, transform 0.2s;
-    } */
-
-    .btn:hover {
-        background-color: #0056b3;
-        transform: scale(1.05);
-    }
-
-    .btn-neutral {
-        background-color: #f8f9fa;
-        color: #007bff;
-    }
-
-    .btn-neutral:hover {
-        background-color: #e2e6ea;
-    } */
-
-    .field {
-        padding: 6px;
-        border-radius: 5px;
-        border: 1px solid #ddd;
-    }
-
     .search-form {
         display: flex;
         justify-content: center;
         gap: 8px; /* 간격을 8px로 조정 */
-    }
-
-    .table {
-        border-collapse: collapse;
-        width: 100%; /* 테이블 너비를 100%로 설정 */
-        margin-top: 20px;
-    }
-
-    .table th, .table td {
-        padding: 8px; /* 셀 패딩을 줄임 */
-        border: 1px solid #ddd;
-        font-size: 14px; /* 폰트 크기를 줄임 */
-    }
-
-    .table th {
-        background-color: #007bff;
-    }
-
-    .table tbody tr:hover {
-        background-color: #f1f1f1;
-    }
-
-    .board-title {
-        color: #007bff;
-        text-decoration: none;
-        transition: color 0.3s, text-decoration 0.3s;
-    }
-
-
-    .board-title:hover {
-        color: #0056b3;
-        text-decoration: underline;
     }
 
     .info-block {
@@ -131,33 +61,9 @@
     .info-block strong {
         display: block;
         margin-bottom: 5px;
-        color: #333;
-    }
-
-    .info-block .info-content {
-/*         background: #fff; */
-/*         background: none; */
-/*         padding: 8px; /* 패딩을 줄임 */ 
-/*         border-radius: 5px; */
-/*         box-shadow: 0 2px 4px rgba(0,0,0,0.1); */
-/*         font-size: 14px; /* 폰트 크기 조정 */
-    }
-
-    .info-block .info-contentViews {
-        /* background: #fff;
-        padding: 8px;
-        border-radius: 5px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        width: 30px;
-        max-width: 100%;
-        height: 30px;
-        line-height: 1;
-        font-size: 12px;
-        */
     }
 
     .faq-section {
-        background-color: #f9f9f9;
         border-radius: 5px;
         padding: 10px; /* 패딩 추가 */
     }
@@ -171,16 +77,10 @@
         margin-bottom: 5px;
     }
     
-    /* 링크에 마우스를 올렸을 때 스타일 변경 */
-.board-title {
-  color: black;  /* 기본 텍스트 색상을 검은색으로 설정 */
-  text-decoration: none; /* 기본 상태에서 밑줄 제거 */
-  transition: transform 0.3s; /* 확대 효과에 부드러운 전환 추가 */
-}
 
 </style>
 
-<div class="container kwon-con">
+<div class="container w-900 my-50">
     <div class="row center">
         <h1>학생 공지 사항</h1>
     </div>
@@ -209,11 +109,11 @@
         <table class="table table-horizontal table-hover">
             <thead>
                 <tr>
-                    <th style="width: 5%;">번호</th>
-                    <th style="width: 10%;">제목</th>
-                    <th style="width: 9%;">작성자</th>
-                    <th style="width: 9%;">작성일</th>
-                    <th style="width: 2.5%;">조회수</th>
+                    <th style="width: 10%;">번호</th>
+                    <th style="width: 40%;">제목</th>
+                    <th style="width: 20%;">작성자</th>
+                    <th style="width: 20%;">작성일</th>
+                    <th style="width: 10%;">조회수</th>
                 </tr>
             </thead>
             <tbody align="center">
@@ -221,7 +121,7 @@
                     <tr class="info-block">
                         <td class="info-content">${boardDto.boardNo}</td>
                         <td class="info-content">
-                            <a href="detail?boardNo=${boardDto.boardNo}" class="board-title info-content">${boardDto.boardTitle}</a>
+                            <a href="detail?boardNo=${boardDto.boardNo}" class="link link-animation info-content">${boardDto.boardTitle}</a>
                         </td>
                         <td class="info-content">${boardDto.boardWriter}</td>
                         <td class="info-content">${boardDto.boardWtime}</td>
