@@ -12,7 +12,9 @@
 <html> <!-- HTML 문서의 범위를 나타내는 태그 -->
 <head> <!-- 문서의 정보를 표시하는 태그 (각 탭에 적히는 내용)-->
 <title>KH 대학교 학사정보 사이트</title>
+<link rel="icon" href="/images/WEB.png" size="16x16" type="image/png">
 <meta charset="UTF-8"> <!-- jsp에 정의해서 중복되지만 HTML만 사용할 때는 써야함 -->
+
 
 <!-- google font cdn -->
 <link rel="preconnect" href="https://fonts.googleapis.com">

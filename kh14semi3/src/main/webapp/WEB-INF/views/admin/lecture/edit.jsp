@@ -285,7 +285,7 @@
                 	<button class="btn btn-positive w-100 confirm-link" data-text="정말 수정하시겠습니까?" onclick="return checkEdit()" >수정하기</button>
                 	<div class="row">
                 	<a href="detail?lectureCode=${lectureDto.lectureCode}" class="btn btn-netraul w-100" >
-                   <i class="fa-solid fa-arrow-rotate-left"></i>
+                   <i class="fa-solid fa-arrow-rotate-left" style="color: white"></i>
                    뒤로가기
                 </a>
                 	</div>

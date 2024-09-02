@@ -67,7 +67,8 @@
 								<c:when test="${memberTakeOffVO.takeOffType == '제적'}">
 									<a class="link link-animation" href="blockNo?takeOffTarget=${memberTakeOffVO.memberId}">제적해제</a>
 								</c:when>
-								<c:otherwise>									
+								<c:otherwise>
+									<a class="link link-animation" href="takeOff?takeOffTarget=${memberTakeOffVO.memberId}">휴학</a>									
 								</c:otherwise>
 							</c:choose>
 							
@@ -75,8 +76,6 @@
 							<c:if test="${memberTakeOffVO.takeOffType != '제적'}">
 								<a class="link link-animation" href="blockGo?takeOffTarget=${memberTakeOffVO.memberId}">제적</a>
 							</c:if>
-								
-							<a class="link link-animation" href="delete?memberId=${memberTakeOffVO.memberId}">삭제</a>
 						</td>
 					</tr>
 				</c:forEach>	

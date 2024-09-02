@@ -286,7 +286,10 @@ $(function(){
 			<button class="btn btn-positive w-100">수정하기</button>
 		</div>
 		<div class="row mt-30">
-			<a href="mypage" class="btn btn-neutral w-100">수정취소</a>
+			<a href="mypage" class="btn btn-neutral w-100">
+			<i class="fa-solid fa-arrow-rotate-left" style="color: white"></i>
+			수정취소
+			</a>
 		</div>
 	</div>
 </form>

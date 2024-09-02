@@ -5,16 +5,27 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
+
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <style>
 .kh-container{
     height: auto !important; 
 }
+.red.bounce {
+	color: red;
+	animation: bounce 0.1s ease-in-out infinite;
+	}
+.green.beat {
+	color: green;
+	animation: beat 0.1s ease-in-out infinite;
+	}	
 </style>
 
-
 <script>
+function checkEdit(){
+	return confirm("정말 수정하시겠습니까?");
+	}
 $(function(){
 	//상태 객체
     var status = {
@@ -193,11 +204,14 @@ $(function(){
 			<input name="memberId" type="hidden" value="${memberDto.memberId}">		
 		</div>
 		<div class="row">
-			<label>이름</label>   <input type="text" name="memberName"
+			<label>이름</label>
+			<i class="fa-solid fa-asterisk red"></i>
+			<input type="text" name="memberName"
 				value="${memberDto.memberName}" class="field w-100">
 		</div>
 		<div class="row">
 			<label>구분</label>
+			<i class="fa-solid fa-asterisk red"></i>
 			<select name="memberRank" class="field w-100">
 				<option value="">분류</option>
 				<option value="관리자"<c:if test="${memberDto.memberRank == '관리자'}">selected</c:if>>관리자</option>
@@ -287,7 +301,11 @@ $(function(){
 			<button class="btn btn-positive w-100" type="submit">수정하기</button>
 		</div>
 		<div class="row">
-			<a class="btn btn-neutral w-100" type="button" href="detail?memberId=${memberDto.memberId}">뒤로가기</a>
+			<a class="btn btn-neutral w-100" type="button" href="detail?memberId=${memberDto.memberId}">
+			<i class="fa-solid fa-arrow-rotate-left" style="color: white"></i>
+			뒤로가기
+			</a>
+			
 		</div>
 	</div>
 </form>
