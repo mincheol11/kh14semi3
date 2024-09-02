@@ -242,8 +242,8 @@ $(function(){
 	</div>
 
 	<form class="check-form" action="join" method="post"  >
-
 		<div class="row">
+ 			
  			<div class="page">
 				<div class="row">
 					<label>아이디</label>
@@ -252,6 +252,7 @@ $(function(){
 					<div class="success-feedback">멋진 아이디입니다!</div>
 					<div class="fail-feedback">올바른 형식으로 작성해주세요</div>
 					<div class="fail2-feedback">아이디가 이미 사용중입니다</div>
+				</div>
 			</div>
                 
 			<div class="page">
@@ -271,6 +272,7 @@ $(function(){
 						<div class="success-feedback">올바른 형식입니다!</div>
                         <div class="fail-feedback">형식에 맞춰 8~16자로 작성하세요</div>
 				</div>
+			</div>
 				
 			<div class="page">
 				<div class="row">
@@ -357,9 +359,12 @@ $(function(){
 			</div>
 			
 			<div class="row w-100 mt-30">
-				<button type="submit" class="btn btn-positive">
-					<i class="fa-solid fa-right-to-bracket"></i> 회원등록
+				<button type="submit" class="btn btn-positive w-100">
+					<i class="fa-solid fa-right-to-bracket"></i> 등록하기
 				</button>
+				<div class="row">
+					<a href="list" class="btn btn-neutral w-100"><i class="fa-solid fa-list"></i> 목록이동</a> 
+				</div>
 			</div>
                 
         </div>
