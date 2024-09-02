@@ -7,7 +7,7 @@
     box-sizing: border-box; 
     font-family: "Noto Sans KR", sans-serif;
     font-optical-sizing: auto;
-    font-weight: 400;
+    /* font-weight: 400; */
     font-style: normal;
     word-break: break-all; /* 글자에 대한 줄바꿈 기준 설정 */
 }
@@ -52,7 +52,7 @@ html, body {
 	height: 100%;
 	margin-left: 10%;
     margin-right: 10%;
-	background-color: #F1F5F9;
+	background-color: #E3ECF4;
 }
 .kh-footer{
 	color: #2D3436;
