@@ -19,6 +19,14 @@
 .fa-asterisk {
 	color:#d63031;
 }
+.red.bounce {
+	color: red;
+	animation: bounce 0.1s ease-in-out infinite;
+	}
+.green.beat {
+	color: green;
+	animation: beat 0.1s ease-in-out infinite;
+	}
 </style>
 
 <script>
@@ -32,9 +40,9 @@ $(function(){
         memberNameValid : false, //형식검사
         memberRankValid: false,
         memberEmailValid : false,
-        memberCellValid : true , //선택항목
-        memberBirthValid : true , //선택항목
-        memberAddressValid : true , //선택항목
+        memberCellValid : false,
+        memberBirthValid : true, //선택항목
+        memberAddressValid : true, //선택항목
         ok : function(){
             return this.memberIdValid && this.memberIdCheckValid
                 && this.memberPwValid && this.memberPwCheckValid 
@@ -58,23 +66,29 @@ $(function(){
                 method:"post",
                 data:{memberId : memberId},
                 success: function(response) {
-                    if(response) {//.success - 아이디가 사용가능한 경우
-                        status.memberIdCheckValid = true;
+                	if(response){
+						status.memberIdCheckValid=true;
+						$("[name=memberId]").removeClass("success fail fail2")
+						.addClass("success");
+						$("[name=memberId]").parent().find("label").find("i").removeClass("fa-bounce");
+						$("[name=memberId]").parent().find("label").find("i").addClass("green fa-beat");
+					}
+					else{
+                        status.departmentNameCheckValid=false;
                         $("[name=memberId]").removeClass("success fail fail2")
-                                                            .addClass("success");
+                        .addClass("fail2");
+                        $("[name=memberId]").parent().find("label").find("i").removeClass("green fa-beat");
+                        $("[name=memberId]").parent().find("label").find("i").addClass("fa-bounce");
                     }
-                    else {//.fail2 - 아이디가 이미 사용중인 경우
-                        status.memberIdCheckValid = false;
-                        $("[name=memberId]").removeClass("success fail fail2")
-                                                            .addClass("fail2");
-                    }
-                },
-            });
-        }
-        else {//.fail - 아이디가 형식에 맞지 않는 경우
-            $("[name=memberId]").removeClass("success fail fail2")
-                                                .addClass("fail");
-        }
+				},
+			});
+		}
+ 		else{
+     			 $("[name=memberId]").removeClass("success fail fail2")
+      			.addClass("fail");
+     			 $("[name=memberId]").parent().find("label").find("i").removeClass("green fa-beat");
+     			$("[name=memberId]").parent().find("label").find("i").addClass("fa-bounce");
+  			}
         status.memberIdValid = isValid;
     });
     $("[name=memberPw]").blur(function(){
@@ -83,14 +97,30 @@ $(function(){
         var isValid = regex.test($(this).val());
         $(this).removeClass("success fail")
                     .addClass(isValid ? "success" : "fail");
+        if(isValid){
+  			$("[name=memberPw]").parent().find("label").find("i").removeClass("red fa-bounce");
+  			$("[name=memberPw]").parent().find("label").find("i").addClass("green fa-beat");
+		}
+  		 else{
+  			$("[name=memberPw]").parent().find("label").find("i").removeClass("green fa-beat");
+  			$("[name=memberPw]").parent().find("label").find("i").addClass("red fa-bounce");
+		}
         status.memberPwValid = isValid;
-        console.log($(this).val());
     });
+    
     $("#password-check").blur(function(){
         var isValid = $("[name=memberPw]").val().length
                         && $(this).val() == $("[name=memberPw]").val();
         $(this).removeClass("success fail")
                     .addClass(isValid ? "success" : "fail");
+        if(isValid){
+  			$("#password-check").parent().find("label").find("i").removeClass("red fa-bounce");
+  			$("#password-check").parent().find("label").find("i").addClass("green fa-beat");
+		}
+  		 else{
+  			$("#password-check").parent().find("label").find("i").removeClass("green fa-beat");
+  			$("#password-check").parent().find("label").find("i").addClass("red fa-bounce");
+		}
         status.memberPwCheckValid = isValid;
     });
     
@@ -99,6 +129,14 @@ $(function(){
         var regex = new RegExp(regexStr);
         var isValid = regex.test($(this).val());
         $(this).removeClass("success fail").addClass(isValid ? "success" : "fail");
+        if(isValid){
+  			$("[name=memberName]").parent().find("label").find("i").removeClass("red fa-bounce");
+  			$("[name=memberName]").parent().find("label").find("i").addClass("green fa-beat");
+		}
+  		 else{
+  			$("[name=memberName]").parent().find("label").find("i").removeClass("green fa-beat");
+  			$("[name=memberName]").parent().find("label").find("i").addClass("red fa-bounce");
+		}
         status.memberNameValid = isValid;
     });
 
@@ -108,6 +146,14 @@ $(function(){
         var isValid = regex.test($(this).val());
         $(this).removeClass("success fail")
         .addClass(isValid ? "success" : "fail");
+        if(isValid){
+  			$("[name=memberRank]").parent().find("label").find("i").removeClass("red fa-bounce");
+  			$("[name=memberRank]").parent().find("label").find("i").addClass("green fa-beat");
+		}
+  		 else{
+  			$("[name=memberRank]").parent().find("label").find("i").removeClass("green fa-beat");
+  			$("[name=memberRank]").parent().find("label").find("i").addClass("red fa-bounce");
+		}
         status.memberRankValid = isValid;
     });
     
@@ -116,20 +162,44 @@ $(function(){
         var isValid = $(this).val().length > 0;
         $(this).removeClass("success fail")
                     .addClass(isValid ? "success" : "fail");
+        if(isValid){
+  			$("[name=memberEmail]").parent().find("label").find("i").removeClass("red fa-bounce");
+  			$("[name=memberEmail]").parent().find("label").find("i").addClass("green fa-beat");
+		}
+  		 else{
+  			$("[name=memberEmail]").parent().find("label").find("i").removeClass("green fa-beat");
+  			$("[name=memberEmail]").parent().find("label").find("i").addClass("red fa-bounce");
+		}
         status.memberEmailValid = isValid;
     });
     $("[name=memberCell]").blur(function(){
         var regex = /^010[1-9][0-9]{7}$/;
-        var isValid = $(this).val().length == 0 || regex.test($(this).val());
+        var isValid = $(this).val().length > 0 || regex.test($(this).val());
         $(this).removeClass("success fail")
                     .addClass(isValid ? "success" : "fail");
+        if(isValid){
+  			$("[name=memberCell]").parent().find("label").find("i").removeClass("red fa-bounce");
+  			$("[name=memberCell]").parent().find("label").find("i").addClass("green fa-beat");
+		}
+  		 else{
+  			$("[name=memberCell]").parent().find("label").find("i").removeClass("green fa-beat");
+  			$("[name=memberCell]").parent().find("label").find("i").addClass("red fa-bounce");
+		}
         status.memberCellValid = isValid;
     });
     $("[name=memberBirth]").blur(function(){
         var regex = /^([0-9]{4})-(02-(0[1-9]|1[0-9]|2[0-9])|(0[469]|11)-(0[1-9]|1[0-9]|2[0-9]|30)|(0[13578]|1[02])-(0[1-9]|1[0-9]|2[0-9]|3[01]))$/;
-        var isValid = $(this).val().length == 0 || regex.test($(this).val());
+        var isValid = $(this).val().length > 0 || regex.test($(this).val());
         $(this).removeClass("success fail")
                     .addClass(isValid ? "success" : "fail");
+        if(isValid){
+  			$("[name=memberBirth]").parent().find("label").find("i").removeClass("red fa-bounce");
+  			$("[name=memberBirth]").parent().find("label").find("i").addClass("green fa-beat");
+		}
+  		 else{
+  			$("[name=memberBirth]").parent().find("label").find("i").removeClass("green fa-beat");
+  			$("[name=memberBirth]").parent().find("label").find("i").addClass("red fa-bounce");
+		}       
         status.memberBirthValid = isValid;
     });
     //주소는 모두 없거나 모두 있거나 둘 중 하나면 통과
@@ -150,6 +220,8 @@ $(function(){
                     .addClass(isValid ? "success" : "fail");
         status.memberAddressValid = isValid;
     });
+    
+    
 
     //폼 검사
     $(".check-form").submit(function(){
@@ -250,7 +322,8 @@ $(function(){
             <div class="">
                 <div class="page">
                     <div class="row">
-                        <label>아이디</label>
+                        <label>아이디 <i class="fa-solid fa-asterisk red"></i></label>
+                        
                         <input type="text" name="memberId" class="field w-100"
                                     placeholder="영문소문자 시작, 숫자 포함 8~20자">
                         <div class="success-feedback">멋진 아이디입니다!</div>
@@ -262,15 +335,12 @@ $(function(){
                     <div class="row">
                         <label>
                             비밀번호
-
+							<i class="fa-solid fa-asterisk red"></i>
                             <!-- 방법1 : 체크박스 사용 -->
                             <label class="ms-20">
                                 <input type="checkbox" class="field-show">
                                 <span>표시하기</span>
                             </label>
-
-                            <!-- 방법2 : 아이콘 사용 -->
-                            <i class="fa-solid fa-eye"></i>
                         </label>
                         <input type="password" name="memberPw" class="field w-100"
                                     placeholder="영문 대소문자, 숫자, !@#$중 하나 반드시 포함">
@@ -278,7 +348,7 @@ $(function(){
                         <div class="fail-feedback">형식에 맞춰 8~16자로 작성하세요</div>
                     </div>
                     <div class="row">
-                        <label>비밀번호 확인</label>
+                        <label>비밀번호 확인 <i class="fa-solid fa-asterisk red"></i></label>
                         <input type="password" id="password-check" class="field w-100"
                                     placeholder="확인을 위해 비밀번호 한번 더 입력">
                         <div class="success-feedback">비밀번호가 일치합니다</div>
@@ -287,7 +357,7 @@ $(function(){
                 </div>
                 <div class="page">
                     <div class="row">
-                        <label>이름</label>
+                        <label>이름 <i class="fa-solid fa-asterisk red"></i></label>
                         <input type="text" name="memberName"
                                 class="field w-100" placeholder="이름">
                         <div class="success-feedback">완료</div>
@@ -297,7 +367,7 @@ $(function(){
 <!------------- 교수 관리자 학생-------------->
                 <div class="page">
                     <div class="row">
-                        <label>직업</label>
+                        <label>직업 <i class="fa-solid fa-asterisk red"></i></label>
                         <select name="memberRank" class="field w-100">
                             <option value="">분류</option>
                             <option value="관리자">관리자</option>
@@ -311,7 +381,7 @@ $(function(){
 
                 <div class="page">
                     <div class="row">
-                        <label>이메일</label>
+                        <label>이메일 <i class="fa-solid fa-asterisk red"></i></label>
                         <input type="email" name="memberEmail"
                             class="field w-100" placeholder="test@kh.com">
                         <div class="fail-feedback">이메일은 반드시 입력해야 합니다</div>
@@ -319,15 +389,16 @@ $(function(){
                 </div>
                 <div class="page">
                     <div class="row">
-                        <label>연락처(휴대전화번호, - 제외)</label>
+                        <label>연락처(휴대전화번호, - 제외) <i class="fa-solid fa-asterisk red"></i></label>
                         <input type="text" name="memberCell" class="field w-100"
                                     placeholder="010XXXXXXXX">
                         <div class="fail-feedback">입력한 번호가 형식에 맞지 않습니다</div>
                     </div>
 
                     <div class="row">
-                        <label>생년월일</label>
+                        <label>생년월일 <i class="fa-solid fa-asterisk red"></i></label>
                         <input type="text" name="memberBirth" class="field w-100">
+                        <div class="fail-feedback">반드시 설정해야 합니다</div>
                     </div>
                 </div>
                 <div class="page">

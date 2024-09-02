@@ -151,7 +151,7 @@
              var isValid = $(this).val().length>0;
           		 $(this).removeClass("success fail")
                             .addClass(isValid ? "success" : "fail");
-          		 if(isValid){
+          		if(isValid){
           			$("[name=lectureType]").parent().find("label").find("i").removeClass("red fa-bounce");
           			$("[name=lectureType]").parent().find("label").find("i").addClass("green fa-beat");
 				}
