@@ -73,9 +73,12 @@
         </div>
         <div class="container w-400 my-0">
             <button type="submit" class="btn btn-positive w-100">
-                <i class="fa-regular fa-envelope"></i>
-                <span>비밀번호 변경 메일 발송</span>
+                <i class="fa-regular fa-envelope" style="color: white"></i>
+                <span style="color: white">비밀번호 변경 메일 발송</span>
             </button>
+        </div>
+        <div class="container w-400 my-10">
+        	<a class="btn btn-positive w-100" href="/home/main">뒤로가기</a>
         </div>
     </form>
     
