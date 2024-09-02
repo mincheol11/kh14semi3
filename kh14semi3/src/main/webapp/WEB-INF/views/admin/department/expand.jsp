@@ -113,7 +113,7 @@
   </script>
 
  <form action="expand" method="post" autocomplete="off" class="check-form">
-        <div class="container w-400 my-50 h-70">
+        <div class="container w-400 my-50">
             <div class="row center">
                 <h1>학과 개설</h1>
             </div>
@@ -137,11 +137,11 @@
                 </div>
 <!-- 전송버튼 -->
             <div class="row">
-                <button type="submit" class="btn btn-positive w-100" >
+                <button type="submit" class="btn btn-positive w-100 mt-30" >
                    <i class="fa-solid fa-landmark"></i> 학과개설
                 </button>
                 <div class="row">
-                <a href="list" class="btn btn-neutral w-100" >
+                	<a href="list" class="btn btn-neutral w-100" >
                    <i class="fa-solid fa-list"></i> 목록이동
                 </a>
                 </div>

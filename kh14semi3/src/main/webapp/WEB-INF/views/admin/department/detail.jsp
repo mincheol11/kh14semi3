@@ -19,7 +19,7 @@
     </script>
     
     <body>
-    <div class="container w-600 my-50">
+    <div class="container w-500 my-50">
   
     <c:choose>
         <c:when test="${departmentDto == null}">
@@ -28,10 +28,11 @@
             </div>
         </c:when>
     <c:otherwise>
-      <div class="row center my-50">
+    
+	<div class="row center my-50">
     <h1>학과 상세정보</h1>
     </div>
-        <table class="table table-border table-hover">
+        <table class="table table-border">
                 <tr>
                     <th width="30%">학과코드</th>
                     <td>${departmentDto.departmentCode}</td>
@@ -44,14 +45,12 @@
         </c:otherwise>
     </c:choose>
     
-     <div class="row float-box">
-     	<div class="float-right">
-		     <a href="expand" class="btn btn-positive"><i class="fa-solid fa-building-columns"></i> 학과개설</a>
-		    <a href="list" class="btn btn-neutral"><i class="fa-solid fa-list"></i> 목록이동</a>
-		    <a href="edit?departmentCode=${departmentDto.departmentCode}" class="btn btn-neutral"><i class="fa-solid fa-eraser"></i> 학과수정</a>
-		    <a href="reduce?departmentCode=${departmentDto.departmentCode}"class="btn btn-negative confirm-link" 
+	<div class="row float-box center mt-30">
+		<a href="expand" class="btn btn-positive"><i class="fa-solid fa-building-columns"></i> 학과개설</a>
+		<a href="list" class="btn btn-neutral"><i class="fa-solid fa-list"></i> 목록이동</a>
+		<a href="edit?departmentCode=${departmentDto.departmentCode}" class="btn btn-neutral"><i class="fa-solid fa-eraser"></i> 학과수정</a>
+		<a href="reduce?departmentCode=${departmentDto.departmentCode}"class="btn btn-negative confirm-link" 
 		    	data-text="정말 삭제하시겠습니까?"><i class="fa-solid fa-trash"></i> 학과삭제</a>
-    	</div>
 	</div>
 </div>    
 </body>

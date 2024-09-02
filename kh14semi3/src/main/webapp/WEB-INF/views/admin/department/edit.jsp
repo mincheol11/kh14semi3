@@ -75,33 +75,35 @@
 
  <form action="edit" method="post" autocomplete="off" class="check-form">
 	<div class="container w-400 my-50">
-            <div class="row center">
-                <h2>학과 상세정보 수정</h2>
-            </div>
-            	<div class="row">
-            		<label>학과코드</label>
-                	<input type="hidden" name="departmentCode" value="${departmentDto.departmentCode}">
-                	<div class="field w-100"  style= "background:white">${departmentDto.departmentCode}</div>
-                	
-<!-- 학과명 입력 -->
-			<div class="row">
-                <label>학과명 <i class="fa-solid fa-asterisk red"></i></label>
-                      <input type="text" name="departmentName"  value="${departmentDto.departmentName}"
+		<div class="row center">
+			<h1>학과 정보 수정</h1>
+		</div>
+            
+		<div class="row">
+			<label>학과코드</label>
+				<input type="hidden" name="departmentCode" value="${departmentDto.departmentCode}">
+				<div class="field w-100">${departmentDto.departmentCode}</div>
+		</div>
+		     	
+		<!-- 학과명 입력 -->
+		<div class="row">
+			<label>학과명 <i class="fa-solid fa-asterisk red"></i></label>
+			<input type="text" name="departmentName"  value="${departmentDto.departmentName}"
                         class="field w-100" placeholder="ex)기계공학과">
- 				<div class="success-feedback 00b894">올바른 학과명입니다.</div>
+				<div class="success-feedback 00b894">올바른 학과명입니다.</div>
                 <div class="fail-feedback d63031">학과명은 한글로만 입력해주세요.</div>
                 <div class="fail2-feedback d63031">이미 사용중인 학과명입니다</div>
-                	</div>
-				 <div class="row mt-40">
-                	<button class="btn btn-positive w-100 confirm-link" data-text="정말 수정하시겠습니까?">수정하기</button>
-            	</div>
-            	<div class="row">
-                <a href="detail?departmentCode=${departmentDto.departmentCode}" class="btn btn-neutral w-100" >
-                   <i class="fa-solid fa-arrow-rotate-left"></i>
-                   뒤로가기
-                </a>
-                </div>
-            </div>
+		</div>
+		
+		<div class="row mt-30">
+			<button class="btn btn-positive w-100 confirm-link" data-text="정말 수정하시겠습니까?">
+							<i class="fa-solid fa-eraser"></i> 수정하기</button>
+		</div>
+		<div class="row">
+			<a href="detail?departmentCode=${departmentDto.departmentCode}" class="btn btn-neutral w-100" >
+                   <i class="fa-solid fa-arrow-rotate-left"></i> 뒤로가기</a>
+		</div>
+		
 	</div>
 </form>
 

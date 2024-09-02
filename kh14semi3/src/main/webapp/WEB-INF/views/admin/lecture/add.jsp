@@ -333,7 +333,7 @@
                 </div>
 <!-- 전송버튼 -->
             <div class="row">
-                <button type="submit" class="btn btn-positive w-100" >
+                <button type="submit" class="btn btn-positive w-100 mt-30" >
                    <i class="fa-regular fa-square-plus"></i>
                    강의개설
                 </button>
