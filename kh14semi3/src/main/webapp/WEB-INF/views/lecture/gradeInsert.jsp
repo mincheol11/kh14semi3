@@ -18,6 +18,11 @@
 	font-size: 14px;
 	padding: 0.3em 0.3em;
 }
+.swal2-icon.swal2-success {
+  border-color: #6695C4;
+  color: #6695C4;
+}
+
 </style>
 
     <script type="text/javascript">
@@ -64,9 +69,11 @@
                     success: function(response) {
                         Swal.fire({
                             icon: 'success',
+                            iconColor: "#6695C4",
                             title: '성적 저장 완료.',
                             showConfirmButton: false,
                             timer: 1500
+                            
                     });
                         // 총점 업데이트
                         row.find('[name=gradeRank-input]').attr("value", gradeRank);
