@@ -29,6 +29,14 @@ $(function(){
         var isValid = $(this).val().length > 0;
         $(this).removeClass("success fail")
                     .addClass(isValid ? "success" : "fail");
+        if(isValid){
+  			$("[name=studentDepartment]").parent().find("label").find("i").removeClass("red fa-bounce");
+  			$("[name=studentDepartment]").parent().find("label").find("i").addClass("green fa-beat");
+		}
+  		 else{
+  			$("[name=studentDepartment]").parent().find("label").find("i").removeClass("green fa-beat");
+  			$("[name=studentDepartment]").parent().find("label").find("i").addClass("red fa-bounce");
+		}
         status.studentDepartmentValid = isValid;
     });
 	
@@ -38,6 +46,14 @@ $(function(){
 		var isValid = regex.test($(this).val());
 		$(this).removeClass("success fail")
         .addClass(isValid ? "success" : "fail");
+		if(isValid){
+  			$("[name=studentLevel]").parent().find("label").find("i").removeClass("red fa-bounce");
+  			$("[name=studentLevel]").parent().find("label").find("i").addClass("green fa-beat");
+		}
+  		 else{
+  			$("[name=studentLevel]").parent().find("label").find("i").removeClass("green fa-beat");
+  			$("[name=studentLevel]").parent().find("label").find("i").addClass("red fa-bounce");
+		}
         status.studentLevelValid = isValid;
 	});
 	
@@ -45,6 +61,14 @@ $(function(){
         var isValid = $(this).val().length > 0;
         $(this).removeClass("success fail")
                     .addClass(isValid ? "success" : "fail");
+        if(isValid){
+  			$("[name=professorDepartment]").parent().find("label").find("i").removeClass("red fa-bounce");
+  			$("[name=professorDepartment]").parent().find("label").find("i").addClass("green fa-beat");
+		}
+  		 else{
+  			$("[name=professorDepartment]").parent().find("label").find("i").removeClass("green fa-beat");
+  			$("[name=professorDepartment]").parent().find("label").find("i").addClass("red fa-bounce");
+		}
         status.professorDepartmentValid = isValid;
     });
 	
@@ -111,10 +135,6 @@ $(function(){
 					<div class="fail-feedback">필수 선택사항 입니다.</div>
 				</div>
 				<div class="right">
-                	<a href="list" class="btn btn-neutral">
-                  		<i class="fa-solid fa-list"></i>
-                   		목록이동
-                	</a>
 					<button class="btn btn-positive" type="submit">등록완료</button>
 				</div>
 		</form>
@@ -135,10 +155,6 @@ $(function(){
 					<div class="fail-feedback">필수 선택사항 입니다.</div>
 				</div>
 				<div class="right">
-					<a href="list" class="btn btn-neutral">
-                  		<i class="fa-solid fa-list"></i>
-                   		목록이동
-                	</a>
 					<button class="btn btn-positive" type="submit">등록완료</button>
 				</div>
 		</form>
@@ -152,10 +168,6 @@ $(function(){
 						class="field w-100">
 				</div>
 			<div class="right">
-				<a href="list" class="btn btn-neutral">
-                  		<i class="fa-solid fa-list"></i>
-                   		목록이동
-                	</a>
 				<button class="btn btn-positive" type="submit">
 				등록완료
 				</button>
