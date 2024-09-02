@@ -87,7 +87,7 @@ h2 span#currentYear, h2 span#currentMonth {
                     if(boardList.length > 0){ 
 	                    // Populate the table with new data
 	                    $.each(boardList, function(index, board) {
-							if(index<5){
+							if(index<3){
 		                        $('#boardTable tbody').append(
 		                            '<tr>' +
 		                            '<td>' + ' [' + board.boardNo + '] ' + board.boardTitle + '</td>' +
@@ -129,8 +129,8 @@ h2 span#currentYear, h2 span#currentMonth {
 		              	$('#lectureTable').append(
 							'<thead>'+	
 						        '<tr>'+    
-							        '<th>학과</th>'+        
-							        '<th>교수</th>'+        
+							        /* '<th>학과</th>'+ */        
+							        /* '<th>교수</th>'+   */      
 							        '<th>분류</th>'+        
 							        '<th>강의명</th>'+        
 							        '<th>시간</th>'+        
@@ -144,10 +144,10 @@ h2 span#currentYear, h2 span#currentMonth {
 							if(index<5){
 								$('#lectureTable').append(
 									'<tr>'+
-		                            '<td>' + lecture.lectureDepartment + '</td>' +
-		                            '<td>' + lecture.lectureProfessor + '</td>' +
+		                            /* '<td>' + lecture.lectureDepartment + '</td>' + */
+		                            /* '<td>' + lecture.lectureProfessor + '</td>' + */
 		                            '<td>' + lecture.lectureType + '</td>' +
-		                            '<td>' + lecture.lectureName + '[' + lecture.lectureCode + ']' + '</td>' +
+		                            '<td>' + lecture.lectureName /* + '[' + lecture.lectureCode + ']' */ + '</td>' +
 		                            '<td>' + lecture.lectureTime + '</td>' +
 		                            '<td>' + lecture.lectureRoom + '</td>' +
 		                            '</tr>'
@@ -187,7 +187,7 @@ h2 span#currentYear, h2 span#currentMonth {
            			if(ScheduleList.length > 0){           			
 		              	// Populate the table with new data
 		              	$.each(ScheduleList, function(index, schedule) {
-							if(index<5){
+							if(index<3){
 								$('#scheduleTable tbody').append(
 									'<tr>' +
 									'<td>' + schedule.scheduleTitle + '</td>' +
