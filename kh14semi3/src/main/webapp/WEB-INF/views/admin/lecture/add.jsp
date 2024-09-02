@@ -240,27 +240,27 @@
 			<div class="row">
                 <label>강의코드 <i class="fa-solid fa-asterisk red"></i></label>
                     <input type="text" name="lectureCode" 
-                        class="field w-100" placeholder="ex)l01">
+                        class="field w-100" placeholder="ex)KHL01003">
                 <div class="success-feedback 00b894">올바른 강의 코드입니다.</div>
-                <div class="fail-feedback d63031">코드는 앞 영문 소문자로 시작하며,다음 숫자를 2~3자로 작성해주세요.</div>
+                <div class="fail-feedback d63031">코드는 영문 대문자와 숫자로 작성해주세요.</div>
                 <div class="fail2-feedback d63031">이미 사용중인 코드입니다.</div>
 			</div>
 <!-- 학과 코드 입력-->
 			<div class="row">
                 <label>학과코드 <i class="fa-solid fa-asterisk red"></i></label>
                       <input type="text" name="lectureDepartment" 
-                        class="field w-100" placeholder="ex)d01">
+                        class="field w-100" placeholder="ex)KHD01001">
  				<div class="success-feedback 00b894">올바른 학과 코드입니다.</div>
-                <div class="fail-feedback d63031">코드는 앞 영문 소문자로 시작하며,다음 숫자를 2~3자로 작성해주세요.</div>
+                 <div class="fail-feedback d63031">코드는 영문 대문자와 숫자로 작성해주세요.</div>
                 <div class="fail2-feedback d63031">존재하지 않는 코드입니다.</div>
                 </div>
 <!-- 교수 코드 입력-->
 			<div class="row">
                 <label>교수코드 <i class="fa-solid fa-asterisk red"></i></label>
                       <input type="text" name="lectureProfessor" 
-                        class="field w-100" placeholder="ex)prof001">
+                        class="field w-100" placeholder="ex)KHP01240002">
  				<div class="success-feedback 00b894">올바른 교수 코드입니다.</div>
-                <div class="fail-feedback d63031">코드는 앞 영문 소문자로 시작하며,다음 숫자를 3자로 작성해주세요.</div>
+                 <div class="fail-feedback d63031">코드는 영문 소문자와 숫자로 작성해주세요.</div>
                 <div class="fail2-feedback d63031">존재하지 않는 코드입니다.</div>
                 </div>
 <!-- 분류 선택-->
