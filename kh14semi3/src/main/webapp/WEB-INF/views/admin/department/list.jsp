@@ -5,9 +5,7 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include> <!-- hearder 추가 -->
 
 <style>
-.kh-container{
-    height: auto !important; 
-}
+
 </style>
 
 <script type="text/javascript">

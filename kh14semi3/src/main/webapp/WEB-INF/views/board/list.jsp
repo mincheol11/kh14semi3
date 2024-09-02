@@ -105,11 +105,9 @@
             </thead>
             <tbody align="center">
                 <c:forEach var="boardDto" items="${boardList}">
-                    <tr class="info-block">
+                    <tr class="info-block" onclick="location.href='detail?boardNo=${boardDto.boardNo}'" style="cursor: pointer;">
                         <td class="info-content">${boardDto.boardNo}</td>
-                        <td class="info-content">
-                            <a href="detail?boardNo=${boardDto.boardNo}" class="link link-animation info-content">${boardDto.boardTitle}</a>
-                        </td>
+                        <td class="info-content">${boardDto.boardTitle}</td>
                         <td class="info-content">${boardDto.boardWriter}</td>
                         <td class="info-content">${boardDto.boardWtime}</td>
                         <td class="info-contentViews">
