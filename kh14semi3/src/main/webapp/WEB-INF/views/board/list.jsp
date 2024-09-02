@@ -42,12 +42,14 @@
    </script>
    
 <style>
-.kh-container{
-    height: auto !important; 
-}
+	.kh-container{
+  	  height: auto !important; 
+	}
+	
 	.target {
 		display: none;
 	}
+	
     .search-form {
         display: flex;
         justify-content: center;
@@ -76,8 +78,6 @@
         display: block;
         margin-bottom: 5px;
     }
-    
-
 </style>
 
 <div class="container w-900 my-50">

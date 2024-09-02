@@ -390,7 +390,8 @@ textarea.field{
 	padding: 12px;
 }
 .table.table-border > tbody > tr > th{
-    background-color: rgba(45, 147, 237, 0.3);
+	font-weight: bold;
+    background-color: #D1DFEC;
 }
 .table.table-border {
     border-radius: 15px;

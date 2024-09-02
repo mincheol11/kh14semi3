@@ -196,9 +196,9 @@ $(function(){
 </script>
 
 <form action="change" method="post" autocomplete="off" class="check-form">
-	<div class="container w-600 my-50">
+	<div class="container w-500 my-50">
 		<div class="row center">
-			<h1>회원정보수정</h1>
+			<h1>회원 정보 수정</h1>
 		</div>
 		<div class="row">
 			<input name="memberId" type="hidden" value="${memberDto.memberId}">		
@@ -261,8 +261,6 @@ $(function(){
 			</c:when>
 		</c:choose>
 		
-		
-		
 		<div class="row">
 			<label>생년월일</label> <input type="date" name="memberBirth"
 				value="${memberDto.memberBirth}" class="field w-100">
@@ -298,15 +296,14 @@ $(function(){
 			<div class="fail-feedback">주소는 비워두거나 모두 입력해야 합니다</div>
 		</div>
 		<div class="row mt-30">
-			<button class="btn btn-positive w-100" type="submit">수정하기</button>
+			<button class="btn btn-positive w-100" type="submit">
+			<i class="fa-solid fa-eraser" ></i> 수정하기</button>
 		</div>
 		<div class="row">
 			<a class="btn btn-neutral w-100" type="button" href="detail?memberId=${memberDto.memberId}">
-			<i class="fa-solid fa-arrow-rotate-left" style="color: white"></i>
-			뒤로가기
-			</a>
-			
+			<i class="fa-solid fa-arrow-rotate-left"></i> 뒤로가기</a>
 		</div>
+		
 	</div>
 </form>
 

@@ -53,17 +53,17 @@ $(document).ready(function() {
     <div class="row">
         <table class="table table-horizontal table-hover">
             <thead>
-              <tr>
+				<tr>
                     <th>학과코드</th>
                     <th>학과명</th>
-             </tr>
-    </thead>
-	<tbody>
-			<c:forEach var="departmentDto" items="${departmentList}">
-    			<tr onclick="location.href='detail?departmentCode=${departmentDto.departmentCode}'" style="cursor: pointer;">
-				        <td>${departmentDto.departmentCode}</td>
-				        <td>${departmentDto.departmentName}</td>
-    				</tr>
+				</tr>
+		    </thead>
+			<tbody>
+				<c:forEach var="departmentDto" items="${departmentList}">
+		    		<tr onclick="location.href='detail?departmentCode=${departmentDto.departmentCode}'" style="cursor: pointer;">
+						<td>${departmentDto.departmentCode}</td>
+						<td>${departmentDto.departmentName}</td>
+					</tr>
 				</c:forEach>
 			</tbody>
 		</table>

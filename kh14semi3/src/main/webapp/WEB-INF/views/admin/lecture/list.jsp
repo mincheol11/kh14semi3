@@ -72,7 +72,7 @@ $(document).ready(function() {
             	</select>
         		<input type="text" name="keyword" value="${param.keyword}" class="field" placeholder="검색어">
         		<button class="btn btn-positive" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
-				<a href="add" class="btn btn-neutral"><i class="fa-solid fa-right-to-bracket"></i> 강의개설</a>
+				<a href="add" class="btn btn-neutral"><i class="fa-regular fa-square-plus"></i> 강의개설</a>
         	</form>
         </div>
                 

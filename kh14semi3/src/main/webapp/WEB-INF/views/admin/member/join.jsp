@@ -236,9 +236,9 @@ $(function(){
 });
 </script>
 
-<div class="container w-600 my-50">
+<div class="container w-500 my-50">
         <div class="row center">
-            <h1>회원 등록 페이지</h1>
+            <h1>회원 등록</h1>
         </div>
         <div class="row">
             <div class="progressbar"><div class="guage"></div></div>
@@ -353,13 +353,16 @@ $(function(){
                                 placeholder="상세주소">
                         <div class="fail-feedback">주소는 비워두거나 모두 입력해야 합니다</div>
                     </div>
-                    <div class="row mt-50">
-                        <div class="flex-box">
-							<button type="submit" class="btn btn-positive w-100">
+                    
+                    <div class="row mt-30">
+						<button type="submit" class="btn btn-positive w-100">
 							<i class="fa-solid fa-right-to-bracket"></i> 회원등록
-							</button>
-                        </div>
+						</button>
                     </div>
+                    <div class="row">
+						<a class="btn btn-neutral w-100" type="button" href="/admin/member/list">
+						<i class="fa-solid fa-list"></i> 목록이동</a>
+					</div>
                 </div>
             </div>
         </div>

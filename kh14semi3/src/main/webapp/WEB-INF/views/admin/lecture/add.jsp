@@ -330,9 +330,8 @@
                    강의개설
                 </button>
                 <div class="row">
-                <a href="list" class="btn btn-netraul w-100" >
-                   <i class="fa-solid fa-list"></i>
-                  목록이동
+                <a href="list" class="btn btn-neutral w-100" >
+                   <i class="fa-solid fa-list"></i> 목록이동
                 </a>
                 </div>
             </div>

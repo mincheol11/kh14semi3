@@ -33,8 +33,8 @@
 	padding-right:10px;
 }
 #scheduleTable td{
-	padding-left:30px;
-	padding-right:30px;
+	padding-left:10px;
+	padding-right:10px;
 }
 /* 특정 h2 요소 내의 <span> 스타일을 정의 */
 h2 span#currentYear, h2 span#currentMonth {
