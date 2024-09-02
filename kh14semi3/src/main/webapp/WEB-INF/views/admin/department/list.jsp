@@ -24,24 +24,14 @@ $(document).ready(function() {
 });
 </script>
 
-<<<<<<< HEAD
-    <div class="container w-900 my-50">
-=======
     <div class="container w-600 my-50">
->>>>>>> refs/heads/20240902wooin
         <div class="row center">
             <h1>학과 시스템 관리</h1>
         </div>
         
     	<div class="row center">
         <form action="list" method="get" autocomplete="off">
-<<<<<<< HEAD
-        <div class="row right">
-		<a href="expand" class="btn btn-positive"><i class="fa-solid fa-building-columns"></i> 학과개설</a>
-		</div>
-		<div class="row right">
-=======
->>>>>>> refs/heads/20240902wooin
+
             <select name="column" class="field">
             <option value="department_code">학과코드</option>
 				<c:choose>
