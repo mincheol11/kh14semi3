@@ -96,7 +96,7 @@
                 	<button class="btn btn-positive w-100 confirm-link" data-text="정말 수정하시겠습니까?">수정하기</button>
             	</div>
             	<div class="row">
-                <a href="detail?departmentCode=${departmentDto.departmentCode}" class="btn btn-netraul w-100" >
+                <a href="detail?departmentCode=${departmentDto.departmentCode}" class="btn btn-neutral w-100" >
                    <i class="fa-solid fa-arrow-rotate-left"></i>
                    뒤로가기
                 </a>

@@ -4,7 +4,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
-
+<!-- lightpick cdn -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/css/lightpick.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.30.1/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/lightpick.min.js"></script>
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
@@ -35,8 +38,8 @@ $(function(){
         memberNameValid : false, //형식검사
         memberRankValid: false,
         memberEmailValid : false,
-        memberCellValid : true , //선택항목
-        memberBirthValid : true , //선택항목
+        memberCellValid : false , //선택항목
+        memberBirthValid : false , //선택항목
         memberAddressValid : true , //선택항목
         ok : function(){
             return this.memberIdValid && this.memberIdCheckValid
@@ -53,6 +56,14 @@ $(function(){
         var regex = new RegExp(regexStr);
         var isValid = regex.test($(this).val());
         $(this).removeClass("success fail").addClass(isValid ? "success" : "fail");
+        if(isValid){
+  			$("[name=memberName]").parent().find("label").find("i").removeClass("red fa-bounce");
+  			$("[name=memberName]").parent().find("label").find("i").addClass("green fa-beat");
+		}
+  		 else{
+  			$("[name=memberName]").parent().find("label").find("i").removeClass("green fa-beat");
+  			$("[name=memberName]").parent().find("label").find("i").addClass("red fa-bounce");
+		}
         status.memberNameValid = isValid;
     });
 
@@ -62,6 +73,14 @@ $(function(){
         var isValid = regex.test($(this).val());
         $(this).removeClass("success fail")
         .addClass(isValid ? "success" : "fail");
+        if(isValid){
+  			$("[name=memberRank]").parent().find("label").find("i").removeClass("red fa-bounce");
+  			$("[name=memberRank]").parent().find("label").find("i").addClass("green fa-beat");
+		}
+  		 else{
+  			$("[name=memberRank]").parent().find("label").find("i").removeClass("green fa-beat");
+  			$("[name=memberRank]").parent().find("label").find("i").addClass("red fa-bounce");
+		}
         status.memberRankValid = isValid;
     });
     
@@ -70,20 +89,46 @@ $(function(){
         var isValid = $(this).val().length > 0;
         $(this).removeClass("success fail")
                     .addClass(isValid ? "success" : "fail");
+        if(isValid){
+  			$("[name=memberEmail]").parent().find("label").find("i").removeClass("red fa-bounce");
+  			$("[name=memberEmail]").parent().find("label").find("i").addClass("green fa-beat");
+		}
+  		 else{
+  			$("[name=memberEmail]").parent().find("label").find("i").removeClass("green fa-beat");
+  			$("[name=memberEmail]").parent().find("label").find("i").addClass("red fa-bounce");
+		}
         status.memberEmailValid = isValid;
     });
+    
     $("[name=memberCell]").blur(function(){
         var regex = /^010[1-9][0-9]{7}$/;
-        var isValid = $(this).val().length == 0 || regex.test($(this).val());
+        var isValid = $(this).val().length > 0 || regex.test($(this).val());
         $(this).removeClass("success fail")
                     .addClass(isValid ? "success" : "fail");
+        if(isValid){
+  			$("[name=memberCell]").parent().find("label").find("i").removeClass("red fa-bounce");
+  			$("[name=memberCell]").parent().find("label").find("i").addClass("green fa-beat");
+		}
+  		 else{
+  			$("[name=memberCell]").parent().find("label").find("i").removeClass("green fa-beat");
+  			$("[name=memberCell]").parent().find("label").find("i").addClass("red fa-bounce");
+		}
         status.memberCellValid = isValid;
     });
+    
     $("[name=memberBirth]").blur(function(){
         var regex = /^([0-9]{4})-(02-(0[1-9]|1[0-9]|2[0-9])|(0[469]|11)-(0[1-9]|1[0-9]|2[0-9]|30)|(0[13578]|1[02])-(0[1-9]|1[0-9]|2[0-9]|3[01]))$/;
         var isValid = $(this).val().length == 0 || regex.test($(this).val());
         $(this).removeClass("success fail")
                     .addClass(isValid ? "success" : "fail");
+        if(isValid){
+  			$("[name=memberBirth]").parent().find("label").find("i").removeClass("red fa-bounce");
+  			$("[name=memberBirth]").parent().find("label").find("i").addClass("green fa-beat");
+		}
+  		 else{
+  			$("[name=memberBirth]").parent().find("label").find("i").removeClass("green fa-beat");
+  			$("[name=memberBirth]").parent().find("label").find("i").addClass("red fa-bounce");
+		}
         status.memberBirthValid = isValid;
     });
     //주소는 모두 없거나 모두 있거나 둘 중 하나면 통과
@@ -202,14 +247,12 @@ $(function(){
 			<input name="memberId" type="hidden" value="${memberDto.memberId}">		
 		</div>
 		<div class="row">
-			<label>이름</label>
-			<i class="fa-solid fa-asterisk red"></i>
+			<label>이름 <i class="fa-solid fa-asterisk red"></i></label>
 			<input type="text" name="memberName"
 				value="${memberDto.memberName}" class="field w-100">
 		</div>
 		<div class="row">
-			<label>구분</label>
-			<i class="fa-solid fa-asterisk red"></i>
+			<label>구분 <i class="fa-solid fa-asterisk red"></i></label>
 			<select name="memberRank" class="field w-100">
 				<option value="">분류</option>
 				<option value="관리자"<c:if test="${memberDto.memberRank == '관리자'}">selected</c:if>>관리자</option>
@@ -223,13 +266,13 @@ $(function(){
 					<input name="studentId" value="${memberDto.memberId}" type="hidden" class="field w-100">					
 				</div>
 				<div class="row">
-					<label>학과코드</label>
+					<label>학과코드 <i class="fa-solid fa-asterisk red"></i></label>
 				</div>
 				<div class="row center">
 					<input name="studentDepartment" value="${studentDto.studentDepartment}" class="field w-100">
 				</div>
 				<div class="row">
-					<label>학년</label>
+					<label>학년 <i class="fa-solid fa-asterisk red"></i></label>
 				</div>
 				<div class="row center">
 					<select name="studentLevel" class="field w-100">
@@ -246,7 +289,7 @@ $(function(){
 					<input name="professorId" value="${memberDto.memberId}" type="hidden" class="field w-100">
 				</div>
 				<div class="row">
-					<label>학과코드</label>
+					<label>학과코드 <i class="fa-solid fa-asterisk red"></i></label>
 				</div>
 				<div class="row center">
 					<input name="professorDepartment" class="field w-100" value="${professorDto.professorDepartment}">
@@ -260,15 +303,15 @@ $(function(){
 		</c:choose>
 		
 		<div class="row">
-			<label>생년월일</label> <input type="date" name="memberBirth"
+			<label>생년월일 <i class="fa-solid fa-asterisk red"></i></label> <input type="date" name="memberBirth"
 				value="${memberDto.memberBirth}" class="field w-100">
 		</div>
 		<div class="row">
-			<label>연락처</label> <input type="tel" name="memberCell"
+			<label>연락처 <i class="fa-solid fa-asterisk red"></i></label> <input type="tel" name="memberCell"
 				value="${memberDto.memberCell}" class="field w-100">
 		</div>
 		<div class="row">
-			<label>이메일</label> <input type="email" name="memberEmail"
+			<label>이메일 <i class="fa-solid fa-asterisk red"></i></label> <input type="email" name="memberEmail"
 				value="${memberDto.memberEmail}" class="field w-100">
 		</div>
 		<div class="row">

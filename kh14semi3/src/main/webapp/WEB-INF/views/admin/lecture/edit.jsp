@@ -309,7 +309,7 @@
 			<a href="detail?lectureCode=${lectureDto.lectureCode}" class="btn btn-neutral w-100" >
 					<i class="fa-solid fa-arrow-rotate-left"></i> 뒤로가기</a>
 		</div>
-            	
+        
 	</div>
 </form>
 
