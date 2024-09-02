@@ -41,19 +41,7 @@ public class BoardController {
 		return "/WEB-INF/views/board/list.jsp";
 		
 	}
-	private boolean checkSearch(String column,String keyword) {
-		if(column == null)
-			return false;
-		if(keyword == null)
-			return false;
-		
-		switch(column) {
-		case "board_title":
-		case "board_writer":
-			return true;
-		}
-		return false;
-	}
+	
 	@RequestMapping("/detail")
 	public  String detail(@RequestParam int boardNo,Model model) {
 		BoardDto boardDto = boardDao.selectOne(boardNo);
@@ -72,13 +60,15 @@ public class BoardController {
 		//세션에서 아이디 추출 후 boardDto에 첨부
 		String createdUser = (String)session.getAttribute("createdUser");
 		boardDto.setBoardWriter(createdUser);
-		System.out.println(boardDto);
 		//시퀀스 번호를 먼저 생성하도록 지시한다
 		int seq = boardDao.sequence();
 		
 		//등록할 정보에 번호를 첨부한다
 		
 		  boardDto.setBoardNo(seq);
+		  System.out.println(boardDto);
+		  
+		  boardDao.insert(boardDto);
 		  return "redirect:/board/list?page=" + pageVO.getPage() + "&message=writeSuccess";
     }
 		

@@ -28,26 +28,18 @@ public class BoardDao {
     public void insert(BoardDto boardDto) {
         String sql = "insert into board(BOARD_NO,BOARD_WRITER, "
         		+ "BOARD_TYPE,BOARD_TITLE,BOARD_CONTENT, "
-        		+ "BOARD_WTIME,BOARD_UTIME,BOARD_VIEWS) "
-        		+ "values(?,? ,?, ?, ?, ?,?,?)";
+        		+ "BOARD_WTIME,BOARD_VIEWS) "
+        		+ "values(?,? ,?, ?, ?, sysdate,?)";
         Object[] data = {
             boardDto.getBoardNo(), boardDto.getBoardWriter(),
             boardDto.getBoardType(),
             boardDto.getBoardTitle(), boardDto.getBoardContent(),
-           boardDto.getBoardWtime(),
-           boardDto.getBoardUtime(),
             boardDto.getBoardViews()
         };
         jdbcTemplate.update(sql, data);
     }
 
-    public List<BoardDto> selectList() {
-        String sql = "select BOARD_NO, BOARD_WRITER, BOARD_TYPE,"
-        		+ " BOARD_TITLE, BOARD_CONTENT, BOARD_WTIME,"
-        		+ " BOARD_UTIME, BOARD_VIEWS "
-        		+ " from board order by board_no desc";
-        return jdbcTemplate.query(sql, boardListMapper);
-    }
+    
 
     public List<BoardDto> selectList(String column, String keyword) {
         String sql = "select BOARD_NO, BOARD_WRITER, BOARD_TYPE,"
@@ -86,45 +78,6 @@ public class BoardDao {
         String sql = "update board set board_views = board_views + 1 where board_no = ?";
         Object[] data = { boardNo };
         return jdbcTemplate.update(sql, data) > 0;
-    }
-
-    public List<BoardDto> selectListByPaging(int page, int size) {
-        int endRow = page * size;
-        int beginRow = endRow - (size - 1);
-
-        String sql = "select * from (select rownum rn, TMP.* from "
-        		+ "(select BOARD_NO, BOARD_WRITER, BOARD_TYPE, "
-        		+ "BOARD_TITLE, BOARD_CONTENT, BOARD_WTIME,"
-        		+ " BOARD_UTIME, BOARD_VIEWS from board "
-        		+ "order by board_no desc) TMP) where rn between ? and ?";
-        Object[] data = { beginRow, endRow };
-        return jdbcTemplate.query(sql, boardListMapper, data);
-    }
-
-    public List<BoardDto> selectListByPaging(String column, String keyword, int page, int size) {
-        int endRow = page * size;
-        int beginRow = endRow - (size - 1);
-
-        String sql = "select * from (select rownum rn, TMP.* from (select BOARD_NO, "
-        		+ "BOARD_WRITER, BOARD_TYPE, BOARD_TITLE, BOARD_CONTENT, "
-        		+ "BOARD_WTIME, BOARD_UTIME, BOARD_VIEWS from "
-        		+ "board where instr(#1, ?) > 0 order by board_no desc) TMP) where rn between ? and ?";
-        sql = sql.replace("#1", column);
-
-        Object[] data = { keyword, beginRow, endRow };
-        return jdbcTemplate.query(sql, boardListMapper, data);
-    }
-
-    public int countByPaging() {
-        String sql = "select count(*) from board";
-        return jdbcTemplate.queryForObject(sql, int.class);
-    }
-
-    public int countByPaging(String column, String keyword) {
-        String sql = "select count(*) from board where instr(#1, ?) > 0";
-        sql = sql.replace("#1", column);
-        Object[] data = { keyword };
-        return jdbcTemplate.queryForObject(sql, int.class, data);
     }
 
     public List<BoardDto> selectListByPaging(PageVO pageVO) {
