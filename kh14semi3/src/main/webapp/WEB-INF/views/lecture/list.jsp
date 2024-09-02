@@ -26,7 +26,7 @@ createdRank = ${sessionScope.createdRank}
 
 <div class="container w-900 my-50">
 	<div class="row center">
-		<h2>${memberDto.memberName}님의 수강 강의 목록</h2>
+		<h2>${memberDto.memberName} 님의 강의 목록</h2>
 	</div>
 
 	<div class="row center">

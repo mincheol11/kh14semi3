@@ -294,7 +294,8 @@ $(function(){
 			<div class="fail-feedback">주소는 비워두거나 모두 입력해야 합니다</div>
 		</div>
 		<div class="row mt-30">
-			<button class="btn btn-positive w-100 confirm-link" data-text="정말 수정하시겠습니까?" type="submit">수정하기</button>
+			<button class="btn btn-positive w-100 confirm-link" data-text="정말 수정하시겠습니까?" type="submit">
+				<i class="fa-solid fa-eraser"></i> 수정하기</button>
 		</div>
 		<div class="row">
 			<a class="btn btn-neutral w-100" type="button" href="detail?memberId=${memberDto.memberId}">

@@ -27,11 +27,11 @@
 
 <div class="container w-500 my-50">
 	<div class="row center" style="font-size:20px;">
-		<h2>[${lectureDto.lectureName}] 강의 정보</h2>
+		<h2>[ ${lectureDto.lectureName} ] 강의 정보</h2>
 	</div>
 	
 	<div class="row">
-        <table class="table table-hover table-horizontal">
+        <table class="table table-border">
             <tr>
                 <th>강의코드</th>
                 <td>${lectureDto.lectureCode}</td>
@@ -66,7 +66,7 @@
             </tr>                     
             <tr>
                 <th>강의계획서</th>
-                <td class="flex-core">	                
+                <td class="center">	                
 	                <img src="https://placehold.co/200x200">
                 </td>
             </tr>
