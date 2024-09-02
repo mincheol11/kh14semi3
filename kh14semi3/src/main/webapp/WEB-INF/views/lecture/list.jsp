@@ -19,12 +19,8 @@
 	});
 </script>
 
-createdUser = ${sessionScope.createdUser} , 
-createdRank = ${sessionScope.createdRank}
 
-
-
-<div class="container w-900 my-50">
+<div class="container w-1000 my-50">
 	<div class="row center">
 		<h2>${memberDto.memberName} 님의 강의 목록</h2>
 	</div>
@@ -52,16 +48,16 @@ createdRank = ${sessionScope.createdRank}
 			<%-- 결과가 있을 때 --%>
 			<c:otherwise>
 				<!-- 결과 화면 -->
-				<div class="right">
+				<!-- <div class="right">
 					<i class="fa-brands fa-slack red"></i> 강의명 클릭시 상세 정보 페이지로 이동
-				</div>
+				</div> -->
 				<table class="table table-horizontal table-hover">
 				<thead>
 					<tr>
 						<th>전공(학과)</th>
 						<th>교수명</th>
 						<th>분류</th>
-						<th width="30%">강의명</th>
+						<th>강의명</th>
 						<th>강의시간</th>
 						<th>강의실</th>
 						<th>수강인원</th>
@@ -73,15 +69,11 @@ createdRank = ${sessionScope.createdRank}
 					<%-- 학생인 경우 --%>
 					<c:if test="${sessionScope.createdRank == '학생'}">
 					<c:forEach var="lectureDto" items="${registrationList}">
-					<tr>
+					<tr onclick="location.href='/lecture/detail?lectureCode=${lectureDto.lectureCode}&&goWhere=lecture1'" style="cursor: pointer;">
 						<td>${lectureDto.lectureDepartment}</td>
 						<td>${lectureDto.lectureProfessor}</td>
 						<td>${lectureDto.lectureType}</td>
-						<td>
-							<a href="/lecture/detail?lectureCode=${lectureDto.lectureCode}&&goWhere=lecture1" class="link link-animation black">
-								${lectureDto.lectureName}
-							</a>
-						</td>
+						<td>${lectureDto.lectureName}</td>
 						<td>${lectureDto.lectureTime} ${lectureDto.lectureDuration} ${lectureDto.lectureDay}</td>
 						<td>${lectureDto.lectureRoom}</td>
 						<td>${lectureDto.lectureRegist}/${lectureDto.lectureCount}</td>						
@@ -95,15 +87,11 @@ createdRank = ${sessionScope.createdRank}
 					<%-- 교수인 경우 --%>
 					<c:if test="${sessionScope.createdRank == '교수'}">
 					<c:forEach var="lectureDto" items="${professorList}">
-					<tr>
+					<tr onclick="location.href='/lecture/detail?lectureCode=${lectureDto.lectureCode}&&goWhere=lecture1'" style="cursor: pointer;">
 						<td>${lectureDto.lectureDepartment}</td>
 						<td>${lectureDto.lectureProfessor}</td>
 						<td>${lectureDto.lectureType}</td>
-						<td>
-							<a href="/lecture/detail?lectureCode=${lectureDto.lectureCode}&&goWhere=lecture1" class="link link-animation black">
-								${lectureDto.lectureName}
-							</a>
-						</td>
+						<td>${lectureDto.lectureName}</td>
 						<td>${lectureDto.lectureTime} ${lectureDto.lectureDuration} ${lectureDto.lectureDay}</td>
 						<td>${lectureDto.lectureRoom}</td>
 						<td>${lectureDto.lectureRegist}/${lectureDto.lectureCount}</td>						

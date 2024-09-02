@@ -26,8 +26,8 @@
 
 
 <div class="container w-500 my-50">
-	<div class="row center" style="font-size:20px;">
-		<h2>[ ${lectureDto.lectureName} ] 강의 정보</h2>
+	<div class="row center">
+		<h1>[ ${lectureDto.lectureName} ] 강의 정보</h1>
 	</div>
 	
 	<div class="row">
@@ -73,10 +73,9 @@
         </table>
     </div>
 
-    <div class="row float-box">
-    	<div class="float-right">    		
-        	<a href="/lecture/list" class="btn btn-neutral btn-go-where">목록 이동</a>
-        </div>
+    <div class="row float-box center mt-30">
+        	<a href="/lecture/list" class="btn btn-neutral btn-go-where">
+        	<i class="fa-solid fa-list"></i> 목록이동</a>
     </div>
 
 </div>

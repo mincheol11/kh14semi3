@@ -10,9 +10,9 @@
 	.class-regist{
 		cursor: pointer;
 	}
-	/* .kh-container{
+	.kh-container{
 	    height: auto !important; 
-	} */
+	}
 </style>
 
 <script type="text/javascript">
@@ -74,7 +74,7 @@ createdRank = ${sessionScope.createdRank}
 	
 <a href="regist" class="btn btn-neutral">이동</a> --%>
 
-<div class="container w-900 my-50">
+<div class="container w-1000 my-50">
 	<div class="row center">
 		<h1>강의 목록</h1>
 	</div>
@@ -112,7 +112,7 @@ createdRank = ${sessionScope.createdRank}
 							<th>전공(학과)</th>
 							<th>교수명</th>
 							<th>분류</th>
-							<th width="30%">강의명</th>
+							<th>강의명</th>
 							<th>강의코드</th>
 							<th>강의시간</th>
 							<th>강의실</th>
@@ -122,15 +122,11 @@ createdRank = ${sessionScope.createdRank}
 					</thead>
 					<tbody class="center">					
 						<c:forEach var="lectureDto" items="${lectureList}">
-						<tr>
+						<tr onclick="location.href='/lecture/detail?lectureCode=${lectureDto.lectureCode}&&goWhere=regist1'" style="cursor: pointer;">
 							<td>${lectureDto.lectureDepartment}</td>
 							<td>${lectureDto.lectureProfessor}</td>
 							<td>${lectureDto.lectureType}</td>
-							<td>
-								<a href="/lecture/detail?lectureCode=${lectureDto.lectureCode}&&goWhere=regist1" class="link link-animation black">
-									${lectureDto.lectureName}
-								</a>
-							</td>
+							<td>${lectureDto.lectureName}</td>
 							<td class="lecture-code">${lectureDto.lectureCode}</td>
 							<td>${lectureDto.lectureTime} ${lectureDto.lectureDuration} ${lectureDto.lectureDay}</td>
 							<td>${lectureDto.lectureRoom}</td>
@@ -138,8 +134,8 @@ createdRank = ${sessionScope.createdRank}
 								<span class="lecture-count">${lectureDto.lectureRegist}</span>
 								/${lectureDto.lectureCount}
 							</td>		
-							<td class="link link-animation class-regist">
-								수강신청
+							<td>
+								<a href="" class="link link-animation class-regist">수강신청</a>
 							</td>					
 						</tr>					
 						</c:forEach>

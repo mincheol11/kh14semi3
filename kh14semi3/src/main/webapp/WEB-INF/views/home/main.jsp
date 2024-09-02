@@ -21,28 +21,27 @@
 .preview{
 	width: 450px;
 	height: 250px;
-	background-color : white;
+	background-color : #F1F5F9;
 	border-radius: 30px;
 }
 /* #boardTable td{
 	padding-left:30px;
 	padding-right:30px;
 } */
-#lectureTable td{
+/* #lectureTable td{
 	padding-left:10px;
 	padding-right:10px;
 }
 #scheduleTable td{
 	padding-left:10px;
 	padding-right:10px;
-}
+} */
 /* 특정 h2 요소 내의 <span> 스타일을 정의 */
 h2 span#currentYear, h2 span#currentMonth {
     font-size: 0.9em; /* 상대적인 크기로 조정, 필요에 따라 px로도 조정 가능 */
     /* 추가 스타일을 여기에 넣을 수 있습니다 */
 }
 .link-more {
-	color: D1DFEC;
 	font-size: 14px;
 	text-decoration: underline;
 }
@@ -90,8 +89,8 @@ h2 span#currentYear, h2 span#currentMonth {
 							if(index<3){
 		                        $('#boardTable tbody').append(
 		                            '<tr>' +
-		                            '<td>' + ' [' + board.boardNo + '] ' + board.boardTitle + '</td>' +
-		                            '<td>' + board.boardWtime + '</td>' +
+		                            '<td class="left">' + board.boardTitle + '</td>' +
+		                            '<td class="ps-50">' + board.boardWtime + '</td>' +
 		                            '</tr>'
 		                        );							
 							}
@@ -123,39 +122,34 @@ h2 span#currentYear, h2 span#currentMonth {
            			var LectureList = response.lectureList;
            			
 	              	// Clear the existing content
-	              	$('#lectureTable').empty();
+	              	$('#lectureTable thead').empty();
+	              	$('#lectureTable tbody').empty();
 	              	
 	              	if(LectureList.length > 0){ 
-		              	$('#lectureTable').append(
-							'<thead>'+	
+		              	$('#lectureTable thead').append(
 						        '<tr>'+    
-							        /* '<th>학과</th>'+ */        
-							        /* '<th>교수</th>'+   */      
-							        '<th>분류</th>'+        
+							        '<th class="pe-50">분류</th>'+        
 							        '<th>강의명</th>'+        
-							        '<th>시간</th>'+        
-							        '<th>교실</th>'+        
-						        '</tr>'+    
-					        '</thead>'+			 
-					        '<tbody>'	              			
-		              			);
+							        '<th class="ps-50">시간</th>'+        
+							        '<th class="ps-50">교실</th>'+        
+						        '</tr>'
+		              	);
 		              	// Populate the table with new data
 		              	$.each(LectureList, function(index, lecture) {
 							if(index<5){
-								$('#lectureTable').append(
+								$('#lectureTable tbody').append(
 									'<tr>'+
 		                            /* '<td>' + lecture.lectureDepartment + '</td>' + */
 		                            /* '<td>' + lecture.lectureProfessor + '</td>' + */
-		                            '<td>' + lecture.lectureType + '</td>' +
+		                            '<td class="pe-50">' + lecture.lectureType + '</td>' +
 		                            '<td>' + lecture.lectureName /* + '[' + lecture.lectureCode + ']' */ + '</td>' +
-		                            '<td>' + lecture.lectureTime + '</td>' +
-		                            '<td>' + lecture.lectureRoom + '</td>' +
-		                            '</tr>'
+		                            '<td class="ps-50">' + lecture.lectureTime + '</td>' +
+		                            '<td class="ps-50">' + lecture.lectureRoom + '</td>' +
+		                            '</tr>' 
 								);							
 							}
 						});
-		              	$('#lectureTable').append('</tbody>');
-	              	}
+	              	 }
 	              	else{
            				$('#lectureTable').parent().append('<p>등록된 강의 목록이 없습니다</p>');           				
            			}
@@ -190,8 +184,8 @@ h2 span#currentYear, h2 span#currentMonth {
 							if(index<3){
 								$('#scheduleTable tbody').append(
 									'<tr>' +
-									'<td>' + schedule.scheduleTitle + '</td>' +
-		                            '<td>' + schedule.scheduleWtime + '</td>' +
+									'<td class="left">' + schedule.scheduleTitle + '</td>' +
+		                            '<td class="ps-50">' + schedule.scheduleWtime + '</td>' +
 	                            	'</tr>'
 								);							
 							}
@@ -226,7 +220,7 @@ h2 span#currentYear, h2 span#currentMonth {
 	<div class="row flex-box mx-10 my-20" style="min-height:50%">
 		
 		<div class="w-50 mx-10 flex-core preview">
-			<div class="row center w-80">	
+			<div class="row center w-100">	
 				<div>		
 					<h2>개인정보
 						<a href="/member/mypage">
@@ -234,7 +228,7 @@ h2 span#currentYear, h2 span#currentMonth {
 						</a>
 					</h2>					
 				</div>
-				<div id="mypage-preview" class="left flex-box flex-core">
+				<div id="mypage-preview" class="left flex-box column-2">
 					<div id="preview-text" class="w-40 center">
 						<!-- <img src="https://placehold.co/100x100"> -->
 						<c:if test="${sessionScope.createdUser != null}">
@@ -242,7 +236,7 @@ h2 span#currentYear, h2 span#currentMonth {
 						</c:if>
 						<p id="memberName" class="my-0"></p>						
 					</div>
-					<div id="preview-text" class="w-60 ms-10">
+					<div id="preview-text" class="w-60">
 						<p id="memberId"></p>
 						<p id="memberRank"></p>
 						<%-- <p id="takeOffType"></p> --%>
@@ -254,73 +248,80 @@ h2 span#currentYear, h2 span#currentMonth {
 		</div>
 		
 		<div class="w-50 mx-10 flex-core preview">
-
-			<div class="row center w-80 mb-20">			
+			
+			<div class="row center w-100">			
 				<div>
 					<h2>공지사항
-				 		<a href="/board/list">
-				 			<i class="fa-regular fa-square-plus"></i>
-				 		</a>
+				 		<a href="/board/list"><i class="fa-regular fa-square-plus"></i></a>
 					</h2>
 				</div>
-				 <table id="boardTable" class="left">		
-					 <thead>
-                		<tr>
-                  
-                 		</tr>
-            		</thead>			 
-			        <tbody>
-			            <!-- AJAX로 채워질 내용 -->
-			        </tbody>
+				
+				 <table id="boardTable" class="flex-box flex-core">		
+					 	<thead>
+                			<tr>
+                 			</tr>
+            			</thead>			 
+			        	<tbody>
+			            	<!-- AJAX로 채워질 내용 -->
+			        	</tbody>
 			    </table>				
 
 			</div>
 		</div>
-		
 	</div>
 			
-	<div class="row flex-box mx-10 my-20">
+			
+	<div class="row flex-box mx-10 my-20" style="min-height:50%">
 	
 		<div class="w-50 mx-10 flex-core preview">
-
-			<div class="row center w-90 mb-40">	
+			<div class="row center w-100">	
 				<div>
 					<h2>강의목록
-						<a href="/lecture/list">
-							<i class="fa-regular fa-square-plus"></i>
-						</a>
+						<a href="/lecture/list"><i class="fa-regular fa-square-plus"></i></a>
 					</h2>
 				</div>		
+				
 				<c:if test="${sessionScope.createdUser == null}">
 					<p class="mt-40">로그인 시 확인 가능합니다</p>
 				</c:if>
 				<c:if test="${sessionScope.createdUser != null}">
+				<div class="flex-box flex-core">
 			 	<table id="lectureTable">
-		            <!-- AJAX로 채워질 내용 -->
+			        <thead>
+                			<tr>
+                				<th>분류</th>
+                				<th>강의명</th>
+                				<th>시간</th>
+                				<th>강의실</th>
+                 			</tr>
+            			</thead>			 
+			        	<tbody>
+			            	<!-- AJAX로 채워질 내용 -->
+			        	</tbody>
 			    </table>	
+				</div>
 			    </c:if>	
 			</div>
 			
 		</div>
 		
 
-		<div class="w-50 mx-10 flex-box flex-core preview">
-			<div class="row center w-80 ">
+		<div class="w-50 mx-10 flex-core preview">
+			<div class="row center w-100">	
 				<div>
 					<h2 class="my-0">학사일정
-						<a href="/schedule/list">
-							<i class="fa-regular fa-square-plus"></i>
-						</a>
+						<a href="/schedule/list"><i class="fa-regular fa-square-plus"></i></a>
 					</h2>
+					
 					<div class="mt-0 mb-10">
 						(<span id="currentYear"></span>
    						<span id="currentMonth"></span>)
-   					</div>					
-				</div>	
-       		 	<table id="scheduleTable" class="left">
+   					</div>			
+				</div>
+					
+       		 	<table id="scheduleTable" class="flex-box flex-core">
             		<thead>
                			<tr>
-                    
                 		</tr>
             		</thead>
             		<tbody>
