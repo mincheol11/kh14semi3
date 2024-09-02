@@ -124,8 +124,8 @@ public class ScheduleController {
         model.addAttribute("currentMonth", month);
         model.addAttribute("currentPage", page);
 
-        boolean showPreviousButton = !(year == 2020 && month == 1) && (year > 2020 || year < 2030);
-        boolean showNextButton = !(year == 2030 && month == 12) && (year < 2030 || year > 2020);
+        boolean showPreviousButton = !(year == 2024 && month == 1) && (year > 2024 || year < 2025);
+        boolean showNextButton = !(year == 2025 && month == 12) && (year < 2025 || year > 2024);
 
         model.addAttribute("showPreviousButton", showPreviousButton);
         model.addAttribute("showNextButton", showNextButton);

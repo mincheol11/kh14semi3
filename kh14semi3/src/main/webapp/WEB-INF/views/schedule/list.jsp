@@ -37,12 +37,8 @@ document.addEventListener('DOMContentLoaded', function() {
         events.forEach(function(event) {
             var textLength = event.textContent.length;
 
-            // 텍스트 길이에 따라 크기를 조정
-            if (textLength > 20) {
-                event.style.fontSize = '12px'; // 긴 텍스트의 경우 작은 크기
-            } else {
-                event.style.fontSize = '14px'; // 기본 텍스트 크기
-            }
+             event.style.fontSize = '10px'; 
+           
         });
     }
 
@@ -53,14 +49,43 @@ document.addEventListener('DOMContentLoaded', function() {
 
 </script>
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // 캘린더 셀의 높이를 고정시키는 함수
+    function fixCellHeight() {
+        var cells = document.querySelectorAll('.calendar-table td');
+        var maxHeight = 0;
+
+        // 모든 셀의 최대 높이를 계산
+        cells.forEach(function(cell) {
+            cell.style.height = 'auto'; // 기존 높이를 제거
+            var height = cell.offsetHeight;
+            if (height > maxHeight) {
+                maxHeight = height;
+            }
+        });
+
+        // 최대 높이로 모든 셀의 높이를 설정
+        cells.forEach(function(cell) {
+            cell.style.height = maxHeight + 'px';
+        });
+    }
+
+    fixCellHeight(); // 페이지 로드 후 셀 높이 조정
+});
+
+</script>
 
 
 <!-- CSS 스타일 -->
 <style>
+.kh-container{
+    height: auto !important; 
+}
  /* 캘린더 컨테이너 */
 .calendar-container {
   width: 100%;
-  max-width: 1000px;
+  max-width: 1100px;
   margin: 100px auto;
   padding: 20px;
   background: #fff;
@@ -131,7 +156,7 @@ width: 1%;
 
 /* 데이터 셀 */
 .calendar-table td {
-  height: 50px;
+  height: 10px;
  
 }
 
@@ -165,7 +190,7 @@ width: 1%;
   margin: 2px 0;
   text-decoration: none;
   border-radius: 4px;
-  font-size: 16px; /* 기본 텍스트 크기 조정 */
+  font-size: 1px; /* 기본 텍스트 크기 조정 */
   max-width: 100%; /* 텍스트가 컨테이너를 넘지 않도록 설정 */
  
 }
