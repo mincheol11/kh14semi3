@@ -6,7 +6,7 @@
 <form action="blockGo" method="post">
 	<div class="container w-500 my-50">
 		<div class="row center">
-			<h1>제적사유</h1>
+			<h1>제적 사유</h1>
 		</div>
 		<div class="row center">
 			<input type="hidden" name="takeOffTarget" value="${param.takeOffTarget}">
@@ -14,7 +14,7 @@
 		</div>
 		<div class="row right">
 			<button class="btn btn-negative">제적</button>
-			<a class="btn btn-positive" href="list">취소</a>
+			<a class="btn btn-neutral" href="list">취소</a>
 		</div>
 	</div>
 </form>

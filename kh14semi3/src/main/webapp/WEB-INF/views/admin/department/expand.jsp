@@ -138,13 +138,16 @@
 <!-- 전송버튼 -->
             <div class="row">
                 <button type="submit" class="btn btn-positive w-100" >
-                   <i class="fa-solid fa-landmark"></i>
-                   학과개설
+                   <i class="fa-solid fa-landmark"></i> 학과개설
                 </button>
                 <div class="row">
                 <a href="list" class="btn btn-neutral w-100" >
+<<<<<<< HEAD
+                   <i class="fa-solid fa-list"></i> 목록이동
+=======
                    <i class="fa-solid fa-list"></i>
                    목록이동
+>>>>>>> refs/remotes/origin/main
                 </a>
                 </div>
             </div>

@@ -6,15 +6,15 @@
 <form action="takeOn" method="post">
 	<div class="container w-500 my-50">
 		<div class="row center">
-			<h1>재학</h1>
+			<h1>복학 사유</h1>
 		</div>
 		<div class="row center">
 			<input type="hidden" name="takeOffTarget" value="${param.takeOffTarget}">
 			<textarea class="w-100" name="takeOffMemo" rows="10" cols="60"></textarea>
 		</div>
 		<div class="row right">
-			<button class="btn btn-positive">재학</button>
-			<a class="btn btn-positive" href="list">취소</a>
+			<button class="btn btn-positive">복학</button>
+			<a class="btn btn-neutral" href="list">취소</a>
 		</div>
 	</div>
 </form>
