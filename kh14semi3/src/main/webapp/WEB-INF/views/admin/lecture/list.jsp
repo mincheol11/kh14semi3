@@ -8,7 +8,6 @@
 .kh-container{
     height: auto !important; 
 }
-
 </style>
 
 
@@ -30,6 +29,7 @@ $(document).ready(function() {
         <div class="row center">
             <h1>강의 시스템 관리</h1>
         </div>
+<<<<<<< HEAD
         <div class="row center mt-50">
         <form action="list" method="get" autocomplete="off">
     <div class="row right">
@@ -47,25 +47,41 @@ $(document).ready(function() {
 				<option value="lecture_department">학과코드</option>
 			</c:otherwise>
 		</c:choose>
+=======
+        
+        <div class="row center">
+        	<form action="list" method="get" autocomplete="off">
+            	<select name="column" class="field">
+           		 <option value="lecture_code">강의코드</option>
+					<c:choose>
+						<c:when test="${param.column == 'lecture_department'}">
+							<option value="lecture_department" selected>학과코드</option>
+						</c:when>
+						<c:otherwise>
+							<option value="lecture_department">학과코드</option>
+						</c:otherwise>
+					</c:choose>
+>>>>>>> refs/heads/20240902wooin
 		
-		<c:choose>
-			<c:when test="${param.column == 'lecture_professor'}">
-				<option value="lecture_professor" selected>교수코드</option>
-			</c:when>
-			<c:otherwise>
-				<option value="lecture_professor">교수코드</option>
-			</c:otherwise>
-		</c:choose>
+					<c:choose>
+						<c:when test="${param.column == 'lecture_professor'}">
+							<option value="lecture_professor" selected>교수코드</option>
+						</c:when>
+						<c:otherwise>
+							<option value="lecture_professor">교수코드</option>
+						</c:otherwise>
+					</c:choose>
 		
-		<c:choose>
-			<c:when test="${param.column == 'lecture_type'}">
-				<option value="lecture_type" selected>분류</option>
-			</c:when>
-			<c:otherwise>
-				<option value="lecture_type">분류</option>
-			</c:otherwise>
-		</c:choose>
+					<c:choose>
+						<c:when test="${param.column == 'lecture_type'}">
+							<option value="lecture_type" selected>분류</option>
+						</c:when>
+						<c:otherwise>
+							<option value="lecture_type">분류</option>
+						</c:otherwise>
+					</c:choose>
 		
+<<<<<<< HEAD
 		<c:choose>
 			<c:when test="${param.column == 'lecture_name'}">
 				<option value="lecture_name" selected>강의명</option>
@@ -80,6 +96,21 @@ $(document).ready(function() {
         <button type="submit" class="btn btn-neutral"><i class="fa-solid fa-magnifying-glass"> 검색</i></button>
 			    </div>
         </form>
+=======
+					<c:choose>
+						<c:when test="${param.column == 'lecture_name'}">
+							<option value="lecture_name" selected>강의명</option>
+						</c:when>
+						<c:otherwise>
+							<option value="lecture_name">강의명</option>
+						</c:otherwise>
+					</c:choose>
+            	</select>
+        		<input type="text" name="keyword" value="${param.keyword}" class="field" placeholder="검색어">
+        		<button class="btn btn-positive" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+				<a href="add" class="btn btn-neutral"><i class="fa-solid fa-right-to-bracket"></i> 강의개설</a>
+        	</form>
+>>>>>>> refs/heads/20240902wooin
         </div>
                 
     <div class="row">
@@ -103,8 +134,8 @@ $(document).ready(function() {
     </thead>
 	<tbody>
 			<c:forEach var="lectureDto" items="${lectureList}">
-    			<tr onclick="location.href='detail?lectureCode=${lectureDto.lectureCode}'" style="cursor: pointer;">
-    					<td>${lectureDto.lectureCode}</td>
+    			<tr>
+    					<td><a class="link link-animation" href="detail?lectureCode=${lectureDto.lectureCode}">${lectureDto.lectureCode}</a></td>
 				        <td>${lectureDto.lectureDepartment}</td>
 				        <td>${lectureDto.lectureProfessor}</td>
 				        <td>${lectureDto.lectureType}</td>

@@ -355,12 +355,9 @@ $(function(){
                     </div>
                     <div class="row mt-50">
                         <div class="flex-box">
-                            <div class="w-100 right">
-                                <button type="submit" class="btn btn-positive">
-                                    <i class="fa-solid fa-right-to-bracket"></i>
-                                    회원가입
-                                </button>
-                            </div>
+							<button type="submit" class="btn btn-positive w-100">
+							<i class="fa-solid fa-right-to-bracket"></i> 회원등록
+							</button>
                         </div>
                     </div>
                 </div>
