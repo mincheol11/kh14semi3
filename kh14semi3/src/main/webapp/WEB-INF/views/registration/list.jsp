@@ -10,6 +10,9 @@
 	.class-regist{
 		cursor: pointer;
 	}
+	/* .kh-container{
+	    height: auto !important; 
+	} */
 </style>
 
 <script type="text/javascript">
@@ -66,10 +69,10 @@
 </script>
 </c:if>
 
-createdUser = ${sessionScope.createdUser} , 
+<%-- createdUser = ${sessionScope.createdUser} , 
 createdRank = ${sessionScope.createdRank}
 	
-<a href="regist" class="btn btn-neutral">이동</a>
+<a href="regist" class="btn btn-neutral">이동</a> --%>
 
 <div class="container w-900 my-50">
 	<div class="row center">
