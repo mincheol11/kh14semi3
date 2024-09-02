@@ -50,7 +50,7 @@
 		    <a href="list" class="btn btn-neutral"><i class="fa-solid fa-list"></i> 목록이동</a>
 		    <a href="edit?departmentCode=${departmentDto.departmentCode}" class="btn btn-neutral"><i class="fa-solid fa-eraser"></i> 학과수정</a>
 		    <a href="reduce?departmentCode=${departmentDto.departmentCode}"class="btn btn-negative confirm-link" 
-		    	data-text="정말 삭제하시겠습니까?" onclick="return checkReduce()"><i class="fa-solid fa-trash"></i> 학과삭제</a>
+		    	data-text="정말 삭제하시겠습니까?"><i class="fa-solid fa-trash"></i> 학과삭제</a>
     	</div>
 	</div>
 </div>    

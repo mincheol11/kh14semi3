@@ -97,8 +97,8 @@ $(document).ready(function() {
     </thead>
 	<tbody>
 			<c:forEach var="lectureDto" items="${lectureList}">
-    			<tr>
-    					<td><a class="link link-animation" href="detail?lectureCode=${lectureDto.lectureCode}">${lectureDto.lectureCode}</a></td>
+    			<tr onclick="location.href='detail?lectureCode=${lectureDto.lectureCode}'" style="cursor: pointer;">
+    					<td>${lectureDto.lectureCode}</td>
 				        <td>${lectureDto.lectureDepartment}</td>
 				        <td>${lectureDto.lectureProfessor}</td>
 				        <td>${lectureDto.lectureType}</td>
