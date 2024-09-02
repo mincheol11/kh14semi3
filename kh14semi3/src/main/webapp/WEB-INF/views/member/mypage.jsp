@@ -28,7 +28,8 @@
 			</tr>
 			<tr>
 				<th>학적상태</th>
-				<td>${lastDto.takeOffType}</td>
+				<c:if test="${lastDto.takeOffType == null}"><td>재학</td></c:if>
+				<c:if test="${lastDto.takeOffType != null}"><td>${lastDto.takeOffType}</td></c:if>
 			</tr>
 			<tr>
 				<c:choose>
