@@ -6,9 +6,9 @@
 <script type="text/javascript">
     $(function(){
         // 비밀번호 찾기 페이지에서 사이드바 안나오게 하기
-        $(document).ready(function(){
+        /* $(document).ready(function(){
         	$(".profile").css("display","none");
-        });
+        }); */
         var status = {
             memberIdValid: false,
             memberEmailValid: false,
@@ -61,24 +61,24 @@
     </div>
     
     <form action="changePw" method="post" class="check-form">
-        <div class="container w-400 my-0">
+        <div class="w-100 my-0">
             <label>아이디</label>
             <input type="text" name="memberId" class="field w-100" required>
             <div class="fail-feedback">아이디를 입력하세요</div>
         </div>
-        <div class="container w-400 my-10">
+        <div class="w-100 my-10">
             <label>이메일</label>
             <input type="email" name="memberEmail" class="field w-100" required>
             <div class="fail-feedback">유효한 이메일을 입력하세요</div>
         </div>
-        <div class="container w-400 my-0">
+        <div class="w-100 mt-30">
             <button type="submit" class="btn btn-positive w-100">
                 <i class="fa-regular fa-envelope" style="color: white"></i>
                 <span style="color: white">비밀번호 변경 메일 발송</span>
             </button>
         </div>
-        <div class="container w-400 my-10">
-        	<a class="btn btn-positive w-100" href="/home/main">뒤로가기</a>
+        <div class="row w-100">
+        	<a class="btn btn-neutral w-100" href="/home/main"><i class="fa-solid fa-arrow-rotate-left" style="color: white"></i> 뒤로가기</a>
         </div>
     </form>
     
