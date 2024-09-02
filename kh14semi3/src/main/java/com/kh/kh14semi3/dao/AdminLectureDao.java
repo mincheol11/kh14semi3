@@ -132,7 +132,7 @@ public class AdminLectureDao {
 
 		//학과 코드 중복검사
 				public LectureDto selectOneByLectureDepartment(String lectureDepartment) {
-					String sql="select * from lecture where lecture_department=?";
+					String sql="select * from department where department_code=?";
 					Object[] data= {lectureDepartment};
 					List<LectureDto>list = jdbcTemplate.query(sql,  lectureMapper, data);
 					return list.isEmpty()? null:list.get(0);
@@ -140,7 +140,7 @@ public class AdminLectureDao {
 				
 		//교수 코드 중복검사
 				public LectureDto selectOneByLectureProfessor(String lectureProfessor) {
-					String sql="select * from lecture where lecture_professor=?";
+					String sql="select * from professor where professor_code=?";
 					Object[] data= {lectureProfessor};
 					List<LectureDto>list = jdbcTemplate.query(sql,  lectureMapper, data);
 					return list.isEmpty()? null:list.get(0);
