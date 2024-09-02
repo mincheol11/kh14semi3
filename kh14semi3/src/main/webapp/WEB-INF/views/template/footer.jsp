@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<style>
+	.campus > .fa-solid,fa-regular{
+		color: #2D3436;
+	}
+</style>
     
 			</div>
 		</div>
@@ -10,8 +14,8 @@
 			
 		<div class="row my-0 flex-box flex-core column-3 kh-footer">
 			
-		    <div class="w-50 center">
-		        <div class="row right">
+		    <div class="w-50">
+		        <div class="row center">
 		            <h3>KH 대학교</h3>
 		            <div>서울시 어쩌구 아무동 OOO-OOO</div>
 		            <div>이사장 : 권이사장</div>
@@ -38,7 +42,7 @@
 				</div>
 		    </div>
 			    
-		    <div class="w-25">
+		    <!-- <div class="w-25">
 		    	<div class="row">
 		            <h3>KH 대학교</h3>
 		        	<div>
@@ -62,7 +66,7 @@
 		                <i class="fa-solid fa-square-arrow-up-right"></i></a>
 		        	</div>
 	    		</div>
-			</div>	
+			</div> -->	
 					
 		</div>	
 	

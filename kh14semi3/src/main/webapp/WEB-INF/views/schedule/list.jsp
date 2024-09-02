@@ -268,11 +268,10 @@ width: 1%;
 }
 </style>
 
+    
 
 <div class="calendar-container">
   <div class="calendar-header">
-    <c:set var="isAdmin" value="${sessionScope.createdRank == '관리자'}" />
-    <c:set var="isLogin" value="${sessionScope.createdUser != null}" />
 
     <div class="nav-buttons">
       <c:choose>
@@ -309,9 +308,7 @@ width: 1%;
       </c:choose>
     </div>
 
-    <c:if test="${isLogin && isAdmin}">
-      <a class="btn btn-positive" href="add">학사 일정등록</a>
-    </c:if>
+   
   </div>
 
   <table class="calendar-table">
@@ -372,11 +369,17 @@ width: 1%;
         </c:forEach>
       </tr>
     </c:forEach>
+<c:set var="isAdmin" value="${sessionScope.createdRank == '관리자'}" />
+    <c:set var="isLogin" value="${sessionScope.createdUser != null}" />
+    <div class="right mb-20">
+     <c:if test="${isLogin && isAdmin}">
+      <a class="btn btn-positive" href="add">학사 일정등록</a>
+    </c:if>
+    </div>
   </tbody>
 </table>
   
 </div>
-
 
 
 <!-- 모달 팝업 HTML -->

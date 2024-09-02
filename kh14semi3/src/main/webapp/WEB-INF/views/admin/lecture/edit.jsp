@@ -303,7 +303,7 @@
 		
 		<div class="row mt-30">
 			<button class="btn btn-positive w-100 confirm-link" data-text="정말 수정하시겠습니까?" onclick="return checkEdit()">
-							<i class="fa-solid fa-eraser"></i> 수정하기</button>
+ 							<i class="fa-solid fa-eraser"></i> 수정하기</button>
 		</div>
 		<div class="row">
 			<a href="detail?lectureCode=${lectureDto.lectureCode}" class="btn btn-neutral w-100" >

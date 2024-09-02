@@ -88,7 +88,7 @@
 	 	<c:when test="${sessionScope.createdUser == null}">
 		 	<div class="row center">
 				<a href="/member/login" class="link link-animation">
-					로그인<i class="fa-solid fa-square-arrow-up-right"></i>
+					로그인<i class="fa-solid fa-square-arrow-up-right" style="color: #2D3436"></i>
 				</a> 하세요
 			</div>
 	 	</c:when>

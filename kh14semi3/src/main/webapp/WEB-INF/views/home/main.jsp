@@ -73,6 +73,7 @@ h2 span#currentYear, h2 span#currentMonth {
 		
 		// board
 		function loadBoardList() {
+
             $.ajax({
                 url: '/rest/home/main/board-preview',
                 method: 'GET',
@@ -95,19 +96,16 @@ h2 span#currentYear, h2 span#currentMonth {
 		                        );							
 							}
 	                    });
-                    }
-                    else{
-                    	$('#boardTable').parent().append('<p>등록된 공지사항이 없습니다</p>');
-                    }
-                    
-                    // Update pagination controls if needed
-                    // $('#pagination').html('...'); // Update pagination HTML
-                },
-                /* error: function(xhr, status, error) {
-                    console.error('Error fetching data:', status, error);
-                } */
-            });
+
+            } else {
+                $('#boardTable').parent().append('<p>등록된 공지사항이 없습니다</p>');
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error('Error fetching data:', status, error);
         }
+    });
+}
 
         // Load board list when the page loads
         loadBoardList();

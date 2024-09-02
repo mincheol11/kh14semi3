@@ -41,6 +41,14 @@
 .btn-map{
 	margin-bottom: 5px;
 }
+
+.btn-map.red i {
+    color: red;
+}
+
+.btn-map.black i {
+    color: black;
+}
 </style>
      
 <!--카카오 맵-->
@@ -75,24 +83,28 @@ $(function(){
             lng = 126.983;
             kakaoMap.setLevel(3);
             $(".jongRo").removeClass("black").addClass("red");
+            $(".jongRo i").removeClass("black").addClass("red");
             break;
           case 'dangSan':
             lat = 37.533826;
             lng = 126.896837;
             kakaoMap.setLevel(3);
             $(".dangSan").removeClass("black").addClass("red");
+            $(".dangSan i").removeClass("black").addClass("red");
             break;
           case 'gangNam':
             lat = 37.499;
             lng = 127.0328;
             kakaoMap.setLevel(3);
             $(".gangNam").removeClass("black").addClass("red");
+            $(".gangNam i").removeClass("black").addClass("red");
             break;
           default:
             lat = 37.533826;
             lng = 126.896837;
             kakaoMap.setLevel(3);
             $(".dangSan").removeClass("black").addClass("red");
+            $(".dangSan i").removeClass("black").addClass("red");
             break;
         }
         
@@ -112,15 +124,22 @@ $(function(){
         var params = new URLSearchParams(location.search);
         var map = params.get("mapW");
 
-        loadMapList(map);
-    
+      loadMapList(map);
+      var imageSrc = "/css/images/education.png", // 마커 이미지 넣는 곳
+      imageSize = new kakao.maps.Size(64, 69),
+      imageOption = { offset: new kakao.maps.Point(27, 69) };
+
+    // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
     //(추가)위치정보가 담긴 버튼들을 누르면 해당 위치로 지도를 이동
-    $(".btn-map").click(function(){
+    $(".btn-map").click(function(){ 
       //this == 클릭당한 버튼
       var lat = $(this).attr("data-lat");//버튼에 써있는 위도 정보 읽기
       var lng = $(this).attr("data-lng");//버튼에 써있는 경도 정보 읽기
       $(".btn-map").removeClass("red").addClass("black");
+      $(".btn-map i").removeClass("red").addClass("black");
       $(this).removeClass("black").addClass("red");
+      $(this).find('i').removeClass("black").addClass("red");
       //지도를 이동하는 코드
       var location = new kakao.maps.LatLng(lat, lng);
       kakaoMap.setLevel(3);
@@ -135,7 +154,8 @@ $(function(){
       }
 
       window.kakaoMapMarker = new kakao.maps.Marker({
-        position:location
+        position:location,
+        image: makerImage
       });
       //마커에 지도를 설정
       kakaoMapMarker.setMap(kakaoMap);
@@ -153,19 +173,19 @@ $(function(){
 		<div class="mt-10 center">
 			<a href="#" data-lat="37.499" data-lng="127.0328" class="link link-animation black btn-map gangNam">
 				강남 캠퍼스 
-				<i class="fa-solid fa-location-arrow"></i>
+				<i class="fa-solid fa-location-arrow black"></i>
 			</a>
 		</div>
 		<div class=" center">
 			<a href="#" data-lat="37.5679" data-lng="126.983" class="link link-animation black btn-map jongRo">
 				종로 캠퍼스
-				<i class="fa-solid fa-location-arrow"></i>
+				<i class="fa-solid fa-location-arrow black"></i>
 			</a>
 		</div>
 		<div class=" center">
 			<a href="#"  data-lat="37.533826" data-lng="126.896837" class="link link-animation black btn-map dangSan">
 				당산 캠퍼스
-				<i class="fa-solid fa-location-arrow"></i>
+				<i class="fa-solid fa-location-arrow black"></i>
 			</a>
 		</div>
 	</div>
