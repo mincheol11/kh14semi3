@@ -87,6 +87,7 @@
 	</div>
 
 	<!-- 메뉴 배치 -->
+
 	<div class="row float-box center mt-20">
 			<a href="join" class="btn btn-positive"><i class="fa-regular fa-square-plus"></i> 회원등록</a>
 			<a href="list" class="btn btn-neutral"><i class="fa-solid fa-list"></i> 목록이동</a> 

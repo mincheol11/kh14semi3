@@ -127,7 +127,7 @@
 	  
 	//강의명 입력창 검사 
 	 $("[name=lectureName]").blur(function(){
-			var regex= /^[가-힣A-Za-z()]{1,10}$/;//형식검사
+			var regex= /^[가-힣A-Za-z()\s]{1,10}$/;//형식검사
 			var lectureName = $(this).val();
 			var isValid= regex.test(lectureName);
 			  $(this).removeClass("success fail")
