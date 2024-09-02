@@ -6,6 +6,11 @@
 <%-- header.jsp에 존재하는 내용을 불러오도록 설정 --%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
+<style>
+.kh-container{
+    height: auto !important; 
+}
+</style>
 
 <div class="container w-500 my-50">
 	<div class="row center">
@@ -86,7 +91,7 @@
 		</table>
 	</div>
 	
-	<div class="row float-box center mt-30">
+	<div class="row right">
 		<a href="edit?memberId=${memberDto.memberId}" class="btn btn-neutral ms-10"><i class="fa-solid fa-eraser"></i> 내 정보 수정</a> 
 	</div>
 	
