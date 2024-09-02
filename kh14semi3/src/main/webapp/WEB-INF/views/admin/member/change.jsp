@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
-<!-- lightpick cdn -->
+	<!-- lightpick cdn -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/css/lightpick.min.css">
     <script src="https://cdn.jsdelivr.net/npm/moment@2.30.1/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/lightpick.min.js"></script>
@@ -303,7 +303,7 @@ $(function(){
 		</c:choose>
 		
 		<div class="row">
-			<label>생년월일 <i class="fa-solid fa-asterisk red"></i></label> <input type="date" name="memberBirth"
+			<label>생년월일 <i class="fa-solid fa-asterisk red"></i></label> <input type="text" name="memberBirth"
 				value="${memberDto.memberBirth}" class="field w-100">
 		</div>
 		<div class="row">
