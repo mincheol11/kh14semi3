@@ -358,7 +358,7 @@ $(function(){
                             <div class="w-100 right">
                                 <button type="submit" class="btn btn-positive">
                                     <i class="fa-solid fa-right-to-bracket"></i>
-                                    회원가입
+                                    다음
                                 </button>
                             </div>
                         </div>

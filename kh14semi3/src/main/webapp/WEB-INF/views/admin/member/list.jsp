@@ -54,9 +54,6 @@
 						<td>${memberTakeOffVO.memberJoin}</td>
 						<td>${memberTakeOffVO.takeOffType}</td>
 						<td>
-							<a class="link link-animation" href="detail?memberId=${memberTakeOffVO.memberId}&memberRank=${memberTakeOffVO.memberRank}">상세</a>
-							<a class="link link-animation" href="change?memberId=${memberTakeOffVO.memberId}">수정</a>
-							
 							<c:choose>
 								<c:when test="${memberTakeOffVO.takeOffType == '재학'}">
 									<a class="link link-animation" href="takeOff?takeOffTarget=${memberTakeOffVO.memberId}">휴학</a>
