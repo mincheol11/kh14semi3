@@ -11,8 +11,8 @@
 <style>
 .kakao-map{
    	position: absolute;
-	width: 130vh;
-	height: 69.5vh;
+	width: 65%;
+	height: 70%;
 	/* width: 100%; */
 	/* height: 84.3vh; */
 	z-index: 1;
