@@ -142,7 +142,12 @@
                 </button>
                 <div class="row">
                 <a href="list" class="btn btn-neutral w-100" >
+<<<<<<< HEAD
                    <i class="fa-solid fa-list"></i> 목록이동
+=======
+                   <i class="fa-solid fa-list"></i>
+                   목록이동
+>>>>>>> refs/remotes/origin/main
                 </a>
                 </div>
             </div>

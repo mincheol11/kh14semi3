@@ -92,7 +92,9 @@
 			<a href="join" class="btn btn-positive"><i class="fa-regular fa-square-plus"></i> 회원등록</a>
 			<a href="list" class="btn btn-neutral"><i class="fa-solid fa-list"></i> 목록이동</a> 
 			<a href="change?memberId=${memberDto.memberId}" class="btn btn-neutral"> <i class="fa-solid fa-eraser"></i> 회원 수정</a> 
-			<a href="delete?memberId=${memberDto.memberId}" class="btn btn-negative"><i class="fa-solid fa-trash"></i> 회원 삭제</a>
+			<a href="delete?memberId=${memberDto.memberId}" class="btn btn-negative confirm-link" 
+			data-text="정말 삭제하시겠습니까?"><i class="fa-solid fa-trash"></i> 회원 삭제</a>
+		</div>
 	</div>
 
 </div>
