@@ -74,41 +74,46 @@ h2 span#currentYear, h2 span#currentMonth {
 		
 		// board
 		function loadBoardList() {
-            $.ajax({
-                url: '/rest/home/main/board-preview',
-                method: 'GET',
-                dataType: 'json',
-                success: function(response) {
-                    var boardList = response.boardList;
-                    
-                    // Clear the existing content
-                    $('#boardTable tbody').empty();
-					
-                    if(boardList.length > 0){ 
-	                    // Populate the table with new data
-	                    $.each(boardList, function(index, board) {
-							if(index<3){
-		                        $('#boardTable tbody').append(
-		                            '<tr>' +
-		                            '<td>' + ' [' + board.boardNo + '] ' + board.boardTitle + '</td>' +
-		                            '<td>' + board.boardWtime + '</td>' +
-		                            '</tr>'
-		                        );							
-							}
-	                    });
+    $.ajax({
+        url: '/rest/home/main/board-preview',
+        method: 'GET',
+        dataType: 'json',
+        success: function(response) {
+            var boardList = response.boardList;
+            
+            // 기존 내용을 비웁니다.
+            $('#boardTable tbody').empty();
+            
+            // 제목의 최대 길이를 설정합니다.
+            var maxTitleLength = 15; // 예를 들어, 20자로 설정
+            
+            if (boardList.length > 0) {
+                // 새로운 데이터를 테이블에 추가합니다.
+                $.each(boardList, function(index, board) {
+                    if (index < 3) {
+                        // 제목이 길면 잘라내고 `...`을 추가합니다.
+                        var title = board.boardTitle;
+                        if (title.length > maxTitleLength) {
+                            title = title.substring(0, maxTitleLength) + '...';
+                        }
+
+                        $('#boardTable tbody').append(
+                            '<tr>' +
+                            '<td>' + ' [' + board.boardNo + '] ' + title + '</td>' +
+                            '<td>' + board.boardWtime + '</td>' +
+                            '</tr>'
+                        );							
                     }
-                    else{
-                    	$('#boardTable').parent().append('<p>등록된 공지사항이 없습니다</p>');
-                    }
-                    
-                    // Update pagination controls if needed
-                    // $('#pagination').html('...'); // Update pagination HTML
-                },
-                /* error: function(xhr, status, error) {
-                    console.error('Error fetching data:', status, error);
-                } */
-            });
+                });
+            } else {
+                $('#boardTable').parent().append('<p>등록된 공지사항이 없습니다</p>');
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error('Error fetching data:', status, error);
         }
+    });
+}
 
         // Load board list when the page loads
         loadBoardList();

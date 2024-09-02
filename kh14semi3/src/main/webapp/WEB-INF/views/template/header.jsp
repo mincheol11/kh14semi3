@@ -78,8 +78,9 @@
 		                	<img src="/images/NEW-KH-LOGO.png" width="30%" height="30%">
 	                	</a>
 	                	<div class="center">
+	                	<i class="fa-brands fa-slack"></i>
                 			로그인 남은 시간 <span id="timer">Loading...</span>
-                			<img src="/images/refresh.png" class="login-time-reset" width="1.5%" height="1.5%">
+                			<i class="fa-solid fa-hourglass-end login-time-reset" style="color: #2D3436"></i>
 	                	</div>
 	                	
 						<%-- createdUser = ${sessionScope.createdUser},
