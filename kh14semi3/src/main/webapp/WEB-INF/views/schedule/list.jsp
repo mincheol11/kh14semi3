@@ -3,6 +3,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
+
+
+
 <script type="text/javascript">
 
 
@@ -44,8 +47,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 페이지 로드 후 텍스트 크기 조정
     adjustEventTextSize();
-});
+//생년월일 입력창에 DatePicker 설정
 
+});
 
 </script>
 
