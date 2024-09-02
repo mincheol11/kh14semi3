@@ -192,7 +192,7 @@
 	            });   
 	
 	//강의실 입력
-		 $("[name=lectureRoom]").blur(function(){
+		 $("[name=lectureRoom]").on("input", function(){
 		        var isValid = $(this).val().length>=0;
 		            $(this).removeClass("success fail")
 		                            .addClass(isValid ? "success" : "fail");
@@ -204,6 +204,14 @@
 	                var content = $(this).val();
 	                $(this).val(content.substring(0, count-1));
 	                count--;
+	            }
+	            
+	            if(count == 5){
+		            $(this).removeClass("fail").addClass("success");	
+		            $(this).css("border-color","green");
+	            }
+	            else{
+	            	$(this).removeClass("success");	  
 	            }
 	        });
 		});		
@@ -315,6 +323,7 @@
 			<div class="row">
                 <label>강의실</label>
                       <input type="text" name="lectureRoom" class="field w-100 onlyFive" placeholder="5글자 이하만 입력하세요">
+                      <div class="success-feedback">최대 5글자 제한</div>
                 </div>
 <!-- 인원 입력-->
 			<div class="row">
