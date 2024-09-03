@@ -32,18 +32,20 @@ $(function(){
             <p>욕설 또는 무분별한 광고, 비방은 예고 없이 삭제될 수 있습니다</p>
         </div>
         <div class="row">
-            <label>제목 <i class="fa-solid fa-asterisk fa-fade"></i></label>
+            <label>제목</label>
             <input type="text" name="scheduleTitle" class="field w-100" required>
           
         </div>
         <div class="row">
-           <label>날짜 <i class="fa-solid fa-asterisk fa-fade"></i></label>
+           <label>날짜</label>
+           <div>
 			<input type="text" name="scheduleWtime" class="field w-200" required>
+           </div>
            
          
         </div>
         <div class="row">
-            <label>내용 <i class="fa-solid fa-asterisk fa-fade"></i></label>
+            <label>내용</label>
             <textarea name="scheduleContent" class="field w-800" required rows="10" cols="80"></textarea>
           
         </div>
