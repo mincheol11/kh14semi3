@@ -73,6 +73,13 @@ $(function(){
 	window.kakaoMap = new kakao.maps.Map(container, options);
 	kakaoMap.setLevel(3);
     var marker;
+    
+    var imageSrc = "/images/education.png", // 마커 이미지 넣는 곳
+    imageSize = new kakao.maps.Size(64, 69),
+    imageOption = { offset: new kakao.maps.Point(27, 69) };
+    // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
+    //(추가)위치정보가 담긴 버튼들을 누르면 해당 위치로 지도를 이동
 	
     function loadMapList(map){
         var lat, lng;
@@ -116,7 +123,8 @@ $(function(){
         }
         
         window.kakaoMapMarker = new kakao.maps.Marker({
-            position: location
+            position: location,
+            image: markerImage
           });
           kakaoMapMarker.setMap(kakaoMap);
         }
@@ -125,13 +133,6 @@ $(function(){
         var map = params.get("mapW");
 
       loadMapList(map);
-      var imageSrc = "/css/images/education.png", // 마커 이미지 넣는 곳
-      imageSize = new kakao.maps.Size(64, 69),
-      imageOption = { offset: new kakao.maps.Point(27, 69) };
-
-    // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
-    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
-    //(추가)위치정보가 담긴 버튼들을 누르면 해당 위치로 지도를 이동
     $(".btn-map").click(function(){ 
       //this == 클릭당한 버튼
       var lat = $(this).attr("data-lat");//버튼에 써있는 위도 정보 읽기
@@ -155,7 +156,7 @@ $(function(){
 
       window.kakaoMapMarker = new kakao.maps.Marker({
         position:location,
-        image: makerImage
+        image: markerImage
       });
       //마커에 지도를 설정
       kakaoMapMarker.setMap(kakaoMap);
