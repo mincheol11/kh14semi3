@@ -224,30 +224,7 @@ public class ScheduleController {
             scheduleDto.setScheduleWtime(originDto.getScheduleWtime());
         }
 
-        // 게시글 내용의 첨부파일을 비교하여 삭제할 항목을 찾음
-        Set<Integer> before = new HashSet<>();
-        Document beforeDocument = Jsoup.parse(originDto.getScheduleContent());
-        for (Element el : beforeDocument.select(".schedule-attach")) {
-            String keyStr = el.attr("data-key");
-            int key = Integer.parseInt(keyStr);
-            before.add(key);
-        }
-
-        Set<Integer> after = new HashSet<>();
-        Document afterDocument = Jsoup.parse(scheduleDto.getScheduleContent());
-        for (Element el : afterDocument.select(".schedule-attach")) {
-            String keyStr = el.attr("data-key");
-            int key = Integer.parseInt(keyStr);
-            after.add(key);
-        }
-
-        before.removeAll(after);
-
-        // 삭제할 첨부파일 처리
-        for (int attachmentNo : before) {
-            attachmentService.delete(attachmentNo);
-        }
-
+      
         // 게시글 업데이트
         scheduleDao.update(scheduleDto);
 
@@ -284,13 +261,6 @@ public class ScheduleController {
         }
     }
 
-    @RequestMapping("/image")
-    public String image(@RequestParam int scheduleNo) {
-        try {
-            Integer attachmentNo = scheduleDao.findImage(scheduleNo);
-            return "redirect:/attach/download?attachmentNo=" + attachmentNo;
-        } catch (Exception e) {
-            return "redirect:/images/해린-깨물하트.gif";
-        }
-    }
+    
+    
 }

@@ -106,9 +106,4 @@ public class BoardDao {
         }
     }
 
-    public int findImage(int boardNo) {
-        String sql = "select attachment from board_image where board=?";
-        Object[] data = { boardNo };
-        return jdbcTemplate.queryForObject(sql, int.class, data);
-    }
 }

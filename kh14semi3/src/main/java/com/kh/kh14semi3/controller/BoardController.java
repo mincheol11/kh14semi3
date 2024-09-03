@@ -1,14 +1,12 @@
 package com.kh.kh14semi3.controller;
 
-import java.util.HashSet;
-import java.util.Set;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -20,7 +18,7 @@ import com.kh.kh14semi3.dao.BoardDao;
 import com.kh.kh14semi3.dto.BoardDto;
 
 import com.kh.kh14semi3.error.TargetNotFoundException;
-import com.kh.kh14semi3.service.AttachmentService;
+
 import com.kh.kh14semi3.vo.PageVO;
 
 import jakarta.servlet.http.HttpSession;
@@ -41,16 +39,31 @@ public class BoardController {
 		return "/WEB-INF/views/board/list.jsp";
 		
 	}
-	
-	@RequestMapping("/detail")
-	public  String detail(@RequestParam int boardNo,Model model) {
-		BoardDto boardDto = boardDao.selectOne(boardNo);
-		if(boardDto == null) 
-			throw new TargetNotFoundException("존재하지 않는 글번호");
-			model.addAttribute("boardDto",boardDto);
-			return "/WEB-INF/views/board/detail.jsp";
-		
-	}
+	 @Transactional // 조회수 동시성 문제 해결
+	 @RequestMapping("/detail")
+	 public String detail(@RequestParam int boardNo, HttpSession session, Model model) {
+	     BoardDto boardDto = boardDao.selectOne(boardNo);
+	     if (boardDto == null) {
+	         throw new TargetNotFoundException("존재하지 않는 글번호");
+	     }
+
+	     // 세션에 조회한 게시글 목록이 저장된 경우
+	     List<Integer> viewedBoards = (List<Integer>) session.getAttribute("viewedBoards");
+	     if (viewedBoards == null) {
+	         viewedBoards = new ArrayList<>();
+	         session.setAttribute("viewedBoards", viewedBoards);
+	     }
+
+	     // 게시글이 조회되지 않은 경우에만 조회수 증가
+	     if (!viewedBoards.contains(boardNo)) {
+	         boardDao.updateBoardViews(boardNo);
+	         viewedBoards.add(boardNo);
+	     }
+
+	     model.addAttribute("boardDto", boardDto);
+	     return "/WEB-INF/views/board/detail.jsp";
+	 }
+
 	@GetMapping("/write")
 	public String write() {
 		return "/WEB-INF/views/board/write.jsp";
@@ -87,31 +100,11 @@ public class BoardController {
 		if(originDto == null)
 			throw new TargetNotFoundException("존재하지 않는 글번호");
 		
-		Set<Integer> before= new HashSet<>();
-		Document beforeDocument = Jsoup.parse(boardDto.getBoardContent());
-		for(Element el : beforeDocument.select(".board-attach")) {
-			String keyStr = el.attr("data-key");
-			int key = Integer.parseInt(keyStr);
-			before.add(key);
-		}
-		Set<Integer> after= new HashSet<>();
-		Document afterDocument = Jsoup.parse(boardDto.getBoardContent());
-		for(Element el : afterDocument.select(".board-attach")) {
-			String keyStr = el.attr("data-key");
-			int key = Integer.parseInt(keyStr);
-			after.add(key);
-		
-	}
-		before.removeAll(after);
-		
-		for(int attachmentNo : before) {
-			attachmentService.delete(attachmentNo);
-		}
+	
 		boardDao.update(boardDto);
 		   return "redirect:/board/list?page=" +pageVO.getPage() + "&message=updateSuccess";
 	}
-	@Autowired
-	private AttachmentService attachmentService;
+
 	
 	@RequestMapping("/delete")
 	public String delete(@RequestParam int boardNo, @RequestParam(defaultValue = "1") int page, @RequestParam(value = "confirm", required = false) String confirm) {
@@ -121,14 +114,7 @@ public class BoardController {
 	            if (boardDto == null) {
 	                throw new TargetNotFoundException("존재하지 않는 게시글 번호");
 	            }
-	       String boardContent = boardDto.getBoardContent();
-		Document document = Jsoup.parse(boardContent);
-		Elements elements = document.select(".board-attach");
-		for(Element element : elements) {
-			String key = element.attr("data-key");
-			int attachmentNo = Integer.parseInt(key);
-			attachmentService.delete(attachmentNo);
-		}
+	     
 		boolean result = boardDao.delete(boardNo);
 		if (result) {
             return "redirect:/board/list?page=" + page + "&message=deleteSuccess";
@@ -139,15 +125,5 @@ public class BoardController {
         return "redirect:/board/detail?boardNo=" + boardNo + "&confirm=show";
     }
 }
-	
-	@RequestMapping("/image")
-	public String image(@RequestParam int boardNo) {
-		try {
-			Integer attachmentNo = boardDao.findImage(boardNo);
-			return "redirect:/attach/download?attachmentNo=" + attachmentNo;
-		}
-		catch(Exception e){
-			return "redirect:/images/해린-깨물하트.gif";
-		}
-	}
+		
 }

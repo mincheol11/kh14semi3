@@ -14,9 +14,9 @@ $(function() {
 					//['메뉴명', ['버튼명', '버튼명', ...]]
 					['area', ['style', 'undo', 'redo']],
 					['style', ['bold', 'italic', 'underline', 'paragraph']],
-					['font', ['fontname', 'fontsize', 'forecolor']],
+					['font', [ 'fontsize', 'forecolor']],
 					['tool', ['ol', 'ul', 'table', 'hr', 'fullscreen']],
-					['attach', ['picture']],],
+					],
 
 				//콜백 설정
 				callbacks: {
@@ -95,9 +95,9 @@ $(function() {
 					//['메뉴명', ['버튼명', '버튼명', ...]]
 					['area', ['style', 'undo', 'redo']],
 					['style', ['bold', 'italic', 'underline', 'paragraph']],
-					['font', ['fontname', 'fontsize', 'forecolor']],
+					['font', ['fontsize', 'forecolor']],
 					['tool', ['ol', 'ul', 'table', 'hr', 'fullscreen']],
-					['attach', ['picture']],],
+					],
 
 				//콜백 설정
 				callbacks: {
