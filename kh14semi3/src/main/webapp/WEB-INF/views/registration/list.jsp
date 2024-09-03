@@ -103,9 +103,9 @@ createdRank = ${sessionScope.createdRank}
 			<%-- 결과가 있을 때 --%>
 			<c:otherwise>
 				<!-- 결과 화면 -->
-				<div class="right">
+				<!-- <div class="right">
 					<i class="fa-brands fa-slack red"></i> 강의명 클릭시 상세 정보 페이지로 이동
-				</div>				
+				</div>	 -->			
 				<table class="table table-horizontal table-hover">
 					<thead>
 						<tr>
