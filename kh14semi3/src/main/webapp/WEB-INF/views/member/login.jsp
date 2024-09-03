@@ -57,7 +57,8 @@
             overflow: hidden; /* 스크롤바 제거 */
         }
         body{
-        	background-image: url("/images/background_gray.png");
+        	background-image: url("/images/KHuniv_background_main_crop_lv150.png");
+        	background-position: center;
         	background-repeat: no-repeat;
         	background-size: cover; 
         }

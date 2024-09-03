@@ -34,7 +34,7 @@ html, body {
 	display: flex;
 	flex-direction: column;
 	height: 100vh;  /*뷰포트 높이의 100%*/
-	background-image: url("/images/background_main.png");
+	background-image: url("/images/KHuniv_background_main_crop_lv80.png");
 	background-position: center;
 	background-repeat: no-repeat;
     background-size: cover; 
