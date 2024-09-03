@@ -14,6 +14,9 @@
 	/* .kh-container{
 	    height: auto !important; 
 	} */
+	.mt-80{
+		margin-top: 80px;
+	}
 </style>
 
 <script type="text/javascript">
@@ -87,16 +90,16 @@ createdLevel = ${sessionScope.createdRank}
 			<h2>수강 신청한 강의가 없습니다</h2>
 	    </c:when>
     	<c:otherwise>
-    		<div class="right">
+    		<!-- <div class="right">
 				<i class="fa-brands fa-slack red"></i> 강의명 클릭시 수강신청 취소 가능
-			</div>
-			<table class="table table-hover table-horizontal">
+			</div> -->
+			<table class="table table-hover table-horizontal mt-80">
 	            <thead>
 	                <tr>
                     	<th>전공(학과)</th>
 						<th>교수명</th>
 						<th>분류</th>
-						<th width="30%">강의명</th>
+						<th>강의명</th>
 						<th>강의코드</th>
 						<th>강의시간</th>
 						<th>강의실</th>
@@ -105,18 +108,18 @@ createdLevel = ${sessionScope.createdRank}
 	                </tr>
 				</thead>
                 <tbody>
-					<c:forEach var="lectureDto" items="${RegistrationList}">
-                    <tr onclick="location.href='/lecture/detail?lectureCode=${lectureDto.lectureCode}&&goWhere=regist2'" style="cursor: pointer;">
-						<td>${lectureDto.lectureCode}</td>	                        
-                        <td>${lectureDto.lectureProfessor}</td>
-						<td>${lectureDto.lectureType}</td>
-						<td>${lectureDto.lectureName}</td>
-						<td class="lecture-code">${lectureDto.lectureCode}</td>
-						<td>${lectureDto.lectureTime} ${lectureDto.lectureDuration} ${lectureDto.lectureDay}</td>
-						<td>${lectureDto.lectureRoom}</td>
+					<c:forEach var="lectureMemberVO" items="${RegistrationList}">
+                    <tr onclick="location.href='/lecture/detail?lectureCode=${lectureMemberVO.lectureCode}&&goWhere=regist2'" style="cursor: pointer;">
+						<td>${lectureMemberVO.departmentName}</td>	                        
+                        <td>${lectureMemberVO.memberName}</td>
+						<td>${lectureMemberVO.lectureType}</td>
+						<td>${lectureMemberVO.lectureName}</td>
+						<td class="lecture-code">${lectureMemberVO.lectureCode}</td>
+						<td>${lectureMemberVO.lectureTime} ${lectureMemberVO.lectureDuration} ${lectureMemberVO.lectureDay}</td>
+						<td>${lectureMemberVO.lectureRoom}</td>
 						<td>
-							<span class="lecture-count">${lectureDto.lectureRegist}</span>
-							/${lectureDto.lectureCount}
+							<span class="lecture-count">${lectureMemberVO.lectureRegist}</span>
+							/${lectureMemberVO.lectureCount}
 						</td>		
 						<td class="link link-animation class-regist">
 							수강취소

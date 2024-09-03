@@ -6,11 +6,13 @@
 <%-- header.jsp에 존재하는 내용을 불러오도록 설정 --%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-<!-- <style>
-.kh-container{
+<style>
+<%--
+ .kh-container{
     height: auto !important; 
-}
-</style> -->
+} --%>
+
+</style>
 
 <script type="text/javascript">
 	$(function(){
@@ -29,8 +31,8 @@
 		<form action="list" method="get" autocomplete="off">
 			<!-- 검색창 --> 
 			<select class="field" name="column">
-			<option value="lecture_department" <c:if test="${param.column == 'lecture_department'}">selected</c:if>>전공(학과)</option>
-			<option value="lecture_professor" <c:if test="${param.column == 'lecture_professor'}">selected</c:if>>교수명</option>
+			<option value="department_name" <c:if test="${param.column == 'department_name'}">selected</c:if>>전공(학과)</option>
+			<option value="member_name" <c:if test="${param.column == 'member_name'}">selected</c:if>>교수명</option>
 			<option value="lecture_type" <c:if test="${param.column == 'lecture_type'}">selected</c:if>>분류</option>
 			<option value="lecture_name" <c:if test="${param.column == 'lecture_name'}">selected</c:if>>강의명</option>
 		</select>
@@ -68,15 +70,15 @@
 				
 					<%-- 학생인 경우 --%>
 					<c:if test="${sessionScope.createdRank == '학생'}">
-					<c:forEach var="lectureDto" items="${registrationList}">
-					<tr onclick="location.href='/lecture/detail?lectureCode=${lectureDto.lectureCode}&&goWhere=lecture1'" style="cursor: pointer;">
-						<td>${lectureDto.lectureDepartment}</td>
-						<td>${lectureDto.lectureProfessor}</td>
-						<td>${lectureDto.lectureType}</td>
-						<td>${lectureDto.lectureName}</td>
-						<td>${lectureDto.lectureTime} ${lectureDto.lectureDuration} ${lectureDto.lectureDay}</td>
-						<td>${lectureDto.lectureRoom}</td>
-						<td>${lectureDto.lectureRegist}/${lectureDto.lectureCount}</td>						
+					<c:forEach var="lectureMemberVO" items="${registrationList}">
+					<tr onclick="location.href='/lecture/detail?lectureCode=${lectureMemberVO.lectureCode}&&goWhere=lecture1'" style="cursor: pointer;">
+						<td>${lectureMemberVO.departmentName}</td>
+						<td>${lectureMemberVO.memberName}</td>
+						<td>${lectureMemberVO.lectureType}</td>
+						<td>${lectureMemberVO.lectureName}</td>
+						<td>${lectureMemberVO.lectureTime} ${lectureMemberVO.lectureDuration} ${lectureMemberVO.lectureDay}</td>
+						<td>${lectureMemberVO.lectureRoom}</td>
+						<td>${lectureMemberVO.lectureRegist}/${lectureMemberVO.lectureCount}</td>						
 						<td>
 							<a href="#" class="link"></a>
 						</td>
@@ -86,17 +88,17 @@
 					
 					<%-- 교수인 경우 --%>
 					<c:if test="${sessionScope.createdRank == '교수'}">
-					<c:forEach var="lectureDto" items="${professorList}">
-					<tr onclick="location.href='/lecture/detail?lectureCode=${lectureDto.lectureCode}&&goWhere=lecture1'" style="cursor: pointer;">
-						<td>${lectureDto.lectureDepartment}</td>
-						<td>${lectureDto.lectureProfessor}</td>
-						<td>${lectureDto.lectureType}</td>
-						<td>${lectureDto.lectureName}</td>
-						<td>${lectureDto.lectureTime} ${lectureDto.lectureDuration} ${lectureDto.lectureDay}</td>
-						<td>${lectureDto.lectureRoom}</td>
-						<td>${lectureDto.lectureRegist}/${lectureDto.lectureCount}</td>						
+					<c:forEach var="lectureMemberVO" items="${professorList}">
+					<tr onclick="location.href='/lecture/detail?lectureCode=${lectureMemberVO.lectureCode}&&goWhere=lecture1'" style="cursor: pointer;">
+						<td>${lectureMemberVO.departmentName}</td>
+						<td>${lectureMemberVO.memberName}</td>
+						<td>${lectureMemberVO.lectureType}</td>
+						<td>${lectureMemberVO.lectureName}</td>
+						<td>${lectureMemberVO.lectureTime} ${lectureMemberVO.lectureDuration} ${lectureMemberVO.lectureDay}</td>
+						<td>${lectureMemberVO.lectureRoom}</td>
+						<td>${lectureMemberVO.lectureRegist}/${lectureMemberVO.lectureCount}</td>						
 						<td>
-							<a href="/lecture/grade/insert?lectureCode=${lectureDto.lectureCode}&gradeLecture=${lectureDto.lectureCode}" class="link link-animation">성적입력</a>
+							<a href="/lecture/grade/insert?lectureCode=${lectureMemberVO.lectureCode}&gradeLecture=${lectureMemberVO.lectureCode}" class="link link-animation">성적입력</a>
 						</td>
 					</tr>					
 					</c:forEach>

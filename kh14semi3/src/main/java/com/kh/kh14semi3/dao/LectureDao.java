@@ -10,8 +10,10 @@ import com.kh.kh14semi3.dto.LectureDto;
 import com.kh.kh14semi3.mapper.GradeLectureMapper;
 import com.kh.kh14semi3.mapper.GradeStudentMapper;
 import com.kh.kh14semi3.mapper.LectureMapper;
+import com.kh.kh14semi3.mapper.LectureMemberMapper;
 import com.kh.kh14semi3.vo.GradeLectureVO;
 import com.kh.kh14semi3.vo.GradeStudentVO;
+import com.kh.kh14semi3.vo.LectureMemberVO;
 import com.kh.kh14semi3.vo.PageVO;
 
 @Repository
@@ -25,6 +27,9 @@ public class LectureDao {
 	
 	@Autowired
 	private GradeLectureMapper gradeLectureMapper;
+	
+	@Autowired
+	private LectureMemberMapper lectureMemberMapper;
 	
 	// 강의 등록
 	public void insert(LectureDto lectureDto) {
@@ -48,52 +53,73 @@ public class LectureDao {
 	}
 	
 	// 페이징 객체를 이용한 목록 및 검색 메소드
-	public List<LectureDto> selectListByPaging(PageVO pageVO){
+	public List<LectureMemberVO> selectListByPaging(PageVO pageVO){
 		if(pageVO.isSearch()) { // 검색이라면 
 			String sql = "select * from ("
 					+ "select rownum rn, TMP.* from ("
-					+ "select "
-					+ "lecture_code, lecture_department, lecture_professor, "
-					+ "lecture_type, lecture_name, "
-					+ "lecture_time, lecture_day, lecture_duration, "
-					+ "lecture_room, lecture_count, lecture_regist "
-					+ "from lecture "
-					+ "where instr("+pageVO.getColumn()+",?)>0 "
+//					+ "select "
+//					+ "lecture_code, lecture_department, lecture_professor, "
+//					+ "lecture_type, lecture_name, "
+//					+ "lecture_time, lecture_day, lecture_duration, "
+//					+ "lecture_room, lecture_count, lecture_regist "
+//					+ "from lecture "
+//					+ "where instr("+pageVO.getColumn()+",?)>0 "
 					// 트리정렬				
-					+ "order by lecture_code asc"
+//					+ "order by lecture_code asc"
+					+ "select * from lecture " 
+					+ "left outer join DEPARTMENT "
+					+ "on lecture_department = department_code "
+					+ "left outer join member "
+					+ "on lecture_professor = member_id "
+					+ "where instr("+pageVO.getColumn()+",?)>0 "
+					+ "order by lecture_code asc "
 					+ ") TMP"
 					+ ") where rn between ? and ?";		
 			Object[] data = {pageVO.getKeyword(), 
 						pageVO.getBeginRow(), pageVO.getEndRow()};
-			return jdbcTemplate.query(sql, lectureMapper, data);
+			return jdbcTemplate.query(sql, lectureMemberMapper, data);
 		}
 		else { // 목록이라면
 			String sql = "select * from ("
 					+ "select rownum rn, TMP.* from ("
-					+ "select "
-					+ "lecture_code, lecture_department, lecture_professor, "
-					+ "lecture_type, lecture_name, "
-					+ "lecture_time, lecture_day, lecture_duration, "
-					+ "lecture_room, lecture_count, lecture_regist "
-					+ "from lecture "
-					// 트리정렬					
-					+ "order by lecture_code asc"
+//					+ "select "
+//					+ "lecture_code, lecture_department, lecture_professor, "
+//					+ "lecture_type, lecture_name, "
+//					+ "lecture_time, lecture_day, lecture_duration, "
+//					+ "lecture_room, lecture_count, lecture_regist "
+//					+ "from lecture "
+//					// 트리정렬					
+//					+ "order by lecture_code asc"
+					+ "select * from lecture " 
+					+ "left outer join DEPARTMENT "
+					+ "on lecture_department = department_code "
+					+ "left outer join member "
+					+ "on lecture_professor = member_id "
+					+ "order by lecture_code asc "
 					+ ") TMP"
 					+ ") where rn between ? and ?";
 			Object[] data = {pageVO.getBeginRow(), pageVO.getEndRow()};
-			return jdbcTemplate.query(sql, lectureMapper, data);
+			return jdbcTemplate.query(sql, lectureMemberMapper, data);
 		}	
 	}
 
 	public int countByPaging(PageVO pageVO) {
 		if(pageVO.isSearch()) { // 검색카운트
 			String sql = "select count(*) from lecture "
+					+ "left outer join DEPARTMENT "
+					+ "on lecture_department = department_code "
+					+ "left outer join member "
+					+ "on lecture_professor = member_id "
 					+ "where instr("+pageVO.getColumn()+", ?) > 0";	
 			Object[] data = {pageVO.getKeyword()};
 			return jdbcTemplate.queryForObject(sql, int.class, data);
 		}
 		else { // 목록카운트
-			String sql = "select count(*) from lecture";		
+			String sql = "select count(*) from lecture "
+					+ "left outer join DEPARTMENT "
+					+ "on lecture_department = department_code "
+					+ "left outer join member "
+					+ "on lecture_professor = member_id ";		
 			return jdbcTemplate.queryForObject(sql, int.class);	
 		}
 	}
@@ -121,6 +147,45 @@ public class LectureDao {
 		return jdbcTemplate.query(sql, lectureMapper, data);
 	}
 	
+	// 학생이 수강신청한 강의 목록을 조회
+	public List<LectureMemberVO> selectListByRegistration2(PageVO pageVO, String studentId) {
+		if(pageVO.isSearch()) {
+			String sql = "select * from ("
+					+ "select rownum rn, TMP.* from ("
+					+ "select * from lecture "
+					+ "left outer join DEPARTMENT "
+					+ "on lecture_department = department_code "
+					+ "left outer join member "
+					+ "on lecture_professor = member_id "
+					+ "where lecture_code in (" 
+					+ "select registration_lecture from registration "
+					+ "where registration_student = ? "
+					+ "and instr("+pageVO.getColumn()+", ?) > 0"
+					+ ") order by lecture_code asc"
+					+ ") TMP"
+					+ ") where rn between ? and ?";	
+			Object[] data = {studentId, pageVO.getKeyword(), pageVO.getBeginRow(), pageVO.getEndRow()};
+			return jdbcTemplate.query(sql, lectureMemberMapper, data);
+		}
+		else {
+			String sql = "select * from ("
+					+ "select rownum rn, TMP.* from ("
+					+ "select * from lecture "
+					+ "left outer join DEPARTMENT "
+					+ "on lecture_department = department_code "
+					+ "left outer join member "
+					+ "on lecture_professor = member_id "
+					+ "where lecture_code in (" 
+					+ "select registration_lecture from registration "
+					+ "where registration_student = ? "
+					+ ") order by lecture_code asc"
+					+ ") TMP"
+					+ ") where rn between ? and ?";	
+			Object[] data = {studentId, pageVO.getBeginRow(), pageVO.getEndRow()};
+			return jdbcTemplate.query(sql, lectureMemberMapper, data);
+		}
+	}
+	
 	// 교수가 가르치고 있는 강의 목록을 조회
 	public List<LectureDto> selectListByTeaching(PageVO pageVO, String professorId){
 		String sql = "select * from ("
@@ -133,10 +198,31 @@ public class LectureDao {
 		return jdbcTemplate.query(sql, lectureMapper, data);
 	}
 	
+	// 교수가 가르치고 있는 강의 목록을 조회
+	public List<LectureMemberVO> selectListByTeaching2(PageVO pageVO, String professorId){
+		String sql = "select * from ("
+				+ "select rownum rn, TMP.* from ("
+				+ "select * from lecture "
+				+ "left outer join DEPARTMENT "
+				+ "on lecture_department = department_code "
+				+ "left outer join member "
+				+ "on lecture_professor = member_id "
+				+ "where lecture_professor = ? "
+				+ "order by lecture_code asc"
+				+ ") TMP"
+				+ ") where rn between ? and ?";	
+		Object[] data = {professorId, pageVO.getBeginRow(), pageVO.getEndRow()};
+		return jdbcTemplate.query(sql, lectureMemberMapper, data);
+	}
+	
 	// 학생이 수강신청한 강의 목록 카운트
 	public int countByPagingWithStudent(PageVO pageVO, String studentId) {
 		if(pageVO.isSearch()) { // 검색카운트
 			String sql = "select count(*) from lecture "
+					+ "left outer join DEPARTMENT "
+					+ "on lecture_department = department_code "
+					+ "left outer join member "
+					+ "on lecture_professor = member_id "
 					+ "where instr("+pageVO.getColumn()+", ?) > 0 and "
 					+ "lecture_code in ( "
 					+ "select registration_lecture from registration where registration_student = ? )";	
@@ -145,6 +231,10 @@ public class LectureDao {
 		}
 		else { // 목록카운트
 			String sql = "select count(*) from lecture "
+					+ "left outer join DEPARTMENT "
+					+ "on lecture_department = department_code "
+					+ "left outer join member "
+					+ "on lecture_professor = member_id "
 					+ "where lecture_code in ( "
 					+ "select registration_lecture from registration where registration_student = ? )";	
 			Object[] data = {studentId};
@@ -156,13 +246,22 @@ public class LectureDao {
 	public int countByPagingWithProfessor(PageVO pageVO, String professorId) {
 		if(pageVO.isSearch()) { // 검색카운트
 			String sql = "select count(*) from lecture "
+					+ "left outer join DEPARTMENT "
+					+ "on lecture_department = department_code "
+					+ "left outer join member "
+					+ "on lecture_professor = member_id "
 					+ "where instr("+pageVO.getColumn()+", ?) > 0 and "
 					+ "lecture_professor = ? ";	
 			Object[] data = {pageVO.getKeyword(), professorId};
 			return jdbcTemplate.queryForObject(sql, int.class, data);
 		}
 		else { // 목록카운트
-			String sql = "select count(*) from lecture where lecture_professor = ? ";	
+			String sql = "select count(*) from lecture "
+					+ "left outer join DEPARTMENT "
+					+ "on lecture_department = department_code "
+					+ "left outer join member "
+					+ "on lecture_professor = member_id "
+					+ "where lecture_professor = ? ";	
 			Object[] data = {professorId};
 			return jdbcTemplate.queryForObject(sql, int.class, data);	
 		}
