@@ -14,7 +14,7 @@
                     <a href="?page=${pageVO.getPrevBlock()}&column=${param.column}&keyword=${param.keyword}"><i class="fa-solid fa-chevron-left"></i></a>
                 </c:when>
                 <c:otherwise>
-                    <i class="fa-solid fa-chevron-left"></i>
+                    <i class="fa-solid fa-chevron-left" style="color:#2D3436"></i>
                 </c:otherwise>
             </c:choose>	<%-- startBlock부터 finishBlock과 lastBlock중 작은값까지 반복문으로 링크 출력 --%>            
             <c:forEach var="n" begin="${pageVO.getStartBlock()}" end="${pageVO.getFinishBlock()}" step="1">
@@ -32,7 +32,7 @@
                     <a href="?page=${pageVO.getNextBlock()}&column=${param.column}&keyword=${param.keyword}"><i class="fa-solid fa-chevron-right"></i></a>
                 </c:when>
                 <c:otherwise>
-                    <i class="fa-solid fa-chevron-right"></i>
+                    <i class="fa-solid fa-chevron-right" style="color:#2D3436"></i>
                 </c:otherwise>
             </c:choose>
         </div>
