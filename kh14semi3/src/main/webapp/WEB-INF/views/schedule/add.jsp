@@ -10,9 +10,15 @@
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.js"></script>
 <link rel="stylesheet" type="text/css" href="/editor/editor.css">
-<script src="/editor/editor.js">
+<script src="/editor/editor.js"></script>
 
-</script>
+<style>
+.kh-container{
+    height: auto !important; 
+}
+</style>
+
+
 <script type="text/javascript">
 $(function(){
 	
