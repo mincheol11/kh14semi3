@@ -5,6 +5,7 @@
 <html lang="ko">
 <head>
 <title>KH 대학교 학사정보 사이트</title>
+<link rel="icon" href="/images/WEB.png" size="16x16" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link
@@ -184,7 +185,7 @@
             <div class="fail-feedback">유효한 이메일을 입력하세요</div>
         </div>
         <div class="container w-400 my-0">
-        <br>
+        <br><br>
             <button type="submit" class="btn btn-positive w-100" >
                 <i class="fa-regular fa-envelope"></i>
                 <span class="white">비밀번호 재설정 메일 발송</span>

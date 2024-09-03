@@ -4,6 +4,7 @@
 <html lang="ko">
 <head>
 <title>KH 대학교 학사정보 사이트</title>
+<link rel="icon" href="/images/WEB.png" size="16x16" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link
@@ -57,7 +58,7 @@
             overflow: hidden; /* 스크롤바 제거 */
         }
         body{
-        	background-image: url("/images/background_gray.png");
+        	background-image: url("/images/KHuniv_background_main_crop_lv150.png");
         	background-repeat: no-repeat;
         	background-size: cover;
         	
