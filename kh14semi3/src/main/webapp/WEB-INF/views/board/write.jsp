@@ -24,19 +24,22 @@
 		
 		<div class="row">
 			<label>제목 <i class="fa-solid fa-asterisk fa-fade"></i></label> <input
-				type="text" name="boardTitle" class="field w-200" required>
-			<br>
-			<br>
+				type="text" name="boardTitle" class="field w-100" required>
+		
+			
 		</div>
 		<div class="row">
-			<label>내용 <i class="fa-solid fa-asterisk fa-fade"></i></label> <br>
+			<label>내용 <i class="fa-solid fa-asterisk fa-fade"></i></label> 
 			<textarea name="boardContent" class="field w-800" required rows="10"
 				cols="80"></textarea>
-			<br>
-			<br>
+			
 		</div>
 		<div class="row">
-			<button type="submit" class="btn btn-positive w-100">작성하기</button>
+			<button type="submit" class="btn btn-positive w-100 mt-30">작성하기</button>
+		</div>
+		<div class="row">
+			<a href="/board/list" class="btn btn-neutral w-100" >
+                   <i class="fa-solid fa-arrow-rotate-left"></i> 뒤로가기</a>
 		</div>
 	</div>
 </form>

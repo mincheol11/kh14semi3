@@ -373,7 +373,7 @@ width: 1%;
     <c:set var="isLogin" value="${sessionScope.createdUser != null}" />
     <div class="right mb-20">
      <c:if test="${isLogin && isAdmin}">
-      <a class="btn btn-positive" href="add">학사 일정등록</a>
+      <a class="btn btn-positive" href="add"><i class="fa-solid fa-pen fa-xs"></i> 학사 일정등록</a>
     </c:if>
     </div>
   </tbody>
