@@ -105,33 +105,44 @@ document.addEventListener('DOMContentLoaded', function() {
 	</div>
 	</div>
 
-	<!-- 정보 -->
-	<div class="info-block">
+ <c:set var="isAdmin" value="${sessionScope.createdRank == '관리자'}" />
+        <c:set var="isLogin" value="${sessionScope.createdUser != null}" />
+
 		 <strong>조회</strong>
+<div class=" row flex-box column-2 positing-menu">
+                  
+            <div class="info-block left">
 		 <div class="info-contentViews"><fmt:formatNumber value="${boardDto.boardViews}" pattern="#,##0" />
 		</div>
 		</div>
+                    
+		  <c:if test="${isLogin && isAdmin}">
+                    <div class="right">
+           
+            <a class="btn btn-positive" href="edit?boardNo=${boardDto.boardNo}">수정</a>
+          
+            <a class="btn btn-negative" href="delete?boardNo=${boardDto.boardNo}">삭제</a>
+		<a class="btn btn-neutral" href="list">목록</a>
+                    </div>
+        </c:if>
+             <c:if test="${isLogin && !isAdmin}">
+             <div class="right w-20">
+           <a class="btn btn-neutral w-20" href="list">목록</a>
+           </div>
+                   </c:if>
+                </div>
+
+
 
 	
 
-	<!-- 각종 이동버튼들 -->
-	<div class="row right">
+		  
 		
-<%-- 관리자만 수정,삭제,등록 가능 --%>
-		  <c:set var="isAdmin" value="${sessionScope.createdRank == '관리자'}" />
-        <c:set var="isLogin" value="${sessionScope.createdUser != null}" />
+	
 		
-		  <c:if test="${isLogin && isAdmin}">
-            <!-- 관리자만 수정 버튼을 볼 수 있음 -->
-            <a class="btn btn-positive" href="edit?boardNo=${boardDto.boardNo}">수정</a>
-            <!-- 관리자만 삭제 버튼을 볼 수 있음 -->
-            <a class="btn btn-negative" href="delete?boardNo=${boardDto.boardNo}">삭제</a>
-            
-          
-        </c:if>
 
-		<a class="btn btn-neutral" href="list">목록</a>
-	</div>
+		
+	
 </div>
 
 
