@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kh.kh14semi3.dao.LectureDao;
+import com.kh.kh14semi3.vo.LectureMemberVO;
 import com.kh.kh14semi3.vo.PageVO;
 
 import jakarta.servlet.http.HttpSession;
@@ -21,7 +22,7 @@ public class RegistrationController {
 	// 강의 전체 목록 + 검색 기능
 	@RequestMapping("/list")
 	public String list(@ModelAttribute("pageVO") PageVO pageVO, Model model) {
-		model.addAttribute("lectureList", lectureDao.selectListByPaging(pageVO));		
+		model.addAttribute("lectureList", lectureDao.selectListByPaging(pageVO));
 		int count = lectureDao.countByPaging(pageVO);
 		pageVO.setCount(count);
 		return "/WEB-INF/views/registration/list.jsp";
@@ -31,7 +32,7 @@ public class RegistrationController {
 	@RequestMapping("/regist")
 	public String regist(HttpSession session,@ModelAttribute("pageVO") PageVO pageVO, Model model) {
 		String studentId = (String) session.getAttribute("createdUser");
-		model.addAttribute("RegistrationList", lectureDao.selectListByRegistration(pageVO, studentId));
+		model.addAttribute("RegistrationList", lectureDao.selectListByRegistration2(pageVO, studentId));
 		int count = lectureDao.countByPagingWithStudent(pageVO, studentId);
 		pageVO.setCount(count);
 		return "/WEB-INF/views/registration/regist.jsp";

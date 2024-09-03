@@ -83,8 +83,8 @@ createdRank = ${sessionScope.createdRank}
 		<form action="list" method="get" autocomplete="off">
 			<!-- 검색창 --> 
 			<select class="field" name="column">
-			<option value="lecture_department" <c:if test="${param.column == 'lecture_department'}">selected</c:if>>전공(학과)</option>
-			<option value="lecture_professor" <c:if test="${param.column == 'lecture_professor'}">selected</c:if>>교수명</option>
+			<option value="department_name" <c:if test="${param.column == 'department_name'}">selected</c:if>>전공(학과)</option>
+			<option value="member_name" <c:if test="${param.column == 'member_name'}">selected</c:if>>교수명</option>
 			<option value="lecture_type" <c:if test="${param.column == 'lecture_type'}">selected</c:if>>분류</option>
 			<option value="lecture_name" <c:if test="${param.column == 'lecture_name'}">selected</c:if>>강의명</option>
 		</select>
@@ -121,18 +121,18 @@ createdRank = ${sessionScope.createdRank}
 						</tr>
 					</thead>
 					<tbody class="center">					
-						<c:forEach var="lectureDto" items="${lectureList}">
-						<tr onclick="location.href='/lecture/detail?lectureCode=${lectureDto.lectureCode}&&goWhere=regist1'" style="cursor: pointer;">
-							<td>${lectureDto.lectureDepartment}</td>
-							<td>${lectureDto.lectureProfessor}</td>
-							<td>${lectureDto.lectureType}</td>
-							<td>${lectureDto.lectureName}</td>
-							<td class="lecture-code">${lectureDto.lectureCode}</td>
-							<td>${lectureDto.lectureTime} ${lectureDto.lectureDuration} ${lectureDto.lectureDay}</td>
-							<td>${lectureDto.lectureRoom}</td>
+						<c:forEach var="lectureMemberVO" items="${lectureList}">
+						<tr onclick="location.href='/lecture/detail?lectureCode=${lectureMemberVO.lectureCode}&&goWhere=regist1'" style="cursor: pointer;">
+							<td>${lectureMemberVO.departmentName}</td>
+							<td>${lectureMemberVO.memberName}</td>
+							<td>${lectureMemberVO.lectureType}</td>
+							<td>${lectureMemberVO.lectureName}</td>
+							<td class="lecture-code">${lectureMemberVO.lectureCode}</td>
+							<td>${lectureMemberVO.lectureTime} ${lectureMemberVO.lectureDuration} ${lectureDto.lectureDay}</td>
+							<td>${lectureMemberVO.lectureRoom}</td>
 							<td>
-								<span class="lecture-count">${lectureDto.lectureRegist}</span>
-								/${lectureDto.lectureCount}
+								<span class="lecture-count">${lectureMemberVO.lectureRegist}</span>
+								/${lectureMemberVO.lectureCount}
 							</td>		
 							<td class="">
 								<a href="#" class="link link-animation class-regist">수강신청</a>

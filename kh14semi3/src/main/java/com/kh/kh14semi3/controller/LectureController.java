@@ -46,14 +46,14 @@ public class LectureController {
 		String memberRank = (String) session.getAttribute("createdRank");
 		if(memberRank.equals("학생")) {
 			// 학생이 수강중인 강의 목록을 전송
-			model.addAttribute("registrationList", lectureDao.selectListByRegistration(pageVO, memberId));			
+			model.addAttribute("registrationList", lectureDao.selectListByRegistration2(pageVO, memberId));			
 			int count = lectureDao.countByPagingWithStudent(pageVO ,memberId);
 			pageVO.setCount(count);
 
 		}
 		else {
 			// 교수가 가르치는 강의 목록을 전송
-			model.addAttribute("professorList", lectureDao.selectListByTeaching(pageVO, memberId));		
+			model.addAttribute("professorList", lectureDao.selectListByTeaching2(pageVO, memberId));		
 			int count = lectureDao.countByPagingWithProfessor(pageVO ,memberId);
 			pageVO.setCount(count);
 		}
