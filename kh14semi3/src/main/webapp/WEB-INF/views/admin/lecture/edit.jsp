@@ -132,6 +132,14 @@
 			var isValid= regex.test(lectureName);
 			  $(this).removeClass("success fail")
                 .addClass(isValid ? "success" : "fail");
+			  if(isValid){
+        			$("[name=lectureName]").parent().find("label").find("i").removeClass("red fa-bounce");
+        			$("[name=lectureName]").parent().find("label").find("i").addClass("green fa-beat");
+				}
+        		 else{
+        			$("[name=lectureName]").parent().find("label").find("i").removeClass("green fa-beat");
+        			$("[name=lectureName]").parent().find("label").find("i").addClass("red fa-bounce");
+				}
 	  			status.lectureNameValid = isValid;
 		});
 	  
@@ -290,7 +298,7 @@
 			<label>강의실</label>
 			<input type="text" name="lectureRoom" class="field w-100 onlyFive" placeholder="5글자 이하만 입력하세요"
 						value="${lectureDto.lectureRoom}" >
-				<div class="success-feedback">최대 5글자까지 입력 가능합니다</div>
+				<div class="success-feedback">최대 5글자까지 입력이 가능합니다</div>
 		</div>
 		
 		<!-- 인원 입력-->
@@ -302,7 +310,7 @@
 		</div>	
 		
 		<div class="row mt-30">
-			<button class="btn btn-positive w-100 confirm-link" data-text="정말 수정하시겠습니까?" onclick="return checkEdit()">
+			<button class="btn btn-positive w-100 confirm-link" data-text="정말 수정하시겠습니까?">
  							<i class="fa-solid fa-eraser"></i> 수정하기</button>
 		</div>
 		<div class="row">
