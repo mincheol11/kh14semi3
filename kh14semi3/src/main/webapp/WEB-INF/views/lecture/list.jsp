@@ -22,7 +22,7 @@
 
 <div class="container w-1000 my-50">
 	<div class="row center">
-		<h2>${memberDto.memberName} 님의 강의 목록</h2>
+		<h1>${memberDto.memberName} 님의 강의 목록</h1>
 	</div>
 
 	<div class="row center">
