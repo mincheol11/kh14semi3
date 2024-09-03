@@ -39,6 +39,28 @@
                 $(this).prop('disabled', true);
              	// 점수 저장 버튼 활성화
                 row.find('.grade-save-btn').prop('disabled', false);
+             	
+             	// 점수 최대치 제한
+             	$('[name=gradeAttendance-input]').on("input",function(){
+             		if($(this).val() >= 20) {
+             			$(this).val('20');
+             		}
+             	});
+             	$('[name=gradeScore1-input]').on("input",function(){
+             		if($(this).val() >= 35) {
+             			$(this).val('35');
+             		}
+             	});
+             	$('[name=gradeScore2-input]').on("input",function(){
+             		if($(this).val() >= 35) {
+             			$(this).val('35');
+             		}
+             	});
+             	$('[name=gradeHomework-input]').on("input",function(){
+             		if($(this).val() >= 10) {
+             			$(this).val('10');
+             		}
+             	});
 
             // 점수 저장 버튼 클릭 이벤트
             $(document).on('click', '.grade-save-btn', function() {
