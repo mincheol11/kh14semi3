@@ -10,11 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.kh14semi3.dao.AdminDao;
+import com.kh.kh14semi3.dao.DepartmentDao;
 import com.kh.kh14semi3.dao.MemberDao;
 import com.kh.kh14semi3.dao.ProfessorDao;
 import com.kh.kh14semi3.dao.StudentDao;
 import com.kh.kh14semi3.dao.TakeOffDao;
 import com.kh.kh14semi3.dto.AdminDto;
+import com.kh.kh14semi3.dto.DepartmentDto;
 import com.kh.kh14semi3.dto.MemberDto;
 import com.kh.kh14semi3.dto.ProfessorDto;
 import com.kh.kh14semi3.dto.StudentDto;
@@ -41,6 +43,9 @@ public class AdminMemberController {
 	@Autowired
 	private AdminDao adminDao;
 	
+	@Autowired
+	private DepartmentDao departmentDao;
+	
 	//회원 관리 목록
 	@RequestMapping("/list")
 	public String list(
@@ -62,10 +67,15 @@ public class AdminMemberController {
 		if("학생".equals(memberDto.getMemberRank())) {
 			StudentDto studentDto = studentDao.selectOne(memberId);
 			model.addAttribute("studentDto", studentDto);
+			DepartmentDto departmentDto = departmentDao.selectOne(studentDto.getStudentDepartment());
+			model.addAttribute("sdDto", departmentDto);
 		}
 		else if("교수".equals(memberDto.getMemberRank())) {
 			ProfessorDto professorDto = professorDao.selectOne(memberId);
 			model.addAttribute("professorDto", professorDto);
+			DepartmentDto departmentDto = departmentDao.selectOne(professorDto.getProfessorDepartment());
+			model.addAttribute("pdDto", departmentDto);
+			System.out.println(departmentDto);
 		}
 		else if("관리자".equals(memberDto.getMemberRank())) {
 			AdminDto adminDto = adminDao.selectOne(memberId);
