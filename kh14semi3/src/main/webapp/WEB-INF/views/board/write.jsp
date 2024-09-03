@@ -23,13 +23,13 @@
 		</div>
 		
 		<div class="row">
-			<label>제목 <i class="fa-solid fa-asterisk fa-fade"></i></label> <input
+			<label>제목 <i class="fa-solid fa-asterisk fa-fade red"></i></label> <input
 				type="text" name="boardTitle" class="field w-100" required>
 		
 			
 		</div>
 		<div class="row">
-			<label>내용 <i class="fa-solid fa-asterisk fa-fade"></i></label> 
+			<label>내용 <i class="fa-solid fa-asterisk fa-fade red"></i></label> 
 			<textarea name="boardContent" class="field w-800" required rows="10"
 				cols="80"></textarea>
 			
