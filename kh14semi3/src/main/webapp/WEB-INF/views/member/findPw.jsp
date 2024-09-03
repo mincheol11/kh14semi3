@@ -59,7 +59,7 @@
             overflow: hidden; /* 스크롤바 제거 */
         }
         body{
-        	background-image: url("/images/background_gray.png");
+        	background-image: url("/images/KHuniv_background_main_crop_lv150.png");
         	background-repeat: no-repeat;
         	background-size: cover;
         	
@@ -184,9 +184,10 @@
             <div class="fail-feedback">유효한 이메일을 입력하세요</div>
         </div>
         <div class="container w-400 my-0">
-            <button type="submit" class="btn btn-positive w-100">
+        <br>
+            <button type="submit" class="btn btn-positive w-100" >
                 <i class="fa-regular fa-envelope"></i>
-                <span>비밀번호 재설정 메일 발송</span>
+                <span class="white">비밀번호 재설정 메일 발송</span>
             </button>
         </div>
     
