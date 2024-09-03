@@ -67,6 +67,7 @@ h2 span#currentYear, h2 span#currentMonth {
 				},
 				error: function() {
 				    $('#mypage-preview').html('<p>로그인 시 확인 가능합니다</p>');
+				    $('#mypage-preview').css("display", "block").removeClass("left flex-box column-2").addClass("center");
 				}
 			});
 		});
