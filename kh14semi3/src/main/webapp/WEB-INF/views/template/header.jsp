@@ -66,7 +66,26 @@
 .login-time-reset{
 	cursor: pointer;
 }
+.spin{
+	animation: spin 0.7s linear ;
+}
+@keyframes spin {
+    0% {
+        transform: rotate(0deg); /* 애니메이션 시작 시 각도 */
+    }
+    100% {
+        transform: rotate(360deg); /* 애니메이션 종료 시 각도 */
+    }
+}
 </style>
+
+<script type="text/javascript">
+	$(function(){
+		$(".login-time-reset").on("click",function(){
+			$(this).toggleClass("spin");
+		});
+	});
+</script>
 </head>
 <body>
 	

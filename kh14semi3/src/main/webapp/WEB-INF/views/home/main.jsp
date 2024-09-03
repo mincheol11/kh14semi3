@@ -73,7 +73,6 @@ h2 span#currentYear, h2 span#currentMonth {
 		
 		// board
 		function loadBoardList() {
-
             $.ajax({
                 url: '/rest/home/main/board-preview',
                 method: 'GET',
@@ -81,16 +80,24 @@ h2 span#currentYear, h2 span#currentMonth {
                 success: function(response) {
                     var boardList = response.boardList;
                     
-                    // Clear the existing content
+                    // 기존 내용을 비웁니다.
                     $('#boardTable tbody').empty();
+                    
+                	// 제목의 최대 길이를 설정합니다.
+                    var maxTitleLength = 15; // 예를 들어, 15자로 설정
 					
                     if(boardList.length > 0){ 
-	                    // Populate the table with new data
+                    	// 새로운 데이터를 테이블에 추가합니다.
 	                    $.each(boardList, function(index, board) {
 							if(index<3){
+								// 제목이 길면 잘라내고 `...`을 추가합니다.
+		                        var title = board.boardTitle;
+		                        if (title.length > maxTitleLength) {
+		                            title = title.substring(0, maxTitleLength) + '...';
+		                        }
 		                        $('#boardTable tbody').append(
 		                            '<tr>' +
-		                            '<td class="left">' + board.boardTitle + '</td>' +
+		                            '<td class="left">' + title + '</td>' +
 		                            '<td class="ps-50">' + board.boardWtime + '</td>' +
 		                            '</tr>'
 		                        );							
@@ -222,7 +229,7 @@ h2 span#currentYear, h2 span#currentMonth {
 				<div>		
 					<h2>개인정보
 						<a href="/member/mypage">
-							<i class="fa-regular fa-square-plus"></i>
+							<i class="fa-regular fa-square-plus" style="color: #2D3436"></i>
 						</a>
 					</h2>					
 				</div>
@@ -250,7 +257,7 @@ h2 span#currentYear, h2 span#currentMonth {
 			<div class="row center w-100">			
 				<div>
 					<h2>공지사항
-				 		<a href="/board/list"><i class="fa-regular fa-square-plus"></i></a>
+				 		<a href="/board/list"><i class="fa-regular fa-square-plus" style="color: #2D3436"></i></a>
 					</h2>
 				</div>
 				
@@ -275,7 +282,7 @@ h2 span#currentYear, h2 span#currentMonth {
 			<div class="row center w-100">	
 				<div>
 					<h2>강의목록
-						<a href="/lecture/list"><i class="fa-regular fa-square-plus"></i></a>
+						<a href="/lecture/list"><i class="fa-regular fa-square-plus" style="color: #2D3436"></i></a>
 					</h2>
 				</div>		
 				
@@ -308,7 +315,7 @@ h2 span#currentYear, h2 span#currentMonth {
 			<div class="row center w-100">	
 				<div>
 					<h2 class="my-0">학사일정
-						<a href="/schedule/list"><i class="fa-regular fa-square-plus"></i></a>
+						<a href="/schedule/list"><i class="fa-regular fa-square-plus" style="color: #2D3436"></i></a>
 					</h2>
 					
 					<div class="mt-0 mb-10">
