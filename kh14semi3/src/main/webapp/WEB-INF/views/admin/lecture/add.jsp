@@ -169,6 +169,14 @@
 			var isValid= regex.test(lectureName);
 			  $(this).removeClass("success fail")
                 .addClass(isValid ? "success" : "fail");
+			  if(isValid){
+        			$("[name=lectureName]").parent().find("label").find("i").removeClass("red fa-bounce");
+        			$("[name=lectureName]").parent().find("label").find("i").addClass("green fa-beat");
+				}
+        		 else{
+        			$("[name=lectureName]").parent().find("label").find("i").removeClass("green fa-beat");
+        			$("[name=lectureName]").parent().find("label").find("i").addClass("red fa-bounce");
+				}
 	  			status.lectureNameValid = isValid;
 		});
 	  
@@ -213,7 +221,7 @@
 	            	$(this).removeClass("success");	  
 	            }
 	        });
-		});		
+
 	
 	//인원 입력
 	 $("[name=lectureCount]").blur(function(){
@@ -235,7 +243,7 @@
 	         	      case 13 : return false; 
 	                }
 	           });
-  
+	});		
   </script>
 
  <form action="add" method="post"  class="check-form" autocomplete="off">
@@ -255,7 +263,7 @@
 <!-- 학과 코드 입력-->
 			<div class="row">
                 <label>학과코드 <i class="fa-solid fa-asterisk red"></i></label>
-                      <input type="text" name="lectureDepartment" 
+                      <input type="text" name="lectureDepartment"  autocomplete="on"
                         class="field w-100" placeholder="ex)KHD01001">
  				<div class="success-feedback 00b894">올바른 학과 코드입니다.</div>
                  <div class="fail-feedback d63031">코드는 영문 대문자와 숫자로 작성해주세요.</div>
@@ -264,8 +272,8 @@
 <!-- 교수 코드 입력-->
 			<div class="row">
                 <label>교수코드 <i class="fa-solid fa-asterisk red"></i></label>
-                      <input type="text" name="lectureProfessor" 
-                        class="field w-100" placeholder="ex)KHP01240002">
+                      <input type="text" name="lectureProfessor"  autocomplete="on"
+                        class="field w-100" placeholder="ex)khp01240002">
  				<div class="success-feedback 00b894">올바른 교수 코드입니다.</div>
                  <div class="fail-feedback d63031">코드는 영문 소문자와 숫자로 작성해주세요.</div>
                 <div class="fail2-feedback d63031">존재하지 않는 코드입니다.</div>
