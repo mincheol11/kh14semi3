@@ -61,7 +61,7 @@
 	                    $(btn).css("cursor", "not-allowed").css("text-decoration-line", "none"); // 클릭할 수 없도록 커서 스타일 변경
 	                    $(btn).attr("title", "이미 수강신청 완료"); // 마우스 오버 시 메시지 표시
 					}
-					$(btn).parent().find(".lecture-count").text(response.count);
+					$(btn).parent().parent().find(".lecture-count").text(response.count);
 				}
 			});
 		});
