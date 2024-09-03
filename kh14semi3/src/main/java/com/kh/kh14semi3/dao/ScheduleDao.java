@@ -106,11 +106,7 @@ public class ScheduleDao {
         }
     }
 
-    public int findImage(int scheduleNo) {
-        String sql = "select attachment from schedule_image where schedule=?";
-        Object[] data = {scheduleNo};
-        return jdbcTemplate.queryForObject(sql, int.class, data);
-    }
+    
 
     // 날짜 기반 게시글 목록 조회
     public List<ScheduleDto> selectListByDate(java.sql.Date date, int page, int size) {
