@@ -77,7 +77,7 @@ createdLevel = ${sessionScope.createdRank}
 
 <div class="container w-900 my-50">
 	<div class="row center">
-        <h2>${sessionScope.createdUser}님의 수강 신청 목록</h2>        
+        <h1>${sessionScope.createdUser}님의 수강 신청 목록</h1>        
     </div>
     
     <div class="row center">

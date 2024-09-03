@@ -6,6 +6,12 @@
 <%-- header.jsp에 존재하는 내용을 불러오도록 설정 --%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
+<style>		
+	.kh-container{
+	    height: auto !important; 
+	}
+</style>
+
 <script type="text/javascript">
 	$(function(){
 		var params = new URLSearchParams(location.search);
