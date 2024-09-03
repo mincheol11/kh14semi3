@@ -85,7 +85,7 @@ h2 span#currentYear, h2 span#currentMonth {
             $('#boardTable tbody').empty();
             
             // 제목의 최대 길이를 설정합니다.
-            var maxTitleLength = 15; // 예를 들어, 20자로 설정
+            var maxTitleLength = 15; // 예를 들어, 15자로 설정
             
             if (boardList.length > 0) {
                 // 새로운 데이터를 테이블에 추가합니다.
