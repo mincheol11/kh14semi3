@@ -191,10 +191,14 @@
             </table>
 
             <!-- 점수 등록 -->
-            <div class="row">
+            <div class="row mt-30">
                 <a type="button" href="/lecture/list" class="btn btn-positive w-100 grade-insert-btn">
                     <i class="fa-solid fa-check"></i> 성적 입력 완료
                 </a>
+            </div>
+            <div class="row">
+                <a href="/lecture/list" class="btn btn-neutral w-100" >
+					<i class="fa-solid fa-arrow-rotate-left"></i> 뒤로가기</a>
             </div>
         </form>
     </div>
