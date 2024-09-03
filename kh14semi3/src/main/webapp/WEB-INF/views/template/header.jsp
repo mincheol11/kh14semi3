@@ -81,8 +81,11 @@
 
 <script type="text/javascript">
 	$(function(){
-		$(".login-time-reset").on("click",function(){
-			$(this).toggleClass("spin");
+		$('#time-button').click(function() {
+		    $(this).addClass("spin");
+		    setTimeout(() => {
+		        $(this).removeClass('spin');
+		    }, 2000); // 2000ms = 2초
 		});
 	});
 </script>
@@ -99,7 +102,7 @@
 	                	<div class="center">
 	                	<i class="fa-brands fa-slack"></i>
                 			로그인 남은 시간 <span id="timer">Loading...</span>
-                			<i class="fa-solid fa-hourglass-end login-time-reset" style="color: #2D3436"></i>
+                			<i class="fa-solid fa-hourglass-end login-time-reset" id="time-button" style="color: #2D3436"></i>
 	                	</div>
 	                	
 						<%-- createdUser = ${sessionScope.createdUser},
