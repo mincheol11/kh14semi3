@@ -102,7 +102,7 @@ $(function(){
     
     $("[name=memberCell]").blur(function(){
         var regex = /^010[1-9][0-9]{7}$/;
-        var isValid = $(this).val().length > 0 || regex.test($(this).val());
+        var isValid = $(this).val().length > 0 && regex.test($(this).val()) && $(this).val().length <=11;
         $(this).removeClass("success fail")
                     .addClass(isValid ? "success" : "fail");
         if(isValid){
@@ -118,7 +118,7 @@ $(function(){
     
     $("[name=memberBirth]").blur(function(){
         var regex = /^([0-9]{4})-(02-(0[1-9]|1[0-9]|2[0-9])|(0[469]|11)-(0[1-9]|1[0-9]|2[0-9]|30)|(0[13578]|1[02])-(0[1-9]|1[0-9]|2[0-9]|3[01]))$/;
-        var isValid = $(this).val().length == 0 || regex.test($(this).val());
+        var isValid = $(this).val().length == 0 && regex.test($(this).val());
         $(this).removeClass("success fail")
                     .addClass(isValid ? "success" : "fail");
         if(isValid){
