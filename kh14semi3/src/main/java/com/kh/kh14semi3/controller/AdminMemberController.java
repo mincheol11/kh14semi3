@@ -59,15 +59,15 @@ public class AdminMemberController {
 							@RequestParam(required = false) String memberRank) {
 		MemberDto memberDto = memberDao.selectOne(memberId);
 		model.addAttribute("memberDto", memberDto);
-		if("학생".equals(memberRank)) {
+		if("학생".equals(memberDto.getMemberRank())) {
 			StudentDto studentDto = studentDao.selectOne(memberId);
 			model.addAttribute("studentDto", studentDto);
 		}
-		else if("교수".equals(memberRank)) {
+		else if("교수".equals(memberDto.getMemberRank())) {
 			ProfessorDto professorDto = professorDao.selectOne(memberId);
 			model.addAttribute("professorDto", professorDto);
 		}
-		else if("관리자".equals(memberRank)) {
+		else if("관리자".equals(memberDto.getMemberRank())) {
 			AdminDto adminDto = adminDao.selectOne(memberId);
 			model.addAttribute("adminDto", adminDto);
 		}
