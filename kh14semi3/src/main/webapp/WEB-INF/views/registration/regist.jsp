@@ -31,7 +31,7 @@
 	                    // 이미 수강신청이 취소된 경우
 	                    $(btn).removeClass("class-regist link link-animation");
 	                    $(btn).off("click");
-	                    $(btn).css("cursor", "not-allowed"); // 클릭할 수 없도록 커서 스타일 변경
+	                    $(btn).css("cursor", "not-allowed").css("text-decoration-line", "none"); // 클릭할 수 없도록 커서 스타일 변경
 	                    $(btn).attr("title", "수강신청 취소 완료"); // 마우스 오버 시 메시지 표시
 	                }
 	                // 수강신청 취소 상태가 아닐 경우에는 기본 상태를 유지
@@ -45,10 +45,10 @@
 <script type="text/javascript">
 	// (회원전용) 강의명을 누르면 수강 신청 취소 처리를 수행	
 	$(function(){
-		$(".class-regist").on("click",function(){
+		$(".class-regist").on("click",function(e){
 			var lectureCode = $(this).parent().find(".lecture-code").text();
 			var btn = this;
-			
+			e.stopPropagation();
 			$.ajax({
 				url: "/rest/registration/regist",
 				method: "post",
@@ -59,7 +59,7 @@
 						window.alert("수강 신청 취소!");
 						$(btn).removeClass("class-regist link link-animation");
 						$(btn).off("click");
-	                    $(btn).css("cursor", "not-allowed"); // 클릭할 수 없도록 커서 스타일 변경
+	                    $(btn).css("cursor", "not-allowed").css("text-decoration-line", "none"); // 클릭할 수 없도록 커서 스타일 변경
 	                    $(btn).attr("title", "수강신청 취소 완료"); // 마우스 오버 시 메시지 표시
 					}					
 					$(btn).parent().find(".lecture-count").text(response.count);
@@ -105,15 +105,11 @@ createdLevel = ${sessionScope.createdRank}
 				</thead>
                 <tbody>
 					<c:forEach var="lectureDto" items="${RegistrationList}">
-                    <tr>
+                    <tr onclick="location.href='/lecture/detail?lectureCode=${lectureDto.lectureCode}&&goWhere=regist2'" style="cursor: pointer;">
 						<td>${lectureDto.lectureCode}</td>	                        
                         <td>${lectureDto.lectureProfessor}</td>
 						<td>${lectureDto.lectureType}</td>
-						<td>
-							<a href="/lecture/detail?lectureCode=${lectureDto.lectureCode}&&goWhere=regist2" class="link link-animation black">
-								${lectureDto.lectureName}
-							</a>
-						</td>
+						<td>${lectureDto.lectureName}</td>
 						<td class="lecture-code">${lectureDto.lectureCode}</td>
 						<td>${lectureDto.lectureTime} ${lectureDto.lectureDuration} ${lectureDto.lectureDay}</td>
 						<td>${lectureDto.lectureRoom}</td>

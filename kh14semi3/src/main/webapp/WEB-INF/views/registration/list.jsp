@@ -10,15 +10,15 @@
 	.class-regist{
 		cursor: pointer;
 	}
-	.kh-container{
+	/* .kh-container{
 	    height: auto !important; 
-	}
+	} */
 </style>
 
 <script type="text/javascript">
 	$(function(){
 		$(".class-regist").each(function() {
-	        var lectureCode = $(this).parent().find(".lecture-code").text();
+	        var lectureCode = $(this).parent().parent().find(".lecture-code").text();
 	        var btn = $(this);
 
 	        $.ajax({
@@ -30,7 +30,7 @@
 	                    // 이미 수강신청이 완료된 경우
 	                    $(btn).removeClass("class-regist link link-animation");
 	                    $(btn).off("click");
-	                    $(btn).css("cursor", "not-allowed"); // 클릭할 수 없도록 커서 스타일 변경
+	                    $(btn).css("cursor", "not-allowed").css("text-decoration-line", "none"); // 클릭할 수 없도록 커서 스타일 변경
 	                    $(btn).attr("title", "이미 수강신청 완료"); // 마우스 오버 시 메시지 표시
 	                }
 	                // 수강신청 상태가 아닐 경우에는 기본 상태를 유지
@@ -44,10 +44,10 @@
 <script type="text/javascript">
 	// (회원전용) 강의명을 누르면 수강 신청 처리를 수행	
 	$(function(){
-		$(".class-regist").on("click",function(){
-			var lectureCode = $(this).parent().find(".lecture-code").text();
+		$(".class-regist").on("click",function(e){
+			var lectureCode = $(this).parent().parent().find(".lecture-code").text();
 			var btn = this;
-			
+			e.stopPropagation();
 			$.ajax({
 				url: "/rest/registration/regist",
 				method: "post",
@@ -58,7 +58,7 @@
 						window.alert("수강 신청 완료!");
 						$(btn).removeClass("class-regist link link-animation");
 						$(btn).off("click");
-	                    $(btn).css("cursor", "not-allowed"); // 클릭할 수 없도록 커서 스타일 변경
+	                    $(btn).css("cursor", "not-allowed").css("text-decoration-line", "none"); // 클릭할 수 없도록 커서 스타일 변경
 	                    $(btn).attr("title", "이미 수강신청 완료"); // 마우스 오버 시 메시지 표시
 					}
 					$(btn).parent().find(".lecture-count").text(response.count);
@@ -134,8 +134,8 @@ createdRank = ${sessionScope.createdRank}
 								<span class="lecture-count">${lectureDto.lectureRegist}</span>
 								/${lectureDto.lectureCount}
 							</td>		
-							<td>
-								<a href="" class="link link-animation class-regist">수강신청</a>
+							<td class="">
+								<a href="#" class="link link-animation class-regist">수강신청</a>
 							</td>					
 						</tr>					
 						</c:forEach>
