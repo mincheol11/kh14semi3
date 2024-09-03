@@ -79,9 +79,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-<div class="container w-800">
+<div class="container w-800 my-50">
 	<!-- 제목 -->
-	<div class="row">
+	<div class="row center">
 		<h1>
 			${boardDto.boardTitle}
 			<c:if test="${boardDto.boardUtime != null}">
@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	<!-- 작성자 -->
 <div class="info-block">
-<strong>작성자:</strong>
+<strong>작성자</strong>
 <div class="info-content">${boardDto.boardWriter}
 </div>
 </div>
@@ -100,14 +100,14 @@ document.addEventListener('DOMContentLoaded', function() {
 	<div class="info-block" >
 		<!-- pre 태그는 내용을 작성된 형태 그대로 출력한다
 				Rich Text Editor를 쓸 경우는 할 필요가 없다 -->
-				<strong>내용:</strong>
+				<strong>내용</strong>
 		<div class="info-content">${boardDto.boardContent}
 	</div>
 	</div>
 
 	<!-- 정보 -->
 	<div class="info-block">
-		 <strong>조회:</strong>
+		 <strong>조회</strong>
 		 <div class="info-contentViews"><fmt:formatNumber value="${boardDto.boardViews}" pattern="#,##0" />
 		</div>
 		</div>
@@ -123,11 +123,11 @@ document.addEventListener('DOMContentLoaded', function() {
 		
 		  <c:if test="${isLogin && isAdmin}">
             <!-- 관리자만 수정 버튼을 볼 수 있음 -->
-            <a class="btn btn-negative" href="edit?boardNo=${boardDto.boardNo}">수정</a>
+            <a class="btn btn-positive" href="edit?boardNo=${boardDto.boardNo}">수정</a>
             <!-- 관리자만 삭제 버튼을 볼 수 있음 -->
             <a class="btn btn-negative" href="delete?boardNo=${boardDto.boardNo}">삭제</a>
-            <!-- 관리자만 등록 버튼을 볼 수 있음 -->
-            <a class="btn btn-positive" href="write">등록</a>
+            
+          
         </c:if>
 
 		<a class="btn btn-neutral" href="list">목록</a>

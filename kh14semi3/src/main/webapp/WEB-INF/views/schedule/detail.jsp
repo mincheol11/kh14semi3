@@ -71,53 +71,6 @@ document.addEventListener('DOMContentLoaded', function() {
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   }
 
-  .btn-primary {
-    background-color: #007bff; /* Blue */
-    color: white;
-    text-decoration: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-  }
-
-  .btn-danger {
-    background-color: #dc3545; /* Red */
-    color: white;
-    text-decoration: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-  }
-
-  .btn-success {
-    background-color: #28a745; /* Green */
-    color: white;
-    text-decoration: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-  }
-
-  .btn-secondary {
-    background-color: #6c757d; /* Gray */
-    color: white;
-    text-decoration: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-  }
-
-  .btn-primary:hover {
-    background-color: #0056b3;
-  }
-
-  .btn-danger:hover {
-    background-color: #c82333;
-  }
-
-  .btn-success:hover {
-    background-color: #218838;
-  }
-
-  .btn-secondary:hover {
-    background-color: #5a6268;
-  }
 
   .modal {
     display: none; /* 기본적으로 모달을 숨김 */
@@ -158,13 +111,13 @@ document.addEventListener('DOMContentLoaded', function() {
   
   <!-- 작성자 -->
   <div class="info-block">
-    <strong>작성자:</strong>
+    <strong>작성자</strong>
     <div class="info-content">${scheduleDto.scheduleWriter}</div>
   </div>
 
   <!-- 작성일 -->
   <div class="info-block">
-    <strong>작성일:</strong>
+    <strong>작성일</strong>
     <div class="info-content">
       <fmt:formatDate value="${scheduleDto.scheduleWtime}" pattern="yyyy년 MM월 dd일 E a hh시 mm분" />
     </div>
@@ -172,7 +125,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   <!-- 내용 -->
   <div class="info-block">
-    <strong>내용:</strong>
+    <strong>내용</strong>
     <div class="info-content">${scheduleDto.scheduleContent}</div>
   </div>
 
@@ -181,11 +134,11 @@ document.addEventListener('DOMContentLoaded', function() {
     <c:set var="isAdmin" value="${sessionScope.createdRank == '관리자'}" />
     <c:set var="isLogin" value="${sessionScope.createdUser != null}" />
     <c:if test="${isLogin && isAdmin}">
-      <a class="btn btn-primary" href="edit?scheduleNo=${scheduleDto.scheduleNo}">수정</a>
-      <a class="btn btn-danger" href="delete?scheduleNo=${scheduleDto.scheduleNo}">삭제</a>
+      <a class="btn btn-positive" href="edit?scheduleNo=${scheduleDto.scheduleNo}">수정</a>
+      <a class="btn btn-negative" href="delete?scheduleNo=${scheduleDto.scheduleNo}">삭제</a>
      
     </c:if>
-    <a class="btn btn-secondary" href="list">목록</a>
+    <a class="btn btn-neutral" href="list">목록</a>
   </div>
 </div>
 
