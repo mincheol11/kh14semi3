@@ -239,16 +239,7 @@ public class ScheduleController {
                 throw new TargetNotFoundException("존재하지 않는 게시글 번호");
             }
 
-            // 게시글의 첨부파일 삭제 처리
-            String scheduleContent = scheduleDto.getScheduleContent();
-            Document document = Jsoup.parse(scheduleContent);
-            Elements elements = document.select(".schedule-attach");
-            for (Element element : elements) {
-                String key = element.attr("data-key");
-                int attachmentNo = Integer.parseInt(key);
-                attachmentService.delete(attachmentNo);
-            }
-
+           
             // 게시글 삭제
             boolean result = scheduleDao.delete(scheduleNo);
             if (result) {

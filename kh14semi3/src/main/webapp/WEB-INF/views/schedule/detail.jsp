@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ page import="java.net.URLDecoder" %>
+
 
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.js"></script>
@@ -100,15 +100,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <!-- 페이지 내용 -->
 <div class="container">
-  <!-- 제목 동적으로 변경 -->
-  <%
-    String title = request.getParameter("title");
-    if (title != null) {
-        title = URLDecoder.decode(title, "UTF-8");
-    }
-  %>
-  <div class="header-title"><%= title != null ? title : "학사 일정" %> 상세 페이지</div>
-  
+ 
   <!-- 작성자 -->
   <div class="info-block">
     <strong>작성자</strong>
