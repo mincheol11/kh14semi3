@@ -13,16 +13,17 @@
 		<h1>${memberDto.memberName} 님의 성적 조회</h1>
 	</div>
 
-	<%-- <div class="row center">
+	<div class="row center">
 		<form action="grade" method="get" autocomplete="off">
 			<!-- 검색창 --> 
 			<select class="field" name="column">
-			<option value="lecture_code" <c:if test="${param.column == 'lecture_code'}">selected</c:if>>강의코드</option>
+			<option value="grade_lecture" <c:if test="${param.column == 'grade_lecture'}">selected</c:if>>강의코드</option>
+			<option value="lecture_name" <c:if test="${param.column == 'lecture_name'}">selected</c:if>>강의명</option>
 		</select>
 		<input class="field" type="search" name="keyword" value="${param.keyword}">
 			<button class="btn btn-neutral">검색</button>
 		</form>
-	</div> --%>
+	</div>
 
 	<div class="row center">
 		<c:choose>

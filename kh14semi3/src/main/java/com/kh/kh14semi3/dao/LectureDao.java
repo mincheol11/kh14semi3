@@ -270,9 +270,19 @@ public class LectureDao {
 	
 	// 학생의 성적 조회 리스트
 	public List<GradeLectureVO> selectListWithGrade(PageVO pageVO, String studentId){
-//		if(pageVO.isSearch()) {
-//		}
-//		else {
+		if(pageVO.isSearch()) {
+			String sql = "select * from lecture L "
+					+ "left outer join grade G on L.lecture_code = G.grade_lecture "
+					+ "where G.grade_student = ? "
+					+ "and instr("+pageVO.getColumn()+", ?) > 0 "
+					+ "and G.grade_lecture in ("
+					+ "select R.registration_lecture from registration R "
+					+ "where R.registration_student = ? ) "
+					+ "order by lecture_name asc";	
+			Object[] data = {studentId, pageVO.getKeyword(), studentId};
+			return jdbcTemplate.query(sql, gradeLectureMapper, data);
+		}
+		else {
 			String sql = "select * from lecture L "
 					+ "left outer join grade G on L.lecture_code = G.grade_lecture "
 					+ "where G.grade_student = ? "
@@ -282,7 +292,34 @@ public class LectureDao {
 					+ "order by lecture_name asc";	
 			Object[] data = {studentId, studentId};
 			return jdbcTemplate.query(sql, gradeLectureMapper, data);			
-//		}
+		}
+	}
+	
+	// 학생이 수강신청한 강의 목록 카운트
+	public int countByPagingWithStudent2(PageVO pageVO, String studentId) {
+		if(pageVO.isSearch()) { // 검색카운트
+			String sql = "select count(*) from lecture L "
+						+ "left outer join grade G on L.lecture_code = G.grade_lecture "
+						+ "where G.grade_student = ? "
+						+ "and instr("+pageVO.getColumn()+", ?) > 0 "
+						+ "and G.grade_lecture in ("
+						+ "select R.registration_lecture from registration R "
+						+ "where R.registration_student = ? ) "
+						+ "order by lecture_name asc";	
+			Object[] data = {studentId, pageVO.getKeyword(), studentId};
+			return jdbcTemplate.queryForObject(sql, int.class, data);
+		}
+		else { // 목록카운트
+			String sql = "select count(*) from lecture L "
+						+ "left outer join grade G on L.lecture_code = G.grade_lecture "
+						+ "where G.grade_student = ? "
+						+ "and G.grade_lecture in ("
+						+ "select R.registration_lecture from registration R "
+						+ "where R.registration_student = ? ) "
+						+ "order by lecture_name asc";
+			Object[] data = {studentId, studentId};
+			return jdbcTemplate.queryForObject(sql, int.class, data);	
+		}
 	}
 
 }
