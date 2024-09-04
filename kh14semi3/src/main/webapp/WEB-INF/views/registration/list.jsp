@@ -128,7 +128,7 @@ createdRank = ${sessionScope.createdRank}
 							<td>${lectureMemberVO.lectureType}</td>
 							<td>${lectureMemberVO.lectureName}</td>
 							<td class="lecture-code">${lectureMemberVO.lectureCode}</td>
-							<td>${lectureMemberVO.lectureTime} ${lectureMemberVO.lectureDuration} ${lectureDto.lectureDay}</td>
+							<td>${lectureMemberVO.lectureDay} ${lectureMemberVO.lectureTime} (${lectureMemberVO.lectureDuration}시간)</td>
 							<td>${lectureMemberVO.lectureRoom}</td>
 							<td>
 								<span class="lecture-count">${lectureMemberVO.lectureRegist}</span>

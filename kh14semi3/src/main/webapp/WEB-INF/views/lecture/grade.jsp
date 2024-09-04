@@ -10,7 +10,7 @@
 
 <div class="container w-900 mt-50">
 	<div class="row center">
-		<h1>${memberDto.memberName}님의 성적 조회</h1>
+		<h1>${memberDto.memberName} 님의 성적 조회</h1>
 	</div>
 
 	<div class="row center">

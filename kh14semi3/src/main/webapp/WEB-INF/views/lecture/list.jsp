@@ -76,7 +76,7 @@
 						<td>${lectureMemberVO.memberName}</td>
 						<td>${lectureMemberVO.lectureType}</td>
 						<td>${lectureMemberVO.lectureName}</td>
-						<td>${lectureMemberVO.lectureTime} ${lectureMemberVO.lectureDuration} ${lectureMemberVO.lectureDay}</td>
+						<td>${lectureMemberVO.lectureDay} ${lectureMemberVO.lectureTime} (${lectureMemberVO.lectureDuration}시간)</td>
 						<td>${lectureMemberVO.lectureRoom}</td>
 						<td>${lectureMemberVO.lectureRegist}/${lectureMemberVO.lectureCount}</td>						
 						<td>
@@ -94,7 +94,7 @@
 						<td>${lectureMemberVO.memberName}</td>
 						<td>${lectureMemberVO.lectureType}</td>
 						<td>${lectureMemberVO.lectureName}</td>
-						<td>${lectureMemberVO.lectureTime} ${lectureMemberVO.lectureDuration} ${lectureMemberVO.lectureDay}</td>
+						<td>${lectureMemberVO.lectureDay} ${lectureMemberVO.lectureTime} (${lectureMemberVO.lectureDuration}시간)</td>
 						<td>${lectureMemberVO.lectureRoom}</td>
 						<td>${lectureMemberVO.lectureRegist}/${lectureMemberVO.lectureCount}</td>						
 						<td>

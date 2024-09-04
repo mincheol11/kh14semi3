@@ -81,7 +81,7 @@ createdLevel = ${sessionScope.createdRank}
 
 <div class="container w-900 my-50">
 	<div class="row center">
-        <h1>${sessionScope.createdUser}님의 수강 신청 목록</h1>        
+        <h1>${memberDto.memberName} 님의 수강 신청 목록</h1>        
     </div>
     
     <div class="row center">
@@ -115,7 +115,7 @@ createdLevel = ${sessionScope.createdRank}
 						<td>${lectureMemberVO.lectureType}</td>
 						<td>${lectureMemberVO.lectureName}</td>
 						<td class="lecture-code">${lectureMemberVO.lectureCode}</td>
-						<td>${lectureMemberVO.lectureTime} ${lectureMemberVO.lectureDuration} ${lectureMemberVO.lectureDay}</td>
+						<td>${lectureMemberVO.lectureDay} ${lectureMemberVO.lectureTime} (${lectureMemberVO.lectureDuration}시간)</td>
 						<td>${lectureMemberVO.lectureRoom}</td>
 						<td>
 							<span class="lecture-count">${lectureMemberVO.lectureRegist}</span>
