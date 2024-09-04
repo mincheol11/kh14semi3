@@ -12,7 +12,7 @@
 <script src="/editor/editor.js"></script>
 
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 document.addEventListener('DOMContentLoaded', function() {
     function showMessage(message) {
         if (message === 'updateSuccess') {
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
         showMessage(message);
     }
 });
-</script>
+</script> -->
 
 <form action="edit" method="post" autocomplete="off">
 	<div class="container w-800 my-50">

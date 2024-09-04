@@ -197,6 +197,7 @@
             $(".check-form").submit(function(){
                 $("[name]").trigger("input").trigger("blur");
                 console.log(status);
+                loadCheck();
                 return status.ok();
             });
             //엔터 차단 코드
@@ -205,7 +206,16 @@
                     case 13 : return false; 
                 }
            });
-	});			
+	});	
+  function loadCheck() {
+		 Swal.fire({
+	    icon: 'success',
+	    iconColor: "#6695C4",
+	    title: '수정 완료.',
+	    showConfirmButton: false,
+	    timer: 1500         
+		 });
+	};	
   </script>
 
 <form action="edit" method="post" autocomplete="off" class="check-form">

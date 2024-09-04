@@ -222,6 +222,7 @@ $(function(){
     $(".check-form").submit(function(){
     	$("[name]").trigger("input").trigger("blur");    
         console.log(status);
+        loadCheck();
     	return status.ok();
     });
     
@@ -234,8 +235,16 @@ $(function(){
         maxDate: moment(),//종료일을 오늘로 설정
     });
     
-    
 });
+function loadCheck() {
+	 Swal.fire({
+    icon: 'success',
+    iconColor: "#6695C4",
+    title: '수정 완료.',
+    showConfirmButton: false,
+    timer: 1500         
+	 });
+};	
 </script>
 
 <form action="change" method="post" autocomplete="off" class="check-form">

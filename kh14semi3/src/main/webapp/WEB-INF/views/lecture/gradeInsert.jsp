@@ -92,7 +92,7 @@
                         Swal.fire({
                             icon: 'success',
                             iconColor: "#6695C4",
-                            title: '성적 저장 완료.',
+                            title: '성적 입력 완료.',
                             showConfirmButton: false,
                             timer: 1500
                             
