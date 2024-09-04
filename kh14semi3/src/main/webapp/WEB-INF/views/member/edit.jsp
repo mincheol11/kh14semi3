@@ -261,10 +261,10 @@ $(function(){
 		</div>
 		<div class="row">
 			<input type="text" name="memberPost" class="field" placeholder="우편번호" readonly>
-			<button class="btn btn-neutral btn-find-address">
+			<button class="btn btn-neutral btn-find-address" type= "button">
 				<i class="fa-solid fa-magnifying-glass"></i>
 			</button>
-			<button class="btn btn-negative btn-clear-address">
+			<button class="btn btn-negative btn-clear-address" type= "button">
 				<i class="fa-solid fa-xmark"></i>
 			</button>
 		</div>

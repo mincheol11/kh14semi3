@@ -39,7 +39,7 @@ $(function(){
         memberRankValid: false,
         memberEmailValid : false,
         memberCellValid : false , //선택항목
-        memberBirthValid : false , //선택항목
+        memberBirthValid : true , //선택항목
         memberAddressValid : true , //선택항목
         ok : function(){
             return this.memberIdValid && this.memberIdCheckValid
@@ -118,17 +118,17 @@ $(function(){
     
     $("[name=memberBirth]").blur(function(){
         var regex = /^([0-9]{4})-(02-(0[1-9]|1[0-9]|2[0-9])|(0[469]|11)-(0[1-9]|1[0-9]|2[0-9]|30)|(0[13578]|1[02])-(0[1-9]|1[0-9]|2[0-9]|3[01]))$/;
-        var isValid = $(this).val().length == 0 && regex.test($(this).val());
+        var isValid = $(this).val().length == 0 || regex.test($(this).val());
         $(this).removeClass("success fail")
                     .addClass(isValid ? "success" : "fail");
-        if(isValid){
+        /* if(isValid){
   			$("[name=memberBirth]").parent().find("label").find("i").removeClass("red fa-bounce");
   			$("[name=memberBirth]").parent().find("label").find("i").addClass("green fa-beat");
 		}
   		 else{
   			$("[name=memberBirth]").parent().find("label").find("i").removeClass("green fa-beat");
   			$("[name=memberBirth]").parent().find("label").find("i").addClass("red fa-bounce");
-		}
+		} */
         status.memberBirthValid = isValid;
     });
     //주소는 모두 없거나 모두 있거나 둘 중 하나면 통과
@@ -303,7 +303,7 @@ $(function(){
 		</c:choose>
 		
 		<div class="row">
-			<label>생년월일 <i class="fa-solid fa-asterisk red"></i></label> <input type="text" name="memberBirth"
+			<label>생년월일</label> <input type="text" name="memberBirth"
 				value="${memberDto.memberBirth}" class="field w-100">
 		</div>
 		<div class="row">

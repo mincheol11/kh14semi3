@@ -16,14 +16,14 @@
 document.addEventListener('DOMContentLoaded', function() {
     function showMessage(message) {
         if (message === 'updateSuccess') {
-            alert('수정이 완료되었습니다.');
+        	alert('수정이 완료되었습니다.');
         } else if (message === 'deleteSuccess') {
-            alert('삭제가 완료되었습니다.');
+        	alert('삭제가 완료되었습니다.');
         } else if (message === 'deleteFail') {
-            alert('삭제에 실패하였습니다.');
+        	alert('삭제에 실패하였습니다.');
         }
         else if (message === 'writeSuccess') {
-            alert('등록되었습니다.');
+        	alert('등록되었습니다.');
         }
     }
 

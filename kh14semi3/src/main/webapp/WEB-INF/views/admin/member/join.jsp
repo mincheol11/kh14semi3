@@ -189,7 +189,7 @@ $(function(){
     });
     $("[name=memberBirth]").blur(function(){
         var regex = /^([0-9]{4})-(02-(0[1-9]|1[0-9]|2[0-9])|(0[469]|11)-(0[1-9]|1[0-9]|2[0-9]|30)|(0[13578]|1[02])-(0[1-9]|1[0-9]|2[0-9]|3[01]))$/;
-        var isValid = $(this).val().length > 0 || regex.test($(this).val());
+        var isValid = $(this).val().length == 0 || regex.test($(this).val());
         $(this).removeClass("success fail")
                     .addClass(isValid ? "success" : "fail");
         if(isValid){
@@ -387,14 +387,14 @@ $(function(){
                 </div>
                 <div class="page">
                     <div class="row">
-                        <label>연락처(휴대전화번호, - 제외) <i class="fa-solid fa-asterisk red"></i></label>
+                        <label>연락처(휴대전화번호, - 제외)</label>
                         <input type="text" name="memberCell" class="field w-100"
                                     placeholder="010XXXXXXXX" maxlength="11">
                         <div class="fail-feedback">입력한 번호가 형식에 맞지 않습니다</div>
                     </div>
 
                     <div class="row">
-                        <label>생년월일 <i class="fa-solid fa-asterisk red"></i></label>
+                        <label>생년월일</label>
                         <input type="text" name="memberBirth" class="field w-100">
                         <div class="fail-feedback">반드시 설정해야 합니다</div>
                     </div>
@@ -406,10 +406,10 @@ $(function(){
                     	</div>
                         <input type="text" name="memberPost" class="field"
                                 placeholder="우편번호" readonly>
-                        <button class="btn btn-neutral btn-find-address">
+                        <button class="btn btn-neutral btn-find-address" type="button">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </button>
-                        <button class="btn btn-negative btn-clear-address">
+                        <button class="btn btn-negative btn-clear-address" type="button">
                             <i class="fa-solid fa-xmark"></i>
                         </button>
                     </div>
