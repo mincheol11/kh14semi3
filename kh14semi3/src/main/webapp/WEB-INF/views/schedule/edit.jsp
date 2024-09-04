@@ -8,6 +8,81 @@
 <link rel="stylesheet" type="text/css" href="/editor/editor.css">
 <script src="/editor/editor.js"></script>
 
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+    // 메시지 표시 함수
+    function showMessage(message) {
+        if (message === 'updateSuccess') {
+        	loadCheck1();
+        } else if (message === 'deleteSuccess') {
+        	loadCheck2();
+        } else if (message === 'deleteFail') {
+        	loadCheck3();
+        } else if (message === 'addSuccess') {
+        	loadCheck4();
+        }
+    }
+    // URL의 message 파라미터를 사용하여 메시지를 표시하고, 한 번만 표시되도록 관리
+    var urlParams = new URLSearchParams(window.location.search);
+    var message = urlParams.get('message');
+    if (message) {
+        showMessage(message);
+        // 메시지 파라미터 제거 후 페이지 이동
+        urlParams.delete('message');
+        window.history.replaceState(null, '', `${window.location.pathname}?${urlParams}`);
+    }
+  
+    // 이벤트 텍스트 크기 조정
+    function adjustEventTextSize() {
+        var events = document.querySelectorAll('.event');
+        events.forEach(function(event) {
+            var textLength = event.textContent.length;
+             event.style.fontSize = '10px'; 
+           
+        });
+    }
+    // 페이지 로드 후 텍스트 크기 조정
+    adjustEventTextSize();
+//생년월일 입력창에 DatePicker 설정
+});
+function loadCheck1() {
+	 Swal.fire({
+     icon: 'success',
+     iconColor: "#6695C4",
+     title: '수정 완료.',
+     showConfirmButton: false,
+     timer: 1500         
+	 });
+};	
+function loadCheck2() {
+	 Swal.fire({
+     icon: 'success',
+     iconColor: "#6695C4",
+     title: '삭제 완료.',
+     showConfirmButton: false,
+     timer: 1500         
+	 });
+};	
+function loadCheck3() {
+	 Swal.fire({
+     icon: 'error',
+     iconColor: "red",
+     title: '삭제 실패.',
+     showConfirmButton: false,
+     timer: 1500         
+	 });
+};	
+function loadCheck4() {
+	 Swal.fire({
+     icon: 'success',
+     iconColor: "#6695C4",
+     title: '등록 완료.',
+     showConfirmButton: false,
+     timer: 1500         
+	 });
+};	
+</script>
+
 <form action="edit" method="post" autocomplete="off">
     <div class="container w-800 my-50">
         <div class="row center">
