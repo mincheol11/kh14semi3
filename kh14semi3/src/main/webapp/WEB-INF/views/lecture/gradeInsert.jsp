@@ -146,8 +146,8 @@
                 </thead>
                 <tbody class="center">
                     <tr>
-                        <td>${lectureDto.lectureDepartment}</td>
-                        <td>${lectureDto.lectureProfessor}</td>
+                        <td>${departmentDto.departmentName}</td>
+                        <td>${memberDto.memberName}</td>
                         <td>${lectureDto.lectureType}</td>
                         <td>${lectureDto.lectureName}</td>
                         <td>${lectureDto.lectureCode}</td>

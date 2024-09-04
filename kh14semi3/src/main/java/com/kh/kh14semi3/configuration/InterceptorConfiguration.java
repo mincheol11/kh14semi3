@@ -10,7 +10,7 @@ import com.kh.kh14semi3.interceptor.BoardOwnerInterceptor;
 import com.kh.kh14semi3.interceptor.BoardViewsInterceptor;
 import com.kh.kh14semi3.interceptor.MemberInterceptor;
 
-//@Configuration
+@Configuration
 public class InterceptorConfiguration implements WebMvcConfigurer{
 	
 	@Autowired
