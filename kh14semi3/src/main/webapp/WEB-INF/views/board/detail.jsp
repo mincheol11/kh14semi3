@@ -68,10 +68,11 @@ document.addEventListener('DOMContentLoaded', function() {
     padding: 10px;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    width: 29px; /* 원하는 너비로 조정 */
+    width: 60px; /* 원하는 너비로 조정 */
     max-width: 100%; /* 부모 요소에 따라 너비가 제한되지 않도록 */
     height: 35px; /* 원하는 높이로 조정 */
     line-height: 1; /* 텍스트 줄 간격 조정 */
+    
 }
 .kh-container{
     height: auto !important; 
@@ -96,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	<!-- 작성자 -->
 <div class="info-block">
-<strong>작성자</strong>
+<strong>작성1자</strong>
 <div class="info-content">${boardDto.boardWriter}
 </div>
 </div>
@@ -116,7 +117,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class=" row flex-box column-2 positing-menu">
                   
             <div class="info-block left">
-		 <div class="info-contentViews"><fmt:formatNumber value="${boardDto.boardViews}" pattern="#,##0" />
+		 <div class="info-contentViews center"><fmt:formatNumber value="${boardDto.boardViews}" pattern="#,##0" />
 		</div>
 		</div>
                     
