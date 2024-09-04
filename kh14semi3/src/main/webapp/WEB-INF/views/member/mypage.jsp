@@ -45,13 +45,13 @@
 						</tr>
 						<tr>
 							<th>학과</th>
-							<td>${studentDto.studentDepartment}</td>
+							<td>${sdDto.departmentName} ${sdDto.departmentCode}</td>
 						</tr>
 					</c:when>
  					<c:when test="${memberDto.memberRank=='교수'}">
  						<tr>
  							<th>학과</th>
- 							<td>${professorDto.professorDepartment}</td>
+ 							<td>${pdDto.departmentName} ${pdDto.departmentCode}</td>
  						</tr>
 					</c:when>
 					<c:otherwise>

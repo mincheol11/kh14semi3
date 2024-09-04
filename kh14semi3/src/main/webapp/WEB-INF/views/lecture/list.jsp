@@ -29,8 +29,8 @@
 
 	<div class="row center">
 		<form action="list" method="get" autocomplete="off">
-			<!-- 검색창 --> 
-			<select class="field" name="column">
+		<!-- 검색창 --> 
+		<select class="field" name="column">
 			<option value="department_name" <c:if test="${param.column == 'department_name'}">selected</c:if>>전공(학과)</option>
 			<option value="member_name" <c:if test="${param.column == 'member_name'}">selected</c:if>>교수명</option>
 			<option value="lecture_type" <c:if test="${param.column == 'lecture_type'}">selected</c:if>>분류</option>
@@ -76,7 +76,7 @@
 						<td>${lectureMemberVO.memberName}</td>
 						<td>${lectureMemberVO.lectureType}</td>
 						<td>${lectureMemberVO.lectureName}</td>
-						<td>${lectureMemberVO.lectureTime} ${lectureMemberVO.lectureDuration} ${lectureMemberVO.lectureDay}</td>
+						<td>${lectureMemberVO.lectureDay} ${lectureMemberVO.lectureTime} (${lectureMemberVO.lectureDuration}시간)</td>
 						<td>${lectureMemberVO.lectureRoom}</td>
 						<td>${lectureMemberVO.lectureRegist}/${lectureMemberVO.lectureCount}</td>						
 						<td>
@@ -94,7 +94,7 @@
 						<td>${lectureMemberVO.memberName}</td>
 						<td>${lectureMemberVO.lectureType}</td>
 						<td>${lectureMemberVO.lectureName}</td>
-						<td>${lectureMemberVO.lectureTime} ${lectureMemberVO.lectureDuration} ${lectureMemberVO.lectureDay}</td>
+						<td>${lectureMemberVO.lectureDay} ${lectureMemberVO.lectureTime} (${lectureMemberVO.lectureDuration}시간)</td>
 						<td>${lectureMemberVO.lectureRoom}</td>
 						<td>${lectureMemberVO.lectureRegist}/${lectureMemberVO.lectureCount}</td>						
 						<td>

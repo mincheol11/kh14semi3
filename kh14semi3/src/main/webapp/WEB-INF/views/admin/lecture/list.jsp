@@ -30,45 +30,14 @@ $(document).ready(function() {
 
         <div class="row center">
         	<form action="list" method="get" autocomplete="off">
-            	<select name="column" class="field">
-           		 <option value="lecture_code">강의코드</option>
-					<c:choose>
-						<c:when test="${param.column == 'lecture_department'}">
-							<option value="lecture_department" selected>학과코드</option>
-						</c:when>
-						<c:otherwise>
-							<option value="lecture_department">학과코드</option>
-						</c:otherwise>
-					</c:choose>
-		
-					<c:choose>
-						<c:when test="${param.column == 'lecture_professor'}">
-							<option value="lecture_professor" selected>교수코드</option>
-						</c:when>
-						<c:otherwise>
-							<option value="lecture_professor">교수코드</option>
-						</c:otherwise>
-					</c:choose>
-		
-					<c:choose>
-						<c:when test="${param.column == 'lecture_type'}">
-							<option value="lecture_type" selected>분류</option>
-						</c:when>
-						<c:otherwise>
-							<option value="lecture_type">분류</option>
-						</c:otherwise>
-					</c:choose>
-
-					<c:choose>
-						<c:when test="${param.column == 'lecture_name'}">
-							<option value="lecture_name" selected>강의명</option>
-						</c:when>
-						<c:otherwise>
-							<option value="lecture_name">강의명</option>
-						</c:otherwise>
-					</c:choose>
-            	</select>
-        		<input type="text" name="keyword" value="${param.keyword}" class="field" placeholder="검색어">
+            	<!-- 검색창 --> 
+				<select class="field" name="column">
+					<option value="department_name" <c:if test="${param.column == 'department_name'}">selected</c:if>>전공(학과)</option>
+					<option value="member_name" <c:if test="${param.column == 'member_name'}">selected</c:if>>교수명</option>
+					<option value="lecture_type" <c:if test="${param.column == 'lecture_type'}">selected</c:if>>분류</option>
+					<option value="lecture_name" <c:if test="${param.column == 'lecture_name'}">selected</c:if>>강의명</option>
+				</select>
+        		<input type="search" name="keyword" value="${param.keyword}" class="field" placeholder="검색어">
         		<button class="btn btn-positive" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
 				<a href="add" class="btn btn-neutral"><i class="fa-regular fa-square-plus"></i> 강의개설</a>
         	</form>
@@ -79,8 +48,8 @@ $(document).ready(function() {
             <thead>
               <tr>
                     <th>강의코드</th>
-                    <th>학과코드</th>
-                     <th>교수코드</th>
+                    <th>전공(학과)</th>
+                     <th>교수명</th>
                     <th>분류</th>
                      <th>강의명</th>
                     <th>시작시간</th>
@@ -91,18 +60,18 @@ $(document).ready(function() {
              </tr>
     </thead>
 	<tbody>
-			<c:forEach var="lectureDto" items="${lectureList}">
-    			<tr onclick="location.href='detail?lectureCode=${lectureDto.lectureCode}'" style="cursor: pointer;">
-    					<td>${lectureDto.lectureCode}</td>
-				        <td>${lectureDto.lectureDepartment}</td>
-				        <td>${lectureDto.lectureProfessor}</td>
-				        <td>${lectureDto.lectureType}</td>
-				        <td>${lectureDto.lectureName}</td>
-				        <td>${lectureDto.lectureTime}</td>
-				        <td>${lectureDto.lectureDuration}</td>
-				        <td>${lectureDto.lectureDay}</td>
-				        <td>${lectureDto.lectureRoom}</td>
-				        <td>${lectureDto.lectureCount}</td>
+			<c:forEach var="lectureMemberVO" items="${lectureList}">
+    			<tr onclick="location.href='detail?lectureCode=${lectureMemberVO.lectureCode}'" style="cursor: pointer;">
+    					<td>${lectureMemberVO.lectureCode}</td>
+				        <td>${lectureMemberVO.departmentName}</td>
+				        <td>${lectureMemberVO.memberName}</td>
+				        <td>${lectureMemberVO.lectureType}</td>
+				        <td>${lectureMemberVO.lectureName}</td>
+				        <td>${lectureMemberVO.lectureTime}</td>
+				        <td>${lectureMemberVO.lectureDuration}</td>
+				        <td>${lectureMemberVO.lectureDay}</td>
+				        <td>${lectureMemberVO.lectureRoom}</td>
+				        <td>${lectureMemberVO.lectureCount}</td>
     				</tr>
 				</c:forEach>
 			</tbody>

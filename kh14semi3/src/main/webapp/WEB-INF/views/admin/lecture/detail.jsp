@@ -18,56 +18,55 @@
     });
     </script>
     
-    <body>
+ 
     <div class="container w-500 my-50">
-    <div class="row center">
-    <h1>강의 상세정보</h1>
-    </div>
-    <c:choose>
-        <c:when test="${lectureDto == null}">
-            <h2>존재하지 않는 강의 정보 입니다.</h2>
-        </c:when>
-    <c:otherwise>
+	    <div class="row center">
+	    	<h1>[ ${lectureDto.lectureName} ] 강의 정보</h1>
+	    </div>
+	    <c:choose>
+	        <c:when test="${lectureDto == null}">
+	            <h2>존재하지 않는 강의 정보 입니다.</h2>
+	        </c:when>
+	    <c:otherwise>
         <table class="table table-border">
                 <tr>
                     <th width="30%">강의코드</th>
                     <td>${lectureDto.lectureCode}</td>
                 </tr>
-                 <tr>
-                    <th>학과코드</th>
-                    <td>${lectureDto.lectureDepartment}</td>
+                <tr>
+                    <th>전공(학과)</th>
+                    <td>
+                    	${departmentDto.departmentName}
+                    	${departmentDto.departmentCode}
+                   	</td>
                 </tr>
                 <tr>
-                    <th>교수코드</th>
-                    <td>${lectureDto.lectureProfessor}</td>
+                    <th>교수명</th>
+                    <td>${memberDto.memberName}</td>
                 </tr>
-                 <tr>
+                <tr>
                     <th>분류</th>
                     <td>${lectureDto.lectureType}</td>
-                </tr>
-                 <tr>
+               	</tr>
+               	<tr>
                     <th>강의명</th>
                     <td>${lectureDto.lectureName}</td>
                 </tr>
-                 <tr>
-                    <th>강의시작 시간</th>
-                    <td>${lectureDto.lectureTime}부터</td>
-                </tr>
-                 <tr>
-                    <th>강의수업 시간</th>
-                    <td>${lectureDto.lectureDuration}시간</td>
-                </tr>
-                 <tr>
-                    <th>강의요일</th>
-                    <td>${lectureDto.lectureDay}</td>
-                </tr>
-                 <tr>
+                <tr>
+                	<th>강의시간</th>
+	                <td>
+		                ${lectureDto.lectureDay}
+		                ${lectureDto.lectureTime}
+		                (${lectureDto.lectureDuration}시간)
+	                </td>
+            	</tr>
+                <tr>
                     <th>강의실</th>
                     <td>${lectureDto.lectureRoom}</td>
                 </tr>
-                 <tr>
-                    <th>정원</th>
-                    <td>${lectureDto.lectureCount}명</td>
+                <tr>
+                    <th>수강인원</th>
+                	<td>${lectureDto.lectureRegist}/${lectureDto.lectureCount}</td>
                 </tr>
             </table>
         </c:otherwise>
@@ -81,6 +80,6 @@
 			<i class="fa-solid fa-trash"></i> 강의삭제</a>
 	</div>
 </div>    
-</body>
+
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include> <!-- footer 추가 -->

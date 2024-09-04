@@ -9,6 +9,7 @@ import com.kh.kh14semi3.interceptor.AdminInterceptor;
 import com.kh.kh14semi3.interceptor.BoardOwnerInterceptor;
 import com.kh.kh14semi3.interceptor.BoardViewsInterceptor;
 import com.kh.kh14semi3.interceptor.MemberInterceptor;
+import com.kh.kh14semi3.interceptor.ScheduleInterceptor;
 
 @Configuration
 public class InterceptorConfiguration implements WebMvcConfigurer{
@@ -21,6 +22,9 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 	private BoardOwnerInterceptor boardOwnerInterceptor;
 	@Autowired
 	private BoardViewsInterceptor boardViewsInterceptor;
+	@Autowired
+	private ScheduleInterceptor scheduleInterceptor;
+	
 	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
@@ -38,8 +42,10 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 					"/home/**",
 					"/registration/**",
 					"/lecture/**",
-					"/schedule/**",
-					"/board/**",
+					"/schedule/list",
+					"/schedule/detail",
+					"/board/list",
+					"/board/detail",
 					"/home/**", // map, main
 					"/rest/board/**",
 					"/rest/grade/**",
@@ -61,7 +67,9 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 				.addPathPatterns(
 					"/admin/**", // 관리자 관련 페이지
 					"/rest/admin/**", // 관리자 페이지의 형식 검사 비동기 통신
-					"/rest/member/**" // 관리자의 멤버 등록 페이지의 형식 검사 비동기통신
+					"/rest/member/**", // 관리자의 멤버 등록 페이지의 형식 검사 비동기통신
+					"/board/add",
+					"/schedule/add"
 				)
 				.excludePathPatterns(
 						
@@ -72,6 +80,13 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 				.addPathPatterns(
 					"/board/edit",
 					"/board/delete"
+				);
+		
+		// 학사일정 수정삭제 검사 인터셉터 설정
+		registry.addInterceptor(scheduleInterceptor)
+				.addPathPatterns(
+					"/schedule/edit",
+					"/schedule/delete"
 				);
 		
 	}
