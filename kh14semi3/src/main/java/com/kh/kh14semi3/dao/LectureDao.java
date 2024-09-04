@@ -223,9 +223,10 @@ public class LectureDao {
 					+ "on lecture_department = department_code "
 					+ "left outer join member "
 					+ "on lecture_professor = member_id "
-					+ "where instr("+pageVO.getColumn()+", ?) > 0 and "
+					+ "where "
 					+ "lecture_code in ( "
-					+ "select registration_lecture from registration where registration_student = ? )";	
+					+ "select registration_lecture from registration where registration_student = ? ) "
+					+ "and instr("+pageVO.getColumn()+", ?) > 0";	
 			Object[] data = {pageVO.getKeyword(), studentId};
 			return jdbcTemplate.queryForObject(sql, int.class, data);
 		}

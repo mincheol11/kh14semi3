@@ -13,16 +13,16 @@
 		<h1>${memberDto.memberName} 님의 성적 조회</h1>
 	</div>
 
-	<div class="row center">
+	<%-- <div class="row center">
 		<form action="grade" method="get" autocomplete="off">
 			<!-- 검색창 --> 
 			<select class="field" name="column">
-			<option value="grade_lecture" <c:if test="${param.column == 'grade_lecture'}">selected</c:if>>강의코드</option>
+			<option value="lecture_code" <c:if test="${param.column == 'lecture_code'}">selected</c:if>>강의코드</option>
 		</select>
 		<input class="field" type="search" name="keyword" value="${param.keyword}">
 			<button class="btn btn-neutral">검색</button>
 		</form>
-	</div>
+	</div> --%>
 
 	<div class="row center">
 		<c:choose>
@@ -33,9 +33,10 @@
 			<%-- 결과가 있을 때 --%>
 			<c:otherwise>
 				<!-- 결과 화면 -->
-				<div class="right">
+				<br>
+				<!-- <div class="right">
 					<i class="fa-brands fa-slack red"></i> 강의명 클릭시 상세 정보 페이지로 이동
-				</div>
+				</div> -->
 				<table class="table table-horizontal table-hover">
 				<thead>
 					<tr>
