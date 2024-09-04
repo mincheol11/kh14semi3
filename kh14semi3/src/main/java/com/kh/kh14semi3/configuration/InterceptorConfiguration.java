@@ -47,7 +47,6 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 					"/schedule/detail",
 					"/board/list",
 					"/board/detail",
-					"/home/**", // map, main
 					"/rest/board/**",
 					"/rest/grade/**",
 					"/rest/home/main/**",
