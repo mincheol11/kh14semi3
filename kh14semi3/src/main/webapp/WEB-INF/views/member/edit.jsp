@@ -209,6 +209,7 @@ $(function(){
 	//폼 검사
     $(".check-form").submit(function(){
     	$("[name]").trigger("input").trigger("blur"); 
+    	loadCheck();
         return status.ok();
     });
     
@@ -222,6 +223,17 @@ $(function(){
         maxDate: moment(),//종료일을 오늘로 설정
     }); */
     
+    
+    
+    function loadCheck() {
+		 Swal.fire({
+           icon: 'success',
+           iconColor: "#6695C4",
+           title: '수정 완료.',
+           showConfirmButton: false,
+           timer: 1500         
+  		 });
+	};	
     
 });
 </script>

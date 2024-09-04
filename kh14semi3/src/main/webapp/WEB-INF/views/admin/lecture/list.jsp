@@ -12,7 +12,7 @@
 <script type="text/javascript">
 function showMessage(message) {
 	if (message === 'remove') 
-        alert('삭제가 완료되었습니다.');
+		loadCheck();
 	}
 $(document).ready(function() {
     var urlParams = new URLSearchParams(window.location.search);
@@ -21,6 +21,15 @@ $(document).ready(function() {
         showMessage(message); 
     }
 });
+function loadCheck() {
+	 Swal.fire({
+     icon: 'success',
+     iconColor: "#6695C4",
+     title: '삭제 완료.',
+     showConfirmButton: false,
+     timer: 1500         
+	 });
+};	
 </script>
 
     <div class="container w-1000 my-50">

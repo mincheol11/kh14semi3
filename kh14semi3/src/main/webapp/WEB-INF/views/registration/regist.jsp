@@ -59,7 +59,8 @@
 				success: function(response){
 					if(!response.checked){						
 						// 너의 수강신청목록에 이거 넣었어 라는 문구 출력
-						window.alert("수강 신청 취소!");
+						/* window.alert("수강 신청 취소!"); */
+						loadCheck();
 						$(btn).removeClass("class-regist link link-animation");
 						$(btn).off("click");
 	                    $(btn).css("cursor", "not-allowed").css("text-decoration-line", "none"); // 클릭할 수 없도록 커서 스타일 변경
@@ -70,6 +71,18 @@
 				}
 			});
 		});
+		
+		function loadCheck() {
+			 Swal.fire({
+                icon: 'success',
+                iconColor: "#6695C4",
+                title: '수강 취소 완료.',
+                showConfirmButton: false,
+                timer: 1500         
+       		 });
+		};	
+		
+		
 	});
 </script>
 </c:if>

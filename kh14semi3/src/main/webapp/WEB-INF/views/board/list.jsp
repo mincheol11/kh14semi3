@@ -8,13 +8,13 @@
     // 메시지 표시 함수
     function showMessage(message) {
         if (message === 'updateSuccess') {
-            alert('수정이 완료되었습니다.');
+        	loadCheck1();
         } else if (message === 'deleteSuccess') {
-            alert('삭제가 완료되었습니다.');
+        	loadCheck2();
         } else if (message === 'deleteFail') {
-            alert('삭제에 실패하였습니다.');
+        	loadCheck3();
         } else if (message === 'writeSuccess') {
-            alert('등록되었습니다.');
+        	loadCheck4();
         }
     }
 
@@ -28,6 +28,43 @@
         urlParams.delete('message');
         window.history.replaceState(null, '', `${window.location.pathname}?${urlParams}`);
     }
+    
+    function loadCheck1() {
+		 Swal.fire({
+          icon: 'success',
+          iconColor: "#6695C4",
+          title: '수정 완료.',
+          showConfirmButton: false,
+          timer: 1500         
+ 		 });
+	};	
+    function loadCheck2() {
+		 Swal.fire({
+          icon: 'success',
+          iconColor: "#6695C4",
+          title: '삭제 완료.',
+          showConfirmButton: false,
+          timer: 1500         
+ 		 });
+	};	
+    function loadCheck3() {
+		 Swal.fire({
+          icon: 'error',
+          iconColor: "red",
+          title: '삭제 실패.',
+          showConfirmButton: false,
+          timer: 1500         
+ 		 });
+	};	
+    function loadCheck4() {
+		 Swal.fire({
+          icon: 'success',
+          iconColor: "#6695C4",
+          title: '등록 완료.',
+          showConfirmButton: false,
+          timer: 1500         
+ 		 });
+	};	
 
 </script>
 
