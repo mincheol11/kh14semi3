@@ -36,7 +36,7 @@ $(function(){
         memberPwValid : true, // /admin/member/change 페이지는 비밀번호 바꾸는거 안함
         memberPwCheckValid : true, 
         memberNameValid : false, //형식검사
-        memberRankValid: false,
+        memberRankValid: true,
         memberEmailValid : false,
         memberCellValid : false , //선택항목
         memberBirthValid : true , //선택항목
@@ -67,7 +67,7 @@ $(function(){
         status.memberNameValid = isValid;
     });
 
-    $("[name=memberRank]").on("input", function(){
+   /*  $("[name=memberRank]").on("input", function(){
         var str = "^(관리자|교수|학생)$";
         var regex = new RegExp(str);//문자열을 정규표현식으로 변환
         var isValid = regex.test($(this).val());
@@ -82,7 +82,7 @@ $(function(){
   			$("[name=memberRank]").parent().find("label").find("i").addClass("red fa-bounce");
 		}
         status.memberRankValid = isValid;
-    });
+    }); */
     
 
     $("[name=memberEmail]").blur(function(){
@@ -253,14 +253,15 @@ function loadCheck() {
 			<h1>회원 정보 수정</h1>
 		</div>
 		<div class="row">
-			<input name="memberId" type="hidden" value="${memberDto.memberId}">		
+			<input name="memberId" type="hidden" value="${memberDto.memberId}">	
+			<input name="memberRank" type="hidden" value="${memberDto.memberRank	}">	
 		</div>
 		<div class="row">
 			<label>이름 <i class="fa-solid fa-asterisk red"></i></label>
 			<input type="text" name="memberName"
 				value="${memberDto.memberName}" class="field w-100">
 		</div>
-		<div class="row">
+<%-- 		<div class="row">
 			<label>구분 <i class="fa-solid fa-asterisk red"></i></label>
 			<select name="memberRank" class="field w-100">
 				<option value="">분류</option>
@@ -268,7 +269,7 @@ function loadCheck() {
 				<option value="교수"<c:if test="${memberDto.memberRank == '교수'}">selected</c:if>>교수</option>
 				<option value="학생"<c:if test="${memberDto.memberRank == '학생'}">selected</c:if>>학생</option>
 			</select>
-		</div>
+		</div> --%>
 		<c:choose>
 			<c:when test="${memberDto.memberRank == '학생'}">
 				<div class="row">
@@ -317,7 +318,7 @@ function loadCheck() {
 		</div>
 		<div class="row">
 			<label>연락처 <i class="fa-solid fa-asterisk red"></i></label> <input type="tel" name="memberCell"
-				value="${memberDto.memberCell}" class="field w-100">
+				value="${memberDto.memberCell}" class="field w-100" maxlength="11">
 		</div>
 		<div class="row">
 			<label>이메일 <i class="fa-solid fa-asterisk red"></i></label> <input type="email" name="memberEmail"

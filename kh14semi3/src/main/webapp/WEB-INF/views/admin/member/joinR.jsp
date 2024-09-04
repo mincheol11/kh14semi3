@@ -112,7 +112,7 @@ $(function(){
 					<label>학과코드</label>
 				</div>
 				<div class="row">
-					<input name="studentDepartment" class="field w-100" placeholder="학과코드: kh + 고유코드(D) + 캠퍼스(01~03) + 순번(001~999)">
+					<input name="studentDepartment" class="field w-100" placeholder="학과코드: KH + 고유코드(D) + 캠퍼스(01~03) + 순번(001~999)">
 					<div class="fail-feedback">필수 선택사항 입니다.</div>
 				</div>
 				<div class="row">
@@ -146,7 +146,7 @@ $(function(){
 					<label>학과코드</label>
 				</div>
 				<div class="row">
-					<input name="professorDepartment" class="field w-100" placeholder="학과코드: kh + 고유코드(D) + 캠퍼스(01~03) + 순번(001~999)">
+					<input name="professorDepartment" class="field w-100" placeholder="학과코드: KH + 고유코드(D) + 캠퍼스(01~03) + 순번(001~999)">
 					<div class="fail-feedback">필수 선택사항 입니다.</div>
 				</div>
 				<div class="right">
