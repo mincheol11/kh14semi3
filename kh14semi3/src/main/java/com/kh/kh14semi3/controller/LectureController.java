@@ -91,7 +91,7 @@ public class LectureController {
 		MemberDto memberDto = memberDao.selectOne(studentId);
 		model.addAttribute("memberDto", memberDto);
 		model.addAttribute("gradeList", lectureDao.selectListWithGrade(pageVO , studentId));
-		int count = lectureDao.countByPagingWithStudent(pageVO, studentId);
+		int count = lectureDao.countByPagingWithStudent2(pageVO, studentId);
 		pageVO.setCount(count);
 		return "/WEB-INF/views/lecture/grade.jsp";
 	}
