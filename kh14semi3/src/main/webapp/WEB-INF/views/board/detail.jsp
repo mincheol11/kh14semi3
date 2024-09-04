@@ -73,6 +73,10 @@ document.addEventListener('DOMContentLoaded', function() {
     height: 35px; /* 원하는 높이로 조정 */
     line-height: 1; /* 텍스트 줄 간격 조정 */
 }
+.kh-container{
+    height: auto !important; 
+}
+
 </style>
 
 		
