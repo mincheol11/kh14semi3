@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	<!-- 작성자 -->
 <div class="info-block">
-<strong>작성자</strong>
+<strong>작성1자</strong>
 <div class="info-content">${boardDto.boardWriter}
 </div>
 </div>
