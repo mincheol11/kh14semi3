@@ -7,9 +7,9 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <style>
-.kh-container{
+/* .kh-container{
     height: auto !important; 
-}
+} */
 </style>
 
 <div class="container w-500 my-50">
