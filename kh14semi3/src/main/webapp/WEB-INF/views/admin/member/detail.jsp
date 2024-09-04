@@ -32,6 +32,20 @@
 			</tr>
 			<tr>
 				<c:choose>
+					<c:when test="${memberDto.memberRank!='관리자'}">
+						<th>학적상태</th>
+						<c:if test="${lastDto.takeOffType == null}"><td>재학</td></c:if>
+						<c:if test="${lastDto.takeOffType != null}"><td>${lastDto.takeOffType}</td></c:if>
+					</c:when>
+					<c:otherwise>
+						<th>재직상태</th>
+						<c:if test="${lastDto.takeOffType == null}"><td>재직</td></c:if>
+						<c:if test="${lastDto.takeOffType != null}"><td>휴직</td></c:if>
+					</c:otherwise>
+				</c:choose>
+			</tr>
+			<tr>
+				<c:choose>
 					<c:when test="${memberDto.memberRank=='학생'}">
 						<tr>
 							<th>학년</th>

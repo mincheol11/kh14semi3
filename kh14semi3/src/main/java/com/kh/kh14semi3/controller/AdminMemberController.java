@@ -60,10 +60,12 @@ public class AdminMemberController {
 	//회원 상세
 	@RequestMapping("/detail")
 	public String detail(Model model,
-							@RequestParam String memberId,
-							@RequestParam(required = false) String memberRank) {
+					@RequestParam String memberId,
+					@RequestParam(required = false) String memberRank) {
 		MemberDto memberDto = memberDao.selectOne(memberId);
 		model.addAttribute("memberDto", memberDto);
+		TakeOffDto lastDto = takeOffDao.selectLastOne(memberId);
+		model.addAttribute("lastDto", lastDto);
 		if("학생".equals(memberDto.getMemberRank())) {
 			StudentDto studentDto = studentDao.selectOne(memberId);
 			model.addAttribute("studentDto", studentDto);

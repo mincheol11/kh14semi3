@@ -52,7 +52,18 @@
 						<td>${memberTakeOffVO.memberRank}</td>
 						<td>${memberTakeOffVO.memberEmail}</td>
 						<td>${memberTakeOffVO.memberJoin}</td>
-						<td>${memberTakeOffVO.takeOffType}</td>
+						<td>
+							<c:choose>
+								<c:when test="${memberTakeOffVO.memberRank!='관리자'}">
+									${memberTakeOffVO.takeOffType}
+								</c:when>
+								<c:otherwise>
+									<c:if test="${memberTakeOffVO.takeOffType == null}">재직</c:if>
+									<c:if test="${memberTakeOffVO.takeOffType == '재학'}">재직</c:if>
+									<c:if test="${memberTakeOffVO.takeOffType == '휴학'}">휴직</c:if>
+								</c:otherwise>
+							</c:choose>
+						</td>
 						<td>
 							<c:choose>
 								<c:when test="${memberTakeOffVO.takeOffType == '재학'}">
