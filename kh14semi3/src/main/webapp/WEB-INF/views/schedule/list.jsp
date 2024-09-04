@@ -7,13 +7,13 @@ document.addEventListener('DOMContentLoaded', function() {
     // 메시지 표시 함수
     function showMessage(message) {
         if (message === 'updateSuccess') {
-            alert('수정이 완료되었습니다.');
+        	loadCheck1();
         } else if (message === 'deleteSuccess') {
-            alert('삭제가 완료되었습니다.');
+        	loadCheck2();
         } else if (message === 'deleteFail') {
-            alert('삭제에 실패하였습니다.');
+        	loadCheck3();
         } else if (message === 'addSuccess') {
-            alert('등록되었습니다.');
+        	loadCheck4();
         }
     }
     // URL의 message 파라미터를 사용하여 메시지를 표시하고, 한 번만 표시되도록 관리
@@ -39,6 +39,42 @@ document.addEventListener('DOMContentLoaded', function() {
     adjustEventTextSize();
 //생년월일 입력창에 DatePicker 설정
 });
+function loadCheck1() {
+	 Swal.fire({
+     icon: 'success',
+     iconColor: "#6695C4",
+     title: '수정 완료.',
+     showConfirmButton: false,
+     timer: 1500         
+	 });
+};	
+function loadCheck2() {
+	 Swal.fire({
+     icon: 'success',
+     iconColor: "#6695C4",
+     title: '삭제 완료.',
+     showConfirmButton: false,
+     timer: 1500         
+	 });
+};	
+function loadCheck3() {
+	 Swal.fire({
+     icon: 'error',
+     iconColor: "red",
+     title: '삭제 실패.',
+     showConfirmButton: false,
+     timer: 1500         
+	 });
+};	
+function loadCheck4() {
+	 Swal.fire({
+     icon: 'success',
+     iconColor: "#6695C4",
+     title: '등록 완료.',
+     showConfirmButton: false,
+     timer: 1500         
+	 });
+};	
 </script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
