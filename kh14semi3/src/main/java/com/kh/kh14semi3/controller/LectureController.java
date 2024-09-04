@@ -10,15 +10,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.kh14semi3.dao.DepartmentDao;
 import com.kh.kh14semi3.dao.GradeDao;
 import com.kh.kh14semi3.dao.LectureDao;
 import com.kh.kh14semi3.dao.MemberDao;
+import com.kh.kh14semi3.dao.ProfessorDao;
+import com.kh.kh14semi3.dto.DepartmentDto;
 import com.kh.kh14semi3.dto.GradeDto;
 import com.kh.kh14semi3.dto.LectureDto;
 import com.kh.kh14semi3.dto.MemberDto;
+import com.kh.kh14semi3.dto.ProfessorDto;
 import com.kh.kh14semi3.error.TargetNotFoundException;
 import com.kh.kh14semi3.vo.GradeLectureVO;
 import com.kh.kh14semi3.vo.GradeStudentVO;
+import com.kh.kh14semi3.vo.LectureMemberVO;
 import com.kh.kh14semi3.vo.PageVO;
 
 import jakarta.servlet.http.HttpSession;
@@ -33,6 +38,8 @@ public class LectureController {
 	private GradeDao gradeDao;
 	@Autowired
 	private MemberDao memberDao;
+	@Autowired
+	private DepartmentDao departmentDao;
 	
 	// 강의 전체 목록 + 검색 기능
 	// 학생이면 수강중인 강의 목록을 보여주고 교수라면 가르치는 강의 목록을 보여준다
@@ -86,11 +93,19 @@ public class LectureController {
 		@RequestMapping("/grade/insert")
 		public String gradeInsert(
 						@ModelAttribute("gradeStudentVO") GradeStudentVO gradeStudentVO,
+						@ModelAttribute("lectureMemberVO") LectureMemberVO lectureMemberVO,
 						@RequestParam String lectureCode,
 						@RequestParam String gradeLecture,
-						Model model) {
+						Model model, HttpSession session) {
+			String memberId = (String) session.getAttribute("createdUser");
+			MemberDto memberDto = memberDao.selectOne(memberId);
+			model.addAttribute("memberDto", memberDto);			
+			
 			LectureDto lectureDto = lectureDao.selectOne(lectureCode);
 			model.addAttribute("lectureDto", lectureDto);
+			
+			DepartmentDto departmentDto = departmentDao.selectOne(lectureDto.getLectureDepartment());
+			model.addAttribute("departmentDto", departmentDto);
 				
 			GradeDto gradeDto = gradeDao.selectOne(gradeLecture);
 			model.addAttribute("gradeDto", gradeDto);
