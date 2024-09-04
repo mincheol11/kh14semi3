@@ -15,12 +15,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.kh.kh14semi3.configuration.CustomCertProperties;
 import com.kh.kh14semi3.dao.AdminDao;
 import com.kh.kh14semi3.dao.CertDao;
+import com.kh.kh14semi3.dao.DepartmentDao;
 import com.kh.kh14semi3.dao.MemberDao;
 import com.kh.kh14semi3.dao.ProfessorDao;
 import com.kh.kh14semi3.dao.StudentDao;
 import com.kh.kh14semi3.dao.TakeOffDao;
 import com.kh.kh14semi3.dto.AdminDto;
 import com.kh.kh14semi3.dto.CertDto;
+import com.kh.kh14semi3.dto.DepartmentDto;
 import com.kh.kh14semi3.dto.MemberDto;
 import com.kh.kh14semi3.dto.ProfessorDto;
 import com.kh.kh14semi3.dto.StudentDto;
@@ -65,6 +67,9 @@ public class MemberController {
 	
 	@Autowired
 	private AdminDao adminDao;
+	
+	@Autowired
+	private DepartmentDao departmentDao;
 	
 	//로그인
 	@GetMapping("/login")
@@ -246,10 +251,14 @@ public class MemberController {
 		if("학생".equals(memberDto.getMemberRank())){
 			StudentDto studentDto = studentDao.selectOne(memberId);
 			model.addAttribute("studentDto", studentDto); // 학생정보 jsp로 전송
+			DepartmentDto departmentDto = departmentDao.selectOne(studentDto.getStudentDepartment());
+			model.addAttribute("sdDto", departmentDto); // 학생의 학과정보 jsp로 전송
 		}
 		else if("교수".equals(memberDto.getMemberRank())) {
 			ProfessorDto professorDto = professorDao.selectOne(memberId);
 			model.addAttribute("professorDto", professorDto); // 교수정보 jsp로 전송
+			DepartmentDto departmentDto = departmentDao.selectOne(professorDto.getProfessorDepartment());
+			model.addAttribute("pdDto", departmentDto); // 학생의 학과정보 jsp로 전송
 		}
 		else if("관리자".equals(memberDto.getMemberRank())) {
 			AdminDto adminDto = adminDao.selectOne(memberId);

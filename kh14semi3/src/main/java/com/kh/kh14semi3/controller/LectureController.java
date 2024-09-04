@@ -73,6 +73,13 @@ public class LectureController {
 		LectureDto lectureDto = lectureDao.selectOne(lectureCode); // 조회
 		if(lectureDto == null) throw new TargetNotFoundException("미등록 강의 입니다.");
 		model.addAttribute("lectureDto", lectureDto);
+
+		DepartmentDto departmentDto =  departmentDao.selectOne(lectureDto.getLectureDepartment());
+		model.addAttribute("departmentDto", departmentDto);
+		
+		MemberDto memberDto = memberDao.selectOne(lectureDto.getLectureProfessor());
+		model.addAttribute("memberDto", memberDto);
+		
 		return "/WEB-INF/views/lecture/detail.jsp";
 	}
 	

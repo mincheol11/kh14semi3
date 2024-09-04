@@ -36,23 +36,35 @@
 		<h1>[ ${lectureDto.lectureName} ] 강의 정보</h1>
 	</div>
 	
+	<c:choose>
+    <c:when test="${lectureDto == null}">
+        <h2>존재하지 않는 강의 정보 입니다.</h2>
+    </c:when>
+   	<c:otherwise>
 	<div class="row">
         <table class="table table-border">
             <tr>
-                <th>강의코드</th>
+                <th width="30%">강의코드</th>
                 <td>${lectureDto.lectureCode}</td>
             </tr>
+             <tr>
+                <th>전공(학과)</th>
+                <td>
+                	${departmentDto.departmentName}
+                	${departmentDto.departmentCode}
+               	</td>
+            </tr>
             <tr>
+                <th>교수명</th>
+                <td>${memberDto.memberName}</td>
+            </tr>
+             <tr>
+                <th>분류</th>
+                <td>${lectureDto.lectureType}</td>
+            </tr>
+             <tr>
                 <th>강의명</th>
                 <td>${lectureDto.lectureName}</td>
-            </tr>
-            <tr>
-                <th>전공(학과)</th>
-                <td>${lectureDto.lectureDepartment}</td>
-            </tr>
-            <tr>
-                <th>강의분류</th>
-                <td>${lectureDto.lectureType}</td>
             </tr>
             <tr>
                 <th>강의시간</th>
@@ -78,6 +90,8 @@
             </tr>
         </table>
     </div>
+    </c:otherwise>
+    </c:choose>
 
     <div class="row float-box center mt-30">
         	<a href="/lecture/list" class="btn btn-neutral btn-go-where">
