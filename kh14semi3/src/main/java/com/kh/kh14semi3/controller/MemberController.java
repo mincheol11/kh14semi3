@@ -89,10 +89,10 @@ public class MemberController {
 		if(memberDto == null) return "redirect:/member/login?error"; //redirect는 get으로 감
 		String rawPw = memberDto.getMemberPw(); // Db에 있는 비밀번호
 
-//		boolean isValid = encoder.matches(memberPw,rawPw);
-//		if (!isValid) {
-//		    return "redirect:/member/login?error";
-//		}
+		boolean isValid = encoder.matches(memberPw,rawPw);
+		if (!isValid) {
+		    return "redirect:/member/login?error";
+		}
 		
 		StudentDto studentDto = studentDao.selectOne(memberId);
 		ProfessorDto professorDto = professorDao.selectOne(memberId);
