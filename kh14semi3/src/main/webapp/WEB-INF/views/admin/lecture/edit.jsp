@@ -111,7 +111,9 @@
 		
 	  //분류코드 선택창 검사
 	   $("[name=lectureType]").on("input", function(){
-             var isValid = $(this).val().length>0;
+		   var regex=  /^(전공|교양|채플)$/;//형식검사
+			var lectureType = $(this).val();
+			var isValid= regex.test(lectureType);
           		 $(this).removeClass("success fail")
                             .addClass(isValid ? "success" : "fail");
           		 if(isValid){
@@ -162,6 +164,14 @@
           status.lectureDateValid = isValid;
       });   
 		
+    //수업시간 입력
+		 $("[name=lectureDuration]").blur(function(){
+		        var isValid = $(this).val()>=0;
+		            $(this).removeClass("success fail fail2")
+		                            .addClass(isValid ? "success" : "fail2");
+		                status.lectureDurationValid = isValid;
+		            });	
+		
       //강의실 입력
   	 $("[name=lectureRoom]").blur(function(){
   	        var isValid = $(this).val().length>=0;
@@ -196,8 +206,10 @@
 		//단축키 폼 검사
             $(".check-form").submit(function(){
                 $("[name]").trigger("input").trigger("blur");
-                console.log(status);
-                loadCheck();
+                if(status.ok()){
+					$(".btn-edit").addClass("confirm-link");
+	                loadCheck();
+				}
                 return status.ok();
             });
             //엔터 차단 코드
@@ -285,6 +297,7 @@
 			<input type="number" name="lectureDuration" class="field w-100" 
     					placeholder="시간" value="${lectureDto.lectureDuration != null ? lectureDto.lectureDuration : ''}">
 				<div class="fail-feedback d63031">3개 모두 입력해야 합니다</div>
+				<div class="fail2-feedback d63031">0 이상이어야 합니다</div>
 		</div>
 		
 		<!-- 강의 수업요일 입력-->
@@ -320,7 +333,7 @@
 		</div>	
 		
 		<div class="row mt-30">
-			<button class="btn btn-positive w-100 confirm-link" data-text="정말 수정하시겠습니까?">
+			<button class="btn btn-positive w-100 btn-edit confirm-link" data-text="정말 수정하시겠습니까?">
  							<i class="fa-solid fa-eraser"></i> 수정하기</button>
 		</div>
 		<div class="row">

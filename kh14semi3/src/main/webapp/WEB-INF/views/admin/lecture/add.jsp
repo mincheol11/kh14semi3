@@ -26,12 +26,14 @@
 	  lectureProfessorValid : false, lectureProfessorCheckValid : false,
 	  lectureTypeValid : false, lectureDateValid : false,
 	  lectureNameValid : false, lectureCountValid : false,
+	  lectureDurationValid : false,
 	  ok : function(){
 		return this.lectureCodeValid && this.lectureCodeCheckValid &&  
 		this.lectureDepartmentValid && this.lectureDepartmentCheckValid &&
 		this.lectureProfessorValid && this.lectureProfessorCheckValid &&
 		this.lectureTypeValid && this.lectureDateValid &&
-		this.lectureNameValid && this.lectureCountValid
+		this.lectureNameValid && this.lectureCountValid && 
+		this.lectureDurationValid
 		},
 	};
 		
@@ -199,6 +201,14 @@
 	                status.lectureDateValid = isValid;
 	            });   
 	
+	//수업시간 입력
+		 $("[name=lectureDuration]").blur(function(){
+		        var isValid = $(this).val()>=0;
+		            $(this).removeClass("success fail fail2")
+		                            .addClass(isValid ? "success" : "fail2");
+		                status.lectureDurationValid = isValid;
+		            });
+	
 	//강의실 입력
 		 $("[name=lectureRoom]").on("input", function(){
 		        var isValid = $(this).val().length>=0;
@@ -213,6 +223,7 @@
 	                $(this).val(content.substring(0, count-1));
 	                count--;
 	            }
+	            $(this).css("border-color","green")
 	            if(count == 5){
 		            $(this).removeClass("fail").addClass("success");	
 		            $(this).css("border-color","green");
@@ -304,12 +315,14 @@
                         <label>강의시작</label>
                         <input type="time" name="lectureTime" class="field w-100">
                         <div class="fail-feedback d63031">3개 모두 입력해야 합니다</div>
+                       
                     </div>
 <!-- 강의 수업시간 입력-->
 			<div class="row">
 				<label>강의시간</label>
     			<input type="number" name="lectureDuration" class="field w-100" placeholder="시간">
     			  <div class="fail-feedback d63031">3개 모두 입력해야 합니다</div>
+    			   <div class="fail2-feedback d63031">0 이상이어야 합니다</div>
 				</div> 
 <!-- 강의 수업요일 입력-->
 			<div class="row">
