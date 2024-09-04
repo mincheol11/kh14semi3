@@ -39,7 +39,8 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 		registry.addInterceptor(memberInterceptor)
 				.addPathPatterns( // member만 접속가능
 					"/member/**", // 모든 페이지
-					"/home/**",
+					"/home/map",
+					"/home/main",
 					"/registration/**",
 					"/lecture/**",
 					"/schedule/list",
@@ -55,6 +56,7 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 					"/api/**" // 로그인 남은 시간 페이지
 				) // 해당 설정은 화이트 리스트 방식
 				.excludePathPatterns( // member 아니어도 접속 가능
+					"/home/login",
 					"/member/login", // 로그인 페이지
 					"/member/findPw*", //비밀번호 찾기 관련 페이지
 					"/member/resetPw*", //비밀번호 재설정 관련 페이지		
