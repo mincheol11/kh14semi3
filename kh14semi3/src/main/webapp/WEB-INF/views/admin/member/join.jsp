@@ -351,7 +351,7 @@ $(function(){
                         <input type="password" id="password-check" class="field w-100"
                                     placeholder="확인을 위해 비밀번호 한번 더 입력">
                         <div class="success-feedback">비밀번호가 일치합니다</div>
-                        <div class="fail-feedback">비밀번호가 일치하지 않습니다</div>
+                        <div class="fail-feedback">형식에 맞춰 8~16자로 작성하세요</div>
                     </div>
                 </div>
                 <div class="page">
@@ -389,7 +389,7 @@ $(function(){
                     <div class="row">
                         <label>연락처(휴대전화번호, - 제외) <i class="fa-solid fa-asterisk red"></i></label>
                         <input type="text" name="memberCell" class="field w-100"
-                                    placeholder="010XXXXXXXX">
+                                    placeholder="010XXXXXXXX" maxlength="11">
                         <div class="fail-feedback">입력한 번호가 형식에 맞지 않습니다</div>
                     </div>
 
