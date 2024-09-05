@@ -67,16 +67,33 @@
 						<td>
 							<c:choose>
 								<c:when test="${memberTakeOffVO.takeOffType == '재학'}">
-									<a class="link link-animation" href="takeOff?takeOffTarget=${memberTakeOffVO.memberId}">휴학</a>
+									<c:if test="${memberTakeOffVO.memberRank!='관리자'}">
+										<a class="link link-animation" href="takeOff?takeOffTarget=${memberTakeOffVO.memberId}">휴학</a>
+									</c:if>
+									<c:if test="${memberTakeOffVO.memberRank=='관리자'}">
+										<a class="link link-animation" href="takeOff?takeOffTarget=${memberTakeOffVO.memberId}">휴직</a>
+									</c:if>
 								</c:when>
 								<c:when test="${memberTakeOffVO.takeOffType == '휴학'}">
-									<a class="link link-animation" href="takeOn?takeOffTarget=${memberTakeOffVO.memberId}">복학</a>
+									<%-- <a class="link link-animation" href="takeOn?takeOffTarget=${memberTakeOffVO.memberId}">복학</a> --%>
+									<c:if test="${memberTakeOffVO.memberRank!='관리자'}">
+										<a class="link link-animation" href="takeOff?takeOffTarget=${memberTakeOffVO.memberId}">복학</a>
+									</c:if>
+									<c:if test="${memberTakeOffVO.memberRank=='관리자'}">
+										<a class="link link-animation" href="takeOff?takeOffTarget=${memberTakeOffVO.memberId}">복직</a>
+									</c:if>
 								</c:when>
 								<c:when test="${memberTakeOffVO.takeOffType == '제적'}">
 									<a class="link link-animation" href="blockNo?takeOffTarget=${memberTakeOffVO.memberId}">제적해제</a>
 								</c:when>
 								<c:otherwise>
-									<a class="link link-animation" href="takeOff?takeOffTarget=${memberTakeOffVO.memberId}">휴학</a>									
+									<%-- <a class="link link-animation" href="takeOff?takeOffTarget=${memberTakeOffVO.memberId}">휴학</a>	 --%>
+									<c:if test="${memberTakeOffVO.memberRank!='관리자'}">
+										<a class="link link-animation" href="takeOff?takeOffTarget=${memberTakeOffVO.memberId}">복학</a>
+									</c:if>
+									<c:if test="${memberTakeOffVO.memberRank=='관리자'}">
+										<a class="link link-animation" href="takeOff?takeOffTarget=${memberTakeOffVO.memberId}">복직</a>
+									</c:if>								
 								</c:otherwise>
 							</c:choose>
 							
