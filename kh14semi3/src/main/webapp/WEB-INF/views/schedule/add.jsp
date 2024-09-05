@@ -22,10 +22,11 @@
 <script type="text/javascript">
 $(function(){
 	
-	var picker = new Lightpick({
-	    field: document.querySelector("[name=scheduleWtime]"),//설치대상
-	    format: "YYYY-MM-DD",//날짜의 표시 형식(momentJS 형식)
-	    firstDay:7//일요일부터 표시
+	 var picker = new Lightpick({
+	        field: document.querySelector("[name=scheduleWtime]"),//설치대상
+	        format: "YYYY-MM-DD",//날짜의 표시 형식(momentJS 형식)
+	        firstDay:7,//일요일부터 표시
+	        minDate: moment(),//종료일을 오늘로 설정
 	   
 	});
 	});
