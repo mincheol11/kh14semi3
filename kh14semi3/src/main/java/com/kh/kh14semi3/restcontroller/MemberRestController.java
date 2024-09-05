@@ -9,10 +9,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kh.kh14semi3.dao.AdminDao;
+import com.kh.kh14semi3.dao.AdminDepartmentDao;
+import com.kh.kh14semi3.dao.DepartmentDao;
 import com.kh.kh14semi3.dao.MemberDao;
 import com.kh.kh14semi3.dao.ProfessorDao;
 import com.kh.kh14semi3.dao.StudentDao;
 import com.kh.kh14semi3.dto.AdminDto;
+import com.kh.kh14semi3.dto.DepartmentDto;
 import com.kh.kh14semi3.dto.MemberDto;
 import com.kh.kh14semi3.dto.ProfessorDto;
 import com.kh.kh14semi3.dto.StudentDto;
@@ -34,6 +37,9 @@ public class MemberRestController {
 	@Autowired
 	private AdminDao adminDao;
 	
+	@Autowired
+	private     DepartmentDao   departmentDao;
+	
 	//아이디 중복 여부 확인
 	@PostMapping("/checkId")
 	public boolean checkId(@RequestParam String memberId) {
@@ -49,6 +55,13 @@ public class MemberRestController {
 		return memberDto == null;
 	}
 	
-	
+	//코드 중복 검사
+			@PostMapping("/checkDepartmentCode")
+			public boolean checkDepartmentCode(@RequestParam String departmentCode) {
+				DepartmentDto departmentDto =
+						departmentDao.selectOne(departmentCode);
+				System.out.println("123123 "+departmentDto);
+				return departmentDto!=null;
+			}
 	
 }

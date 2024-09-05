@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+  pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
@@ -11,28 +11,52 @@
 $(function(){
 	var status = {
 			studentDepartmentValid : false,
+			studentDepartmentCheckValid : false,
 			studentLevelValid : false,
 			professorDepartmentValid : false,
+			professorDepartmentCheckValid : false,
 			ok : function(){
-				return this.studentDepartmentValid 
-					&& this.studentLevelValid
-					&& this.professorDepartmentValid
-			},
+				return  this.studentDepartmentValid && this.studentLevelValid && this.studentDepartmentCheckValid &&
+					  this.professorDepartmentValid && this.professorDepartmentCheckValid 
+		},
 	};
 	
 	$("[name=studentDepartment]").blur(function(){
-        var isValid = $(this).val().length > 0;
-        $(this).removeClass("success fail")
-                    .addClass(isValid ? "success" : "fail");
-        if(isValid){
-  			$("[name=studentDepartment]").parent().find("label").find("i").removeClass("red fa-bounce");
-  			$("[name=studentDepartment]").parent().find("label").find("i").addClass("green fa-beat");
+		var departmentCode  = $(this).val();
+	   var isValid = $(this).val().length > 0;
+        /* $(this).removeClass("success fail")
+                    .addClass(isValid ? "success" : "fail"); */
+        if(isValid){//중복검사
+			$.ajax({
+				url:"/rest/member/checkDepartmentCode",
+				method:"post",
+				data:{departmentCode :departmentCode},
+				success:function(response){
+					if(response){
+						status.studentDepartmentCheckValid=true;
+						$("[name=studentDepartment]").removeClass("success fail fail2")
+						.addClass("success");
+						$("[name=studentDepartment]").parent().find("label").find("i").removeClass("red fa-bounce");
+						$("[name=studentDepartment]").parent().find("label").find("i").addClass("green fa-beat");
+					}
+					else{
+						status.studentDepartmentCheckValid=false;
+                        $("[name=studentDepartment]").removeClass("success fail fail2")
+                        .addClass("fail2");
+                        $("[name=studentDepartment]").parent().find("label").find("i").removeClass("green fa-beat");
+                        $("[name=studentDepartment]").parent().find("label").find("i").addClass("red fa-bounce");
+                    }
+				},
+			});
 		}
-  		 else{
-  			$("[name=studentDepartment]").parent().find("label").find("i").removeClass("green fa-beat");
-  			$("[name=studentDepartment]").parent().find("label").find("i").addClass("red fa-bounce");
-		}
+ 		 else{
+     			 $("[name=studentDepartment]").removeClass("success fail fail2")
+      			.addClass("fail");
+     			$("[name=studentDepartment]").parent().find("label").find("i").removeClass("green fa-beat");
+     			$("[name=studentDepartment]").parent().find("label").find("i").addClass("fa-bounce");
+  			}
         status.studentDepartmentValid = isValid;
+        
     });
 	
 	$("[name=studentLevel]").on("click", function(){
@@ -50,15 +74,37 @@ $(function(){
   			$("[name=studentLevel]").parent().find("label").find("i").addClass("red fa-bounce");
 		}
         status.studentLevelValid = isValid;
+      
 	});
 	
+	
 	$("[name=professorDepartment]").blur(function(){
+		var departmentCode = $(this).val();
         var isValid = $(this).val().length > 0;
-        $(this).removeClass("success fail")
-                    .addClass(isValid ? "success" : "fail");
+        /* $(this).removeClass("success fail")
+                    .addClass(isValid ? "success" : "fail"); */
         if(isValid){
-  			$("[name=professorDepartment]").parent().find("label").find("i").removeClass("red fa-bounce");
-  			$("[name=professorDepartment]").parent().find("label").find("i").addClass("green fa-beat");
+        	$.ajax({
+				url:"/rest/member/checkDepartmentCode",
+				method:"post",
+				data:{departmentCode:departmentCode},
+				success:function(response){
+					if(response){
+					    status.professorDepartmentCheckValid=true;
+						$("[name=professorDepartment]").removeClass("success fail fail2")
+						.addClass("success");
+						$("[name=professorDepartment]").parent().find("label").find("i").removeClass("red fa-bounce");
+						$("[name=professorDepartment]").parent().find("label").find("i").addClass("green fa-beat");
+					}
+					else{
+						status.professorDepartmentCheckValid=false;
+                        $("[name=professorDepartment]").removeClass("success fail fail2")
+                        .addClass("fail2");
+                        $("[name=professorDepartment]").parent().find("label").find("i").removeClass("green fa-beat");
+                        $("[name=professorDepartment]").parent().find("label").find("i").addClass("red fa-bounce");
+                    }
+				},
+			});
 		}
   		 else{
   			$("[name=professorDepartment]").parent().find("label").find("i").removeClass("green fa-beat");
@@ -71,7 +117,8 @@ $(function(){
 	//학생
     $(".check-form1").submit(function(){
         $("[name]").trigger("input").trigger("blur").trigger("click");
-        status.professorDepartmentValid=true;
+      status.professorDepartmentValid=true;
+      status.professorDepartmentCheckValid=true;
         return status.ok();
     });
 	
@@ -79,21 +126,20 @@ $(function(){
     $(".check-form2").submit(function(){
         $("[name]").trigger("input").trigger("blur").trigger("click");
         status.studentDepartmentValid=true;
-        status.studentLevelValid=true;
+       status.studentLevelValid=true;
         return status.ok();
     });
 	
 	//관리자
     $(".check-form3").submit(function(){
         $("[name]").trigger("input").trigger("blur").trigger("click");
-        status.studentDepartmentValid=true;
-        status.studentLevelValid=true;
+       status.studentDepartmentValid=true;
+       status.studentLevelValid=true;
         status.professorDepartmentValid=true;
+        status.professorDepartmentCheckValid=true;
         return status.ok();
     });
-    
-	
-	
+  	
 });
 </script>
 
@@ -113,7 +159,9 @@ $(function(){
 				</div>
 				<div class="row">
 					<input name="studentDepartment" class="field w-100" placeholder="학과코드: KH + 고유코드(D) + 캠퍼스(01~03) + 순번(001~999)">
-					<div class="fail-feedback">필수 선택사항 입니다.</div>
+					<div class="success-feedback">등록 가능한 학과코드입니다.</div>
+					<div class="fail-feedback">필수 입니다.</div>
+					<div class="fail2-feedback">없는 학과코드입니다.</div>
 				</div>
 				<div class="row">
 					<label>학년</label>
@@ -137,7 +185,7 @@ $(function(){
 		</form>
 		</c:when>
 		<c:when test="${memberDto.memberRank == '교수'}">
-		<form class="check-form" action="joinR" method="post" autocomplete="off">
+		<form class="check-form2" action="joinR" method="post" autocomplete="off">
 				<div class="row">
 				<input name="memberId" value="${memberDto.memberId}" type="hidden"
 						class="field w-100">
@@ -149,7 +197,9 @@ $(function(){
 				</div>
 				<div class="row">
 					<input name="professorDepartment" class="field w-100" placeholder="학과코드: KH + 고유코드(D) + 캠퍼스(01~03) + 순번(001~999)">
+					<div class="success-feedback">등록 가능한 학과코드입니다.</div>
 					<div class="fail-feedback">필수 선택사항 입니다.</div>
+					<div class="fail2-feedback">없는 학과코드입니다.</div>
 				</div>
 				<div class="right">
 					<button class="btn btn-positive" type="submit">
@@ -159,7 +209,7 @@ $(function(){
 		</form>
 		</c:when>
 		<c:when test="${memberDto.memberRank == '관리자'}">
-		<form class="check-form" action="joinR" method="post" autocomplete="off">
+		<form class="check-form3" action="joinR" method="post" autocomplete="off">
 				<div class="row">
 				<input name="memberId" value="${memberDto.memberId}" type="hidden"
 						class="field w-100">
