@@ -320,7 +320,7 @@
 <!-- 강의 수업시간 입력-->
 			<div class="row">
 				<label>강의시간</label>
-    			<input type="number" name="lectureDuration" class="field w-100" placeholder="시간">
+    			<input type="number" name="lectureDuration" class="field w-100" placeholder="시간" min="0">
     			  <div class="fail-feedback d63031">3개 모두 입력해야 합니다</div>
     			   <div class="fail2-feedback d63031">0 이상이어야 합니다</div>
 				</div> 
@@ -349,7 +349,7 @@
 			<div class="row">
                 <label>정원</label>
                       <input type="number" name="lectureCount" value="1"
-                        class="field w-100" placeholder="인원">
+                        class="field w-100" placeholder="인원" min="1">
                         <div class="fail-feedback d63031">1명 이상이어야 합니다</div>
                 </div>
 <!-- 전송버튼 -->
