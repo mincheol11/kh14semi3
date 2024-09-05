@@ -133,10 +133,11 @@ $(function(){
 	//관리자
     $(".check-form3").submit(function(){
         $("[name]").trigger("input").trigger("blur").trigger("click");
-       status.studentDepartmentValid=true;
+      /*  status.studentDepartmentValid=true;
        status.studentLevelValid=true;
         status.professorDepartmentValid=true;
-        status.professorDepartmentCheckValid=true;
+        status.professorDepartmentCheckValid=true; */
+        status.ok() = true;
         return status.ok();
     });
   	
