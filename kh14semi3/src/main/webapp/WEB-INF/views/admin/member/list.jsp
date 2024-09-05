@@ -77,10 +77,10 @@
 								<c:when test="${memberTakeOffVO.takeOffType == '휴학'}">
 									<%-- <a class="link link-animation" href="takeOn?takeOffTarget=${memberTakeOffVO.memberId}">복학</a> --%>
 									<c:if test="${memberTakeOffVO.memberRank!='관리자'}">
-										<a class="link link-animation" href="takeOff?takeOffTarget=${memberTakeOffVO.memberId}">복학</a>
+										<a class="link link-animation" href="takeOn?takeOffTarget=${memberTakeOffVO.memberId}">복학</a>
 									</c:if>
 									<c:if test="${memberTakeOffVO.memberRank=='관리자'}">
-										<a class="link link-animation" href="takeOff?takeOffTarget=${memberTakeOffVO.memberId}">복직</a>
+										<a class="link link-animation" href="takeOn?takeOffTarget=${memberTakeOffVO.memberId}">복직</a>
 									</c:if>
 								</c:when>
 								<c:when test="${memberTakeOffVO.takeOffType == '제적'}">
@@ -89,10 +89,10 @@
 								<c:otherwise>
 									<%-- <a class="link link-animation" href="takeOff?takeOffTarget=${memberTakeOffVO.memberId}">휴학</a>	 --%>
 									<c:if test="${memberTakeOffVO.memberRank!='관리자'}">
-										<a class="link link-animation" href="takeOff?takeOffTarget=${memberTakeOffVO.memberId}">복학</a>
+										<a class="link link-animation" href="takeOff?takeOffTarget=${memberTakeOffVO.memberId}">휴학</a>
 									</c:if>
 									<c:if test="${memberTakeOffVO.memberRank=='관리자'}">
-										<a class="link link-animation" href="takeOff?takeOffTarget=${memberTakeOffVO.memberId}">복직</a>
+										<a class="link link-animation" href="takeOff?takeOffTarget=${memberTakeOffVO.memberId}">휴직</a>
 									</c:if>								
 								</c:otherwise>
 							</c:choose>
