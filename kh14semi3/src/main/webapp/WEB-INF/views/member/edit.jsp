@@ -6,6 +6,8 @@
 <%-- header.jsp에 존재하는 내용을 불러오도록 설정 --%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
 <style>
 .kh-container{
     height: auto !important; 
@@ -272,7 +274,8 @@ $(function(){
 			<input type="email" name="memberEmail" value="${memberDto.memberEmail}" class="field w-100">
 		</div>
 		<div class="row">
-			<input type="text" name="memberPost" class="field" placeholder="우편번호" readonly>
+			<label>주소</label><br>
+			<input type="text" name="memberPost" class="field" placeholder="우편번호" readonly value="${memberDto.memberPost}">
 			<button class="btn btn-neutral btn-find-address" type= "button">
 				<i class="fa-solid fa-magnifying-glass"></i>
 			</button>
@@ -281,10 +284,10 @@ $(function(){
 			</button>
 		</div>
 		<div class="row">
-			<input type="text" name="memberAddress1" class="field w-100" placeholder="기본주소" readonly>
+			<input type="text" name="memberAddress1" class="field w-100" placeholder="기본주소" readonly value="${memberDto.memberAddress1}">
 		</div>
 		<div class="row">
-			<input type="text" name="memberAddress2" class="field w-100" placeholder="상세주소">
+			<input type="text" name="memberAddress2" class="field w-100" placeholder="상세주소" value="${memberDto.memberAddress2}">
 		</div>
 		<div> <!-- 숨겨서 전달하는 정보들 -->
 			<input type="hidden" name="studentId" value="${studentDto.studentId}" readonly>
