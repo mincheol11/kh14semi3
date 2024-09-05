@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   <!-- 작성일 -->
   <div class="info-block">
-    <strong>작성일</strong>
+    <strong>행사일</strong>
     <div class="info-content">
       <fmt:formatDate value="${scheduleDto.scheduleWtime}" pattern="yyyy년 MM월 dd일 E a hh시 mm분" />
     </div>
