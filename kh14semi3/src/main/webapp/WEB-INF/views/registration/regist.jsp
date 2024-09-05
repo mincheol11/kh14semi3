@@ -17,6 +17,9 @@
 	.mt-80{
 		margin-top: 80px;
 	}
+	.class-regist:hover {
+		background-color : transparent;
+	}
 </style>
 
 <script type="text/javascript">
@@ -134,8 +137,8 @@ createdLevel = ${sessionScope.createdRank}
 							<span class="lecture-count">${lectureMemberVO.lectureRegist}</span>
 							/${lectureMemberVO.lectureCount}
 						</td>		
-						<td class="link link-animation class-regist">
-							수강취소
+						<td>
+							<span class="link link-animation class-regist">수강취소</span>
 						</td>
                     </tr>
                     </c:forEach>
