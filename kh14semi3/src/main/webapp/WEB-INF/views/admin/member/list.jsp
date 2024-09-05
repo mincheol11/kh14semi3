@@ -4,6 +4,30 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
+<script type="text/javascript">
+function showMessage(message) {
+if (message === 'delete') 
+	loadCheck();
+}
+$(document).ready(function() {
+    var urlParams = new URLSearchParams(window.location.search);
+    var message = urlParams.get('message');
+    if (message) {
+        showMessage(message); 
+    }
+});
+
+function loadCheck() {
+	 Swal.fire({
+     icon: 'success',
+     iconColor: "#6695C4",
+     title: '삭제 완료.',
+     showConfirmButton: false,
+     timer: 1500         
+	 });
+};	
+</script>
+
 
 <div class="container w-900 my-50">
 	<div class="row center">

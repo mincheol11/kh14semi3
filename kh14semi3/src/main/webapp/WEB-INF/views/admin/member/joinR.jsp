@@ -130,7 +130,9 @@ $(function(){
 					<div class="fail-feedback">필수 선택사항 입니다.</div>
 				</div>
 				<div class="right">
-					<button class="btn btn-positive" type="submit">등록완료</button>
+					<button class="btn btn-positive" type="submit">
+						<i class="fa-solid fa-right-to-bracket"></i> 등록완료
+					</button>
 				</div>
 		</form>
 		</c:when>
@@ -150,7 +152,9 @@ $(function(){
 					<div class="fail-feedback">필수 선택사항 입니다.</div>
 				</div>
 				<div class="right">
-					<button class="btn btn-positive" type="submit">등록완료</button>
+					<button class="btn btn-positive" type="submit">
+						<i class="fa-solid fa-right-to-bracket"></i> 등록완료
+					</button>
 				</div>
 		</form>
 		</c:when>
@@ -167,7 +171,7 @@ $(function(){
 			</div>
 			<div class="right">
 				<button class="btn btn-positive" type="submit">
-				등록완료
+				<i class="fa-solid fa-right-to-bracket"></i> 등록완료
 				</button>
 			</div>
 		</form>

@@ -5,33 +5,8 @@
 
 <%-- header.jsp에 존재하는 내용을 불러오도록 설정 --%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
-<script type="text/javascript">
-//메세지 표시함수
-/* function showMessage(message) {
-	console.log("Message received:", message); // 추가된 콘솔 로그
-     if (message === 'delete') 
-    	 loadCheck();
- } */
 
-    $(document).ready(function() {
-        var urlParams = new URLSearchParams(window.location.search);
-        var message = urlParams.get('message');
-        if (message) {
-            showMessage(message); 
-        }
-    });
 
-	function loadCheck() {
-		 Swal.fire({
-	     icon: 'success',
-	     iconColor: "#6695C4",
-	     title: '삭제 완료.',
-	     showConfirmButton: false,
-	     timer: 3000         
-		 });
-	};	
- 
-</script>
 <style>
 .kh-container{
 	height: 100vh;  /* 뷰포트 높이의 100% */
