@@ -162,6 +162,9 @@ $(function(){
 					<input name="adminId" value="${memberDto.memberId}" type="hidden"
 						class="field w-100">
 				</div>
+			<div class="center">
+				<h3>등록완료 버튼을 누르시고 나가시면 됩니다.</h3>
+			</div>
 			<div class="right">
 				<button class="btn btn-positive" type="submit">
 				등록완료
