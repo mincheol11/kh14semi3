@@ -7,7 +7,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.kh14semi3.dto.AdminDto;
+import com.kh.kh14semi3.dto.DepartmentDto;
 import com.kh.kh14semi3.mapper.AdminMapper;
+import com.kh.kh14semi3.mapper.DepartmentMapper;
 
 @Repository
 public class AdminDao {
@@ -16,6 +18,7 @@ public class AdminDao {
 	private JdbcTemplate jdbcTemplate;
 	@Autowired
 	private AdminMapper adminMapper;
+	
 	
 	public void insert(AdminDto adminDto) {
 		String sql = "insert into admin(admin_id) values(?)";
@@ -41,7 +44,5 @@ public class AdminDao {
 		Object[] data = {adminId};
 		return jdbcTemplate.update(sql, data) > 0 ;
 	}
-	
-	
 	
 }
