@@ -426,7 +426,7 @@ $(function(){
 			
 			<div class="row w-100 mt-30">
 				<button type="submit" class="btn btn-positive w-100">
-					<i class="fa-solid fa-right-to-bracket"></i> 등록하기
+					 다음단계 <i class="fa-solid fa-angles-right"></i>
 				</button>
 				<div class="row">
 					<a href="list" class="btn btn-neutral w-100"><i class="fa-solid fa-list"></i> 목록이동</a> 
