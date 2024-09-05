@@ -82,6 +82,11 @@ function loadCheck4() {
 	 });
 };	
 </script>
+<style>
+ .kh-container{
+    height: auto !important; 
+}
+</style>
 
 <form action="edit" method="post" autocomplete="off">
     <div class="container w-800 my-50">
