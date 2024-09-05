@@ -7,29 +7,29 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <script type="text/javascript">
 //메세지 표시함수
- function showMessage(message) {
+/* function showMessage(message) {
+	console.log("Message received:", message); // 추가된 콘솔 로그
      if (message === 'delete') 
     	 loadCheck();
- }
+ } */
 
- $(document).ready(function() {
-     var urlParams = new URLSearchParams(window.location.search);
-     var message = urlParams.get('message');
-     if (message) {
-         showMessage(message); 
-     }
- });
- 
- function loadCheck() {
-	 Swal.fire({
-     icon: 'success',
-     iconColor: "#6695C4",
-     title: '수정 완료.',
-     showConfirmButton: false,
-     timer: 1500         
-	 });
- 
-};	
+    $(document).ready(function() {
+        var urlParams = new URLSearchParams(window.location.search);
+        var message = urlParams.get('message');
+        if (message) {
+            showMessage(message); 
+        }
+    });
+
+	function loadCheck() {
+		 Swal.fire({
+	     icon: 'success',
+	     iconColor: "#6695C4",
+	     title: '삭제 완료.',
+	     showConfirmButton: false,
+	     timer: 3000         
+		 });
+	};	
  
 </script>
 <style>
