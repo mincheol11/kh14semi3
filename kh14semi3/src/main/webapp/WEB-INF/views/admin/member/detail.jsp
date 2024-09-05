@@ -40,7 +40,8 @@
 					<c:otherwise>
 						<th>재직상태</th>
 						<c:if test="${lastDto.takeOffType == null}"><td>재직</td></c:if>
-						<c:if test="${lastDto.takeOffType != null}"><td>휴직</td></c:if>
+						<c:if test="${lastDto.takeOffType == '재학'}"><td>재직</td></c:if>
+						<c:if test="${lastDto.takeOffType == '휴학'}"><td>휴직</td></c:if>
 					</c:otherwise>
 				</c:choose>
 			</tr>

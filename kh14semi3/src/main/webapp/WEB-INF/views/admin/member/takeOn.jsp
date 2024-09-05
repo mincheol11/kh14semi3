@@ -6,7 +6,7 @@
 <form action="takeOn" method="post">
 	<div class="container w-500 my-50">
 		<div class="row center">
-			<h1>복학 사유</h1>
+			<h1>복학 및 복직 사유</h1>
 		</div>
 		<div class="row center">
 			<input type="hidden" name="takeOffTarget" value="${param.takeOffTarget}">
