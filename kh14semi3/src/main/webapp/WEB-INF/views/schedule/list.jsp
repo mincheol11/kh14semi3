@@ -4,7 +4,7 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <script type="text/javascript">
 document.addEventListener('DOMContentLoaded', function() {
-    // 메시지 표시 함수
+    // 메시지 표시 
     function showMessage(message) {
         if (message === 'updateSuccess') {
         	loadCheck1();
@@ -96,6 +96,18 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     fixCellHeight(); // 페이지 로드 후 셀 높이 조정
+    
+
+});
+   
+</script>
+<script type="text/javascript">
+//생년월일 입력창에 DatePicker 설정
+var picker = new Lightpick({
+    field: document.querySelector("[name=scheduleWtime]"),//설치대상
+    format: "YYYY-MM-DD",//날짜의 표시 형식(momentJS 형식)
+    firstDay:7,//일요일부터 표시
+    maxDate: moment(),//종료일을 오늘로 설정
 });
 </script>
 <!-- CSS 스타일 -->
