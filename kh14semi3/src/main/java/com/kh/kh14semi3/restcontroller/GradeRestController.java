@@ -26,7 +26,7 @@ public class GradeRestController {
     // 성적 입력 및 수정
     @PostMapping("/insert")
     public ResponseEntity<Object> insert(@RequestBody GradeDto gradeDto) {
-    	System.out.println("Received gradeDto: " + gradeDto);
+//    	System.out.println("Received gradeDto: " + gradeDto);
     	if (gradeDto == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }

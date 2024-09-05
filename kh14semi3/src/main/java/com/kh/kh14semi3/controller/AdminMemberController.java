@@ -77,7 +77,7 @@ public class AdminMemberController {
 			model.addAttribute("professorDto", professorDto);
 			DepartmentDto departmentDto = departmentDao.selectOne(professorDto.getProfessorDepartment());
 			model.addAttribute("pdDto", departmentDto);
-			System.out.println(departmentDto);
+//			System.out.println(departmentDto);
 		}
 		else if("관리자".equals(memberDto.getMemberRank())) {
 			AdminDto adminDto = adminDao.selectOne(memberId);

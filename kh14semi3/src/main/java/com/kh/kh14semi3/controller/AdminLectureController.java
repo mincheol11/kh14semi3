@@ -40,7 +40,7 @@ public class AdminLectureController {
 	}
 	@PostMapping("/add")
 	public String add(@ModelAttribute LectureDto lectureDto) {
-		System.out.println("lectureDto : "+lectureDto);
+//		System.out.println("lectureDto : "+lectureDto);
 		adminLectureDao.add(lectureDto);
 		//학과 상세정보 이동
 		return "redirect:detail?lectureCode="+lectureDto.getLectureCode();
