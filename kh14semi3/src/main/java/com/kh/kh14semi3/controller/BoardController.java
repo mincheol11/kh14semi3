@@ -79,7 +79,7 @@ public class BoardController {
 		//등록할 정보에 번호를 첨부한다
 		
 		  boardDto.setBoardNo(seq);
-		  System.out.println(boardDto);
+//		  System.out.println(boardDto);
 		  
 		  boardDao.insert(boardDto);
 		  return "redirect:/board/list?page=" + pageVO.getPage() + "&message=writeSuccess";
