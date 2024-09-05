@@ -148,7 +148,7 @@ $(function(){
 <div class="container w-600 my-50">
 	<c:choose>
 		<c:when test="${memberDto.memberRank == '학생'}">
-		<form class="check-form1" action="joinR" method="post" autocomplete="off">
+		<form class="check-form1" action="joinR" method="post" autocomplete="on">
 				<div class="row">
 					<input name="memberId" value="${memberDto.memberId}" type="hidden"
 						class="field w-100">

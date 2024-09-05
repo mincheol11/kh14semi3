@@ -109,7 +109,7 @@ public class BoardController {
 	@RequestMapping("/delete")
 	public String delete(@RequestParam int boardNo, @RequestParam(defaultValue = "1") int page, @RequestParam(value = "confirm", required = false) String confirm) {
 		
-		 if ("true".equals(confirm)) {
+//		 if ("true".equals(confirm)) {
 			 BoardDto boardDto = boardDao.selectOne(boardNo);
 	            if (boardDto == null) {
 	                throw new TargetNotFoundException("존재하지 않는 게시글 번호");
@@ -121,9 +121,9 @@ public class BoardController {
         } else {
             return "redirect:/board/list?page=" + page + "&message=deleteFail";
         }
-    } else {
-        return "redirect:/board/detail?boardNo=" + boardNo + "&confirm=show";
-    }
+//    } else {
+//        return "redirect:/board/detail?boardNo=" + boardNo + "&confirm=show";
+//    }
 }
 		
 }
