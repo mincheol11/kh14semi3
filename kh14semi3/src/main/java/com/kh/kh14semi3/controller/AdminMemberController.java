@@ -188,27 +188,27 @@ public class AdminMemberController {
 			if(result2 == false) {
 				throw new TargetNotFoundException("존재하지 않는 회원ID입니다.");
 			}
-			return "redirect:list";
+			return "redirect:detail?memberId="+memberDto.getMemberId()+"&message=change";
 		}
 		else if("교수".equals(memberDto.getMemberRank())) {
 			boolean result3 = professorDao.update(professorDto);
 			if(result3 == false) {
 				throw new TargetNotFoundException("존재하지 않는 회원ID입니다.");
 			}
-			return "redirect:list";
+			return "redirect:detail?memberId="+memberDto.getMemberId()+"&message=change";
 		}
 		else if("관리자".equals(memberDto.getMemberRank())) {
 //			boolean result4 = adminDao.update(adminDto);
 //			if(result4 == false) {
 //				throw new TargetNotFoundException("존재하지 않는 회원ID입니다.");
 //			}
-			return "redirect:list";
+			return "redirect:detail?memberId="+memberDto.getMemberId()+"&message=change";
 		}
 		else {
 			
 		}
 		
-		return "redirect:list";
+		return "redirect:detail?memberId="+memberDto.getMemberId()+"&message=change";
 	}
 	
 	//휴학기능
