@@ -93,9 +93,9 @@ public class AdminMemberController {
 	@RequestMapping("/delete")
 	public String delete(@RequestParam String memberId) {
 		boolean result = memberDao.delete(memberId);
-		if(result == false)
+		if(result == false) 
 			throw new TargetNotFoundException("존재하지 않는 회원ID");
-		return "redirect:list";
+			return "redirect:list?message=delete";
 	}
 	
 	//관리자 - 회원가입(멤버테이블)
