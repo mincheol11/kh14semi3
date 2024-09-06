@@ -127,6 +127,7 @@ $(function(){
         $("[name]").trigger("input").trigger("blur").trigger("click");
         status.studentDepartmentValid=true;
        status.studentLevelValid=true;
+       status.studentDepartmentCheckValid=true;
         return status.ok();
     });
 	
