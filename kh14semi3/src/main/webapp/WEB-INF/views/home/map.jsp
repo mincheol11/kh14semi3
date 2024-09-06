@@ -74,7 +74,7 @@ $(function(){
 	kakaoMap.setLevel(3);
     var marker;
     
-    var imageSrc = "/images/education.png", // 마커 이미지 넣는 곳
+    var imageSrc = "${pageContext.request.contextPath}/images/education.png", // 마커 이미지 넣는 곳
     imageSize = new kakao.maps.Size(64, 69),
     imageOption = { offset: new kakao.maps.Point(27, 69) };
     // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다

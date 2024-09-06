@@ -62,7 +62,7 @@ $(function(){
         if(isValid) {
             //비동기 통신으로 중복 검사 수행
             $.ajax({
-                url:"/rest/member/checkId",
+                url:"${pageContext.request.contextPath}/rest/member/checkId",
                 method:"post",
                 data:{memberId : memberId},
                 success: function(response) {

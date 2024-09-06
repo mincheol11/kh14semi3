@@ -10,8 +10,8 @@
 	src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.js"></script>
 
 
-<link rel="stylesheet" type="text/css" href="/editor/editor.css">
-<script src="/editor/editor.js"></script>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/editor/editor.css">
+<script src="${pageContext.request.contextPath}/editor/editor.js"></script>
 
 
 <form action="write" method="post" autocomplete="off">

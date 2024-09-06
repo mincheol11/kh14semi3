@@ -32,7 +32,7 @@
 		var isValid= regex.test(departmentCode);
 		if(isValid){//중복검사
 				$.ajax({
-					url:"/rest/admin/department/checkDepartmentCode",
+					url:"${pageContext.request.contextPath}/rest/admin/department/checkDepartmentCode",
 					method:"post",
 					data:{departmentCode:departmentCode},
 					success:function(response){
@@ -69,7 +69,7 @@
 					var isValid= regex.test(departmentName);
 					if(isValid){//중복검사
 							$.ajax({
-								url:"/rest/admin/department/checkDepartmentName",
+								url:"${pageContext.request.contextPath}/rest/admin/department/checkDepartmentName",
 								method:"post",
 								data:{departmentName:departmentName},
 								success:function(response){

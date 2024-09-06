@@ -44,7 +44,7 @@
 		var isValid= regex.test(lectureCode);
 		if(isValid){//중복검사
 				$.ajax({
-					url:"/rest/admin/lecture/checkLectureCode",
+					url:"${pageContext.request.contextPath}/rest/admin/lecture/checkLectureCode",
 					method:"post",
 					data:{lectureCode:lectureCode},
 					success:function(response){
@@ -81,7 +81,7 @@
 		var isValid= regex.test(lectureDepartment);
 		if(isValid){//중복검사
 				$.ajax({
-					url:"/rest/admin/lecture/checkLectureDepartment",
+					url:"${pageContext.request.contextPath}/rest/admin/lecture/checkLectureDepartment",
 					method:"post",
 					data:{lectureDepartment:lectureDepartment},
 					success:function(response){
@@ -118,7 +118,7 @@
 		var isValid= regex.test(lectureProfessor);
 		if(isValid){//중복검사
 				$.ajax({
-					url:"/rest/admin/lecture/checkLectureProfessor",
+					url:"${pageContext.request.contextPath}/rest/admin/lecture/checkLectureProfessor",
 					method:"post",
 					data:{lectureProfessor:lectureProfessor},
 					success:function(response){
@@ -245,7 +245,7 @@
    //단축키 폼 검사
 	 $(".check-form").submit(function(){
 	 $("[name]").trigger("input").trigger("blur").trigger("click");
-	 console.log(status);
+	 // console.log(status);
 	                return status.ok();
 	            });
    //엔터 차단 코드

@@ -42,7 +42,7 @@
 		var isValid= regex.test(lectureDepartment);
 		if(isValid){//중복검사
 				$.ajax({
-					url:"/rest/admin/lecture/checkLectureDepartment",
+					url:"${pageContext.request.contextPath}/rest/admin/lecture/checkLectureDepartment",
 					method:"post",
 					data:{lectureDepartment:lectureDepartment},
 					success:function(response){
@@ -79,7 +79,7 @@
 		var isValid= regex.test(lectureProfessor);
 		if(isValid){//중복검사
 				$.ajax({
-					url:"/rest/admin/lecture/checkLectureProfessor",
+					url:"${pageContext.request.contextPath}/rest/admin/lecture/checkLectureProfessor",
 					method:"post",
 					data:{lectureProfessor:lectureProfessor},
 					success:function(response){

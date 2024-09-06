@@ -18,13 +18,13 @@
 		var goWhere = params.get("goWhere");
 		$(".btn-go-where").on("click",function(){
 			if(goWhere == 'regist1'){
-				$(this).attr("href", "/registration/list");
+				$(this).attr("href", "${pageContext.request.contextPath}/registration/list");
 			}
 			else if(goWhere == 'regist2'){
-				$(this).attr("href", "/registration/regist");
+				$(this).attr("href", "${pageContext.request.contextPath}/registration/regist");
 			}
 			else{
-				$(this).attr("href", "/lecture/list");
+				$(this).attr("href", "${pageContext.request.contextPath}/lecture/list");
 			}
 		});		
 	});
@@ -94,7 +94,7 @@
     </c:choose>
 
     <div class="row float-box center mt-30">
-        	<a href="/lecture/list" class="btn btn-neutral btn-go-where">
+        	<a href="list" class="btn btn-neutral btn-go-where">
         	<i class="fa-solid fa-list"></i> 목록이동</a>
     </div>
 

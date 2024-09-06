@@ -60,7 +60,7 @@ public class MemberRestController {
 			public boolean checkDepartmentCode(@RequestParam String departmentCode) {
 				DepartmentDto departmentDto =
 						departmentDao.selectOne(departmentCode);
-				System.out.println("123123 "+departmentDto);
+//				System.out.println("123123 "+departmentDto);
 				return departmentDto!=null;
 			}
 	

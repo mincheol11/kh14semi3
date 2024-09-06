@@ -56,7 +56,7 @@ h2 span#currentYear, h2 span#currentMonth {
 		// mypage
 		$(document).ready(function() {
 			$.ajax({
-				url: '/rest/home/main/mypage-preview',
+				url: '${pageContext.request.contextPath}/rest/home/main/mypage-preview',
 				method: 'GET',
 				success: function(data) {					
 					$('#memberId').text("학번 : "+data.memberId);
@@ -75,7 +75,7 @@ h2 span#currentYear, h2 span#currentMonth {
 		// board
 		function loadBoardList() {
             $.ajax({
-                url: '/rest/home/main/board-preview',
+                url: '${pageContext.request.contextPath}/rest/home/main/board-preview',
                 method: 'GET',
                 dataType: 'json',
                 success: function(response) {
@@ -121,7 +121,7 @@ h2 span#currentYear, h2 span#currentMonth {
 		// lecture
 		function loadLectureList() {
      		$.ajax({
-          		url: '/rest/home/main/lecture-preview',
+          		url: '${pageContext.request.contextPath}/rest/home/main/lecture-preview',
           		method: 'GET',
           		dataType: 'json',
           		success: function(response) {
@@ -174,7 +174,7 @@ h2 span#currentYear, h2 span#currentMonth {
 		// schedule
 		function loadScheduleList() {
      		$.ajax({
-          		url: '/rest/home/main/schedule-preview',
+          		url: '${pageContext.request.contextPath}/rest/home/main/schedule-preview',
           		method: 'GET',
           		dataType: 'json',
           		success: function(response) {
@@ -229,7 +229,7 @@ h2 span#currentYear, h2 span#currentMonth {
 			<div class="row center w-100">	
 				<div>		
 					<h2>개인정보
-						<a href="/member/mypage">
+						<a href="${pageContext.request.contextPath}/member/mypage">
 							<i class="fa-regular fa-square-plus" style="color: #2D3436"></i>
 						</a>
 					</h2>					
@@ -238,7 +238,7 @@ h2 span#currentYear, h2 span#currentMonth {
 					<div id="preview-text" class="w-40 center">
 						<!-- <img src="https://placehold.co/100x100"> -->
 						<c:if test="${sessionScope.createdUser != null}">
-							<img src="/images/empGo.png" width="100px;" height="100px;">
+							<img src="${pageContext.request.contextPath}/images/empGo.png" width="100px;" height="100px;">
 						</c:if>
 						<p id="memberName" class="my-0"></p>						
 					</div>
@@ -258,7 +258,7 @@ h2 span#currentYear, h2 span#currentMonth {
 			<div class="row center w-100">			
 				<div>
 					<h2>공지사항
-				 		<a href="/board/list"><i class="fa-regular fa-square-plus" style="color: #2D3436"></i></a>
+				 		<a href="${pageContext.request.contextPath}/board/list"><i class="fa-regular fa-square-plus" style="color: #2D3436"></i></a>
 					</h2>
 				</div>
 				
@@ -283,7 +283,7 @@ h2 span#currentYear, h2 span#currentMonth {
 			<div class="row center w-100">	
 				<div>
 					<h2>강의목록
-						<a href="/lecture/list"><i class="fa-regular fa-square-plus" style="color: #2D3436"></i></a>
+						<a href="${pageContext.request.contextPath}/lecture/list"><i class="fa-regular fa-square-plus" style="color: #2D3436"></i></a>
 					</h2>
 				</div>		
 				
@@ -316,7 +316,7 @@ h2 span#currentYear, h2 span#currentMonth {
 			<div class="row center w-100">	
 				<div>
 					<h2 class="my-0">학사일정
-						<a href="/schedule/list"><i class="fa-regular fa-square-plus" style="color: #2D3436"></i></a>
+						<a href="${pageContext.request.contextPath}/schedule/list"><i class="fa-regular fa-square-plus" style="color: #2D3436"></i></a>
 					</h2>
 					
 					<div class="mt-0 mb-10">

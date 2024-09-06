@@ -22,7 +22,7 @@
 	        var btn = $(this);
 
 	        $.ajax({
-	            url: "/rest/registration/check",
+	            url: "${pageContext.request.contextPath}/rest/registration/check",
 	            method: "post",
 	            data: {lectureCode: lectureCode},
 	            success: function(response) {
@@ -59,7 +59,7 @@
 			var btn = this;
 			e.stopPropagation();
 			$.ajax({
-				url: "/rest/registration/regist",
+				url: "${pageContext.request.contextPath}/rest/registration/regist",
 				method: "post",
 				data: {lectureCode : lectureCode},
 				success: function(response){
@@ -144,7 +144,7 @@ createdRank = ${sessionScope.createdRank}
 					</thead>
 					<tbody class="center">					
 						<c:forEach var="lectureMemberVO" items="${lectureList}">
-						<tr onclick="location.href='/lecture/detail?lectureCode=${lectureMemberVO.lectureCode}&&goWhere=regist1'" style="cursor: pointer;">
+						<tr onclick="location.href='${pageContext.request.contextPath}/lecture/detail?lectureCode=${lectureMemberVO.lectureCode}&&goWhere=regist1'" style="cursor: pointer;">
 							<td>${lectureMemberVO.departmentName}</td>
 							<td>${lectureMemberVO.memberName}</td>
 							<td>${lectureMemberVO.lectureType}</td>

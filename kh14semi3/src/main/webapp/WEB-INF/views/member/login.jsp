@@ -4,7 +4,7 @@
 <html lang="ko">
 <head>
 <title>KH 대학교 학사정보 사이트</title>
-<link rel="icon" href="/images/WEB.png" size="16x16" type="image/png">
+<link rel="icon" href="${pageContext.request.contextPath}/images/WEB.png" size="16x16" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link
@@ -12,9 +12,9 @@
 	rel="stylesheet">
 
 <!-- my css (절대주소 필수) -->
-<link rel="stylesheet" type="text/css" href="/css/commons.css">
-<link rel="stylesheet" type="text/css" href="/css/commons.css">
-<!-- <link rel="stylesheet" type="text/css" href="/css/test.css"> -->
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/commons.css">
+<%-- <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/commons.css"> --%>
+<%-- <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/test.css"> --%>
 
 <!-- font awesome icon cdn-->
 <link rel="stylesheet" type="text/css"
@@ -32,9 +32,9 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 <!-- my jquery library (무조건 jquery cdn 뒤에 있어야 제대로 돌아간다!)-->
-<script src="/js/checkbox.js"></script>
-<script src="/js/confirm-link.js"></script>
-<script src="/js/multipage.js"></script>
+<script src="${pageContext.request.contextPath}/js/checkbox.js"></script>
+<script src="${pageContext.request.contextPath}/js/confirm-link.js"></script>
+<script src="${pageContext.request.contextPath}/js/multipage.js"></script>
 
 <!-- chart.js cdn -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -58,7 +58,7 @@
             overflow: hidden; /* 스크롤바 제거 */
         }
         body{
-        	background-image: url("/images/KHuniv_background_main_crop_lv150.png");
+        	background-image: url("${pageContext.request.contextPath}/images/KHuniv_background_main_crop_lv150.png");
         	background-position: center;
         	background-repeat: no-repeat;
         	background-size: cover; 
@@ -163,7 +163,7 @@
 <form action="login" method="post" autocomplete="off" class="check-form">
     <div class="container w-400 my-50">
     	<div class="row center">
-	    		<img src="/images/kh.png" width=60% style="margin-top: -50">
+	    		<img src="${pageContext.request.contextPath}/images/kh.png" width=60% style="margin-top: -50">
     	</div>
     	<div class="row">
     		<label>아이디</label> 
