@@ -76,7 +76,7 @@
                 var gradeRank = calculateRank(gradeAttendance, gradeScore1, gradeScore2, gradeHomework);
         	
 		        $.ajax({
-		            url: '/rest/grade/update',
+		            url: '${pageContext.request.contextPath}/rest/grade/update',
 		            type: 'post',
 		            data: {
 		                gradeCode: gradeCode,
@@ -214,12 +214,12 @@
 
             <!-- 점수 등록 -->
             <div class="row mt-30">
-                <a type="button" href="/lecture/list" class="btn btn-positive w-100 grade-insert-btn">
+                <a type="button" href="list" class="btn btn-positive w-100 grade-insert-btn">
                     <i class="fa-solid fa-check"></i> 성적 입력 완료
                 </a>
             </div>
             <div class="row">
-                <a href="/lecture/list" class="btn btn-neutral w-100" >
+                <a href="list" class="btn btn-neutral w-100" >
 					<i class="fa-solid fa-arrow-rotate-left"></i> 뒤로가기</a>
             </div>
         </form>

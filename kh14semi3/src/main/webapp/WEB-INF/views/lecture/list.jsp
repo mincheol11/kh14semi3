@@ -71,7 +71,7 @@
 					<%-- 학생인 경우 --%>
 					<c:if test="${sessionScope.createdRank == '학생'}">
 					<c:forEach var="lectureMemberVO" items="${registrationList}">
-					<tr onclick="location.href='/lecture/detail?lectureCode=${lectureMemberVO.lectureCode}&&goWhere=lecture1'" style="cursor: pointer;">
+					<tr onclick="location.href='detail?lectureCode=${lectureMemberVO.lectureCode}&&goWhere=lecture1'" style="cursor: pointer;">
 						<td>${lectureMemberVO.departmentName}</td>
 						<td>${lectureMemberVO.memberName}</td>
 						<td>${lectureMemberVO.lectureType}</td>
@@ -89,7 +89,7 @@
 					<%-- 교수인 경우 --%>
 					<c:if test="${sessionScope.createdRank == '교수'}">
 					<c:forEach var="lectureMemberVO" items="${professorList}">
-					<tr onclick="location.href='/lecture/detail?lectureCode=${lectureMemberVO.lectureCode}&&goWhere=lecture1'" style="cursor: pointer;">
+					<tr onclick="location.href='detail?lectureCode=${lectureMemberVO.lectureCode}&&goWhere=lecture1'" style="cursor: pointer;">
 						<td>${lectureMemberVO.departmentName}</td>
 						<td>${lectureMemberVO.memberName}</td>
 						<td>${lectureMemberVO.lectureType}</td>
@@ -98,7 +98,7 @@
 						<td>${lectureMemberVO.lectureRoom}</td>
 						<td>${lectureMemberVO.lectureRegist}/${lectureMemberVO.lectureCount}</td>						
 						<td>
-							<a href="/lecture/grade/insert?lectureCode=${lectureMemberVO.lectureCode}&gradeLecture=${lectureMemberVO.lectureCode}" class="link link-animation">성적입력</a>
+							<a href="grade/insert?lectureCode=${lectureMemberVO.lectureCode}&gradeLecture=${lectureMemberVO.lectureCode}" class="link link-animation">성적입력</a>
 						</td>
 					</tr>					
 					</c:forEach>

@@ -2,7 +2,7 @@ $(function(){
 
 	function fetchSessionTime() {
         $.ajax({
-            url: '/api/session-time',
+            url: contextPath+'/api/session-time',
             method: 'GET',
             success: function(data) {
 	            var remainingTime = data.remainingTime;
@@ -19,7 +19,7 @@ $(function(){
 	
 	function resetSession() {
         $.ajax({
-            url: '/api/reset-session',
+            url: contextPath+'/api/reset-session',
             method: 'GET',
             success: function() {
                 // Optionally handle success
@@ -32,7 +32,7 @@ $(function(){
 	
 	function goLogout() {
 		$.ajax({
-			url: '/api/logout',
+			url: contextPath+'/api/logout',
 			method: 'GET',
 			success: function() {},
 		});

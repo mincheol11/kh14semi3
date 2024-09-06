@@ -28,7 +28,7 @@ $(function(){
                     .addClass(isValid ? "success" : "fail"); */
         if(isValid){//중복검사
 			$.ajax({
-				url:"/rest/member/checkDepartmentCode",
+				url:"${pageContext.request.contextPath}/rest/member/checkDepartmentCode",
 				method:"post",
 				data:{departmentCode :departmentCode},
 				success:function(response){
@@ -85,7 +85,7 @@ $(function(){
                     .addClass(isValid ? "success" : "fail"); */
         if(isValid){
         	$.ajax({
-				url:"/rest/member/checkDepartmentCode",
+				url:"${pageContext.request.contextPath}/rest/member/checkDepartmentCode",
 				method:"post",
 				data:{departmentCode:departmentCode},
 				success:function(response){

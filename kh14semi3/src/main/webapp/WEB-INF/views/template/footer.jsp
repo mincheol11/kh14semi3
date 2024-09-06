@@ -28,15 +28,15 @@
 		        <div class="row center">
 		            <h3>캠퍼스 정보</h3>
 		            <div>
-		            	<a href="/home/map?mapW=gangNam" data-lat="37.499" data-lng="127.0328" class="link link-animation campus">강남 캠퍼스
+		            	<a href="${pageContext.request.contextPath}/home/map?mapW=gangNam" data-lat="37.499" data-lng="127.0328" class="link link-animation campus">강남 캠퍼스
 		                <i class="fa-solid fa-square-arrow-up-right"></i></a>
 		            </div>
 		            <div>
-		            	<a href="/home/map?mapW=jongRo" data-lat="37.5679" data-lng="126.983" class="link link-animation campus">종로 캠퍼스
+		            	<a href="${pageContext.request.contextPath}/home/map?mapW=jongRo" data-lat="37.5679" data-lng="126.983" class="link link-animation campus">종로 캠퍼스
 		                <i class="fa-solid fa-square-arrow-up-right"></i></a>
 		            </div>
 		            <div>
-		            	<a href="/home/map?mapW=dangSan"  data-lat="37.533826" data-lng="126.896837" class="link link-animation campus">당산 캠퍼스
+		            	<a href="${pageContext.request.contextPath}/home/map?mapW=dangSan"  data-lat="37.533826" data-lng="126.896837" class="link link-animation campus">당산 캠퍼스
 		                <i class="fa-solid fa-square-arrow-up-right"></i></a>
 		            </div>
 				</div>

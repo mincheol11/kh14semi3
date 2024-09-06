@@ -78,7 +78,7 @@
             </button>
         </div>
         <div class="row w-100">
-        	<a class="btn btn-neutral w-100" href="/home/main"><i class="fa-solid fa-arrow-rotate-left" style="color: white"></i> 뒤로가기</a>
+        	<a class="btn btn-neutral w-100" href="${pageContext.request.contextPath}/home/main"><i class="fa-solid fa-arrow-rotate-left" style="color: white"></i> 뒤로가기</a>
         </div>
     </form>
     

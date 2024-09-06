@@ -394,7 +394,7 @@ var modal = document.getElementById("eventModal");
 //모달 열기
 function openModal(url) {
 var modalBody = document.getElementById("modal-body");
-console.log("Opening modal with URL: " + url); // 로그 추가
+// console.log("Opening modal with URL: " + url); // 로그 추가
 //AJAX 요청으로 상세 페이지 내용 로드
 var xhr = new XMLHttpRequest();
 xhr.open("GET", url, true);

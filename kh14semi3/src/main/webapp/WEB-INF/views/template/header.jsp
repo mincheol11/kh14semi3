@@ -12,7 +12,7 @@
 <html> <!-- HTML 문서의 범위를 나타내는 태그 -->
 <head> <!-- 문서의 정보를 표시하는 태그 (각 탭에 적히는 내용)-->
 <title>KH 대학교 학사정보 사이트</title>
-<link rel="icon" href="/images/WEB.png" size="16x16" type="image/png">
+<link rel="icon" href="${pageContext.request.contextPath}/images/WEB.png" size="16x16" type="image/png">
 <meta charset="UTF-8"> <!-- jsp에 정의해서 중복되지만 HTML만 사용할 때는 써야함 -->
 
 
@@ -22,9 +22,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 
 <!-- my css (절대주소 필수) -->
-<link rel="stylesheet" type="text/css" href="/css/commons.css">
-<link rel="stylesheet" type="text/css" href="/css/commons.css">
-<!-- <link rel="stylesheet" type="text/css" href="/css/test.css"> -->
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/commons.css">
+<!-- <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/commons.css"> -->
+<!-- <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/test.css"> -->
 
 <!-- font awesome icon cdn-->
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
@@ -38,10 +38,15 @@
 <!-- jquery cdn -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
+<!-- 외부 페이지 관련 구분 주소 추가 -->
+<script type="text/javascript">
+	var contextPath = "${pageContext.request.contextPath}";
+</script>
+
 <!-- my jquery library (무조건 jquery cdn 뒤에 있어야 제대로 돌아간다!)-->
-<script src="/js/checkbox.js"></script>
-<script src="/js/confirm-link.js"></script>	    
-<script src="/js/multipage.js"></script>
+<script src="${pageContext.request.contextPath}/js/checkbox.js"></script>
+<script src="${pageContext.request.contextPath}/js/confirm-link.js"></script>	    
+<script src="${pageContext.request.contextPath}/js/multipage.js"></script>
 
 <!-- chart.js cdn -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -54,7 +59,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <!-- 로그인 남은시간 remainTime.js -->
-<script src="/js/remainTime.js"></script>
+<script src="${pageContext.request.contextPath}/js/remainTime.js"></script>
     
 <style>	    
 .profile{
@@ -99,8 +104,8 @@
 	
 	        <div class="row my-0 flex-box flex-core kh-header">	        
 	            <div class="w-50 center">
-	                	<a href="/home/main" class="link">
-		                	<img src="/images/NEW-KH-LOGO.png" width="30%" height="30%">
+	                	<a href="${pageContext.request.contextPath}/home/main" class="link">
+		                	<img src="${pageContext.request.contextPath}/images/NEW-KH-LOGO.png" width="30%" height="30%">
 	                	</a>
 	                	<div class="center">
 	                	<i class="fa-brands fa-slack"></i>

@@ -87,7 +87,7 @@
 	 <c:choose>
 	 	<c:when test="${sessionScope.createdUser == null}">
 		 	<div class="row center">
-				<a href="/member/login" class="link link-animation">
+				<a href="${pageContext.request.contextPath}/member/login" class="link link-animation">
 					로그인<i class="fa-solid fa-square-arrow-up-right" style="color: #2D3436"></i>
 				</a> 하세요
 			</div>
@@ -98,30 +98,30 @@
 	                <li>
 	                    <a href="#">공지사항</a>
 	                    <ul class="submenu">
-	                        <li><a href="/board/list">공지사항</a></li>
-	                        <li><a href="/schedule/list">학사일정</a></li>
+	                        <li><a href="${pageContext.request.contextPath}/board/list">공지사항</a></li>
+	                        <li><a href="${pageContext.request.contextPath}/schedule/list">학사일정</a></li>
 	                    </ul>
 	                </li>
 	                <li>
 	                    <a href="#">수강신청</a>
 	                    <ul class="submenu">
-	                        <li><a href="/registration/list">수강 신청</a></li>
-	                        <li><a href="/registration/regist">수강 목록</a></li>
+	                        <li><a href="${pageContext.request.contextPath}/registration/list">수강 신청</a></li>
+	                        <li><a href="${pageContext.request.contextPath}/registration/regist">수강 목록</a></li>
 	                    </ul>
 	                </li>
 	                <li>
 	                    <a href="#">강의 관리</a>
 	                    <ul class="submenu">
-	                        <li><a href="/lecture/list">강의 목록</a></li>
-	                        <li><a href="/lecture/grade">성적 조회</a></li>
+	                        <li><a href="${pageContext.request.contextPath}/lecture/list">강의 목록</a></li>
+	                        <li><a href="${pageContext.request.contextPath}/lecture/grade">성적 조회</a></li>
 	                    </ul>
 	                </li>
 	                <li>
 	                    <a href="#">마이페이지</a>
 	                    <ul class="submenu">
-	                        <li><a href="/member/mypage">내 정보</a></li>
-	                        <li><a href="/member/changePw" class="pw12">비밀번호 변경</a></li>
-	                        <li><a href="/member/logout">로그아웃</a></li>
+	                        <li><a href="${pageContext.request.contextPath}/member/mypage">내 정보</a></li>
+	                        <li><a href="${pageContext.request.contextPath}/member/changePw" class="pw12">비밀번호 변경</a></li>
+	                        <li><a href="${pageContext.request.contextPath}/member/logout">로그아웃</a></li>
 	                    </ul>
 	                </li>
 	            </ul>
@@ -133,23 +133,23 @@
 	                <li>
 	                    <a href="#">공지사항</a>
 	                    <ul class="submenu">
-	                        <li><a href="/board/list">공지사항</a></li>
-	                        <li><a href="/schedule/list">학사일정</a></li>
+	                        <li><a href="${pageContext.request.contextPath}/board/list">공지사항</a></li>
+	                        <li><a href="${pageContext.request.contextPath}/schedule/list">학사일정</a></li>
 	                    </ul>
 	                </li>	                
 	                <li>
 	                    <a href="#">강의 관리</a>
 	                    <ul class="submenu">
-	                        <li><a href="/lecture/list">강의 목록</a></li>
+	                        <li><a href="${pageContext.request.contextPath}/lecture/list">강의 목록</a></li>
 	                        <!-- <li><a href="/lecture/grade">성적 입력</a></li> -->
 	                    </ul>
 	                </li>
 	                <li>
 	                    <a href="#">마이페이지</a>
 	                    <ul class="submenu">
-	                        <li><a href="/member/mypage">내 정보</a></li>
-	                        <li><a href="/member/changePw" class="pw12">비밀번호 변경</a></li>
-	                        <li><a href="/member/logout">로그아웃</a></li>
+	                        <li><a href="${pageContext.request.contextPath}/member/mypage">내 정보</a></li>
+	                        <li><a href="${pageContext.request.contextPath}/member/changePw" class="pw12">비밀번호 변경</a></li>
+	                        <li><a href="${pageContext.request.contextPath}/member/logout">로그아웃</a></li>
 	                    </ul>
 	                </li>
 	            </ul>
@@ -161,37 +161,37 @@
 	            	<li>
 	                    <a href="#">공지사항</a>
 	                    <ul class="submenu">
-	                        <li><a href="/board/list">공지사항</a></li>
-	                        <li><a href="/schedule/list">학사일정</a></li>
+	                        <li><a href="${pageContext.request.contextPath}/board/list">공지사항</a></li>
+	                        <li><a href="${pageContext.request.contextPath}/schedule/list">학사일정</a></li>
 	                    </ul>
 	                </li>
 	                <li>
 	                    <a href="#">회원 관리</a>
 	                    <ul class="submenu">
-	                        <li><a href="/admin/member/list">회원 목록</a></li>
-	                        <li><a href="/admin/member/join">회원 등록</a></li>
+	                        <li><a href="${pageContext.request.contextPath}/admin/member/list">회원 목록</a></li>
+	                        <li><a href="${pageContext.request.contextPath}/admin/member/join">회원 등록</a></li>
 	                    </ul>
 	                </li>
 	                <li>
 	                    <a href="#">강의 시스템 관리</a>
 	                    <ul class="submenu">
-	                        <li><a href="/admin/lecture/list">강의 목록</a></li>
-	                        <li><a href="/admin/lecture/add">강의 개설</a></li>
+	                        <li><a href="${pageContext.request.contextPath}/admin/lecture/list">강의 목록</a></li>
+	                        <li><a href="${pageContext.request.contextPath}/admin/lecture/add">강의 개설</a></li>
 	                    </ul>
 	                </li>
 	                <li>
 	                    <a href="#">학과 시스템 관리</a>
 	                    <ul class="submenu">
-	                        <li><a href="/admin/department/list">학과 목록</a></li>
-	                        <li><a href="/admin/department/expand">학과 개설</a></li>
+	                        <li><a href="${pageContext.request.contextPath}/admin/department/list">학과 목록</a></li>
+	                        <li><a href="${pageContext.request.contextPath}/admin/department/expand">학과 개설</a></li>
 	                    </ul>
 	                </li>
 	                <li>
 	                    <a href="#">마이페이지</a>
 	                    <ul class="submenu">
-	                        <li><a href="/member/mypage">내 정보</a></li>
-	                        <li><a href="/member/changePw" class="pw12">비밀번호 변경</a></li>
-	                        <li><a href="/member/logout">로그아웃</a></li>
+	                        <li><a href="${pageContext.request.contextPath}/member/mypage">내 정보</a></li>
+	                        <li><a href="${pageContext.request.contextPath}/member/changePw" class="pw12">비밀번호 변경</a></li>
+	                        <li><a href="${pageContext.request.contextPath}/member/logout">로그아웃</a></li>
 	                    </ul>
 	                </li>
 	            </ul>

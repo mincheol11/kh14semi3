@@ -221,7 +221,7 @@ $(function(){
   	//폼 검사
     $(".check-form").submit(function(){
     	$("[name]").trigger("input").trigger("blur");    
-        console.log(status);
+        // console.log(status);
         loadCheck();
     	return status.ok();
     });
