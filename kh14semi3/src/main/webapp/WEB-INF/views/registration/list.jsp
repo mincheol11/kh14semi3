@@ -32,6 +32,7 @@
 	                    $(btn).off("click");
 	                    $(btn).css("cursor", "not-allowed").css("text-decoration-line", "none"); // 클릭할 수 없도록 커서 스타일 변경
 	                    $(btn).attr("title", "이미 수강신청 완료"); // 마우스 오버 시 메시지 표시
+	                    $(btn).text("신청완료");
 	                }
 	                // 수강신청 상태가 아닐 경우에는 기본 상태를 유지
 	            }
@@ -42,7 +43,7 @@
 			 Swal.fire({
                  icon: 'success',
                  iconColor: "#6695C4",
-                 title: '성적 저장 완료.',
+                 title: '수강 신청 완료.',
                  showConfirmButton: false,
                  timer: 1500         
         		 });
@@ -71,6 +72,7 @@
 						$(btn).off("click");
 	                    $(btn).css("cursor", "not-allowed").css("text-decoration-line", "none"); // 클릭할 수 없도록 커서 스타일 변경
 	                    $(btn).attr("title", "이미 수강신청 완료"); // 마우스 오버 시 메시지 표시
+	                    $(btn).text("신청완료");
 					}
 					$(btn).parent().parent().find(".lecture-count").text(response.count);
 				}
